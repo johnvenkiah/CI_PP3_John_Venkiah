@@ -6,7 +6,9 @@ from google.auth.transport.requests import Request
 from google.oauth2.service_account import Credentials
 
 SCOPE = [
+    'https://www.googleapis.com/auth/calendar.readonly',
     'https://www.googleapis.com/auth/calendar',
+    'https://www.googleapis.com/auth/calendar.events.readonly',
     'https://www.googleapis.com/auth/calendar.events'
     ]
 
@@ -15,21 +17,20 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 
 service = build('calendar', 'v3', credentials=CREDS)
 
+# Call the Calendar API
+now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
+print('Getting the upcoming 10 events')
 
-def main():
-    # Call the Calendar API
-    now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
-    print('Getting the upcoming 10 events')
-    events_result = service.events().list(calendarId='uueq3s2tbgdl57dvmmvcp5osd8@group.calendar.google.com', timeMin=now,
-                                        maxResults=10, singleEvents=True,
-                                        orderBy='startTime').execute()
-    events = events_result.get('items', [])
+events_result = service.events().list(
+    calendarId='uueq3s2tbgdl57dvmmvcp5osd8@group.calendar.google.com',
+    timeMin=now,
+    maxResults=10, singleEvents=True,
+    orderBy='startTime').execute()
 
-    if not events:
-        print('No upcoming events found.')
-    for event in events:
-        start = event['start'].get('dateTime', event['start'].get('date'))
-        print(start, event['summary'])
+events = events_result.get('items', [])
 
-
-main()
+if not events:
+    print('No upcoming events found.')
+for event in events:
+    start = event['start'].get('dateTime', event['start'].get('date'))
+    print(start, event['summary'])
