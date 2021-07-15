@@ -10,7 +10,7 @@ CREDS = Credentials.from_service_account_file('credentials.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPES)
 CAL = build('calendar', 'v3', credentials=CREDS)
 
-GMT_OFF = '-00:00'
+GMT_OFF = '+02:00'
 
 
 def staff_login(password):
@@ -42,7 +42,6 @@ def show_schedule(CAL):
 
     # Call the Calendar API
     now = datetime.datetime.utcnow().isoformat() + 'Z'
-    print('Getting the upcoming 10 events')
     events_result = CAL.events().list(
         calendarId='uueq3s2tbgdl57dvmmvcp5osd8@group.calendar.google.com',
         timeMin=now,
@@ -54,7 +53,10 @@ def show_schedule(CAL):
     if not events:
         print('No upcoming events found.')
     for event in events:
-        start = event['start'].get('dateTime', event['start'].get('date'))  # 'date' needed?
+
+        start = event['start'].get('dateTime', event['start'].get('date'))
+        start = datetime.datetime.strptime(start, '%Y-%m-%dT%H:%M:%S%z')
+        start = start.strftime("%H:%M, %dth %b %Y")
         print(start, event['summary'])
 
 
