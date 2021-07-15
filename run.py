@@ -49,18 +49,12 @@ def show_schedule(CAL):
         maxResults=10, singleEvents=True,
         orderBy='startTime').execute()
 
-    events_result = CAL.events().list(
-        calendarId='uueq3s2tbgdl57dvmmvcp5osd8@group.calendar.google.com',
-        timeMin=now,
-        maxResults=10, singleEvents=True,
-        orderBy='startTime').execute()
-
     events = events_result.get('items', [])
 
     if not events:
         print('No upcoming events found.')
     for event in events:
-        start = event['start'].get('dateTime', event['start'].get('date'))
+        start = event['start'].get('dateTime', event['start'].get('date'))  # 'date' needed?
         print(start, event['summary'])
 
 
