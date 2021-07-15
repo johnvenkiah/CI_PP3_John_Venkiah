@@ -1,9 +1,8 @@
 from __future__ import print_function
-from getpass import getpass
+import stdiomask
 import password
 import datetime
 from googleapiclient.discovery import build
-# from httplib2 import Http
 from google.oauth2.service_account import Credentials
 
 SCOPES = 'http://www.googleapis.com/auth/calendar'
@@ -15,10 +14,16 @@ GMT_OFF = '-00:00'
 
 
 def staff_login(password):
+    attempts = 0
+
     while True:
         print('Customer login area\n')
 
-        password_entered = getpass('Enter your password:\n')
+        password_entered = stdiomask.getpass('Enter your password:\n')
+
+        if attempts == 4:
+            print('Too many incorrect attempts, exiting...\n')
+            break
 
         if password_entered == password.password:
             print('Password correct, here is your schedule:\n')
@@ -27,13 +32,7 @@ def staff_login(password):
 
         else:
             print('Wrong password, please try again\n')
-
-
-def get_password(password_entered):
-    """
-    Checks if the user has the correct password to enter.
-    If so, show show schedule will execute.
-    """
+            attempts += 1
 
 
 def show_schedule(CAL):
