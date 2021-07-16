@@ -11,7 +11,7 @@ CREDS = Credentials.from_service_account_file('credentials.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPES)
 CAL = build('calendar', 'v3', credentials=CREDS)
 CAL_ID = 'uueq3s2tbgdl57dvmmvcp5osd8@group.calendar.google.com'
-
+now = datetime.datetime.utcnow().isoformat() + 'Z'
 GMT_OFF = '+02:00'
 
 
@@ -30,7 +30,7 @@ def welcome_screen():
             break
 
         elif staff_or_customer == 'b':
-            new_event(CAL)
+            suggest_appointment()
             break
 
         else:
@@ -71,7 +71,6 @@ def show_schedule(CAL):
     Shows the schedule if password has been entered correctly.
     """
     # Call the Calendar API
-    now = datetime.datetime.utcnow().isoformat() + 'Z'
     events_result = CAL.events().list(
         calendarId=CAL_ID,
         timeMin=now,
@@ -91,22 +90,18 @@ def show_schedule(CAL):
         print(start, event['summary'])
 
 
-def find_appointment(CAL, CAL_ID):
+def get_appointments(earliest, latest):
     """
-    Get month, date and see avilable timeslots
+    Get appointments for the given period
     """
+    print('Here are the one hour scheduled appointments:\n')
     now = datetime.datetime.now().isoformat()
-    print(now)
-    print(now + 'Z')
-
-    now_without_tz = datetime.datetime.now().isoformat()
-    now = now_without_tz + 'Z'
-    in_a_week = datetime.datetime.now() + timedelta(7)
+    now = now + 'Z'
 
     events_result = CAL.events().list(
         calendarId=CAL_ID,
-        timeMin=now,
-        timeMax=in_a_week.isoformat() + 'Z',
+        timeMin=earliest,
+        timeMax=latest,
         singleEvents=True,
         orderBy='startTime'
     ).execute()
@@ -117,10 +112,50 @@ def find_appointment(CAL, CAL_ID):
         print('No upcoming events found.')
     for event in events:
 
-        start = event['start'].get('dateTime', event['start'].get('date'))
+        start = event['start'].get('dateTime')
         start = datetime.datetime.strptime(start, '%Y-%m-%dT%H:%M:%S%z')
         start = start.strftime("%H:%M, %dth %b %Y")
+
         print(start, event['summary'])
+
+
+# def find_free_time():
+
+
+def suggest_appointment():
+
+    print('When would you like an appointment?\n')
+    print('Within a week: "1"\n')
+    print('Within two weeks: "2"\n')
+    print('Choose date: "3"\n')
+    print('Press "e" to exit')
+    apntmt_choice = input()
+
+    while True:
+
+        if apntmt_choice == '1':
+            get_appointments(now, future_date(7))
+            break
+
+        elif apntmt_choice == '2':
+            get_appointments(future_date(7), future_date(14))
+            break
+
+        elif apntmt_choice == '3':
+            get_appointments(now, future_date(61))
+            break
+
+        elif apntmt_choice == 'e' or 'E':
+            welcome_screen()
+            break
+    else:
+        print('Invalid entry, try again\n')
+
+
+def future_date(day):
+    date = datetime.datetime.now() + timedelta(day)
+    date = date.isoformat() + 'Z'
+    return date
 
 
 def new_event(CAL):
@@ -149,5 +184,6 @@ def new_event(CAL):
     )
 
 
-find_appointment(CAL, CAL_ID)
+suggest_appointment()
+# get_appointments()
 # welcome_screen()
