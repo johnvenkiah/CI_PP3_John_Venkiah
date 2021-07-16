@@ -2,6 +2,7 @@ from __future__ import print_function
 import stdiomask
 import password
 import datetime
+from datetime import timedelta
 from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
 
@@ -69,14 +70,46 @@ def show_schedule(CAL):
     """
     Shows the schedule if password has been entered correctly.
     """
-
     # Call the Calendar API
     now = datetime.datetime.utcnow().isoformat() + 'Z'
     events_result = CAL.events().list(
         calendarId=CAL_ID,
         timeMin=now,
         maxResults=10, singleEvents=True,
-        orderBy='startTime').execute()
+        orderBy='startTime'
+    ).execute()
+
+    events = events_result.get('items', [])
+
+    if not events:
+        print('No upcoming events found.')
+    for event in events:
+
+        start = event['start'].get('dateTime', event['start'].get('date'))
+        start = datetime.datetime.strptime(start, '%Y-%m-%dT%H:%M:%S%z')
+        start = start.strftime("%H:%M, %dth %b %Y")
+        print(start, event['summary'])
+
+
+def find_appointment(CAL, CAL_ID):
+    """
+    Get month, date and see avilable timeslots
+    """
+    now = datetime.datetime.now().isoformat()
+    print(now)
+    print(now + 'Z')
+
+    now_without_tz = datetime.datetime.now().isoformat()
+    now = now_without_tz + 'Z'
+    in_a_week = datetime.datetime.now() + timedelta(7)
+
+    events_result = CAL.events().list(
+        calendarId=CAL_ID,
+        timeMin=now,
+        timeMax=in_a_week.isoformat() + 'Z',
+        singleEvents=True,
+        orderBy='startTime'
+    ).execute()
 
     events = events_result.get('items', [])
 
@@ -116,4 +149,5 @@ def new_event(CAL):
     )
 
 
-welcome_screen()
+find_appointment(CAL, CAL_ID)
+# welcome_screen()
