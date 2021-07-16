@@ -9,29 +9,42 @@ SCOPES = 'http://www.googleapis.com/auth/calendar'
 CREDS = Credentials.from_service_account_file('credentials.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPES)
 CAL = build('calendar', 'v3', credentials=CREDS)
+CAL_ID = 'uueq3s2tbgdl57dvmmvcp5osd8@group.calendar.google.com'
 
 GMT_OFF = '+02:00'
 
 
-def staff_login(password):
-    attempts = 0
+def welcome_screen():
+    welcome_greeting = 'Welcome to the Feelgood Physio booking system\n'
+    print(staff_greeting.upper())
 
     while True:
-        print('Customer login area\n')
 
-        password_entered = stdiomask.getpass('Enter your password:\n')
+        staff_or_customer = input('\nPress "b" to book an appointment or "s" for staff login:\n')
+        staff_or_customer.lower()
+
+        
+
+def staff_login(password):
+    attempts = 0
+    staff_greeting = 'Feelgood Physio - Staff login area\n'
+    print(staff_greeting.upper())
+
+    while True:
+
+        password_entered = stdiomask.getpass('Enter your password:\n\n')
 
         if attempts == 4:
-            print('Too many incorrect attempts, exiting...\n')
+            print('\nToo many incorrect attempts, exiting...\n')
             break
 
         if password_entered == password.password:
-            print('Password correct, here is your schedule:\n')
+            print('\nPassword correct, here is your schedule:\n')
             show_schedule(CAL)
             break
 
         else:
-            print('Wrong password, please try again\n')
+            print('\nWrong password, please try again\n')
             attempts += 1
 
 
@@ -43,7 +56,7 @@ def show_schedule(CAL):
     # Call the Calendar API
     now = datetime.datetime.utcnow().isoformat() + 'Z'
     events_result = CAL.events().list(
-        calendarId='uueq3s2tbgdl57dvmmvcp5osd8@group.calendar.google.com',
+        calendarId=CAL_ID,
         timeMin=now,
         maxResults=10, singleEvents=True,
         orderBy='startTime').execute()
@@ -75,7 +88,7 @@ def new_event(CAL):
     }
 
     e = CAL.events().insert(
-            calendarId='uueq3s2tbgdl57dvmmvcp5osd8@group.calendar.google.com',
+            calendarId=CAL_ID,
             sendNotifications=True, body=EVENT).execute()
 
     print(
