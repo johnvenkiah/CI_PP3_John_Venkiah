@@ -54,7 +54,7 @@ def staff_login(password):
 
         if password_entered == password.password:
             print('\nPassword correct, here is your schedule:\n')
-            show_schedule(CAL)
+            get_appointments(now, future_date(14))
             break
 
         elif password_entered in ('e', 'E'):
@@ -66,28 +66,28 @@ def staff_login(password):
             attempts += 1
 
 
-def show_schedule(CAL):
-    """
-    Shows the schedule if password has been entered correctly.
-    """
-    # Call the Calendar API
-    events_result = CAL.events().list(
-        calendarId=CAL_ID,
-        timeMin=now,
-        maxResults=10, singleEvents=True,
-        orderBy='startTime'
-    ).execute()
+# def show_schedule(CAL):
+#     """
+#     Shows the schedule if password has been entered correctly.
+#     """
+#     # Call the Calendar API
+#     events_result = CAL.events().list(
+#         calendarId=CAL_ID,
+#         timeMin=now,
+#         maxResults=10, singleEvents=True,
+#         orderBy='startTime'
+#     ).execute()
 
-    events = events_result.get('items', [])
+#     events = events_result.get('items', [])
 
-    if not events:
-        print('No upcoming events found.')
-    for event in events:
+#     if not events:
+#         print('No upcoming events found.')
+#     for event in events:
 
-        start = event['start'].get('dateTime', event['start'].get('date'))
-        start = datetime.datetime.strptime(start, '%Y-%m-%dT%H:%M:%S%z')
-        start = start.strftime("%H:%M, %dth %b %Y")
-        print(start, event['summary'])
+#         start = event['start'].get('dateTime', event['start'].get('date'))
+#         start = datetime.datetime.strptime(start, '%Y-%m-%dT%H:%M:%S%z')
+#         start = start.strftime("%H:%M, %dth %b %Y")
+#         print(start, event['summary'])
 
 
 def get_appointments(earliest, latest):
@@ -215,6 +215,6 @@ def new_event(start, end, name, email, details):
     )
 
 
-suggest_appointment()
+# suggest_appointment()
 # get_appointments()
-# welcome_screen()
+welcome_screen()
