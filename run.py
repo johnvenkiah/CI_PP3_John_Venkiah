@@ -16,14 +16,25 @@ GMT_OFF = '+02:00'
 
 def welcome_screen():
     welcome_greeting = 'Welcome to the Feelgood Physio booking system\n'
-    print(staff_greeting.upper())
+    print(welcome_greeting.upper())
 
     while True:
 
-        staff_or_customer = input('\nPress "b" to book an appointment or "s" for staff login:\n')
-        staff_or_customer.lower()
+        staff_or_customer = input(
+            '\nPress "b" to book an appointment or "s" for staff login:\n'
+            )
+        staff_or_customer = staff_or_customer.lower()
+        if staff_or_customer == 's':
+            staff_login(password)
+            break
 
-        
+        elif staff_or_customer == 'b':
+            new_event(CAL)
+            break
+
+        else:
+            print('\nInvalid entry, please try again\n')
+
 
 def staff_login(password):
     attempts = 0
@@ -32,7 +43,9 @@ def staff_login(password):
 
     while True:
 
-        password_entered = stdiomask.getpass('Enter your password:\n\n')
+        password_entered = stdiomask.getpass(
+            'Enter your password or "e" to exit:\n\n'
+            )
 
         if attempts == 4:
             print('\nToo many incorrect attempts, exiting...\n')
@@ -41,6 +54,10 @@ def staff_login(password):
         if password_entered == password.password:
             print('\nPassword correct, here is your schedule:\n')
             show_schedule(CAL)
+            break
+
+        elif password_entered in ('e', 'E'):
+            welcome_screen()
             break
 
         else:
@@ -99,4 +116,4 @@ def new_event(CAL):
     )
 
 
-staff_login(password)
+welcome_screen()
