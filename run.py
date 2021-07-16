@@ -142,7 +142,7 @@ def suggest_appointment():
             break
 
         elif apntmt_choice == '3':
-            get_appointments(now, future_date(61))
+            event_details()
             break
 
         elif apntmt_choice == 'e' or 'E':
@@ -158,18 +158,49 @@ def future_date(day):
     return date
 
 
-def new_event(CAL):
+def event_details():
+    year = datetime.date.today().year
+
+    print('Which month would you would like to come?\n')
+    month = input('(3 letters, 1st capital)\n')
+
+    print('Which date?\n')
+    date = input('1 - 31:\n')
+
+    print('What time?\n')
+    hour = input('Enter hour, 9 - 17:\n')
+
+    apntmnt_time = (f'{hour}:00, {date}th {month} {year}')
+    apntmnt_time = datetime.datetime.strptime(apntmnt_time, '%H:%M, %dth %b %Y')
+
+    end_time = apntmnt_time + timedelta(hours=+1)
+    apntmnt_time = apntmnt_time.strftime('%Y-%m-%dT%H:%M:%S%z' + 'Z')
+    end_time = end_time.strftime('%Y-%m-%dT%H:%M:%S%z' + 'Z')
+
+    name = input('enter your full name:\n')
+
+    email = input('enter your email:\n')
+
+    details = input('discribe your symptoms:\n')
+
+    print(f'Confirm appointment: {apntmnt_time}?')
+    confirm = input('"y" = YES, "n" = NO\n')
+    if confirm == 'y':
+        new_event(apntmnt_time, end_time, name, email, details)
+
+
+def new_event(start, end, name, email, details):
     """
     New event in Google Calendar.
     """
     EVENT = {
         "start": {
-            "dateTime": '2021-07-22T15:00:00Z',
+            "dateTime": start,
             },
         "end": {
-            "dateTime": '2021-07-22T16:00:00Z',
+            "dateTime": end,
             },
-        'summary': 'John Locke, Neckpain',
+        'summary': f'{name}, {email}, {details}'
     }
 
     e = CAL.events().insert(
@@ -177,8 +208,8 @@ def new_event(CAL):
             sendNotifications=True, body=EVENT).execute()
 
     print(
-        '''*** %r event added:
-        Start: %s End: %s''' % (
+        f'''Thanks, {name}, %r appointment added:
+            Start: %s End: %s''' % (
             e['summary'].encode('utf-8'), e['start']
             ['dateTime'], e['end']['dateTime'])
     )
