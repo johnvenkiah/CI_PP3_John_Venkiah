@@ -169,7 +169,7 @@ def days_feb():
 def book_appointment(year):
     """
     Gets information from user to determine date and time for appointment.
-    
+
     @param year(int): the year of the appointment.
     """
 
@@ -209,7 +209,8 @@ def book_appointment(year):
 
                 print(f'{month}, {year}. Which date?\n')
                 date = input('1 - 31:\n')
-                if int(date) > 31:
+                if int(date) > 31 or int(date) < 1 or
+                    (month == 'Feb' and int(date) > days_feb()):
                     raise ValueError('date not valid, try again')
 
                 print('What time?\n')
