@@ -66,30 +66,6 @@ def staff_login(password):
             attempts += 1
 
 
-# def show_schedule(CAL):
-#     """
-#     Shows the schedule if password has been entered correctly.
-#     """
-#     # Call the Calendar API
-#     events_result = CAL.events().list(
-#         calendarId=CAL_ID,
-#         timeMin=now,
-#         maxResults=10, singleEvents=True,
-#         orderBy='startTime'
-#     ).execute()
-
-#     events = events_result.get('items', [])
-
-#     if not events:
-#         print('No upcoming events found.')
-#     for event in events:
-
-#         start = event['start'].get('dateTime', event['start'].get('date'))
-#         start = datetime.datetime.strptime(start, '%Y-%m-%dT%H:%M:%S%z')
-#         start = start.strftime("%H:%M, %dth %b %Y")
-#         print(start, event['summary'])
-
-
 def get_appointments(earliest, latest):
     """
     Get appointments for the given period
@@ -174,7 +150,8 @@ def book_appointment():
         int_this_month = int(this_month)
 
         if int_month < int_this_month:
-            years = years + timedelta(years=+1)
+            year = datetime.datetime.now() + timedelta(365.2425)
+            year = year.year
 
         print(f'{month}, {year}. Which date?\n')
         date = input('1 - 31:\n')
@@ -232,11 +209,35 @@ def new_event(start, end, name, email, details):
     if goback != '¶':
         welcome_screen()
 
-            # Start: %s End: %s' % (
-            # e['summary'].encode('utf-8'), e['start']
-            # ['dateTime'], e['end']['dateTime'])
+        # Start: %s End: %s' % (
+        # e['summary'].encode('utf-8'), e['start']
+        # ['dateTime'], e['end']['dateTime'])
 
 
 # suggest_appointment()
 # get_appointments()
 welcome_screen()
+
+
+# def show_schedule(CAL):
+#     """
+#     Shows the schedule if password has been entered correctly.
+#     """
+#     # Call the Calendar API
+#     events_result = CAL.events().list(
+#         calendarId=CAL_ID,
+#         timeMin=now,
+#         maxResults=10, singleEvents=True,
+#         orderBy='startTime'
+#     ).execute()
+
+#     events = events_result.get('items', [])
+
+#     if not events:
+#         print('No upcoming events found.')
+#     for event in events:
+
+#         start = event['start'].get('dateTime', event['start'].get('date'))
+#         start = datetime.datetime.strptime(start, '%Y-%m-%dT%H:%M:%S%z')
+#         start = start.strftime("%H:%M, %dth %b %Y")
+#         print(start, event['summary'])

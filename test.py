@@ -1,7 +1,3 @@
-test = 'b'
+import datetime
 
-if test != 'b' or test != 'c':
-    print('tjene')
-
-else:
-    print('tonk')
+print(datetime())
