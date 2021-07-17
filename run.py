@@ -11,6 +11,7 @@ CREDS = Credentials.from_service_account_file('credentials.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPES)
 CAL = build('calendar', 'v3', credentials=CREDS)
 CAL_ID = 'uueq3s2tbgdl57dvmmvcp5osd8@group.calendar.google.com'
+year = datetime.date.now().year
 now = datetime.datetime.utcnow().isoformat() + 'Z'
 GMT_OFF = '+02:00'
 
@@ -135,8 +136,40 @@ def future_date(day):
     return date
 
 
+def days_feb():
+
+    d = 28
+    
+    if (year % 4) == 0:
+        if (year % 100) == 0:
+            if (year % 400) == 0:
+                d = 29
+            else:
+                d = 28
+        else:
+            d = 29
+    else:
+        d = 28
+    
+    return d
+
 def book_appointment():
-    year = datetime.date.today().year
+
+
+month_dict = {
+    'Jan': 31,
+    'Feb': days_feb(),
+    'Mar': 31,
+    'Apr': 30,
+    'May': 31,
+    'Jun': 30,
+    'Jul': 31,
+    'Aug': 31,
+    'Sep': 30,
+    'Okt': 31,
+    'Nov': 30,
+    'Dec': 31,
+}
 
     while True:
 
