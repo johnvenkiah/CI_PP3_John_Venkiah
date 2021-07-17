@@ -152,8 +152,7 @@ def suggest_appointment():
 
 def future_date(day):
     """
-    Function to let patient continue with booking or go back,
-    for example if a staff  member entered the wrong input.
+    Gives a day in the future in datetime format depending on day parameter.
 
     @param day (int): The amount of days from now into the future to
     pass into the function
@@ -170,19 +169,7 @@ def days_feb():
     year the request is made.
     """
 
-    d = 28
-
-    if (year % 4) == 0:
-        if (year % 100) == 0:
-            if (year % 400) == 0:
-                d = 29
-            else:
-                d = 28
-        else:
-            d = 29
-    else:
-        d = 28
-
+    d = 29 if year % 4 == 0 and (year % 100 == 0 or year % 400 == 0) else 28
     return d
 
 
@@ -214,70 +201,111 @@ def book_appointment(year):
         month = input('(3 letters, 1st capital)\n')
         days_in_month = month_dict.get(month)
 
-        try:
-            if month in month_dict.keys():
+        if month in month_dict.keys():
 
-                int_month = datetime.datetime.strptime(month, '%b')
-                int_month = int_month.strftime('%m')
-                int_month = int(int_month)
+            int_month = datetime.datetime.strptime(month, '%b')
+            int_month = int_month.strftime('%m')
+            int_month = int(int_month)
 
-                this_month = datetime.datetime.now().month
-                int_this_month = int(this_month)
+            this_month = datetime.datetime.now().month
+            int_this_month = int(this_month)
 
-                if int_month < int_this_month:
-                    year = datetime.datetime.today() + timedelta(365.2425)
-                    year = year.year
+            if int_month < int_this_month:
+                year = datetime.datetime.today() + timedelta(365.2425)
+                year = year.year
 
-                print(f'{month}, {year}. Which date?\n')
-                date = input('(Enter two digits):\n')
+            get_date(days_in_month, month, year)
+            return False
 
-                try:
-                    if (
-                            int(date) <= int(days_in_month) and
-                            int(date) > 0
-                    ):
-
-                        print(f'{date} {month}, {year}.What time?\n')
-                        hour = input('Enter hour, 9 - 17:\n')
-
-                        apntmnt_time = (f'{hour}:00, {date} {month} {year}')
-                        apntmnt_time = datetime.datetime.strptime(
-                            apntmnt_time, '%H:%M, %dth %b %Y'
-                        )
-
-                        end_time = apntmnt_time + timedelta(hours=+1)
-                        apntmnt_time = apntmnt_time.strftime(
-                            '%Y-%m-%dT%H:%M:%S' + GMT_OFF
-                        )
-                        end_time = end_time.strftime(
-                            '%Y-%m-%dT%H:%M:%S' + GMT_OFF
-                        )
-
-                        name = input('enter your full name:\n')
-
-                        email = input('enter your email:\n')
-
-                        details = input('discribe your symptoms:\n')
-
-                        print(f'Confirm appointment: {apntmnt_time}?')
-                        confirm = input('"y" = YES, "n" = NO\n')
-                        if confirm == 'y':
-                            new_event(
-                                apntmnt_time, end_time, name, email, details
-                            )
-                            return False
-                    else:
-                        raise TypeError
-                except TypeError:
-                    print('Date incorrect, please try again\n')
-
-            elif month.isnumeric():
-                raise ValueError
-
-            else:
-                raise ValueError
-        except ValueError:
+        elif month.isnumeric():
             print('Month incorrect, please try again\n')
+        else:
+            print('Month incorrect, please try again\n')
+
+
+def get_date(days_in_month, month, year):
+    """
+    Get the date from the user, with the month and year
+    passed from the above function
+
+    @param month(str): Month given by user
+    @param year(str): Year given by user
+    """
+
+    while True:
+
+        print(f'{month}, {year}. Which date?\n')
+        date = input('(Enter two digits):\n')
+
+        if (
+            int(date) <= int(days_in_month) and
+            int(date) > 0
+        ):
+            get_time(date, month, year)
+            return False
+        else:
+            print('Date incorrect, please try again\n')
+
+
+def get_time(date, month, year):
+    """
+    Get the date from the user, with the month and year
+    passed from the above function
+
+    @param month(str): Month given by user
+    @param year(str): Year given by user
+    """
+    while True:
+
+        print(f'{date} {month}, {year}. What time?\n')
+        hour = input('Enter hour, 9 - 17:\n')
+
+        apntmnt_time = (f'{hour}:00, {date} {month} {year}')
+        apntmnt_time = datetime.datetime.strptime(
+            apntmnt_time, '%H:%M, %d %b %Y'
+        )
+
+        end_time = apntmnt_time + timedelta(hours=+1)
+        apntmnt_time = apntmnt_time.strftime(
+            '%Y-%m-%dT%H:%M:%S' + GMT_OFF
+        )
+        end_time = end_time.strftime(
+            '%Y-%m-%dT%H:%M:%S' + GMT_OFF
+        )
+
+        if events:
+            print('Time fully booked, choose another time.\n')
+        else:
+            enter_details(apntmnt_time, end_time)
+            return False
+
+
+def enter_details(apntmnt_time, end_time):
+    """
+    Get the date from the user, with the month and year
+    passed from the above function
+
+    @param start(str): Start time of appointment
+    @param end(str): Start time of appointment
+    """
+
+    while True:
+        name = input('enter your full name:\n')
+
+        email = input('enter your email:\n')
+
+        details = input('discribe your symptoms:\n')
+
+        print(f'Confirm appointment: {apntmnt_time}?')
+        confirm = input('"y" = YES, "n" = NO\n')
+        if confirm == 'y':
+            new_event(
+                apntmnt_time, end_time, name, email, details
+            )
+            return False
+
+        else:
+            print('Lets try that again!\n')
 
 
 def new_event(start, end, name, email, details):
