@@ -64,6 +64,7 @@ def staff_login(password):
         if password_entered == password.password:
             print('\nPassword correct, here is your schedule:\n')
             get_appointments(now, future_date(14))
+            print_appointments()
             break
 
         elif password_entered in ('e', 'E'):
@@ -77,8 +78,12 @@ def staff_login(password):
 
 def get_appointments(earliest, latest):
     """
-    Get appointments for the given period
+    Get scheduled appointments for the given period from the Google Calendar
+
+    @param earliest(str): starttime for period.
+    @param latest(str): endtime for period.
     """
+
     print('Here are the one hour scheduled appointments:\n')
     now = datetime.datetime.now().isoformat()
     now = now + 'Z'
@@ -91,7 +96,19 @@ def get_appointments(earliest, latest):
         orderBy='startTime'
     ).execute()
 
+    global events
     events = events_result.get('items', [])
+
+    return events
+
+
+def print_appointments():
+    """
+    Print the events taken through the get_appointments function.
+
+    @param earliest(str): starttime for period.
+    @param latest(str): endtime for period.
+    """
 
     if not events:
         print('No upcoming events found.')
@@ -220,10 +237,10 @@ def book_appointment(year):
                             int(date) > 0
                     ):
 
-                        print('What time?\n')
+                        print(f'{date} {month}, {year}.What time?\n')
                         hour = input('Enter hour, 9 - 17:\n')
 
-                        apntmnt_time = (f'{hour}:00, {date}th {month} {year}')
+                        apntmnt_time = (f'{hour}:00, {date} {month} {year}')
                         apntmnt_time = datetime.datetime.strptime(
                             apntmnt_time, '%H:%M, %dth %b %Y'
                         )
