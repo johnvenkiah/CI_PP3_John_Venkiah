@@ -11,7 +11,7 @@ CREDS = Credentials.from_service_account_file('credentials.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPES)
 CAL = build('calendar', 'v3', credentials=CREDS)
 CAL_ID = 'uueq3s2tbgdl57dvmmvcp5osd8@group.calendar.google.com'
-year = datetime.date.now().year
+year = datetime.date.today().year
 now = datetime.datetime.utcnow().isoformat() + 'Z'
 GMT_OFF = '+02:00'
 
@@ -120,7 +120,7 @@ def suggest_appointment():
             break
 
         elif apntmt_choice == '3':
-            book_appointment()
+            book_appointment(year)
             break
 
         elif apntmt_choice == 'e' or 'E':
@@ -153,66 +153,76 @@ def days_feb():
     
     return d
 
-def book_appointment():
+def book_appointment(year):
 
 
-month_dict = {
-    'Jan': 31,
-    'Feb': days_feb(),
-    'Mar': 31,
-    'Apr': 30,
-    'May': 31,
-    'Jun': 30,
-    'Jul': 31,
-    'Aug': 31,
-    'Sep': 30,
-    'Okt': 31,
-    'Nov': 30,
-    'Dec': 31,
-}
+    month_dict = {
+        'Jan': 31,
+        'Feb': days_feb(),
+        'Mar': 31,
+        'Apr': 30,
+        'May': 31,
+        'Jun': 30,
+        'Jul': 31,
+        'Aug': 31,
+        'Sep': 30,
+        'Okt': 31,
+        'Nov': 30,
+        'Dec': 31,
+    }
 
     while True:
 
         print('Which month would you would like to come?\n')
         month = input('(3 letters, 1st capital)\n')
-        int_month = datetime.datetime.strptime(month, '%b')
-        int_month = int_month.strftime('%m')
-        int_month = int(int_month)
 
-        this_month = datetime.datetime.now().month
-        int_this_month = int(this_month)
+        try:
+            if month in month_dict.keys():
 
-        if int_month < int_this_month:
-            year = datetime.datetime.now() + timedelta(365.2425)
-            year = year.year
+                int_month = datetime.datetime.strptime(month, '%b')
+                int_month = int_month.strftime('%m')
+                int_month = int(int_month)
 
-        print(f'{month}, {year}. Which date?\n')
-        date = input('1 - 31:\n')
-        if int(date) > 31:
-            raise ValueError('date not valid, try again')
+                this_month = datetime.datetime.now().month
+                int_this_month = int(this_month)
 
-        print('What time?\n')
-        hour = input('Enter hour, 9 - 17:\n')
+                if int_month < int_this_month:
+                    year = datetime.datetime.today() + timedelta(365.2425)
+                    year = year.year
 
-        apntmnt_time = (f'{hour}:00, {date}th {month} {year}')
-        apntmnt_time = datetime.datetime.strptime(
-            apntmnt_time, '%H:%M, %dth %b %Y'
-        )
+                print(f'{month}, {year}. Which date?\n')
+                date = input('1 - 31:\n')
+                if int(date) > 31:
+                    raise ValueError('date not valid, try again')
 
-        end_time = apntmnt_time + timedelta(hours=+1)
-        apntmnt_time = apntmnt_time.strftime('%Y-%m-%dT%H:%M:%S' + GMT_OFF)
-        end_time = end_time.strftime('%Y-%m-%dT%H:%M:%S' + GMT_OFF)
+                print('What time?\n')
+                hour = input('Enter hour, 9 - 17:\n')
 
-        name = input('enter your full name:\n')
+                apntmnt_time = (f'{hour}:00, {date}th {month} {year}')
+                apntmnt_time = datetime.datetime.strptime(
+                    apntmnt_time, '%H:%M, %dth %b %Y'
+                )
 
-        email = input('enter your email:\n')
+                end_time = apntmnt_time + timedelta(hours=+1)
+                apntmnt_time = apntmnt_time.strftime('%Y-%m-%dT%H:%M:%S' + GMT_OFF)
+                end_time = end_time.strftime('%Y-%m-%dT%H:%M:%S' + GMT_OFF)
 
-        details = input('discribe your symptoms:\n')
+                name = input('enter your full name:\n')
 
-        print(f'Confirm appointment: {apntmnt_time}?')
-        confirm = input('"y" = YES, "n" = NO\n')
-        if confirm == 'y':
-            new_event(apntmnt_time, end_time, name, email, details)
+                email = input('enter your email:\n')
+
+                details = input('discribe your symptoms:\n')
+
+                print(f'Confirm appointment: {apntmnt_time}?')
+                confirm = input('"y" = YES, "n" = NO\n')
+                if confirm == 'y':
+                    new_event(apntmnt_time, end_time, name, email, details)
+                    return False
+
+            else:
+                raise ValueError
+        except ValueError:
+            print('Month incorrect, please try again\n')
 
 
 def new_event(start, end, name, email, details):
@@ -234,7 +244,7 @@ def new_event(start, end, name, email, details):
             calendarId=CAL_ID,
             sendNotifications=True, body=EVENT).execute()
 
-    print(f'Thanks, {name}, %r appointment added:\n')
+    print(f'Thanks, {name}, appointment added:\n')
     print(f'{start}, {email}')
     print(details)
     goback = input('Press any key to go back to the beginning\n')
