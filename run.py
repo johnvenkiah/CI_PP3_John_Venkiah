@@ -98,7 +98,9 @@ def get_appointments(earliest, latest):
     for event in events:
 
         start = event['start'].get('dateTime')
-        start = datetime.datetime.strptime(start, '%Y-%m-%dT%H:%M:%S' + GMT_OFF)
+        start = datetime.datetime.strptime(
+            start, '%Y-%m-%dT%H:%M:%S' + GMT_OFF
+        )
         start = start.strftime("%H:%M, %dth %b %Y")
 
         print(start, event['summary'], event['description'])
@@ -166,6 +168,7 @@ def days_feb():
 
     return d
 
+
 def book_appointment(year):
     """
     Gets information from user to determine date and time for appointment.
@@ -192,6 +195,7 @@ def book_appointment(year):
 
         print('Which month would you would like to come?\n')
         month = input('(3 letters, 1st capital)\n')
+        days_in_month = month_dict.get(month)
 
         try:
             if month in month_dict.keys():
@@ -208,34 +212,50 @@ def book_appointment(year):
                     year = year.year
 
                 print(f'{month}, {year}. Which date?\n')
-                date = input('1 - 31:\n')
-                if int(date) > 31 or int(date) < 1 or
-                    (month == 'Feb' and int(date) > days_feb()):
-                    raise ValueError('date not valid, try again')
+                date = input('(Enter two digits):\n')
 
-                print('What time?\n')
-                hour = input('Enter hour, 9 - 17:\n')
+                try:
+                    if (
+                            int(date) <= int(days_in_month) and
+                            int(date) > 0
+                    ):
 
-                apntmnt_time = (f'{hour}:00, {date}th {month} {year}')
-                apntmnt_time = datetime.datetime.strptime(
-                    apntmnt_time, '%H:%M, %dth %b %Y'
-                )
+                        print('What time?\n')
+                        hour = input('Enter hour, 9 - 17:\n')
 
-                end_time = apntmnt_time + timedelta(hours=+1)
-                apntmnt_time = apntmnt_time.strftime('%Y-%m-%dT%H:%M:%S' + GMT_OFF)
-                end_time = end_time.strftime('%Y-%m-%dT%H:%M:%S' + GMT_OFF)
+                        apntmnt_time = (f'{hour}:00, {date}th {month} {year}')
+                        apntmnt_time = datetime.datetime.strptime(
+                            apntmnt_time, '%H:%M, %dth %b %Y'
+                        )
 
-                name = input('enter your full name:\n')
+                        end_time = apntmnt_time + timedelta(hours=+1)
+                        apntmnt_time = apntmnt_time.strftime(
+                            '%Y-%m-%dT%H:%M:%S' + GMT_OFF
+                        )
+                        end_time = end_time.strftime(
+                            '%Y-%m-%dT%H:%M:%S' + GMT_OFF
+                        )
 
-                email = input('enter your email:\n')
+                        name = input('enter your full name:\n')
 
-                details = input('discribe your symptoms:\n')
+                        email = input('enter your email:\n')
 
-                print(f'Confirm appointment: {apntmnt_time}?')
-                confirm = input('"y" = YES, "n" = NO\n')
-                if confirm == 'y':
-                    new_event(apntmnt_time, end_time, name, email, details)
-                    return False
+                        details = input('discribe your symptoms:\n')
+
+                        print(f'Confirm appointment: {apntmnt_time}?')
+                        confirm = input('"y" = YES, "n" = NO\n')
+                        if confirm == 'y':
+                            new_event(
+                                apntmnt_time, end_time, name, email, details
+                            )
+                            return False
+                    else:
+                        raise TypeError
+                except TypeError:
+                    print('Date incorrect, please try again\n')
+
+            elif month.isnumeric():
+                raise ValueError
 
             else:
                 raise ValueError
@@ -266,9 +286,9 @@ def new_event(start, end, name, email, details):
         'description': f'{email}, {details}'
     }
 
-    e = CAL.events().insert(  # pylint: disable=maybe-no-member
-            calendarId=CAL_ID,
-            sendNotifications=True, body=EVENT).execute()
+    CAL.events().insert(  # pylint: disable=maybe-no-member
+        calendarId=CAL_ID,
+        sendNotifications=True, body=EVENT).execute()
 
     print(f'Thanks, {name}, appointment added:\n')
     print(f'{start}, {email}')
@@ -283,30 +303,4 @@ def new_event(start, end, name, email, details):
         # ['dateTime'], e['end']['dateTime'])
 
 
-# suggest_appointment()
-# get_appointments()
 welcome_screen()
-
-
-# def show_schedule(CAL):
-#     """
-#     Shows the schedule if password has been entered correctly.
-#     """
-#     # Call the Calendar API
-#     events_result = CAL.events().list(
-#         calendarId=CAL_ID,
-#         timeMin=now,
-#         maxResults=10, singleEvents=True,
-#         orderBy='startTime'
-#     ).execute()
-
-#     events = events_result.get('items', [])
-
-#     if not events:
-#         print('No upcoming events found.')
-#     for event in events:
-
-#         start = event['start'].get('dateTime', event['start'].get('date'))
-#         start = datetime.datetime.strptime(start, '%Y-%m-%dT%H:%M:%S%z')
-#         start = start.strftime("%H:%M, %dth %b %Y")
-#         print(start, event['summary'])
