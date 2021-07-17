@@ -17,6 +17,10 @@ GMT_OFF = '+02:00'
 
 
 def welcome_screen():
+    """
+    The patient or staff member is greeted with this welcome screen,
+    from here users can either choose the patient or staff section.
+    """
     welcome_greeting = 'Welcome to the Feelgood Physio booking system\n'
     print(welcome_greeting.upper())
 
@@ -39,6 +43,10 @@ def welcome_screen():
 
 
 def staff_login(password):
+    """
+    This is the staff area, from which staff members can access, change
+    or delete patient data after successfully entering the password.
+    """
     attempts = 0
     staff_greeting = 'Feelgood Physio - Staff login area\n'
     print(staff_greeting.upper())
@@ -101,45 +109,50 @@ def get_appointments(earliest, latest):
 
 
 def suggest_appointment():
+    """
+    Function to let patient continue with booking or go back,
+    for example if a staff  member entered the wrong input.
+    """
 
-    print('When would you like an appointment?\n')
-    print('Within a week: "1"\n')
-    print('Within two weeks: "2"\n')
-    print('Choose date: "3"\n')
-    print('Press "e" to exit')
-    apntmt_choice = input()
+    print("Let's find you an appointment.\n")
+    print('Press "1" to continue or "e" to exit.\n')
+    book_or_back = input()
 
     while True:
 
-        if apntmt_choice == '1':
-            get_appointments(now, future_date(7))
-            break
-
-        elif apntmt_choice == '2':
-            get_appointments(future_date(7), future_date(14))
-            break
-
-        elif apntmt_choice == '3':
+        if book_or_back == '1':
             book_appointment(year)
             break
 
-        elif apntmt_choice == 'e' or 'E':
+        elif book_or_back == 'e' or 'E':
             welcome_screen()
             break
-    else:
-        print('Invalid entry, try again\n')
+        else:
+            print('Invalid entry, try again\n')
 
 
 def future_date(day):
+    """
+    Function to let patient continue with booking or go back,
+    for example if a staff  member entered the wrong input.
+
+    @param day (int): The amount of days from now into the future to
+    pass into the function
+    """
+
     date = datetime.datetime.now() + timedelta(day)
     date = date.isoformat() + 'Z'
     return date
 
 
 def days_feb():
+    """
+    Simple function to calculate amount of days in Feb on the
+    year the request is made.
+    """
 
     d = 28
-    
+
     if (year % 4) == 0:
         if (year % 100) == 0:
             if (year % 400) == 0:
@@ -150,11 +163,15 @@ def days_feb():
             d = 29
     else:
         d = 28
-    
+
     return d
 
 def book_appointment(year):
-
+    """
+    Gets information from user to determine date and time for appointment.
+    
+    @param year(int): the year of the appointment.
+    """
 
     month_dict = {
         'Jan': 31,
@@ -227,8 +244,16 @@ def book_appointment(year):
 
 def new_event(start, end, name, email, details):
     """
-    New event in Google Calendar.
+    Makes an event entry in Google Calendar, getting data from
+    the book_appointment function.
+
+    @param start(str): Start time of appointment
+    @param end(str): Start time of appointment
+    @param name(str): Name entered by patient
+    @param email(str): Email entered by patient
+    @param details(str): Description of symptoms entered by patient
     """
+
     EVENT = {
         "start": {
             "dateTime": start,
