@@ -5,6 +5,7 @@ import datetime
 from datetime import timedelta
 from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
+import re
 
 SCOPES = 'http://www.googleapis.com/auth/calendar'
 CREDS = Credentials.from_service_account_file('credentials.json')
@@ -90,6 +91,7 @@ def staff_login(password):
 
         if attempts == 4:
             print('\nToo many incorrect attempts, exiting...\n')
+            welcome_screen()
             return False
 
         if password_entered == password.password:
@@ -145,7 +147,7 @@ def print_appointments():
         start = datetime.datetime.strptime(
             start, '%Y-%m-%dT%H:%M:%S' + GMT_OFF
         )
-        start = start.strftime("%H:%M, %dth %b %Y")
+        start = start.strftime("%H:%M, %d %b %Y")
 
         print(start, event['summary'], event['description'])
         # print(start, event['summary'])
@@ -197,7 +199,7 @@ def get_month(year):
 
     while True:
 
-        print('Which month would you would like to come?\n')
+        print('\nWhich month would you would like to come?\n')
         month = input('3 letters, first capital. "e" to exit.\n\n')
         days_in_month = month_dict.get(month)
 
@@ -285,16 +287,24 @@ def get_time(date, month, year):
             get_appointments(apntmnt_time, end_time)
 
             if events:
-                print('Time fully booked, choose another time.\n')
+                print('Sorry, appointment not available. Try again.\n')
             else:
                 print(f'{hour}:00 on {date} {month}, {year} is free.\n')
-                enter_details(apntmnt_time, end_time)
+                get_name(apntmnt_time, end_time)
                 return False
         else:
-            print('Sorry, invalid entry.\n')
+            print('\nSorry, invalid entry.\n')
 
 
-def enter_details(apntmnt_time, end_time):
+patient_dict = {
+                'name': '',
+                'email': '',
+                'appointment': '',
+                'symtoms': '',
+                }
+
+
+def get_name(apntmnt_time, end_time):
     """
     Get the date from the user, with the month and year
     passed from the above function
@@ -308,14 +318,45 @@ def enter_details(apntmnt_time, end_time):
         name = input('To continue, enter your full name ("e" to exit):\n\n')
         e_to_exit(name)
 
-        email = input('\nPlease enter your email ("e" to exit):\n\n')
+        if any(char.isdigit() for char in name):
+            print("\nName can't contain numbers!\n")
+            continue
+
+        elif name.__contains__(' '):
+            print(f'\nThank you, {name}.\n')
+            get_email(apntmnt_time, end_time, name)
+            return False
+
+        else:
+            print("\nFirst and last name please\n")
+
+    return name
+
+
+def get_email(apntmnt_time, end_time, name):
+
+    while True:
+
+        email = input('Please enter your email ("e" to exit):\n\n')
         e_to_exit(email)
 
+        if not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+            print('\nInvalid email, try again\n')
+        else:
+            get_details(apntmnt_time, end_time, name, email)
+
+    return False
+            
+
+def get_details(apntmnt_time, end_time, name, email):
+
+    while True:
         details = input('\nShortly describe your symptoms ("e" to exit):\n\n')
         e_to_exit(details)
 
         print(f'\nConfirm appointment: {apntmnt_time}?\n')
-        confirm = input('\n"y" = YES, any other key = NO\n\n')
+        confirm = input('"y" = YES, any other key = NO\n\n')
+
         if confirm.lower() == 'y':
             new_event(
                 apntmnt_time, end_time, name, email, details
