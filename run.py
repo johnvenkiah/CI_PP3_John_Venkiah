@@ -60,6 +60,17 @@ def suggest_appointment():
         welcome_screen()
 
 
+def e_to_exit(user_input):
+    """
+    Gets user back to welcome screen if they input "e".
+    @paran user_input(str): input from user.
+    """
+
+    if user_input.lower() == 'e':
+        welcome_screen()
+        return False
+
+
 def staff_login(password):
     """
     This is the staff area, from which staff members can access, change
@@ -73,20 +84,18 @@ def staff_login(password):
 
         password_entered = stdiomask.getpass(
             'Enter your password or "e" to exit:\n\n'
-            )
+        )
+
+        e_to_exit(password_entered)
 
         if attempts == 4:
             print('\nToo many incorrect attempts, exiting...\n')
-            break
+            return False
 
         if password_entered == password.password:
             print('\nPassword correct, here is your schedule:\n')
             get_appointments(now, future_date(14))
             print_appointments()
-            break
-
-        elif password_entered in ('e', 'E'):
-            welcome_screen()
             break
 
         else:
@@ -189,11 +198,10 @@ def get_month(year):
     while True:
 
         print('Which month would you would like to come?\n')
-        month = input('3 letters, 1st capital. "b" to go back.\n')
+        month = input('3 letters, first capital. "e" to exit.\n')
         days_in_month = month_dict.get(month)
 
-        if month.lower() == 'b':
-            welcome_screen()
+        e_to_exit(month)
 
         if month in month_dict.keys():
 
@@ -229,9 +237,12 @@ def get_date(days_in_month, month, year):
     while True:
 
         print(f'{month}, {year}. Which date?\n')
-        date = input('(Enter two digits):\n')
+        date = input('Enter two digits, "e" to exit.:\n')
+
+        e_to_exit(date)
 
         if (
+            date.isnumeric() and
             int(date) <= int(days_in_month) and
             int(date) > 0
         ):
@@ -252,29 +263,35 @@ def get_time(date, month, year):
     while True:
 
         print(f'{date} {month}, {year}. What time?\n')
-        hour = input('Enter hour, 9 - 17:\n')
+        hour = input('Enter hour, 9 - 17. "e" to exit.\n')
 
-        apntmnt_time = (f'{hour}:00, {date} {month} {year}')
-        apntmnt_time = datetime.datetime.strptime(
-            apntmnt_time, '%H:%M, %d %b %Y'
-        )
+        e_to_exit(hour)
 
-        end_time = apntmnt_time + timedelta(hours=+1)
-        apntmnt_time = apntmnt_time.strftime(
-            '%Y-%m-%dT%H:%M:%S' + GMT_OFF
-        )
-        end_time = end_time.strftime(
-            '%Y-%m-%dT%H:%M:%S' + GMT_OFF
-        )
+        if hour.isnumeric() and int(hour) >= 9 and int(hour) < 17:
 
-        get_appointments(apntmnt_time, end_time)
+            apntmnt_time = (f'{hour}:00, {date} {month} {year}')
+            apntmnt_time = datetime.datetime.strptime(
+                apntmnt_time, '%H:%M, %d %b %Y'
+            )
 
-        if events:
-            print('Time fully booked, choose another time.\n')
+            end_time = apntmnt_time + timedelta(hours=+1)
+            apntmnt_time = apntmnt_time.strftime(
+                '%Y-%m-%dT%H:%M:%S' + GMT_OFF
+            )
+            end_time = end_time.strftime(
+                '%Y-%m-%dT%H:%M:%S' + GMT_OFF
+            )
+
+            get_appointments(apntmnt_time, end_time)
+
+            if events:
+                print('Time fully booked, choose another time.\n')
+            else:
+                print(f'{hour}:00 on {date} {month}, {year} is free.\n')
+                enter_details(apntmnt_time, end_time)
+                return False
         else:
-            enter_details(apntmnt_time, end_time)
-            print(f'{hour}:00 on {date} {month}, {year} is free.\n')
-            return False
+            print('Sorry, invalid entry.\n')
 
 
 def enter_details(apntmnt_time, end_time):
@@ -287,11 +304,15 @@ def enter_details(apntmnt_time, end_time):
     """
 
     while True:
-        name = input('Enter your full name:\n')
+
+        name = input('Enter your full name ("e" to exit):\n')
+        e_to_exit(name)
 
         email = input('Enter your email:\n')
+        e_to_exit(email)
 
-        details = input('Shortly describe your symptoms:\n')
+        details = input('Shortly describe your symptoms ("e" to exit):\n')
+        e_to_exit(details)
 
         print(f'Confirm appointment: {apntmnt_time}?')
         confirm = input('"y" = YES, "n" = NO\n')
