@@ -27,7 +27,7 @@ def welcome_screen():
     while True:
 
         staff_or_customer = input(
-            '\nPress "b" to book an appointment or "s" for staff login:\n'
+            '\nPress "b" to book an appointment or "s" for staff login:\n\n'
             )
         staff_or_customer = staff_or_customer.lower()
         if staff_or_customer == 's':
@@ -48,9 +48,9 @@ def suggest_appointment():
     for example if a staff  member entered the wrong input.
     """
 
-    print("Let's find you an appointment.\n")
+    print("\nLet's find you an appointment.\n")
     book_or_back = input(
-        'Press "1" to continue or any other key to go back.\n'
+        'Press "1" to continue or any other key to go back.\n\n'
         )
 
     if book_or_back == '1':
@@ -198,7 +198,7 @@ def get_month(year):
     while True:
 
         print('Which month would you would like to come?\n')
-        month = input('3 letters, first capital. "e" to exit.\n')
+        month = input('3 letters, first capital. "e" to exit.\n\n')
         days_in_month = month_dict.get(month)
 
         e_to_exit(month)
@@ -220,9 +220,9 @@ def get_month(year):
             return False
 
         elif month.isnumeric():
-            print('Month incorrect, please try again\n')
+            print('\nMonth incorrect, please try again\n')
         else:
-            print('Month incorrect, please try again\n')
+            print('\nMonth incorrect, please try again\n')
 
 
 def get_date(days_in_month, month, year):
@@ -237,7 +237,7 @@ def get_date(days_in_month, month, year):
     while True:
 
         print(f'{month}, {year}. Which date?\n')
-        date = input('Enter two digits, "e" to exit.:\n')
+        date = input('Enter two digits, ("e" to exit):\n\n')
 
         e_to_exit(date)
 
@@ -249,7 +249,7 @@ def get_date(days_in_month, month, year):
             get_time(date, month, year)
             return False
         else:
-            print('Date incorrect, please try again\n')
+            print('\nDate incorrect, please try again\n')
 
 
 def get_time(date, month, year):
@@ -262,8 +262,8 @@ def get_time(date, month, year):
     """
     while True:
 
-        print(f'{date} {month}, {year}. What time?\n')
-        hour = input('Enter hour, 9 - 17. "e" to exit.\n')
+        print(f'\n{date} {month}, {year}. What time?\n')
+        hour = input('Enter hour, 9 - 17 ("e" to exit):\n\n')
 
         e_to_exit(hour)
 
@@ -305,25 +305,25 @@ def enter_details(apntmnt_time, end_time):
 
     while True:
 
-        name = input('Enter your full name ("e" to exit):\n')
+        name = input('To continue, enter your full name ("e" to exit):\n\n')
         e_to_exit(name)
 
-        email = input('Enter your email:\n')
+        email = input('\nPlease enter your email ("e" to exit):\n\n')
         e_to_exit(email)
 
-        details = input('Shortly describe your symptoms ("e" to exit):\n')
+        details = input('\nShortly describe your symptoms ("e" to exit):\n\n')
         e_to_exit(details)
 
-        print(f'Confirm appointment: {apntmnt_time}?')
-        confirm = input('"y" = YES, "n" = NO\n')
-        if confirm == 'y':
+        print(f'\nConfirm appointment: {apntmnt_time}?\n')
+        confirm = input('\n"y" = YES, any other key = NO\n\n')
+        if confirm.lower() == 'y':
             new_event(
                 apntmnt_time, end_time, name, email, details
             )
             return False
 
         else:
-            print('Lets try that again!\n')
+            print('\nAppointment Cancelled!\n')
 
 
 def new_event(start, end, name, email, details):
@@ -353,10 +353,10 @@ def new_event(start, end, name, email, details):
         calendarId=CAL_ID,
         sendNotifications=True, body=EVENT).execute()
 
-    print(f'Thanks, {name}, appointment added:\n')
-    print(f'{start}, {email}')
+    print(f'\nThanks, {name}, appointment added:\n')
+    print(f'{start}, {email}\n')
     print(details)
-    goback = input('Press any key to go back to the beginning\n')
+    goback = input('\nPress any key to go back to the beginning\n\n')
 
     if goback != '¶':
         welcome_screen()
