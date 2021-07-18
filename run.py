@@ -13,7 +13,7 @@ CAL = build('calendar', 'v3', credentials=CREDS)
 CAL_ID = 'uueq3s2tbgdl57dvmmvcp5osd8@group.calendar.google.com'
 year = datetime.date.today().year
 now = datetime.datetime.utcnow().isoformat() + 'Z'
-GMT_OFF = '+02:00'
+GMT_OFF = '+01:00'
 
 
 def welcome_screen():
@@ -32,14 +32,30 @@ def welcome_screen():
         staff_or_customer = staff_or_customer.lower()
         if staff_or_customer == 's':
             staff_login(password)
-            break
+            return False
 
         elif staff_or_customer == 'b':
             suggest_appointment()
-            break
+            return False
 
         else:
             print('\nInvalid entry, please try again\n')
+
+
+def suggest_appointment():
+    """
+    Function to let patient continue with booking or go back,
+    for example if a staff  member entered the wrong input.
+    """
+
+    print("Let's find you an appointment.\n")
+    book_or_back = input('Press "1" to continue or any other key to go back.\n')
+
+    if book_or_back == '1':
+        get_month(year)
+
+    else:
+        welcome_screen()
 
 
 def staff_login(password):
@@ -84,7 +100,7 @@ def get_appointments(earliest, latest):
     @param latest(str): endtime for period.
     """
 
-    print('Here are the one hour scheduled appointments:\n')
+    print('\nChecking schedule...\n')
     now = datetime.datetime.now().isoformat()
     now = now + 'Z'
 
@@ -124,32 +140,6 @@ def print_appointments():
         # print(start, event['summary'])
 
 
-# def find_free_time():
-
-
-def suggest_appointment():
-    """
-    Function to let patient continue with booking or go back,
-    for example if a staff  member entered the wrong input.
-    """
-
-    print("Let's find you an appointment.\n")
-    print('Press "1" to continue or "e" to exit.\n')
-    book_or_back = input()
-
-    while True:
-
-        if book_or_back == '1':
-            book_appointment(year)
-            break
-
-        elif book_or_back == 'e' or 'E':
-            welcome_screen()
-            break
-        else:
-            print('Invalid entry, try again\n')
-
-
 def future_date(day):
     """
     Gives a day in the future in datetime format depending on day parameter.
@@ -173,9 +163,9 @@ def days_feb():
     return d
 
 
-def book_appointment(year):
+def get_month(year):
     """
-    Gets information from user to determine date and time for appointment.
+    Initiate the booking process and gets month from user for appointment.
 
     @param year(int): the year of the appointment.
     """
@@ -273,10 +263,13 @@ def get_time(date, month, year):
             '%Y-%m-%dT%H:%M:%S' + GMT_OFF
         )
 
+        get_appointments(apntmnt_time, end_time)
+
         if events:
             print('Time fully booked, choose another time.\n')
         else:
             enter_details(apntmnt_time, end_time)
+            print(f'{hour}:00 on {date} {month}, {year} is free.\n')
             return False
 
 
@@ -290,11 +283,11 @@ def enter_details(apntmnt_time, end_time):
     """
 
     while True:
-        name = input('enter your full name:\n')
+        name = input('Enter your full name:\n')
 
-        email = input('enter your email:\n')
+        email = input('Enter your email:\n')
 
-        details = input('discribe your symptoms:\n')
+        details = input('Shortly describe your symptoms:\n')
 
         print(f'Confirm appointment: {apntmnt_time}?')
         confirm = input('"y" = YES, "n" = NO\n')
@@ -311,7 +304,7 @@ def enter_details(apntmnt_time, end_time):
 def new_event(start, end, name, email, details):
     """
     Makes an event entry in Google Calendar, getting data from
-    the book_appointment function.
+    the get_month function.
 
     @param start(str): Start time of appointment
     @param end(str): Start time of appointment
