@@ -49,7 +49,9 @@ def suggest_appointment():
     """
 
     print("Let's find you an appointment.\n")
-    book_or_back = input('Press "1" to continue or any other key to go back.\n')
+    book_or_back = input(
+        'Press "1" to continue or any other key to go back.\n'
+        )
 
     if book_or_back == '1':
         get_month(year)
@@ -144,8 +146,7 @@ def future_date(day):
     """
     Gives a day in the future in datetime format depending on day parameter.
 
-    @param day (int): The amount of days from now into the future to
-    pass into the function
+    @param day (int): Amount of days from now into the future to return.
     """
 
     date = datetime.datetime.now() + timedelta(day)
@@ -188,8 +189,11 @@ def get_month(year):
     while True:
 
         print('Which month would you would like to come?\n')
-        month = input('(3 letters, 1st capital)\n')
+        month = input('3 letters, 1st capital. "b" to go back.\n')
         days_in_month = month_dict.get(month)
+
+        if month.lower() == 'b':
+            welcome_screen()
 
         if month in month_dict.keys():
 
