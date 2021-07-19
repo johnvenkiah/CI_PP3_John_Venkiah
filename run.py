@@ -175,7 +175,7 @@ def print_appointments():
 
         event_id = appointment['id']
 
-        app_dict = {app_nr: event_id}
+        app_dict.update({f'{app_nr}': event_id})
 
         if 'description' not in appointment:
             appointment.update({'description': 'No info'})
@@ -184,33 +184,56 @@ def print_appointments():
             appointment['description'], f'{app_dict}'
             )
         app_nr += 1
-    nav_edit_app(weeks_multiplier)
+    nav_appntmnt(weeks_multiplier, app_dict)
 
 
-def nav_edit_app(weeks_multiplier):
-        print('\nTo edit an appointment, enter the appointment number.')
-        print('\nTo get appointments for week after, press "n".')
-        print('\nTo go back to the previous week, press "b".\n')
-        nav_or_edit = input('Press "e" to exit:\n\n')
+def nav_appntmnt(weeks_multiplier, app_dict):
+    print('\nTo edit an appointment, enter the appointment number.')
+    print('\nTo get appointments for week after, press "n".')
+    print('\nTo go back to the previous week, press "b".\n')
+    nav_or_edit = input('Press "e" to exit:\n\n')
 
-        if nav_or_edit == 'n':
-            weeks_multiplier.increment()
-            days_1 = weeks_multiplier.get_value()
-            days_2 = days_1 + 7
-            get_appointments(future_date(days_1), future_date(days_2))
-            print_appointments()
+    if nav_or_edit == 'n':
+        weeks_multiplier.increment()
+        days_1 = weeks_multiplier.get_value()
+        days_2 = days_1 + 7
+        get_appointments(future_date(days_1), future_date(days_2))
+        print_appointments()
 
-        elif nav_or_edit == 'b':
-            weeks_multiplier.decrement()
-            days_1 = weeks_multiplier.get_value()
-            days_2 = days_1 + 7
-            get_appointments(future_date(days_1), future_date(days_2))
-            print_appointments()
-        else:
-            print('\nExiting..')
-            welcome_screen()
-            return
+    elif nav_or_edit == 'b':
+        weeks_multiplier.decrement()
+        days_1 = weeks_multiplier.get_value()
+        days_2 = days_1 + 7
+        get_appointments(future_date(days_1), future_date(days_2))
+        print_appointments()
+    
+    elif str(nav_or_edit) in app_dict:
+        del_id = app_dict[nav_or_edit]
+        edit_appntmnt(nav_or_edit, del_id)
+        return
 
+    else:
+        print(type(nav_or_edit))
+        print(f'\n{nav_or_edit} Exiting..')
+        welcome_screen()
+        return
+
+
+def edit_appntmnt(nav_or_edit, del_id):
+
+    delete_or_not = input(f'\ndelete appointment {nav_or_edit}?\n')
+
+    if delete_or_not == 'y':
+    
+        CAL.events().delete(calendarId=CAL_ID,
+        eventId=del_id).execute()
+
+        print('Appointment deleted!\n')
+
+    else:
+
+        get_appointments(now, future_date(7))
+        print_appointments()
 
 def future_date(day):
     """
