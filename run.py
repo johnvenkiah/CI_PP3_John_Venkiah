@@ -348,7 +348,7 @@ def get_email(apntmnt_time, end_time, name):
             get_details(apntmnt_time, end_time, name, email)
 
     return False
-            
+
 
 def get_details(apntmnt_time, end_time, name, email):
 
@@ -357,7 +357,7 @@ def get_details(apntmnt_time, end_time, name, email):
         e_to_exit(details)
 
         start_time_pretty = datetime.datetime.strptime(
-        apntmnt_time, '%Y-%m-%dT%H:%M:%S' + GMT_OFF
+            apntmnt_time, '%Y-%m-%dT%H:%M:%S' + GMT_OFF
         )
 
         start_time_pretty = start_time_pretty.strftime('%H:%M, %d %b %Y')
@@ -409,10 +409,6 @@ def new_event(start, end, name, email, details, start_time_pretty):
 
     if goback != '¶':
         welcome_screen()
-
-        # Start: %s End: %s' % (
-        # e['summary'].encode('utf-8'), e['start']
-        # ['dateTime'], e['end']['dateTime'])
 
 
 welcome_screen()
