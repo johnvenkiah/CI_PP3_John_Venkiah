@@ -22,7 +22,7 @@ def welcome_screen():
     The patient or staff member is greeted with this welcome screen,
     from here users can either choose the patient or staff section.
     """
-    welcome_greeting = 'Welcome to the Feelgood Physio booking system\n'
+    welcome_greeting = '\nWelcome to the Feelgood Physio booking system\n'
     print(welcome_greeting.upper())
 
     while True:
@@ -144,6 +144,8 @@ def print_appointments():
     for event in events:
 
         start = event['start'].get('dateTime')
+        if start is None:
+            continue
         start = datetime.datetime.strptime(
             start, '%Y-%m-%dT%H:%M:%S' + GMT_OFF
         )
@@ -238,7 +240,7 @@ def get_date(days_in_month, month, year):
 
     while True:
 
-        print(f'{month}, {year}. Which date?\n')
+        print(f'\n{month}, {year}. Which date?\n')
         date = input('Enter two digits, ("e" to exit):\n\n')
 
         e_to_exit(date)
@@ -251,7 +253,7 @@ def get_date(days_in_month, month, year):
             get_time(date, month, year)
             return False
         else:
-            print('\nDate incorrect, please try again\n')
+            print('\nDate incorrect, please try again')
 
 
 def get_time(date, month, year):
@@ -287,13 +289,13 @@ def get_time(date, month, year):
             get_appointments(apntmnt_time, end_time)
 
             if events:
-                print('Sorry, appointment not available. Try again.\n')
+                print('Sorry, appointment not available. Try again.')
             else:
                 print(f'{hour}:00 on {date} {month}, {year} is free.\n')
                 get_name(apntmnt_time, end_time)
                 return False
         else:
-            print('\nSorry, invalid entry.\n')
+            print('\nSorry, invalid entry.')
 
 
 patient_dict = {
@@ -354,12 +356,18 @@ def get_details(apntmnt_time, end_time, name, email):
         details = input('\nShortly describe your symptoms ("e" to exit):\n\n')
         e_to_exit(details)
 
-        print(f'\nConfirm appointment: {apntmnt_time}?\n')
+        start_time_pretty = datetime.datetime.strptime(
+        apntmnt_time, '%Y-%m-%dT%H:%M:%S' + GMT_OFF
+        )
+
+        start_time_pretty = start_time_pretty.strftime('%H:%M, %d %b %Y')
+
+        print(f'\nConfirm appointment: {start_time_pretty}?\n')
         confirm = input('"y" = YES, any other key = NO\n\n')
 
         if confirm.lower() == 'y':
             new_event(
-                apntmnt_time, end_time, name, email, details
+                apntmnt_time, end_time, name, email, details, start_time_pretty
             )
             return False
 
@@ -367,7 +375,7 @@ def get_details(apntmnt_time, end_time, name, email):
             print('\nAppointment Cancelled!\n')
 
 
-def new_event(start, end, name, email, details):
+def new_event(start, end, name, email, details, start_time_pretty):
     """
     Makes an event entry in Google Calendar, getting data from
     the get_month function.
@@ -395,7 +403,7 @@ def new_event(start, end, name, email, details):
         sendNotifications=True, body=EVENT).execute()
 
     print(f'\nThanks, {name}, appointment added:\n')
-    print(f'{start}, {email}\n')
+    print(f'{start_time_pretty}, {email}\n')
     print(details)
     goback = input('\nPress any key to go back to the beginning\n\n')
 
