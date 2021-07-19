@@ -28,7 +28,7 @@ def welcome_screen():
     while True:
 
         staff_or_customer = input(
-            '\nPress "b" to book an appointment or "s" for staff login:\n\n'
+            'Press "b" to book an appointment or "s" for staff login:\n\n'
             )
         staff_or_customer = staff_or_customer.lower()
         if staff_or_customer == 's':
@@ -134,6 +134,9 @@ def get_appointments(earliest, latest):
     return appointments
 
 
+weeks_multiplier = 0
+
+
 def print_appointments():
     """
     Print the appointments taken through the get_appointments function.
@@ -148,8 +151,6 @@ def print_appointments():
 
     for appointment in appointments:
 
-
-
         start = appointment['start'].get('dateTime')
         if start is None:
             continue
@@ -159,24 +160,25 @@ def print_appointments():
         start = start.strftime("%H:%M, %d %b %Y")
 
         event_id = appointment['id']
+
+        app_dict = {app_nr: event_id}
+
+        print(
+            f'{app_nr}: ', start, appointment['summary'],
+            appointment['description'], f'{app_dict}'
+            )
         app_nr += 1
-        app_dict_entry = {f'{app_nr}':f' {event_id}'}
-
-        print(f'{app_nr}, ', start, appointment['summary'],
-        appointment['description'], f'{app_dict_entry}')
-    nav_edit_app()
+    nav_edit_app(weeks_multiplier)
 
 
-def nav_edit_app():
-        print('To edit an appointment, press the number ')
-        nav_or_edit = input('\nTo get appointments for week after, press "n"\n')
-
-        days_1 = 0
-        days_2 = 7
+def nav_edit_app(weeks_multiplier):
+        print('\nTo edit an appointment, press the number ')
+        nav_or_edit = input('\nTo get appointments for week after, press "n"\n\n')
 
         if nav_or_edit == 'n':
-            days_1 += 7
-            days_2 += 7
+            weeks_multiplier += 1
+            days_1 = weeks_multiplier * 7
+            days_2 = days_1 + 7
             get_appointments(future_date(days_1), future_date(days_2))
             print_appointments()
 
