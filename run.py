@@ -139,6 +139,8 @@ def print_appointments():
     Print the appointments taken through the get_appointments function.
 
     """
+    app_nr = 1
+    app_dict = {}
 
     if not appointments:
         print('No appointments found.')
@@ -156,8 +158,12 @@ def print_appointments():
         )
         start = start.strftime("%H:%M, %d %b %Y")
 
-        print(start, appointment['summary'], appointment['description'])
+        event_id = appointment['id']
+        app_nr += 1
+        app_dict_entry = {f'{app_nr}':f' {event_id}'}
 
+        print(f'{app_nr}, ', start, appointment['summary'],
+        appointment['description'], f'{app_dict_entry}')
     nav_edit_app()
 
 
