@@ -134,7 +134,20 @@ def get_appointments(earliest, latest):
     return appointments
 
 
-weeks_multiplier = 0
+class Counter():
+    def __init__(self):
+        self.counter = 0
+
+    def increment(self):
+        self.counter += 7
+
+    def decrement(self):
+        self.counter -= 7
+
+    def get_value(self):
+        return self.counter
+
+weeks_multiplier = Counter()
 
 
 def print_appointments():
@@ -176,11 +189,21 @@ def nav_edit_app(weeks_multiplier):
         nav_or_edit = input('\nTo get appointments for week after, press "n"\n\n')
 
         if nav_or_edit == 'n':
-            weeks_multiplier += 1
-            days_1 = weeks_multiplier * 7
+            weeks_multiplier.increment()
+            days_1 = weeks_multiplier.get_value()
             days_2 = days_1 + 7
             get_appointments(future_date(days_1), future_date(days_2))
             print_appointments()
+
+        elif nav_or_edit == 'b':
+            weeks_multiplier.decrement()
+            days_1 = weeks_multiplier.get_value()
+            days_2 = days_1 + 7
+            get_appointments(future_date(days_1), future_date(days_2))
+            print_appointments()
+        else:
+            print('Exiting..')
+            return
 
 
 def future_date(day):
