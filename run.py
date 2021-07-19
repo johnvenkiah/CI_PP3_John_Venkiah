@@ -12,9 +12,9 @@ CREDS = Credentials.from_service_account_file('credentials.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPES)
 CAL = build('calendar', 'v3', credentials=CREDS)
 CAL_ID = 'uueq3s2tbgdl57dvmmvcp5osd8@group.calendar.google.com'
-year = datetime.date.today().year
-now = datetime.datetime.utcnow().isoformat() + 'Z'
 GMT_OFF = '+01:00'
+year = datetime.date.today().year
+now = datetime.datetime.utcnow().isoformat() + GMT_OFF
 
 
 def welcome_screen():
@@ -115,7 +115,7 @@ def get_appointments(earliest, latest):
     @param latest(str): endtime for period.
     """
 
-    print('\nChecking schedule...\n')
+    print('\nChecking schedule...')
     global now
     now = datetime.datetime.now().isoformat()
     now = now + 'Z'
@@ -131,6 +131,7 @@ def get_appointments(earliest, latest):
     global appointments
     appointments = appointments_result.get('items', [])
 
+    print(f'\nAppointments between {earliest} and {latest}:\n')
     return appointments
 
 
@@ -160,7 +161,7 @@ def print_appointments():
     app_dict = {}
 
     if not appointments or len(appointments) <= 2:
-        print('No appointments that week.\n')
+        print('No appointments that week.')
 
     for appointment in appointments:
 
@@ -206,7 +207,7 @@ def nav_edit_app(weeks_multiplier):
             get_appointments(future_date(days_1), future_date(days_2))
             print_appointments()
         else:
-            print('Exiting..')
+            print('\nExiting..')
             welcome_screen()
             return
 
