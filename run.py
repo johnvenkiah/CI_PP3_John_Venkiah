@@ -176,6 +176,8 @@ def print_appointments():
 
         app_dict = {app_nr: event_id}
 
+        if 'description' not in appointment:
+            appointment.update({'description': 'No info'})
         print(
             f'{app_nr}: ', start, appointment['summary'],
             appointment['description'], f'{app_dict}'
@@ -185,8 +187,9 @@ def print_appointments():
 
 
 def nav_edit_app(weeks_multiplier):
-        print('\nTo edit an appointment, press the number ')
-        nav_or_edit = input('\nTo get appointments for week after, press "n"\n\n')
+        print('\nTo edit an appointment, press the appointment number.')
+        print('\nTo get appointments for week after, press "n" or press\n')
+        nav_or_edit = input('"e" to exit:\n\n')
 
         if nav_or_edit == 'n':
             weeks_multiplier.increment()
@@ -203,6 +206,7 @@ def nav_edit_app(weeks_multiplier):
             print_appointments()
         else:
             print('Exiting..')
+            welcome_screen()
             return
 
 
