@@ -134,20 +134,21 @@ def get_appointments(earliest, latest):
     return appointments
 
 
-class Counter():
+class Inc_dec_week():
     def __init__(self):
-        self.counter = 0
+        self.inc_dec_week = 0
 
     def increment(self):
-        self.counter += 7
+        self.inc_dec_week += 7
 
     def decrement(self):
-        self.counter -= 7
+        self.inc_dec_week -= 7
 
     def get_value(self):
-        return self.counter
+        return self.inc_dec_week
 
-weeks_multiplier = Counter()
+
+weeks_multiplier = Inc_dec_week()
 
 
 def print_appointments():
@@ -158,9 +159,8 @@ def print_appointments():
     app_nr = 1
     app_dict = {}
 
-    if not appointments:
-        print('No appointments found.')
-        return
+    if not appointments or len(appointments) <= 2:
+        print('No appointments that week.\n')
 
     for appointment in appointments:
 
@@ -187,9 +187,10 @@ def print_appointments():
 
 
 def nav_edit_app(weeks_multiplier):
-        print('\nTo edit an appointment, press the appointment number.')
-        print('\nTo get appointments for week after, press "n" or press\n')
-        nav_or_edit = input('"e" to exit:\n\n')
+        print('\nTo edit an appointment, enter the appointment number.')
+        print('\nTo get appointments for week after, press "n".')
+        print('\nTo go back to the previous week, press "b".\n')
+        nav_or_edit = input('Press "e" to exit:\n\n')
 
         if nav_or_edit == 'n':
             weeks_multiplier.increment()
