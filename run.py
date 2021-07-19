@@ -78,7 +78,7 @@ def staff_login(password):
     or delete patient data after successfully entering the password.
     """
     attempts = 0
-    staff_greeting = 'Feelgood Physio - Staff login area\n'
+    staff_greeting = '\nFeelgood Physio - Staff login area\n'
     print(staff_greeting.upper())
 
     while True:
@@ -95,8 +95,10 @@ def staff_login(password):
             return False
 
         if password_entered == password.password:
-            print('\nPassword correct, here is your schedule:\n')
-            get_appointments(now, future_date(14))
+            print(
+                '\nPassword correct, getting schedule for coming week:'
+            )
+            get_appointments(now, future_date(7))
             print_appointments()
             break
 
@@ -114,10 +116,11 @@ def get_appointments(earliest, latest):
     """
 
     print('\nChecking schedule...\n')
+    global now
     now = datetime.datetime.now().isoformat()
     now = now + 'Z'
 
-    events_result = CAL.events().list(  # pylint: disable=maybe-no-member
+    appointments_result = CAL.events().list(  # pylint: disable=maybe-no-member
         calendarId=CAL_ID,
         timeMin=earliest,
         timeMax=latest,
@@ -125,25 +128,27 @@ def get_appointments(earliest, latest):
         orderBy='startTime'
     ).execute()
 
-    global events
-    events = events_result.get('items', [])
+    global appointments
+    appointments = appointments_result.get('items', [])
 
-    return events
+    return appointments
 
 
 def print_appointments():
     """
-    Print the events taken through the get_appointments function.
+    Print the appointments taken through the get_appointments function.
 
-    @param earliest(str): starttime for period.
-    @param latest(str): endtime for period.
     """
 
-    if not events:
-        print('No upcoming events found.')
-    for event in events:
+    if not appointments:
+        print('No appointments found.')
+        return
 
-        start = event['start'].get('dateTime')
+    for appointment in appointments:
+
+
+
+        start = appointment['start'].get('dateTime')
         if start is None:
             continue
         start = datetime.datetime.strptime(
@@ -151,8 +156,23 @@ def print_appointments():
         )
         start = start.strftime("%H:%M, %d %b %Y")
 
-        print(start, event['summary'], event['description'])
-        # print(start, event['summary'])
+        print(start, appointment['summary'], appointment['description'])
+
+    nav_edit_app()
+
+
+def nav_edit_app():
+        print('To edit an appointment, press the number ')
+        nav_or_edit = input('\nTo get appointments for week after, press "n"\n')
+
+        days_1 = 0
+        days_2 = 7
+
+        if nav_or_edit == 'n':
+            days_1 += 7
+            days_2 += 7
+            get_appointments(future_date(days_1), future_date(days_2))
+            print_appointments()
 
 
 def future_date(day):
@@ -288,7 +308,7 @@ def get_time(date, month, year):
 
             get_appointments(apntmnt_time, end_time)
 
-            if events:
+            if appointments:
                 print('Sorry, appointment not available. Try again.')
             else:
                 print(f'{hour}:00 on {date} {month}, {year} is free.\n')
@@ -366,7 +386,7 @@ def get_details(apntmnt_time, end_time, name, email):
         confirm = input('"y" = YES, any other key = NO\n\n')
 
         if confirm.lower() == 'y':
-            new_event(
+            new_appointment(
                 apntmnt_time, end_time, name, email, details, start_time_pretty
             )
             return False
@@ -375,9 +395,9 @@ def get_details(apntmnt_time, end_time, name, email):
             print('\nAppointment Cancelled!\n')
 
 
-def new_event(start, end, name, email, details, start_time_pretty):
+def new_appointment(start, end, name, email, details, start_time_pretty):
     """
-    Makes an event entry in Google Calendar, getting data from
+    Makes an appointment entry in Google Calendar, getting data from
     the get_month function.
 
     @param start(str): Start time of appointment
@@ -387,7 +407,7 @@ def new_event(start, end, name, email, details, start_time_pretty):
     @param details(str): Description of symptoms entered by patient
     """
 
-    EVENT = {
+    APPOINTMENT = {
         "start": {
             "dateTime": start,
             },
@@ -398,9 +418,9 @@ def new_event(start, end, name, email, details, start_time_pretty):
         'description': f'{email}, {details}'
     }
 
-    CAL.events().insert(  # pylint: disable=maybe-no-member
+    CAL.appointments().insert(  # pylint: disable=maybe-no-member
         calendarId=CAL_ID,
-        sendNotifications=True, body=EVENT).execute()
+        sendNotifications=True, body=APPOINTMENT).execute()
 
     print(f'\nThanks, {name}, appointment added:\n')
     print(f'{start_time_pretty}, {email}\n')
