@@ -99,7 +99,9 @@ def staff_login(password):
                 '\nPassword correct, getting schedule for coming week:'
             )
             get_appointments(now, future_date(7))
-            print(now, future_date(7))
+            d_1 = convert_time.iso_to_pretty(now, 0)
+            d_2 = convert_time.iso_to_pretty(now, 1)
+            print(f'Showing appointments between {d_1} and {d_2}\n')
             print_appointments()
             break
 
@@ -167,10 +169,8 @@ def print_appointments():
         start = appointment['start'].get('dateTime')
         if start is None:
             continue
-        start = datetime.datetime.strptime(
-            start, '%Y-%m-%dT%H:%M:%S' + GMT_OFF
-        )
-        start = start.strftime("%H:%M, %d %b %Y")
+
+        start = convert_time_no_ms.iso_to_pretty(start, 0)
 
         event_id = appointment['id']
 
@@ -180,28 +180,41 @@ def print_appointments():
             appointment.update({'description': 'No info'})
         print(
             f'{app_nr}: ', start, appointment['summary'],
-            appointment['description'], f'{app_dict}'
+            appointment['description']
             )
         app_nr += 1
     nav_appntmnt(week_multiplier, app_dict)
 
 
-def iso_to_pretty(date, offset):
-    date = datetime.datetime.strptime(date, '%Y-%m-%dT%H:%M:%S.%f' + GMT_OFF)
-    date = date + timedelta(hours=offset)
-    return date.strftime('%H:%M, %d %b %Y')
+class Time_F_Converter():
+
+    def __init__(self, str_iso, str_pretty):
+        self.str_iso = str_iso
+        self.str_pretty = str_pretty
+
+    def iso_to_pretty(self, date, offset):
+        date = datetime.datetime.strptime(date, self.str_iso)
+        date = date + timedelta(hours=offset)
+        return date.strftime(self.str_pretty)
+
+    def pretty_to_iso(self, date, offset):
+        date = datetime.datetime.strptime(date, self.str_pretty)
+        date = date + timedelta(hours=offset)
+        return date.strftime(self.str_iso)
+
+    def add_hour_iso(self, date, offset):
+        date = datetime.datetime.strptime(date, self.str_iso)
+        date = date + timedelta(hours=offset)
+        return date.strftime(self.str_iso)
 
 
-def pretty_to_iso(date, offset):
-    date = datetime.datetime.strptime(date, '%H:%M, %d %b %Y')
-    date = date + timedelta(hours=offset)
-    return date.strftime('%Y-%m-%dT%H:%M:%S.%f' + GMT_OFF)
+convert_time = Time_F_Converter(
+    '%Y-%m-%dT%H:%M:%S.%f' + GMT_OFF, '%H:%M, %d %b %Y'
+)
 
-
-def add_hour(date, offset)
-    date = datetime.datetime.strptime(date, '%Y-%m-%dT%H:%M:%S.%f' + GMT_OFF)
-    date = date + timedelta(hours=offset)
-    return date.strftime('%Y-%m-%dT%H:%M:%S.%f' + GMT_OFF)
+convert_time_no_ms = Time_F_Converter(
+    '%Y-%m-%dT%H:%M:%S' + GMT_OFF, '%H:%M, %d %b %Y'
+)
 
 
 def nav_appntmnt(week_multiplier, app_dict):
@@ -216,8 +229,8 @@ def nav_appntmnt(week_multiplier, app_dict):
         days_2 = days_1 + 7
         date_1 = future_date(days_1)
         date_2 = future_date(days_2)
-        d_pretty_1 = iso_to_pretty(date_1)
-        d_pretty_2 = iso_to_pretty(date_2)
+        d_pretty_1 = convert_time.iso_to_pretty(date_1, 0)
+        d_pretty_2 = convert_time.iso_to_pretty(date_2, 0)
         print(
             f'\nAppointments between {d_pretty_1} and {d_pretty_2}:'
         )
@@ -462,8 +475,8 @@ def get_time(date, month, year):
 
             # end_time = apntmnt_time + timedelta(hours=+1)
 
-            apntmnt_time = pretty_to_iso(apntmnt_time, 0)
-            end_time = pretty_to_iso(apntmnt_time, +1)
+            apntmnt_time = convert_time.pretty_to_iso(apntmnt_time, 0)
+            end_time = convert_time.add_hour_iso(apntmnt_time, +1)
             # apntmnt_time = apntmnt_time.strftime(
             #     '%Y-%m-%dT%H:%M:%S' + GMT_OFF
             # )
@@ -515,7 +528,7 @@ def get_name(apntmnt_time, end_time):
             return False
 
         else:
-            print("\nFirst and last name please\n")
+            print("\nFirst and last name please.\n")
 
     return name
 
@@ -541,7 +554,7 @@ def get_details(apntmnt_time, end_time, name, email):
         details = input('\nShortly describe your symptoms ("e" to exit):\n\n')
         e_to_exit(details)
 
-        start_time_pretty = iso_to_pretty(apntmnt_time)
+        start_time_pretty = convert_time.iso_to_pretty(apntmnt_time, 0)
 
         # start_time_pretty = datetime.datetime.strptime(
         #     apntmnt_time, '%Y-%m-%dT%H:%M:%S' + GMT_OFF
