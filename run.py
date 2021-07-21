@@ -99,6 +99,7 @@ def staff_login(password):
                 '\nPassword correct, getting schedule for coming week:'
             )
             get_appointments(now, future_date(7))
+            print(now, future_date(7))
             print_appointments()
             break
 
@@ -116,9 +117,9 @@ def get_appointments(earliest, latest):
     """
 
     print('\nChecking schedule...\n')
-    global now
-    now = datetime.datetime.now().isoformat()
-    now = now + 'Z'
+    # global now
+    # now = datetime.datetime.now().isoformat()
+    # now = now + 'Z'
 
     appointments_result = CAL.events().list(  # pylint: disable=maybe-no-member
         calendarId=CAL_ID,
@@ -186,57 +187,52 @@ def print_appointments():
 
 
 def iso_to_pretty(date):
-    date = datetime.datetime.strptime(date, '%Y-%m-%dT%H:%M:%S.%f' + 'Z')
+    date = datetime.datetime.strptime(date, '%Y-%m-%dT%H:%M:%S.%f' + GMT_OFF)
     return date.strftime('%H:%M, %d %b %Y')
 
 
 def pretty_to_iso(date):
     date = datetime.datetime.strptime(date, '%H:%M, %d %b %Y')
-    return date.strftime('%Y-%m-%dT%H:%M:%S.%f' + 'Z')
+    return date.strftime('%Y-%m-%dT%H:%M:%S.%f' + GMT_OFF)
 
 
 def nav_appntmnt(week_multiplier, app_dict):
     print('\nTo edit an appointment, enter the appointment number.')
     print('\nTo get appointments for week after, press "n".')
     print('\nTo go back to the previous week, press "b".\n')
-    nav_or_edit = input('Press "e" to exit:\n\n')
+    nav_or_edit = input('Press any other key to exit.\n\n')
 
-    if nav_or_edit == 'n':
-        week_multiplier.increment()
+
+    def week_nav_fn(week_multiplier):
         days_1 = week_multiplier.get_value()
         days_2 = days_1 + 7
         date_1 = future_date(days_1)
         date_2 = future_date(days_2)
-        d_1 = iso_to_pretty(date_1)
-        d_2 = iso_to_pretty(date_2)
-        # date_1 = datetime.datetime.strptime(
-        #     future_date(days_1), '%Y-%m-%dT%H:%M:%S' + GMT_OFF
-        # )
-
-        # fd_1 = fd_1.strptime("%H:%M, %d %b %Y")
-
+        d_pretty_1 = iso_to_pretty(date_1)
+        d_pretty_2 = iso_to_pretty(date_2)
         print(
-            f'\nAppointments between {d_1} and {d_2}:'
+            f'\nAppointments between {d_pretty_1} and {d_pretty_2}:'
         )
 
-        get_appointments(future_date(days_1), future_date(days_2))
+        get_appointments(date_1, date_2)
         print_appointments()
+
+
+    if nav_or_edit == 'n':
+        week_multiplier.increment()
+        week_nav_fn(week_multiplier)
 
     elif nav_or_edit == 'b':
         week_multiplier.decrement()
-        days_1 = week_multiplier.get_value()
-        days_2 = days_1 + 7
-        get_appointments(future_date(days_1), future_date(days_2))
-        print_appointments()
-    
+        week_nav_fn(week_multiplier)
+
     elif str(nav_or_edit) in app_dict:
         apntmnt_id = app_dict[nav_or_edit]
         edit_appntmnt(nav_or_edit, apntmnt_id)
         return
 
     else:
-        print(type(nav_or_edit))
-        print(f'\n{nav_or_edit} Exiting..')
+        print('Exiting..')
         welcome_screen()
         return
 
@@ -337,7 +333,7 @@ def future_date(day):
     """
 
     date = datetime.datetime.now() + timedelta(day)
-    date = date.isoformat() + 'Z'
+    date = date.isoformat() + GMT_OFF
     return date
 
 
