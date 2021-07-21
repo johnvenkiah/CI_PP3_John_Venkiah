@@ -208,8 +208,8 @@ def nav_appntmnt(weeks_multiplier, app_dict):
         print_appointments()
     
     elif str(nav_or_edit) in app_dict:
-        del_id = app_dict[nav_or_edit]
-        edit_appntmnt(nav_or_edit, del_id)
+        apntmnt_id = app_dict[nav_or_edit]
+        edit_appntmnt(nav_or_edit, apntmnt_id)
         return
 
     else:
@@ -219,7 +219,7 @@ def nav_appntmnt(weeks_multiplier, app_dict):
         return
 
 
-def edit_appntmnt(nav_or_edit, del_id):
+def edit_appntmnt(nav_or_edit, apntmnt_id):
     print(f'\nAppointment {nav_or_edit}:')
     delete_or_not = input(
         'Press "c" to change, "d" to remove or any other key to go back.\n'
@@ -232,21 +232,21 @@ def edit_appntmnt(nav_or_edit, del_id):
         if sure == 'd':
     
             CAL.events().delete(
-                calendarId=CAL_ID, eventId=del_id
+                calendarId=CAL_ID, eventId=apntmnt_id
             ).execute()
 
             print('Appointment deleted!\n')
         
         else:
             print('Cancelled.')
-            edit_appntmnt(nav_or_edit, del_id)
+            edit_appntmnt(nav_or_edit, apntmnt_id)
 
     elif delete_or_not == 'c':
 
         apntmnt_to_edit = CAL.events().get(
-            calendarId=CAL_ID, eventId=del_id
+            calendarId=CAL_ID, eventId=apntmnt_id
         ).execute()
-        change_appntmnt(apntmnt_to_edit)
+        change_appntmnt(apntmnt_to_edit, apntmnt_id)
 
 
     else:
@@ -255,7 +255,7 @@ def edit_appntmnt(nav_or_edit, del_id):
         print_appointments()
 
 
-def change_appntmnt(apntmnt_to_edit):
+def change_appntmnt(apntmnt_to_edit, apntmnt_id):
     """
     Edit the start and end time of the appointment.
 
@@ -264,14 +264,48 @@ def change_appntmnt(apntmnt_to_edit):
     change = input('Change event?')
     if change == 'y':
 
-        get_time = apntmnt_to_edit['start']['datetime']
-        get_end_time = apntmnt_to_edit['end']['datetime']
-        get_time.datetime.datetime.strptime(
-            get_time, '%Y-%m-%dT%H:%M:%S' + GMT_OFF
+        get_start_time = apntmnt_to_edit['start'].get('dateTime')
+        get_end_time = apntmnt_to_edit['end'].get('dateTime')
+
+        get_start_time = datetime.datetime.strptime(
+            get_start_time, '%Y-%m-%dT%H:%M:%S' + GMT_OFF
         )
-        
-        print(f'appointment changed to {future_date(1)}')
-    
+
+        get_end_time = datetime.datetime.strptime(
+            get_end_time, '%Y-%m-%dT%H:%M:%S' + GMT_OFF
+        )
+        """
+
+        apntmnt_time = (f'{hour}:00, {date} {month} {year}')
+        apntmnt_time = datetime.datetime.strptime(
+            apntmnt_time, '%H:%M, %d %b %Y'
+        )
+
+        end_time = apntmnt_time + timedelta(hours=+1)
+        apntmnt_time = apntmnt_time.strftime(
+            '%Y-%m-%dT%H:%M:%S' + GMT_OFF
+        )
+        end_time = end_time.strftime(
+            '%Y-%m-%dT%H:%M:%S' + GMT_OFF
+        )
+
+        """
+
+        new_start_time = get_start_time + timedelta(hours=+1)
+        new_end_time = get_end_time + timedelta(hours=+1)
+
+        new_start_time = new_start_time.strftime('%Y-%m-%dT%H:%M:%S' + GMT_OFF)
+        new_end_time = new_end_time.strftime('%Y-%m-%dT%H:%M:%S' + GMT_OFF)
+
+        apntmnt_to_edit['start']['dateTime'] = new_start_time
+        apntmnt_to_edit['end']['dateTime'] = new_end_time
+
+        updated_apntmnt = CAL.events().update(
+            calendarId=CAL_ID, eventId=apntmnt_id, body=apntmnt_to_edit
+        ).execute()
+
+        print(updated_apntmnt['updated'])
+
     return
 
 
@@ -508,11 +542,11 @@ def new_appointment(start, end, name, email, details, start_time_pretty):
     """
 
     APPOINTMENT = {
-        "start": {
-            "dateTime": start,
+        'start': {
+            'dateTime': start,
             },
-        "end": {
-            "dateTime": end,
+        'end': {
+            'dateTime': end,
             },
         'summary': name,
         'description': f'{email}, {details}'
