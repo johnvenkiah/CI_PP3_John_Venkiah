@@ -220,20 +220,60 @@ def nav_appntmnt(weeks_multiplier, app_dict):
 
 
 def edit_appntmnt(nav_or_edit, del_id):
+    print(f'\nAppointment {nav_or_edit}:')
+    delete_or_not = input(
+        'Press "c" to change, "d" to remove or any other key to go back.\n'
+    )
 
-    delete_or_not = input(f'\ndelete appointment {nav_or_edit}?\n')
+    if delete_or_not == 'd':
 
-    if delete_or_not == 'y':
+        sure = input(f'Delete appointment {nav_or_edit}?\n')
+
+        if sure == 'd':
     
-        CAL.events().delete(calendarId=CAL_ID,
-        eventId=del_id).execute()
+            CAL.events().delete(
+                calendarId=CAL_ID, eventId=del_id
+            ).execute()
 
-        print('Appointment deleted!\n')
+            print('Appointment deleted!\n')
+        
+        else:
+            print('Cancelled.')
+            edit_appntmnt(nav_or_edit, del_id)
+
+    elif delete_or_not == 'c':
+
+        apntmnt_to_edit = CAL.events().get(
+            calendarId=CAL_ID, eventId=del_id
+        ).execute()
+        change_appntmnt(apntmnt_to_edit)
+
 
     else:
-
+        print('Cancelled.')
         get_appointments(now, future_date(7))
         print_appointments()
+
+
+def change_appntmnt(apntmnt_to_edit):
+    """
+    Edit the start and end time of the appointment.
+
+    @param apntmnt_to_edit (int): The specific event passed to change.
+    """
+    change = input('Change event?')
+    if change == 'y':
+
+        get_time = apntmnt_to_edit['start']['datetime']
+        get_end_time = apntmnt_to_edit['end']['datetime']
+        get_time.datetime.datetime.strptime(
+            get_time, '%Y-%m-%dT%H:%M:%S' + GMT_OFF
+        )
+        
+        print(f'appointment changed to {future_date(1)}')
+    
+    return
+
 
 def future_date(day):
     """
@@ -281,7 +321,7 @@ def get_month(year):
 
     while True:
 
-        print('\nWhich month would you would like to come?\n')
+        print('\nChoose the month for the appointment.\n')
         month = input('3 letters, first capital. "e" to exit.\n\n')
         days_in_month = month_dict.get(month)
 
