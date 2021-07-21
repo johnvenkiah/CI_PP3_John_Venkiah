@@ -186,13 +186,21 @@ def print_appointments():
     nav_appntmnt(week_multiplier, app_dict)
 
 
-def iso_to_pretty(date):
+def iso_to_pretty(date, offset):
     date = datetime.datetime.strptime(date, '%Y-%m-%dT%H:%M:%S.%f' + GMT_OFF)
+    date = date + timedelta(hours=offset)
     return date.strftime('%H:%M, %d %b %Y')
 
 
-def pretty_to_iso(date):
+def pretty_to_iso(date, offset):
     date = datetime.datetime.strptime(date, '%H:%M, %d %b %Y')
+    date = date + timedelta(hours=offset)
+    return date.strftime('%Y-%m-%dT%H:%M:%S.%f' + GMT_OFF)
+
+
+def add_hour(date, offset)
+    date = datetime.datetime.strptime(date, '%Y-%m-%dT%H:%M:%S.%f' + GMT_OFF)
+    date = date + timedelta(hours=offset)
     return date.strftime('%Y-%m-%dT%H:%M:%S.%f' + GMT_OFF)
 
 
@@ -240,21 +248,24 @@ def nav_appntmnt(week_multiplier, app_dict):
 def edit_appntmnt(nav_or_edit, apntmnt_id):
     print(f'\nAppointment {nav_or_edit}:')
     delete_or_not = input(
-        'Press "c" to change, "d" to remove or any other key to go back.\n'
+        'Press "c" to change, "r" to remove or any other key to go back.\n'
     )
 
-    if delete_or_not == 'd':
+    if delete_or_not == 'r':
 
-        sure = input(f'Delete appointment {nav_or_edit}?\n')
+        sure = input(
+            f'Delete appointment {nav_or_edit}("y": yes, any other key: no)?\n'
+        )
 
-        if sure == 'd':
+        if sure == 'y':
     
             CAL.events().delete(
                 calendarId=CAL_ID, eventId=apntmnt_id
             ).execute()
 
             print('Appointment deleted!\n')
-        
+            get_appointments(now, future_date(7))
+            print_appointments()
         else:
             print('Cancelled.')
             edit_appntmnt(nav_or_edit, apntmnt_id)
@@ -374,15 +385,15 @@ def get_month(year):
         print('\nChoose the month for the appointment.\n')
         month = input('3 letters, first capital. "e" to exit.\n\n')
         days_in_month = month_dict.get(month)
+        month_incorr = '\nMonth incorrect, please try again'
 
         e_to_exit(month)
-        month_incorr = print('\nMonth incorrect, please try again')
 
         if month in month_dict.keys():
 
             int_month = datetime.datetime.strptime(month, '%b')
-            int_month = int_month.strftime('%m')
-            int_month = int(int_month)
+            int_month = int(int_month.strftime('%m'))
+            # int_month = int(int_month)
 
             this_month = datetime.datetime.now().month
             int_this_month = int(this_month)
@@ -395,9 +406,9 @@ def get_month(year):
             return False
 
         elif month.isnumeric():
-            month_incorr
+            print(month_incorr)
         else:
-            month_incorr
+            print(month_incorr)
 
 
 def get_date(days_in_month, month, year):
@@ -445,17 +456,20 @@ def get_time(date, month, year):
         if hour.isnumeric() and int(hour) >= 9 and int(hour) < 17:
 
             apntmnt_time = (f'{hour}:00, {date} {month} {year}')
-            apntmnt_time = datetime.datetime.strptime(
-                apntmnt_time, '%H:%M, %d %b %Y'
-            )
+            # apntmnt_time = datetime.datetime.strptime(
+            #     apntmnt_time, '%H:%M, %d %b %Y'
+            # )
 
-            end_time = apntmnt_time + timedelta(hours=+1)
-            apntmnt_time = apntmnt_time.strftime(
-                '%Y-%m-%dT%H:%M:%S' + GMT_OFF
-            )
-            end_time = end_time.strftime(
-                '%Y-%m-%dT%H:%M:%S' + GMT_OFF
-            )
+            # end_time = apntmnt_time + timedelta(hours=+1)
+
+            apntmnt_time = pretty_to_iso(apntmnt_time, 0)
+            end_time = pretty_to_iso(apntmnt_time, +1)
+            # apntmnt_time = apntmnt_time.strftime(
+            #     '%Y-%m-%dT%H:%M:%S' + GMT_OFF
+            # )
+            # end_time = end_time.strftime(
+            #     '%Y-%m-%dT%H:%M:%S' + GMT_OFF
+            # )
 
             get_appointments(apntmnt_time, end_time)
 
@@ -527,11 +541,13 @@ def get_details(apntmnt_time, end_time, name, email):
         details = input('\nShortly describe your symptoms ("e" to exit):\n\n')
         e_to_exit(details)
 
-        start_time_pretty = datetime.datetime.strptime(
-            apntmnt_time, '%Y-%m-%dT%H:%M:%S' + GMT_OFF
-        )
+        start_time_pretty = iso_to_pretty(apntmnt_time)
 
-        start_time_pretty = start_time_pretty.strftime('%H:%M, %d %b %Y')
+        # start_time_pretty = datetime.datetime.strptime(
+        #     apntmnt_time, '%Y-%m-%dT%H:%M:%S' + GMT_OFF
+        # )
+
+        # start_time_pretty = start_time_pretty.strftime('%H:%M, %d %b %Y')
 
         print(f'\nConfirm appointment: {start_time_pretty}?\n')
         confirm = input('"y" = YES, any other key = NO\n\n')
@@ -576,7 +592,7 @@ def new_appointment(start, end, name, email, details, start_time_pretty):
     print(f'\nThanks, {name}, appointment added:\n')
     print(f'{start_time_pretty}, {email}\n')
     print(details)
-    goback = input('\nPress any key to go back to the beginning\n\n')
+    goback = input('\nPress any key to go back to the start screen.\n\n')
 
     if goback != '¶':
         welcome_screen()
