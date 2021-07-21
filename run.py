@@ -115,7 +115,7 @@ def get_appointments(earliest, latest):
     @param latest(str): endtime for period.
     """
 
-    print('\nChecking schedule...')
+    print('\nChecking schedule...\n')
     global now
     now = datetime.datetime.now().isoformat()
     now = now + 'Z'
@@ -130,8 +130,6 @@ def get_appointments(earliest, latest):
 
     global appointments
     appointments = appointments_result.get('items', [])
-
-    print(f'\nAppointments between {earliest} and {latest}:\n')
     return appointments
 
 
@@ -149,7 +147,7 @@ class Inc_dec_week():
         return self.inc_dec_week
 
 
-weeks_multiplier = Inc_dec_week()
+week_multiplier = Inc_dec_week()
 
 
 def print_appointments():
@@ -184,25 +182,49 @@ def print_appointments():
             appointment['description'], f'{app_dict}'
             )
         app_nr += 1
-    nav_appntmnt(weeks_multiplier, app_dict)
+    nav_appntmnt(week_multiplier, app_dict)
 
 
-def nav_appntmnt(weeks_multiplier, app_dict):
+def iso_to_pretty(date):
+    date = datetime.datetime.strptime(date, '%Y-%m-%dT%H:%M:%S.%f' + 'Z')
+    return date.strftime('%H:%M, %d %b %Y')
+
+
+def pretty_to_iso(date):
+    date = datetime.datetime.strptime(date, '%H:%M, %d %b %Y')
+    return date.strftime('%Y-%m-%dT%H:%M:%S.%f' + 'Z')
+
+
+def nav_appntmnt(week_multiplier, app_dict):
     print('\nTo edit an appointment, enter the appointment number.')
     print('\nTo get appointments for week after, press "n".')
     print('\nTo go back to the previous week, press "b".\n')
     nav_or_edit = input('Press "e" to exit:\n\n')
 
     if nav_or_edit == 'n':
-        weeks_multiplier.increment()
-        days_1 = weeks_multiplier.get_value()
+        week_multiplier.increment()
+        days_1 = week_multiplier.get_value()
         days_2 = days_1 + 7
+        date_1 = future_date(days_1)
+        date_2 = future_date(days_2)
+        d_1 = iso_to_pretty(date_1)
+        d_2 = iso_to_pretty(date_2)
+        # date_1 = datetime.datetime.strptime(
+        #     future_date(days_1), '%Y-%m-%dT%H:%M:%S' + GMT_OFF
+        # )
+
+        # fd_1 = fd_1.strptime("%H:%M, %d %b %Y")
+
+        print(
+            f'\nAppointments between {d_1} and {d_2}:'
+        )
+
         get_appointments(future_date(days_1), future_date(days_2))
         print_appointments()
 
     elif nav_or_edit == 'b':
-        weeks_multiplier.decrement()
-        days_1 = weeks_multiplier.get_value()
+        week_multiplier.decrement()
+        days_1 = week_multiplier.get_value()
         days_2 = days_1 + 7
         get_appointments(future_date(days_1), future_date(days_2))
         print_appointments()
@@ -261,11 +283,18 @@ def change_appntmnt(apntmnt_to_edit, apntmnt_id):
 
     @param apntmnt_to_edit (int): The specific event passed to change.
     """
-    change = input('Change event?')
-    if change == 'y':
 
-        get_start_time = apntmnt_to_edit['start'].get('dateTime')
-        get_end_time = apntmnt_to_edit['end'].get('dateTime')
+    print('Edit appointment - choose what to edit:')
+    change_choice = input(
+        'Time: "t" | Name: "n" | Details and Email: "d"'
+    )
+
+    get_start_time = apntmnt_to_edit['start']['dateTime']
+    get_end_time = apntmnt_to_edit['end']['dateTime']
+    get_eml_dtls = apntmnt_to_edit['description']
+    get_nme = apntmnt_to_edit['name']
+
+    if change_choice.lower() == 't':
 
         get_start_time = datetime.datetime.strptime(
             get_start_time, '%Y-%m-%dT%H:%M:%S' + GMT_OFF
@@ -274,22 +303,8 @@ def change_appntmnt(apntmnt_to_edit, apntmnt_id):
         get_end_time = datetime.datetime.strptime(
             get_end_time, '%Y-%m-%dT%H:%M:%S' + GMT_OFF
         )
-        """
 
-        apntmnt_time = (f'{hour}:00, {date} {month} {year}')
-        apntmnt_time = datetime.datetime.strptime(
-            apntmnt_time, '%H:%M, %d %b %Y'
-        )
-
-        end_time = apntmnt_time + timedelta(hours=+1)
-        apntmnt_time = apntmnt_time.strftime(
-            '%Y-%m-%dT%H:%M:%S' + GMT_OFF
-        )
-        end_time = end_time.strftime(
-            '%Y-%m-%dT%H:%M:%S' + GMT_OFF
-        )
-
-        """
+        new_time_entered = input('enter the time and date to change to')
 
         new_start_time = get_start_time + timedelta(hours=+1)
         new_end_time = get_end_time + timedelta(hours=+1)
@@ -305,6 +320,11 @@ def change_appntmnt(apntmnt_to_edit, apntmnt_id):
         ).execute()
 
         print(updated_apntmnt['updated'])
+
+    if change_choice.lower() == 'n':
+
+        new_name = input('Please enter new name:')
+
 
     return
 
@@ -360,6 +380,7 @@ def get_month(year):
         days_in_month = month_dict.get(month)
 
         e_to_exit(month)
+        month_incorr = print('\nMonth incorrect, please try again')
 
         if month in month_dict.keys():
 
@@ -378,9 +399,9 @@ def get_month(year):
             return False
 
         elif month.isnumeric():
-            print('\nMonth incorrect, please try again\n')
+            month_incorr
         else:
-            print('\nMonth incorrect, please try again\n')
+            month_incorr
 
 
 def get_date(days_in_month, month, year):
@@ -552,7 +573,7 @@ def new_appointment(start, end, name, email, details, start_time_pretty):
         'description': f'{email}, {details}'
     }
 
-    CAL.appointments().insert(  # pylint: disable=maybe-no-member
+    CAL.events().insert(  # pylint: disable=maybe-no-member
         calendarId=CAL_ID,
         sendNotifications=True, body=APPOINTMENT).execute()
 
