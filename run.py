@@ -178,7 +178,7 @@ def print_appointments():
 
         if 'description' not in appointment:
             appointment.update({'description': 'No info'})
-        
+
         if 'summary' not in appointment:
             appointment.update({'summary': 'No name'})
         print(
@@ -234,7 +234,6 @@ def nav_appntmnt(week_multiplier, app_dict):
     print('\nTo go back to the previous week, press "b".\n')
     nav_or_edit = input('Press any other key to exit.\n\n')
 
-
     def week_nav_fn(week_multiplier):
         days_1 = week_multiplier.get_value()
         days_2 = days_1 + 7
@@ -248,7 +247,6 @@ def nav_appntmnt(week_multiplier, app_dict):
 
         get_appointments(date_1, date_2)
         print_appointments()
-
 
     if nav_or_edit == 'n':
         week_multiplier.increment()
@@ -271,19 +269,19 @@ def nav_appntmnt(week_multiplier, app_dict):
 
 def edit_appntmnt(nav_or_edit, apntmnt_id):
     print(f'\nAppointment {nav_or_edit}:\n')
-    delete_or_not = input(
+    edit_or_delete = input(
         'Press "e" to edit, "r" to remove or any other key to go back.\n\n'
     )
 
-    if delete_or_not == 'r':
+    if edit_or_delete == 'r':
 
         sure = input(
             f'Delete appointment {nav_or_edit}("y": yes, any other key: no)?\n'
         )
 
         if sure == 'y':
-    
-            CAL.events().delete(
+
+            CAL.events().delete(  # pylint: disable=maybe-no-member
                 calendarId=CAL_ID, eventId=apntmnt_id
             ).execute()
 
@@ -294,15 +292,14 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
             print('Cancelled.')
             edit_appntmnt(nav_or_edit, apntmnt_id)
 
-    elif delete_or_not == 'e':
+    elif edit_or_delete == 'e':
 
-        apntmnt_to_edit = CAL.events().get(
+        apntmnt_to_edit = CAL.events().get(  # pylint: disable=maybe-no-member
             calendarId=CAL_ID,
             eventId=apntmnt_id
         ).execute()
 
         edit_appntmnt_2(apntmnt_to_edit, apntmnt_id)
-
 
     else:
         print('Cancelled.')
@@ -346,30 +343,13 @@ def edit_appntmnt_2(apntmnt_to_edit, apntmnt_id):
         new_name = input('Please enter new name:\n')
         apntmnt_to_edit['summary'] = new_name
 
-        CAL.events().update(
+        CAL.events().update(  # pylint: disable=maybe-no-member
             calendarId=CAL_ID, eventId=apntmnt_id, body=apntmnt_to_edit
         ).execute()
 
         print(f'Appointment name updated: {new_name}\n')
         get_appointments(now, future_date(7))
         return False
-
-
-        # get_start_time = datetime.datetime.strptime(
-        #     get_start_time, '%Y-%m-%dT%H:%M:%S' + GMT_OFF
-        # )
-
-        # get_end_time = datetime.datetime.strptime(
-        #     get_end_time, '%Y-%m-%dT%H:%M:%S' + GMT_OFF
-        # )
-
-        # new_time_entered = input('enter the time and date to change to')
-
-        # new_start_time = get_start_time + timedelta(hours=+1)
-        # new_end_time = get_end_time + timedelta(hours=+1)
-
-        # new_start_time = new_start_time.strftime('%Y-%m-%dT%H:%M:%S' + GMT_OFF)
-        # new_end_time = new_end_time.strftime('%Y-%m-%dT%H:%M:%S' + GMT_OFF)
 
 
 def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
@@ -403,12 +383,14 @@ def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
                 print('Sorry, appointment not available. Try again.')
             else:
                 print(f'{get_hour} on {date_input} is free.\n')
-                if not 'summary' in apntmnt_to_edit:
+                if 'summary' not in apntmnt_to_edit:
                     apntmnt_to_edit.update({'summary': 'No info'})
                 print('confirm new appointment time for\n')
                 print(apntmnt_to_edit['summary'] + '?\n')
 
-                conf_new_time = input('"y" for yes, any other key for "no"\n\n')
+                conf_new_time = input(
+                    '"y" for yes, any other key for "no"\n\n'
+                )
 
                 if conf_new_time == 'y':
                     update_apntmnt_time(
@@ -429,7 +411,7 @@ def update_apntmnt_time(apntmnt_time, end_time, apntmnt_to_edit, apntmnt_id):
     apntmnt_to_edit['start']['dateTime'] = apntmnt_time
     apntmnt_to_edit['end']['dateTime'] = end_time
 
-    CAL.events().update(
+    CAL.events().update(  # pylint: disable=maybe-no-member
         calendarId=CAL_ID,
         eventId=apntmnt_id,
         body=apntmnt_to_edit
