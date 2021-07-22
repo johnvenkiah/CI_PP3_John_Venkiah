@@ -323,28 +323,35 @@ def edit_appntmnt_2(apntmnt_to_edit, apntmnt_id):
     # get_nme = apntmnt_to_edit['summary']
 
     if change_choice.lower() == 't':
-
-        while True:
-
-            print('\nEnter new date for appointment, in this format:\n')
-            date_input = input("DD-MM-YY (don't forget the hyphens)\n\n")
-
-            try:
-                date_input = datetime.datetime.strptime(date_input, '%d-%m-%y')
-                date_input = date_input.date()
-                date_input = date_input.strftime('%d-%m-%Y')
-                add_time_staff(date_input, apntmnt_to_edit, apntmnt_id)
-
-            except ValueError as e:
-                print(f'\nInvalid date: {e}, please try again.')
+        get_date_staff(apntmnt_to_edit, apntmnt_id)
 
     if change_choice.lower() == 'n':
-        while True:
+        get_name_staff(apntmnt_to_edit, apntmnt_id)
 
-            new_name = input('\nPlease enter new name:\n\n')
-            if bool(validate_name(new_name)) == False:
-                update_name(apntmnt_to_edit, apntmnt_id, new_name)
-                return False
+
+def get_name_staff(apntmnt_to_edit, apntmnt_id):
+
+    print('\nPlease enter new name:\n')
+    new_name = validate_name()
+    update_name(apntmnt_to_edit, apntmnt_id, new_name)
+
+
+def get_date_staff(apntmnt_to_edit, apntmnt_id):
+
+    while True:
+
+        print('\nEnter new date for appointment, in this format:\n')
+        date_input = input("DD-MM-YY (don't forget the hyphens)\n\n")
+
+        try:
+            date_input = datetime.datetime.strptime(date_input, '%d-%m-%y')
+            date_input = date_input.date()
+            date_input = date_input.strftime('%d-%m-%Y')
+            add_time_staff(date_input, apntmnt_to_edit, apntmnt_id)
+            return False
+
+        except ValueError as e:
+            print(f'\nInvalid date: {e}, please try again.')
 
 
 def update_name(apntmnt_to_edit, apntmnt_id, new_name):
@@ -575,8 +582,7 @@ def get_time(date, month, year):
                 print('Sorry, appointment not available. Try again.')
             else:
                 print(f'{hour}:00 on {date} {month}, {year} is free.\n')
-                name = get_name()
-                get_email(apntmnt_time, end_time, name)
+                get_name(apntmnt_time, end_time)
                 return False
         else:
             print('\nSorry, invalid entry.')
@@ -590,20 +596,23 @@ patient_dict = {
                 }
 
 
-def validate_name(name):
+def validate_name():
 
-    if any(char.isdigit() for char in name):
-        print("\nName can't contain numbers!\n")
+    while True:
 
-    elif name.__contains__(' '):
-        print(f'\nUpdating...')
-        return False
+        name = input()
+        e_to_exit(name)
+        if any(char.isdigit() for char in name):
+            print("\nName can't contain numbers!\n")
 
-    else:
-        print("\nFirst and last name please.")
+        elif name.__contains__(' '):
+            return name
+
+        else:
+            print("\nFirst and last name please.")
 
 
-def get_name():
+def get_name(apntmnt_time, end_time):
     """
     Get the date from the user, with the month and year
     passed from the above function
@@ -611,13 +620,12 @@ def get_name():
     @param start(str): Start time of appointment
     @param end(str): Start time of appointment
     """
-    while True:
 
-        name = input('To continue, enter your full name ("e" to exit):\n\n')
-        e_to_exit(name)
-
-        if bool(validate_name(name)) == False:
-            return name
+    print('To continue, enter your full name ("e" to exit):\n')
+    name = validate_name()
+    print(f'\nThank you {name}.\n')
+    get_email(apntmnt_time, end_time, name)
+    return name
 
 
 def get_email(apntmnt_time, end_time, name):
@@ -631,8 +639,7 @@ def get_email(apntmnt_time, end_time, name):
             print('\nInvalid email, try again\n')
         else:
             get_details(apntmnt_time, end_time, name, email)
-
-    return False
+            return False
 
 
 def get_details(apntmnt_time, end_time, name, email):
