@@ -220,11 +220,11 @@ convert_time_no_ms = Time_F_Converter(
 )
 
 convert_time_staff = Time_F_Converter(
-    '%Y-%m-%dT%H:%M:%S' + GMT_OFF, '%H:%M, %d-%m-%y'
+    '%Y-%m-%dT%H:%M:%S' + GMT_OFF, '%H:%M, %d-%m-%Y'
 )
 
 convert_iso_iso_ms = Time_F_Converter(
-    '%Y-%m-%dT%H:%M:%S.%f' + GMT_OFF, '%Y-%m-%dT%H:%M:%S' + GMT_OFF
+    '%Y-%m-%dT%H:%M:%S' + GMT_OFF, '%Y-%m-%dT%H:%M:%S.%f' + GMT_OFF
 )
 
 
@@ -297,9 +297,10 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
     elif delete_or_not == 'e':
 
         apntmnt_to_edit = CAL.events().get(
-            calendarId=CAL_ID, eventId=apntmnt_id
+            calendarId=CAL_ID,
+            eventId=apntmnt_id
         ).execute()
-        print(apntmnt_to_edit)
+
         edit_appntmnt_2(apntmnt_to_edit, apntmnt_id)
 
 
@@ -392,7 +393,7 @@ def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
             get_hour = get_hour + ':00'
             apntmnt_time = (f'{get_hour}, {date_input}')
 
-            apntmnt_time = convert_iso_iso_ms.pretty_to_iso(apntmnt_time, 0)
+            apntmnt_time = convert_time_staff.pretty_to_iso(apntmnt_time, 0)
 
             end_time = convert_iso_iso_ms.add_hour_iso(apntmnt_time, +1)
 
@@ -402,8 +403,10 @@ def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
                 print('Sorry, appointment not available. Try again.')
             else:
                 print(f'{get_hour} on {date_input} is free.\n')
-                print(f"""confirm new appointment time for
-                {apntmnt_to_edit}?\n""")
+                if not 'summary' in apntmnt_to_edit:
+                    apntmnt_to_edit.update({'summary': 'No info'})
+                print('confirm new appointment time for\n')
+                print(apntmnt_to_edit['summary'] + '?\n')
 
                 conf_new_time = input('"y" for yes, any other key for "no"\n\n')
 
@@ -423,26 +426,20 @@ def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
 
 def update_apntmnt_time(apntmnt_time, end_time, apntmnt_to_edit, apntmnt_id):
 
-    update = {
-        'start': {
-            'dateTime': apntmnt_time,
-        },
-        'end': {
-            'dateTime': end_time
-        }
-    }
+    apntmnt_to_edit['start']['dateTime'] = apntmnt_time
+    apntmnt_to_edit['end']['dateTime'] = end_time
 
-    updated_apntmnt = CAL.events().update(
-        calendarId=CAL_ID, eventId=apntmnt_id, body=update
+    CAL.events().update(
+        calendarId=CAL_ID,
+        eventId=apntmnt_id,
+        body=apntmnt_to_edit
     ).execute()
 
-    apntmnt_time = convert_time.iso_to_pretty(apntmnt_time, 0)
-    print(
-        f"""Appointment time updated:
-        {apntmnt_time}, {updated_apntmnt['summary']}"""
-    )
+    apntmnt_time = convert_time_no_ms.iso_to_pretty(apntmnt_time, 0)
+    print('Appointment time updated:')
+    print(apntmnt_time + ', ' + apntmnt_to_edit['summary'])
 
-    go_back = input('press any key to go back to the start screen')
+    go_back = input('Press any key to go back to the start screen')
     if go_back != '¶¥¿':
         welcome_screen()
         return
