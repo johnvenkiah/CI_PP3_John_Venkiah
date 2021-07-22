@@ -316,8 +316,9 @@ def edit_appntmnt_2(apntmnt_to_edit, apntmnt_id):
     """
 
     print('\nEdit appointment - choose what to edit:')
+    print('\nTime: "t"                | Name: "n"\n')
     change_choice = input(
-        '\nTime: "t" | Name: "n" | Details and Email: "d"\n\n'
+        'Details / Email: "d"   | Exit: any other\n\n'
     )
 
     # get_eml_dtls = apntmnt_to_edit['description']
@@ -328,9 +329,15 @@ def edit_appntmnt_2(apntmnt_to_edit, apntmnt_id):
 
     elif change_choice.lower() == 'n':
         get_name_staff(apntmnt_to_edit, apntmnt_id)
-    
+
     elif change_choice.lower() == 'd':
-        get_details_staff()
+        get_details_staff(apntmnt_to_edit, apntmnt_id)
+
+    else:
+        get_appointments(now, future_date(7))
+        print_appointments()
+        return
+
 
 def get_name_staff(apntmnt_to_edit, apntmnt_id):
 
@@ -359,17 +366,29 @@ def get_date_staff(apntmnt_to_edit, apntmnt_id):
 
 def get_details_staff(apntmnt_to_edit, apntmnt_id):
     name = apntmnt_to_edit['summary']
-    print(f'\ndetails for {name}:\n')
-    print('\n'apntmnt_to_edit['description'])
-    new_details = input('\nEnter new patient details here:\n')
+    print(f'\nDetails for {name}:')
 
-    print(f'Accept update {new_details} for {name}?')
-    update_details = input('("y" for YES, "n" for NO'))
+    if 'description' in apntmnt_to_edit:
+        print('\n' + apntmnt_to_edit['description'])
+    
+    else:
+        print(f'\nNo details for {name}')
 
-    if update_details == 'y':
+    new_details = input('\nEnter new patient details here:\n\n')
+
+    print(f'\nAccept update "{new_details}" for {name}?\n')
+    update_details = input('("y" for YES, "n" for NO)\n\n')
+
+    if update_details.lower() == 'y':
+
         apntmnt_to_edit['description'] = new_details
+        update_cal(apntmnt_id, apntmnt_to_edit)
+
+        print(f'\nDetails for {name} updated.')
+
         get_appointments(now, future_date(7))
         print_appointments()
+        return
 
     else:
         print('invalid entry, please try again.')
@@ -377,9 +396,7 @@ def get_details_staff(apntmnt_to_edit, apntmnt_id):
 def update_name(apntmnt_to_edit, apntmnt_id, new_name):
     apntmnt_to_edit['summary'] = new_name
 
-    CAL.events().update(  # pylint: disable=maybe-no-member
-        calendarId=CAL_ID, eventId=apntmnt_id, body=apntmnt_to_edit
-    ).execute()
+    update_cal(apntmnt_id, apntmnt_to_edit)
 
     print(f'\nAppointment name updated: {new_name}')
     get_appointments(now, future_date(7))
@@ -447,13 +464,10 @@ def update_apntmnt_time(apntmnt_time, end_time, apntmnt_to_edit, apntmnt_id):
     apntmnt_to_edit['start']['dateTime'] = apntmnt_time
     apntmnt_to_edit['end']['dateTime'] = end_time
 
-    CAL.events().update(  # pylint: disable=maybe-no-member
-        calendarId=CAL_ID,
-        eventId=apntmnt_id,
-        body=apntmnt_to_edit
-    ).execute()
+    update_cal(apntmnt_id, apntmnt_to_edit)
 
     apntmnt_time = convert_time_no_ms.iso_to_pretty(apntmnt_time, 0)
+
     print('\nAppointment time updated:\n')
     print(apntmnt_time + ', ' + apntmnt_to_edit['summary'] + '\n')
 
@@ -461,6 +475,14 @@ def update_apntmnt_time(apntmnt_time, end_time, apntmnt_to_edit, apntmnt_id):
     if go_back != '¶¥¿':
         get_appointments(now, future_date(7))
         print_appointments()
+
+
+def update_cal(apntmnt_id, apntmnt_to_edit):
+    CAL.events().update(  # pylint: disable=maybe-no-member
+        calendarId=CAL_ID,
+        eventId=apntmnt_id,
+        body=apntmnt_to_edit
+    ).execute()
 
 
 def future_date(day):
@@ -583,20 +605,9 @@ def get_time(date, month, year):
         if hour.isnumeric() and int(hour) >= 9 and int(hour) < 17:
 
             apntmnt_time = (f'{hour}:00, {date} {month} {year}')
-            # apntmnt_time = datetime.datetime.strptime(
-            #     apntmnt_time, '%H:%M, %d %b %Y'
-            # )
-
-            # end_time = apntmnt_time + timedelta(hours=+1)
 
             apntmnt_time = convert_time.pretty_to_iso(apntmnt_time, 0)
             end_time = convert_time.add_hour_iso(apntmnt_time, +1)
-            # apntmnt_time = apntmnt_time.strftime(
-            #     '%Y-%m-%dT%H:%M:%S' + GMT_OFF
-            # )
-            # end_time = end_time.strftime(
-            #     '%Y-%m-%dT%H:%M:%S' + GMT_OFF
-            # )
 
             get_appointments(apntmnt_time, end_time)
 
@@ -611,6 +622,7 @@ def get_time(date, month, year):
 
 
 patient_dict = {
+                'id': '',
                 'name': '',
                 'email': '',
                 'appointment': '',
