@@ -100,7 +100,7 @@ def staff_login(password):
             )
             get_appointments(now, future_date(7))
             d_1 = convert_time.iso_to_pretty(now, 0)
-            d_2 = convert_time.iso_to_pretty(now, 1)
+            d_2 = convert_time.iso_to_pretty(future_date(7), 0)
             print(f'Showing appointments between {d_1} and {d_2}\n')
             print_appointments()
             break
@@ -178,6 +178,9 @@ def print_appointments():
 
         if 'description' not in appointment:
             appointment.update({'description': 'No info'})
+        
+        if 'summary' not in appointment:
+            appointment.update({'summary': 'No name'})
         print(
             f'{app_nr}: ', start, appointment['summary'],
             appointment['description']
@@ -214,6 +217,14 @@ convert_time = Time_F_Converter(
 
 convert_time_no_ms = Time_F_Converter(
     '%Y-%m-%dT%H:%M:%S' + GMT_OFF, '%H:%M, %d %b %Y'
+)
+
+convert_time_staff = Time_F_Converter(
+    '%Y-%m-%dT%H:%M:%S' + GMT_OFF, '%H:%M, %d-%m-%y'
+)
+
+convert_iso_iso_ms = Time_F_Converter(
+    '%Y-%m-%dT%H:%M:%S.%f' + GMT_OFF, '%Y-%m-%dT%H:%M:%S' + GMT_OFF
 )
 
 
@@ -259,9 +270,9 @@ def nav_appntmnt(week_multiplier, app_dict):
 
 
 def edit_appntmnt(nav_or_edit, apntmnt_id):
-    print(f'\nAppointment {nav_or_edit}:')
+    print(f'\nAppointment {nav_or_edit}:\n')
     delete_or_not = input(
-        'Press "c" to change, "r" to remove or any other key to go back.\n'
+        'Press "e" to edit, "r" to remove or any other key to go back.\n\n'
     )
 
     if delete_or_not == 'r':
@@ -283,12 +294,13 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
             print('Cancelled.')
             edit_appntmnt(nav_or_edit, apntmnt_id)
 
-    elif delete_or_not == 'c':
+    elif delete_or_not == 'e':
 
         apntmnt_to_edit = CAL.events().get(
             calendarId=CAL_ID, eventId=apntmnt_id
         ).execute()
-        change_appntmnt(apntmnt_to_edit, apntmnt_id)
+        print(apntmnt_to_edit)
+        edit_appntmnt_2(apntmnt_to_edit, apntmnt_id)
 
 
     else:
@@ -297,56 +309,143 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
         print_appointments()
 
 
-def change_appntmnt(apntmnt_to_edit, apntmnt_id):
+def edit_appntmnt_2(apntmnt_to_edit, apntmnt_id):
     """
     Edit the start and end time of the appointment.
 
     @param apntmnt_to_edit (int): The specific event passed to change.
     """
 
-    print('Edit appointment - choose what to edit:')
+    print('\nEdit appointment - choose what to edit:')
     change_choice = input(
-        'Time: "t" | Name: "n" | Details and Email: "d"'
+        '\nTime: "t" | Name: "n" | Details and Email: "d"\n\n'
     )
 
-    get_start_time = apntmnt_to_edit['start']['dateTime']
-    get_end_time = apntmnt_to_edit['end']['dateTime']
-    get_eml_dtls = apntmnt_to_edit['description']
-    get_nme = apntmnt_to_edit['name']
+    # get_eml_dtls = apntmnt_to_edit['description']
+    # get_nme = apntmnt_to_edit['summary']
 
     if change_choice.lower() == 't':
 
-        get_start_time = datetime.datetime.strptime(
-            get_start_time, '%Y-%m-%dT%H:%M:%S' + GMT_OFF
-        )
+        while True:
 
-        get_end_time = datetime.datetime.strptime(
-            get_end_time, '%Y-%m-%dT%H:%M:%S' + GMT_OFF
-        )
+            print('\nEnter new date for appointment, in this format:\n')
+            date_input = input("DD-MM-YY (don't forget the hyphens)\n\n")
 
-        new_time_entered = input('enter the time and date to change to')
+            try:
+                date_input = datetime.datetime.strptime(date_input, '%d-%m-%y')
+                date_input = date_input.date()
+                date_input = date_input.strftime('%d-%m-%Y')
+                add_time_staff(date_input, apntmnt_to_edit, apntmnt_id)
 
-        new_start_time = get_start_time + timedelta(hours=+1)
-        new_end_time = get_end_time + timedelta(hours=+1)
-
-        new_start_time = new_start_time.strftime('%Y-%m-%dT%H:%M:%S' + GMT_OFF)
-        new_end_time = new_end_time.strftime('%Y-%m-%dT%H:%M:%S' + GMT_OFF)
-
-        apntmnt_to_edit['start']['dateTime'] = new_start_time
-        apntmnt_to_edit['end']['dateTime'] = new_end_time
-
-        updated_apntmnt = CAL.events().update(
-            calendarId=CAL_ID, eventId=apntmnt_id, body=apntmnt_to_edit
-        ).execute()
-
-        print(updated_apntmnt['updated'])
+            except ValueError as e:
+                print(f'\nInvalid date: {e}, please try again.')
 
     if change_choice.lower() == 'n':
 
-        new_name = input('Please enter new name:')
+        new_name = input('Please enter new name:\n')
+        apntmnt_to_edit['summary'] = new_name
+
+        CAL.events().update(
+            calendarId=CAL_ID, eventId=apntmnt_id, body=apntmnt_to_edit
+        ).execute()
+
+        print(f'Appointment name updated: {new_name}\n')
+        get_appointments(now, future_date(7))
+        return False
 
 
-    return
+        # get_start_time = datetime.datetime.strptime(
+        #     get_start_time, '%Y-%m-%dT%H:%M:%S' + GMT_OFF
+        # )
+
+        # get_end_time = datetime.datetime.strptime(
+        #     get_end_time, '%Y-%m-%dT%H:%M:%S' + GMT_OFF
+        # )
+
+        # new_time_entered = input('enter the time and date to change to')
+
+        # new_start_time = get_start_time + timedelta(hours=+1)
+        # new_end_time = get_end_time + timedelta(hours=+1)
+
+        # new_start_time = new_start_time.strftime('%Y-%m-%dT%H:%M:%S' + GMT_OFF)
+        # new_end_time = new_end_time.strftime('%Y-%m-%dT%H:%M:%S' + GMT_OFF)
+
+
+def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
+    """
+    Get the date from the user, with the month and year
+    passed from the above function
+
+    @param month(str): Month given by user
+    @param year(str): Year given by user
+    """
+    while True:
+
+        # date_input = date_input.strftime('%d-%m-%y')
+        print(f'\n{date_input}. What time? Enter hour, two digits.\n')
+        get_hour = input('Enter hour, 9 - 17 ("e" to exit):\n\n')
+
+        e_to_exit(get_hour)
+
+        if get_hour.isnumeric() and int(get_hour) >= 9 and int(get_hour) < 17:
+
+            get_hour = get_hour + ':00'
+            apntmnt_time = (f'{get_hour}, {date_input}')
+
+            apntmnt_time = convert_iso_iso_ms.pretty_to_iso(apntmnt_time, 0)
+
+            end_time = convert_iso_iso_ms.add_hour_iso(apntmnt_time, +1)
+
+            get_appointments(apntmnt_time, end_time)
+
+            if appointments:
+                print('Sorry, appointment not available. Try again.')
+            else:
+                print(f'{get_hour} on {date_input} is free.\n')
+                print(f"""confirm new appointment time for
+                {apntmnt_to_edit}?\n""")
+
+                conf_new_time = input('"y" for yes, any other key for "no"\n\n')
+
+                if conf_new_time == 'y':
+                    update_apntmnt_time(
+                        apntmnt_time, end_time, apntmnt_to_edit, apntmnt_id
+                    )
+                    return False
+
+                else:
+                    print('cancelled. Getting the coming week:')
+                    get_appointments(now, future_date(7))
+                    print_appointments()
+        else:
+            print('\nSorry, invalid entry.')
+
+
+def update_apntmnt_time(apntmnt_time, end_time, apntmnt_to_edit, apntmnt_id):
+
+    update = {
+        'start': {
+            'dateTime': apntmnt_time,
+        },
+        'end': {
+            'dateTime': end_time
+        }
+    }
+
+    updated_apntmnt = CAL.events().update(
+        calendarId=CAL_ID, eventId=apntmnt_id, body=update
+    ).execute()
+
+    apntmnt_time = convert_time.iso_to_pretty(apntmnt_time, 0)
+    print(
+        f"""Appointment time updated:
+        {apntmnt_time}, {updated_apntmnt['summary']}"""
+    )
+
+    go_back = input('press any key to go back to the start screen')
+    if go_back != '¶¥¿':
+        welcome_screen()
+        return
 
 
 def future_date(day):
