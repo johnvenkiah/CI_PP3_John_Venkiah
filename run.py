@@ -276,7 +276,8 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
     if edit_or_delete == 'r':
 
         sure = input(
-            f'Delete appointment {nav_or_edit}("y": yes, any other key: no)?\n'
+            '\nDelete appointment ' + nav_or_edit +
+            ' ("y": YES, any other key: NO)?\n\n'
         )
 
         if sure == 'y':
@@ -285,11 +286,11 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
                 calendarId=CAL_ID, eventId=apntmnt_id
             ).execute()
 
-            print('Appointment deleted!\n')
+            print('\nAppointment deleted!')
             get_appointments(now, future_date(7))
             print_appointments()
         else:
-            print('Cancelled.')
+            print('\nCancelled.')
             edit_appntmnt(nav_or_edit, apntmnt_id)
 
     elif edit_or_delete == 'e':
@@ -325,9 +326,11 @@ def edit_appntmnt_2(apntmnt_to_edit, apntmnt_id):
     if change_choice.lower() == 't':
         get_date_staff(apntmnt_to_edit, apntmnt_id)
 
-    if change_choice.lower() == 'n':
+    elif change_choice.lower() == 'n':
         get_name_staff(apntmnt_to_edit, apntmnt_id)
-
+    
+    elif change_choice.lower() == 'd':
+        get_details_staff()
 
 def get_name_staff(apntmnt_to_edit, apntmnt_id):
 
@@ -353,6 +356,23 @@ def get_date_staff(apntmnt_to_edit, apntmnt_id):
         except ValueError as e:
             print(f'\nInvalid date: {e}, please try again.')
 
+
+def get_details_staff(apntmnt_to_edit, apntmnt_id):
+    name = apntmnt_to_edit['summary']
+    print(f'\ndetails for {name}:\n')
+    print('\n'apntmnt_to_edit['description'])
+    new_details = input('\nEnter new patient details here:\n')
+
+    print(f'Accept update {new_details} for {name}?')
+    update_details = input('("y" for YES, "n" for NO'))
+
+    if update_details == 'y':
+        apntmnt_to_edit['description'] = new_details
+        get_appointments(now, future_date(7))
+        print_appointments()
+
+    else:
+        print('invalid entry, please try again.')
 
 def update_name(apntmnt_to_edit, apntmnt_id, new_name):
     apntmnt_to_edit['summary'] = new_name
@@ -386,9 +406,7 @@ def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
 
             get_hour = get_hour + ':00'
             apntmnt_time = (f'{get_hour}, {date_input}')
-
             apntmnt_time = convert_time_staff.pretty_to_iso(apntmnt_time, 0)
-
             end_time = convert_iso_iso_ms.add_hour_iso(apntmnt_time, +1)
 
             get_appointments(apntmnt_time, end_time)
@@ -397,10 +415,14 @@ def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
                 print('Sorry, appointment not available. Try again.')
             else:
                 print(f'{get_hour} on {date_input} is free.\n')
+
                 if 'summary' not in apntmnt_to_edit:
+
                     apntmnt_to_edit.update({'summary': 'No info'})
-                print('confirm new appointment time for\n')
-                print(apntmnt_to_edit['summary'] + '?\n')
+                    print(
+                        'confirm ' + get_hour + ' , ' + date_input + ' for ' +
+                        apntmnt_to_edit['summary'] + '?\n'
+                    )
 
                 conf_new_time = input(
                     '"y" for yes, any other key for "no"\n\n'
@@ -438,7 +460,7 @@ def update_apntmnt_time(apntmnt_time, end_time, apntmnt_to_edit, apntmnt_id):
     go_back = input('Press any key to see current schedule for the week.\n\n')
     if go_back != '¶¥¿':
         get_appointments(now, future_date(7))
-        return
+        print_appointments()
 
 
 def future_date(day):
