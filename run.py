@@ -417,7 +417,7 @@ def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
                     return False
 
                 else:
-                    print('cancelled. Getting the coming week:')
+                    print('\nCancelled. Getting the coming week:')
                     get_appointments(now, future_date(7))
                     print_appointments()
         else:
@@ -436,12 +436,12 @@ def update_apntmnt_time(apntmnt_time, end_time, apntmnt_to_edit, apntmnt_id):
     ).execute()
 
     apntmnt_time = convert_time_no_ms.iso_to_pretty(apntmnt_time, 0)
-    print('Appointment time updated:')
-    print(apntmnt_time + ', ' + apntmnt_to_edit['summary'])
+    print('\nAppointment time updated:\n')
+    print(apntmnt_time + ', ' + apntmnt_to_edit['summary'] + '\n')
 
-    go_back = input('Press any key to go back to the start screen')
+    go_back = input('Press any key to see current schedule for the week.\n\n')
     if go_back != '¶¥¿':
-        welcome_screen()
+        get_appointments(now, future_date(7))
         return
 
 
