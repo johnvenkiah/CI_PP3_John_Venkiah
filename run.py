@@ -341,6 +341,7 @@ def edit_appntmnt_2(apntmnt_to_edit, apntmnt_id):
     if change_choice.lower() == 'n':
 
         new_name = input('\nPlease enter new name:\n\n')
+
         validate_name(new_name)
         apntmnt_to_edit['summary'] = new_name
 
@@ -570,7 +571,8 @@ def get_time(date, month, year):
                 print('Sorry, appointment not available. Try again.')
             else:
                 print(f'{hour}:00 on {date} {month}, {year} is free.\n')
-                get_name(apntmnt_time, end_time)
+                get_name(name)
+                get_email(apntmnt_time, end_time, name)
                 return False
         else:
             print('\nSorry, invalid entry.')
@@ -586,22 +588,17 @@ patient_dict = {
 
 def validate_name(name):
 
-    while True:
         if any(char.isdigit() for char in name):
             print("\nName can't contain numbers!\n")
-            continue
 
         elif name.__contains__(' '):
             print(f'\nThank you, {name}.\n')
-            get_email(apntmnt_time, end_time, name)
-            return False
 
         else:
             print("\nFirst and last name please.\n")
 
 
-
-def get_name(apntmnt_time, end_time):
+def get_name(name):
     """
     Get the date from the user, with the month and year
     passed from the above function
@@ -609,13 +606,15 @@ def get_name(apntmnt_time, end_time):
     @param start(str): Start time of appointment
     @param end(str): Start time of appointment
     """
+    while True:
 
-    name = input('To continue, enter your full name ("e" to exit):\n\n')
-    e_to_exit(name)
+        name = input('To continue, enter your full name ("e" to exit):\n\n')
+        e_to_exit(name)
 
-    validate_name(name)
+        validate_name(name)
 
-    return name
+        if not validate_name(name):
+            return False
 
 
 def get_email(apntmnt_time, end_time, name):
