@@ -342,19 +342,21 @@ def edit_appntmnt_2(apntmnt_to_edit, apntmnt_id):
         while True:
 
             new_name = input('\nPlease enter new name:\n\n')
-
-            if validate_name(new_name):
-
-                apntmnt_to_edit['summary'] = new_name
-
-                CAL.events().update(  # pylint: disable=maybe-no-member
-                    calendarId=CAL_ID, eventId=apntmnt_id, body=apntmnt_to_edit
-                ).execute()
-
-                print(f'\nAppointment name updated: {new_name}')
-                get_appointments(now, future_date(7))
-                print_appointments()
+            if bool(validate_name(new_name)) == False:
+                update_name(apntmnt_to_edit, apntmnt_id, new_name)
                 return False
+
+
+def update_name(apntmnt_to_edit, apntmnt_id, new_name):
+    apntmnt_to_edit['summary'] = new_name
+
+    CAL.events().update(  # pylint: disable=maybe-no-member
+        calendarId=CAL_ID, eventId=apntmnt_id, body=apntmnt_to_edit
+    ).execute()
+
+    print(f'\nAppointment name updated: {new_name}')
+    get_appointments(now, future_date(7))
+    print_appointments()
 
 
 def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
@@ -573,7 +575,7 @@ def get_time(date, month, year):
                 print('Sorry, appointment not available. Try again.')
             else:
                 print(f'{hour}:00 on {date} {month}, {year} is free.\n')
-                get_name(name)
+                name = get_name()
                 get_email(apntmnt_time, end_time, name)
                 return False
         else:
@@ -594,13 +596,14 @@ def validate_name(name):
         print("\nName can't contain numbers!\n")
 
     elif name.__contains__(' '):
-        print(f'\nThank you, {name}.\n')
+        print(f'\nUpdating...')
+        return False
 
     else:
-        print("\nFirst and last name please.\n")
+        print("\nFirst and last name please.")
 
 
-def get_name(name):
+def get_name():
     """
     Get the date from the user, with the month and year
     passed from the above function
@@ -613,8 +616,8 @@ def get_name(name):
         name = input('To continue, enter your full name ("e" to exit):\n\n')
         e_to_exit(name)
 
-        if validate_name(name):
-            return False
+        if bool(validate_name(name)) == False:
+            return name
 
 
 def get_email(apntmnt_time, end_time, name):
