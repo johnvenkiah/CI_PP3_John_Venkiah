@@ -339,20 +339,22 @@ def edit_appntmnt_2(apntmnt_to_edit, apntmnt_id):
                 print(f'\nInvalid date: {e}, please try again.')
 
     if change_choice.lower() == 'n':
+        while True:
 
-        new_name = input('\nPlease enter new name:\n\n')
+            new_name = input('\nPlease enter new name:\n\n')
 
-        validate_name(new_name)
-        apntmnt_to_edit['summary'] = new_name
+            if validate_name(new_name):
 
-        CAL.events().update(  # pylint: disable=maybe-no-member
-            calendarId=CAL_ID, eventId=apntmnt_id, body=apntmnt_to_edit
-        ).execute()
+                apntmnt_to_edit['summary'] = new_name
 
-        print(f'\nAppointment name updated: {new_name}')
-        get_appointments(now, future_date(7))
-        print_appointments()
-        return False
+                CAL.events().update(  # pylint: disable=maybe-no-member
+                    calendarId=CAL_ID, eventId=apntmnt_id, body=apntmnt_to_edit
+                ).execute()
+
+                print(f'\nAppointment name updated: {new_name}')
+                get_appointments(now, future_date(7))
+                print_appointments()
+                return False
 
 
 def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
@@ -588,14 +590,14 @@ patient_dict = {
 
 def validate_name(name):
 
-        if any(char.isdigit() for char in name):
-            print("\nName can't contain numbers!\n")
+    if any(char.isdigit() for char in name):
+        print("\nName can't contain numbers!\n")
 
-        elif name.__contains__(' '):
-            print(f'\nThank you, {name}.\n')
+    elif name.__contains__(' '):
+        print(f'\nThank you, {name}.\n')
 
-        else:
-            print("\nFirst and last name please.\n")
+    else:
+        print("\nFirst and last name please.\n")
 
 
 def get_name(name):
@@ -611,9 +613,7 @@ def get_name(name):
         name = input('To continue, enter your full name ("e" to exit):\n\n')
         e_to_exit(name)
 
-        validate_name(name)
-
-        if not validate_name(name):
+        if validate_name(name):
             return False
 
 
