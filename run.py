@@ -340,15 +340,17 @@ def edit_appntmnt_2(apntmnt_to_edit, apntmnt_id):
 
     if change_choice.lower() == 'n':
 
-        new_name = input('Please enter new name:\n')
+        new_name = input('\nPlease enter new name:\n\n')
+        validate_name(new_name)
         apntmnt_to_edit['summary'] = new_name
 
         CAL.events().update(  # pylint: disable=maybe-no-member
             calendarId=CAL_ID, eventId=apntmnt_id, body=apntmnt_to_edit
         ).execute()
 
-        print(f'Appointment name updated: {new_name}\n')
+        print(f'\nAppointment name updated: {new_name}')
         get_appointments(now, future_date(7))
+        print_appointments()
         return False
 
 
@@ -582,20 +584,9 @@ patient_dict = {
                 }
 
 
-def get_name(apntmnt_time, end_time):
-    """
-    Get the date from the user, with the month and year
-    passed from the above function
-
-    @param start(str): Start time of appointment
-    @param end(str): Start time of appointment
-    """
+def validate_name(name):
 
     while True:
-
-        name = input('To continue, enter your full name ("e" to exit):\n\n')
-        e_to_exit(name)
-
         if any(char.isdigit() for char in name):
             print("\nName can't contain numbers!\n")
             continue
@@ -607,6 +598,22 @@ def get_name(apntmnt_time, end_time):
 
         else:
             print("\nFirst and last name please.\n")
+
+
+
+def get_name(apntmnt_time, end_time):
+    """
+    Get the date from the user, with the month and year
+    passed from the above function
+
+    @param start(str): Start time of appointment
+    @param end(str): Start time of appointment
+    """
+
+    name = input('To continue, enter your full name ("e" to exit):\n\n')
+    e_to_exit(name)
+
+    validate_name(name)
 
     return name
 
