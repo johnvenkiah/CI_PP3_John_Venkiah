@@ -1,5 +1,4 @@
 from __future__ import print_function
-import stdiomask
 import datetime
 import os
 if os.path.exists('password.py'):
@@ -9,14 +8,6 @@ from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
 import re
 import sheet
-import sys
-
-if sys.stdin.isatty():
-    p = stdiomask.getpass('Using getpass: ')
-else:
-    print('Using readline')
-    p = sys.stdin.readline().rstrip()
-
 
 staff_password = os.environ['PASSWORD']
 
@@ -129,7 +120,7 @@ def staff_login(password):
     print(staff_greeting.upper())
 
     while True:
-        password_entered = stdiomask.getpass(
+        password_entered = input(
             'Enter your password or "e" to exit:\n\n'
         )
         e_to_exit(password_entered)
