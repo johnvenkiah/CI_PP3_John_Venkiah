@@ -26,11 +26,11 @@ def welcome_screen():
     print(welcome_greeting.upper())
 
     while True:
-
         staff_or_customer = input(
             'Press "b" to book an appointment or "s" for staff login:\n\n'
-            )
+        )
         staff_or_customer = staff_or_customer.lower()
+
         if staff_or_customer == 's':
             staff_login(password)
             return False
@@ -82,11 +82,9 @@ def staff_login(password):
     print(staff_greeting.upper())
 
     while True:
-
         password_entered = stdiomask.getpass(
             'Enter your password or "e" to exit:\n\n'
         )
-
         e_to_exit(password_entered)
 
         if attempts == 4:
@@ -119,9 +117,6 @@ def get_appointments(earliest, latest):
     """
 
     print('\nChecking schedule...\n')
-    # global now
-    # now = datetime.datetime.now().isoformat()
-    # now = now + 'Z'
 
     appointments_result = CAL.events().list(  # pylint: disable=maybe-no-member
         calendarId=CAL_ID,
@@ -283,7 +278,8 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
         if sure == 'y':
 
             CAL.events().delete(  # pylint: disable=maybe-no-member
-                calendarId=CAL_ID, eventId=apntmnt_id
+                calendarId=CAL_ID,
+                eventId=apntmnt_id
             ).execute()
 
             print('\nAppointment deleted!')
@@ -320,9 +316,6 @@ def edit_appntmnt_2(apntmnt_to_edit, apntmnt_id):
     change_choice = input(
         'Details / Email: "d"   | Exit: any other\n\n'
     )
-
-    # get_eml_dtls = apntmnt_to_edit['description']
-    # get_nme = apntmnt_to_edit['summary']
 
     if change_choice.lower() == 't':
         get_date_staff(apntmnt_to_edit, apntmnt_id)
@@ -414,7 +407,6 @@ def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
     """
     while True:
 
-        # date_input = date_input.strftime('%d-%m-%y')
         print(f'\n{date_input}. What time? Enter hour, two digits.\n')
         get_hour = input('Enter hour, 9 - 17 ("e" to exit):\n\n')
 
@@ -435,7 +427,6 @@ def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
                 print(f'{get_hour} on {date_input} is free.\n')
 
                 if 'summary' not in apntmnt_to_edit:
-
                     apntmnt_to_edit.update({'summary': 'No info'})
                     print(
                         'confirm ' + get_hour + ' , ' + date_input + ' for ' +
@@ -473,6 +464,7 @@ def update_apntmnt_time(apntmnt_time, end_time, apntmnt_to_edit, apntmnt_id):
     print(apntmnt_time + ', ' + apntmnt_to_edit['summary'] + '\n')
 
     go_back = input('Press any key to see current schedule for the week.\n\n')
+
     if go_back != '¶¥¿':
         get_appointments(now, future_date(7))
         print_appointments()
@@ -540,7 +532,6 @@ def get_month(year):
         e_to_exit(month)
 
         if month in month_dict.keys():
-
             int_month = datetime.datetime.strptime(month, '%b')
             int_month = int(int_month.strftime('%m'))
 
@@ -556,6 +547,7 @@ def get_month(year):
 
         elif month.isnumeric():
             print(month_incorr)
+
         else:
             print(month_incorr)
 
@@ -577,24 +569,20 @@ def get_date(days_in_month, month, year, int_month, int_this_month):
 
         try:
             date_today = datetime.date.today().day
-            weekday_int = datetime.date(year, int_this_month, int(date)).weekday()
+            weekday_int = datetime.date(
+                year, int_this_month, int(date)
+            ).weekday()
             e_to_exit(date)
 
             if (
                 int_month == int_this_month and int(date) <= date_today
                 or weekday_int == 5 or weekday_int == 6
             ):
+                print(
+                    '\nBooking has to be at least one day ahead, no weekends.'
+                )
 
-                print('\nBooking has to be at least one day ahead, no weekends.')
-                # print(weekday_int)
-                # print(int(date))
-                # print(date_today)
-                # print(int_month)
-                # print(int_this_month)
-            elif (
-                int(date) <= int(days_in_month) and
-                int(date) > 0
-            ):
+            elif int(date) <= int(days_in_month) and int(date) > 0:
                 get_time(date, month, year)
                 return False
 
@@ -618,7 +606,6 @@ def get_time(date, month, year):
         e_to_exit(hour)
 
         if hour.isnumeric() and int(hour) >= 9 and int(hour) < 17:
-
             apntmnt_time = (f'{hour}:00, {date} {month} {year}')
 
             apntmnt_time = convert_time.pretty_to_iso(apntmnt_time, 0)
@@ -648,7 +635,6 @@ patient_dict = {
 def validate_name():
 
     while True:
-
         name = input()
         e_to_exit(name)
         if any(char.isdigit() for char in name):
@@ -680,12 +666,12 @@ def get_name(apntmnt_time, end_time):
 def get_email(apntmnt_time, end_time, name):
 
     while True:
-
         email = input('Please enter your email ("e" to exit):\n\n')
         e_to_exit(email)
 
         if not re.match(r'[^@]+@[^@]+\.[^@]+', email):
             print('\nInvalid email, try again\n')
+
         else:
             get_details(apntmnt_time, end_time, name, email)
             return False
@@ -694,7 +680,6 @@ def get_email(apntmnt_time, end_time, name):
 def get_details(apntmnt_time, end_time, name, email):
 
     while True:
-
         details = input('\nShortly describe your symptoms ("e" to exit):\n\n')
         e_to_exit(details)
 
@@ -709,7 +694,8 @@ def get_details(apntmnt_time, end_time, name, email):
 
             if confirm.lower() == 'y':
                 new_appointment(
-                    apntmnt_time, end_time, name, email, details, start_time_pretty
+                    apntmnt_time, end_time, name, email,
+                    details, start_time_pretty
                 )
                 return False
 
