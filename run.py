@@ -1,16 +1,20 @@
 from __future__ import print_function
 import stdiomask
-import password
 import datetime
+import os
+if os.path.exists('password.py'):
+    import password
 from datetime import timedelta
 from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
 import re
 import sheet
 
+staff_password = os.environ['PASSWORD']
+
 SCOPES = 'http://www.googleapis.com/auth/calendar'
 
-CREDS = Credentials.from_service_account_file('credentials.json')
+CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPES)
 CAL = build('calendar', 'v3', credentials=CREDS)
 CAL_ID = 'uueq3s2tbgdl57dvmmvcp5osd8@group.calendar.google.com'
@@ -34,7 +38,7 @@ def welcome_screen():
         staff_or_customer = staff_or_customer.lower()
 
         if staff_or_customer == 's':
-            staff_login(password)
+            staff_login(staff_password)
             return False
 
         elif staff_or_customer == 'b':
@@ -127,7 +131,7 @@ def staff_login(password):
             welcome_screen()
             return False
 
-        if password_entered == password.password:
+        if password_entered == staff_password:
             print('\nPassword correct!')
             staff_nav()
             return False
