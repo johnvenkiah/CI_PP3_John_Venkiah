@@ -2,7 +2,7 @@
 
 ## A simple Command Line Interface Application connected to Google Calendar for staff and patients
 
-*ADD LINK TO SITE HERE*
+[Click here](https://feelgood-physio.herokuapp.com/) to visit the deployed site.
 
 ## Contents
 
