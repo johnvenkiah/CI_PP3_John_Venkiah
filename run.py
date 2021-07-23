@@ -52,6 +52,7 @@ def suggest_appointment():
     """
 
     print("\nLet's find you an appointment.\n")
+    print('Your data will be saved to our database upon confirmation.\n')
     book_or_back = input(
         'Press "1" to continue or any other key to go back.\n\n'
         )
@@ -745,11 +746,6 @@ def new_appointment(start, end, name, email, details, start_time_pretty):
             'description': f'{email}, {details}'
         }
 
-        p_nr = sheet.get_p_nr(sheet.p_log)
-
-        data = [p_nr, name, email, details]
-        sheet.p_log.append_row(data)
-
         CAL.events().insert(  # pylint: disable=maybe-no-member
             calendarId=CAL_ID,
             sendNotifications=True, body=APPOINTMENT).execute()
@@ -757,12 +753,15 @@ def new_appointment(start, end, name, email, details, start_time_pretty):
         print(f'\nThanks, {name}, appointment added:\n')
         print(f'{start_time_pretty}, {email}\n')
         print(details)
+        print('Logging your details...')
+        sheet.append_p_row(name, email, details)
+
         goback = input('\nPress any key to go back to the start screen.\n\n')
         if goback != '¶':
             welcome_screen()
 
     except Exception as e:
-        print('\nCould not add appointment, possible Google API Error: {e}')
-
+        print(f'\nCould not add appointment, possible Google API Error: {e}')
+        welcome_screen()
 
 welcome_screen()
