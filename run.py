@@ -655,7 +655,7 @@ def get_time(date, month, year):
 def validate_name():
 
     while True:
-        name = input()
+        name = input('\n\n')
         e_to_exit(name)
         if any(char.isdigit() for char in name):
             print("\nName can't contain numbers!\n")
