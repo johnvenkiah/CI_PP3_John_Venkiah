@@ -1,62 +1,37 @@
 # FeelGood Physio Booking System
 
-## A simple 
+## A simple Command Line Interface Application connected to Google Calendar for staff and patients
 
-![Mockup of Musical Minds on different devices](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/mockup/musical_minds_mockup.png)
-
-Musical Minds is a simple website with the main goal of making learning music theory fun.
-
-<a href="https://johnvenkiah.github.io/CI_MS2_John_Venkiah/" target="_blank">Click here</a> to visit the deployed site.
+*ADD LINK TO SITE HERE*
 
 ## Contents
 
-1. [User Experience Design](#user-experience-design)
+1. [User Experience](#user-experience)
     1. [Strategy](#strategy)
         1. [Project Goals](#project-goals)
         2. [Future Goals](#future-goals)
         3. [User Goals](#user-goals)
 
     2. [Structure](#structure)
-        1. [Home](#home)
-        2. [Quiz](#quiz)
-        3. [Learn](#learn)
-        4. [Play](#play)
-        5. [Contact](#contact)
-        6. [404](#404)
+
 
     3. [Scope](#scope)
         1. [User Stories](#user-stories)
         2. [Site Owner Goals](#site-owner-goals)
     
     4. [Skeleton](#skeleton)
-        1. [Wireframes](#wireframes)
 
     5. [Surface](#surface)
         1. [Design Choices](#design-choices)
-        2. [Fonts](#fonts)
-        3. [Colors](#colors)
 
 2. [Features](#features)
     1. [Existing Features](#existing-features)
-        1. [Feature 1: The Navigation Menu](#feature-1-the-navigation-menu)
-        2. [Feature 2: The Home Page](#feature-2-the-home-page)
-        3. [Feature 3: The Quiz](#feature-3-the-quiz)
-        4. [Feature 4: The Piano](#feature-4-the-piano)
-        5. [Feature 5: The Learn Page](#feature-5-the-learn-page)
-        6. [Feature 6: The Contact Page](#feature-6-the-contact-page)
-        7. [Feature 7: The 404-Error Page](#feature-7-the-404-error-page)
-    2. [Features To Be Implemented](#features-to-be-implemented)
 3. [Technologies Used](#technologies-used)
     1. [Languages](#languages)
     2. [Applications, Libraries and Platforms](#applications-libraries-and-platforms)
 
 4. [Validation](#validation)
-    1. [HTML validation](#html-validation)
-    2. [CSS validation](#css-validation)
-    3. [JavaScript validation](#javascript-validation)
-    4. [Accessibility](#accessibility)
     5. [Performance](#performance)
-    6. [Devices](#devices)
 
 4. [Testing of User Stories/Site Owner Goals](#testing-of-user-stories/site-owner-goals)
     1. Testing of User Stories
@@ -68,8 +43,7 @@ Musical Minds is a simple website with the main goal of making learning music th
     1. [GitHub Pages](#github-pages)
     2. [Forking the GitHub Repository](#forking-the-github-repository)
     3. [Making a Local Clone](#making-a-local-clone)
-    4. [YouTube API](#youtube-api)
-    5. [EmailJS](#emailjs)
+
 7. [Credits](#credits)
 
 ## User Experience Design
@@ -79,9 +53,9 @@ ___
 
 #### Project Goals
 
-The main goals of Musical Minds are:
+The main goals of FeelGood Physio are:
 
-- Creating a fun website that users feel they want to learn more
+- To make it easy for patients to schedule their appointments.
 - Making users aware of how easy it is to learn sight reading
 - Personally, for me, learning to apply JavaScript to websites
 
