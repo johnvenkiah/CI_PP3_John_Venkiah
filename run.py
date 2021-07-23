@@ -764,4 +764,5 @@ def new_appointment(start, end, name, email, details, start_time_pretty):
         print(f'\nCould not add appointment, possible Google API Error: {e}')
         welcome_screen()
 
+
 welcome_screen()
