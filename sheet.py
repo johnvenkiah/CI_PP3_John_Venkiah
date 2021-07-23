@@ -16,8 +16,16 @@ p_log = SHEET.worksheet('patient_log')
 
 
 def get_p_data(p_log):
+    p_log_dict = {}
+    p_dict = {}
     p_data = p_log.get_all_values()
-    print(p_data)
+    for row in p_data:
+        if p_data[0] == row:
+            continue
+        p_dict = dict(zip(p_data[0], row))
+        p_log_dict = p_log_dict, p_dict
+
+    print(str(p_log_dict).replace("{", "").replace("}", "").replace("'", ""))
 
 
 get_p_data(p_log)
