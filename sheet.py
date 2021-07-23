@@ -13,26 +13,23 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('feelgood_patient_data')
 
 p_log = SHEET.worksheet('patient_log')
-
+p_data = p_log.get_all_values()
 
 def get_p_data(p_log):
-    p_log_dict = {}
     p_dict = {}
-    p_data = p_log.get_all_values()
+
     for row in p_data:
         if p_data[0] == row:
             continue
         p_dict = dict(zip(p_data[0], row))
-        p_log_dict = p_log_dict, p_dict
+        print(
+            str(p_dict).replace("{", "").replace(
+                "}", "").replace("'", "")
+        )
 
-    print('\n' + str(p_log_dict).replace(
-        "{", "").replace("}", "").replace("'", "").replace(
-        "(", "").replace(")", "").replace(",", "")
-    )
-
-
-# def append_p_row(p_log):
-
-# get_p_data(p_log)
-
-
+def get_p_nr(p_log):
+    if not p_data:
+        p_nr = 1
+    else:
+        p_nr = int(p_data[-1][0]) + 1
+    return str(p_nr)

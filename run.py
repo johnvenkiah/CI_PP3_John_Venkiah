@@ -77,7 +77,9 @@ def e_to_exit(user_input):
 def staff_nav():
     while True:
         print('\nWhat would you like to view?\n')
-        sche_or_log = input('Schedule: "s", Patient Log: "l"\n\n')
+        sche_or_log = input(
+            'Schedule: "s", Patient Log: "l", Exit: any other key\n\n'
+        )
 
         if sche_or_log == 's':
             get_appointments(now, future_date(7))
@@ -89,15 +91,19 @@ def staff_nav():
 
         elif sche_or_log == 'l':
             sheet.get_p_data(sheet.p_log)
+
             e = input(
-                '\nPress e to exit or any other key for the staff menu.\n'
+                '\nPress e to exit or any other key for the staff menu.\n\n'
             )
+
             if e == 'e':
                 e_to_exit(e)
                 return False
-        
+
         else:
-            print('\nInvalid entry, please try again.\n')
+            print('\nExiting...')
+            welcome_screen()
+            return False
 
 
 def staff_login(password):
@@ -249,7 +255,7 @@ def nav_appntmnt(week_multiplier, app_dict):
     print('\nTo edit an appointment, enter the appointment number.')
     print('\nTo get appointments for week after, press "n".')
     print('\nTo go back to the previous week, press "b".\n')
-    nav_or_edit = input('Press any other key to exit.\n\n')
+    nav_or_edit = input('Press any other key to get to the staff menu.\n\n')
 
     def week_nav_fn(week_multiplier):
         days_1 = week_multiplier.get_value()
@@ -279,8 +285,8 @@ def nav_appntmnt(week_multiplier, app_dict):
         return
 
     else:
-        print('Exiting..')
-        welcome_screen()
+        print('\nExiting..')
+        staff_nav()
         return
 
 
@@ -645,14 +651,6 @@ def get_time(date, month, year):
             print('\nSorry, invalid entry.')
 
 
-patient_dict = {
-                'id': '',
-                'name': '',
-                'email': '',
-                'symtoms': '',
-                }
-
-
 def validate_name():
 
     while True:
@@ -735,41 +733,36 @@ def new_appointment(start, end, name, email, details, start_time_pretty):
     @param email(str): Email entered by patient
     @param details(str): Description of symptoms entered by patient
     """
+    try:
+        APPOINTMENT = {
+            'start': {
+                'dateTime': start,
+                },
+            'end': {
+                'dateTime': end,
+                },
+            'summary': name,
+            'description': f'{email}, {details}'
+        }
 
-    APPOINTMENT = {
-        'start': {
-            'dateTime': start,
-            },
-        'end': {
-            'dateTime': end,
-            },
-        'summary': name,
-        'description': f'{email}, {details}'
-    }
+        p_nr = sheet.get_p_nr(sheet.p_log)
 
-    # if name in p_log:
-    #     p_log.update({
-    #         'email': email,
-    #         'symptoms': symptoms
-    #     })
+        data = [p_nr, name, email, details]
+        sheet.p_log.append_row(data)
 
-    # else:
-    #     p_log_new_entry = [p_id, name, email, symptoms]
-    #     for items in p_log_new_entry:
-    #         new dict with items
+        CAL.events().insert(  # pylint: disable=maybe-no-member
+            calendarId=CAL_ID,
+            sendNotifications=True, body=APPOINTMENT).execute()
 
+        print(f'\nThanks, {name}, appointment added:\n')
+        print(f'{start_time_pretty}, {email}\n')
+        print(details)
+        goback = input('\nPress any key to go back to the start screen.\n\n')
+        if goback != '¶':
+            welcome_screen()
 
-    CAL.events().insert(  # pylint: disable=maybe-no-member
-        calendarId=CAL_ID,
-        sendNotifications=True, body=APPOINTMENT).execute()
-
-    print(f'\nThanks, {name}, appointment added:\n')
-    print(f'{start_time_pretty}, {email}\n')
-    print(details)
-    goback = input('\nPress any key to go back to the start screen.\n\n')
-
-    if goback != '¶':
-        welcome_screen()
+    except Exception as e:
+        print('\nCould not add appointment, possible Google API Error: {e}')
 
 
 welcome_screen()
