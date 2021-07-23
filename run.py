@@ -402,7 +402,7 @@ def get_details_staff(apntmnt_to_edit, apntmnt_id):
     new_details = input('\nEnter new patient details here:\n\n')
 
     print(f'\nAccept update "{new_details}" for {name}?\n')
-    update_details = input('("y" for YES, "n" for NO)\n\n')
+    update_details = input('("y" for YES, any other key for NO)\n\n')
 
     if update_details.lower() == 'y':
 
@@ -416,7 +416,8 @@ def get_details_staff(apntmnt_to_edit, apntmnt_id):
         return
 
     else:
-        print('invalid entry, please try again.')
+        print('Cancelled, getting main menu...')
+        staff_nav()
 
 
 def update_name(apntmnt_to_edit, apntmnt_id, new_name):
