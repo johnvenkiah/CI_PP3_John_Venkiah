@@ -659,7 +659,7 @@ def get_time(date, month, year):
 def validate_name():
 
     while True:
-        name = input('\n\n')
+        name = input()
         e_to_exit(name)
         if any(char.isdigit() for char in name):
             print("\nName can't contain numbers!\n")
@@ -757,7 +757,7 @@ def new_appointment(start, end, name, email, details, start_time_pretty):
         print(f'\nThanks, {name}, appointment added:\n')
         print(f'{start_time_pretty}, {email}\n')
         print(details)
-        print('Logging your details...')
+        print('\nLogging your details...')
         sheet.append_p_row(name, email, details)
 
         goback = input('\nPress any key to go back to the start screen.\n\n')
