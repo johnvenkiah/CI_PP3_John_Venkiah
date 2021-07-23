@@ -9,6 +9,14 @@ from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
 import re
 import sheet
+import sys
+
+if sys.stdin.isatty():
+    p = stdiomask.getpass('Using getpass: ')
+else:
+    print('Using readline')
+    p = sys.stdin.readline().rstrip()
+
 
 staff_password = os.environ['PASSWORD']
 
