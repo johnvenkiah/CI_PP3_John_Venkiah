@@ -6,6 +6,7 @@ from datetime import timedelta
 from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
 import re
+import sheet
 
 SCOPES = 'http://www.googleapis.com/auth/calendar'
 
@@ -73,6 +74,32 @@ def e_to_exit(user_input):
         return False
 
 
+def staff_nav():
+    while True:
+        print('\nWhat would you like to view?\n')
+        sche_or_log = input('Schedule: "s", Patient Log: "l"\n\n')
+
+        if sche_or_log == 's':
+            get_appointments(now, future_date(7))
+            d_1 = convert_time.iso_to_pretty(now, 0)
+            d_2 = convert_time.iso_to_pretty(future_date(7), 0)
+            print(f'Showing appointments between {d_1} and {d_2}\n')
+            print_appointments()
+            return False
+
+        elif sche_or_log == 'l':
+            sheet.get_p_data(sheet.p_log)
+            e = input(
+                '\nPress e to exit or any other key for the staff menu.\n'
+            )
+            if e == 'e':
+                e_to_exit(e)
+                return False
+        
+        else:
+            print('\nInvalid entry, please try again.\n')
+
+
 def staff_login(password):
     """
     This is the staff area, from which staff members can access, change
@@ -94,15 +121,9 @@ def staff_login(password):
             return False
 
         if password_entered == password.password:
-            print(
-                '\nPassword correct, getting schedule for coming week:'
-            )
-            get_appointments(now, future_date(7))
-            d_1 = convert_time.iso_to_pretty(now, 0)
-            d_2 = convert_time.iso_to_pretty(future_date(7), 0)
-            print(f'Showing appointments between {d_1} and {d_2}\n')
-            print_appointments()
-            break
+            print('\nPassword correct!')
+            staff_nav()
+            return False
 
         else:
             print('\nWrong password, please try again\n')

@@ -25,7 +25,14 @@ def get_p_data(p_log):
         p_dict = dict(zip(p_data[0], row))
         p_log_dict = p_log_dict, p_dict
 
-    print(str(p_log_dict).replace("{", "").replace("}", "").replace("'", ""))
+    print('\n' + str(p_log_dict).replace(
+        "{", "").replace("}", "").replace("'", "").replace(
+        "(", "").replace(")", "").replace(",", "")
+    )
 
 
-get_p_data(p_log)
+# def append_p_row(p_log):
+
+# get_p_data(p_log)
+
+
