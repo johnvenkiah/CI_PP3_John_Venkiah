@@ -5,15 +5,9 @@ import datetime
 from datetime import timedelta
 from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
-import gspread
 import re
 
-SCOPES = [
-    'http://www.googleapis.com/auth/calendar'
-    'https://www.googleapis.com/auth/spreadsheets',
-    'https://www.googleapis.com/auth/drive.file',
-    'https://www.googleapis.com/auth/drive'
-        ]
+SCOPES = 'http://www.googleapis.com/auth/calendar'
 
 CREDS = Credentials.from_service_account_file('credentials.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPES)
@@ -732,17 +726,17 @@ def new_appointment(start, end, name, email, details, start_time_pretty):
         'description': f'{email}, {details}'
     }
 
-    if name in p_log:
-        p_log.update{
-            'email': email,
-            'symptoms': symptoms
-        }
-    
-    else:
-        p_log_new_entry = [p_id, name, email, symptoms]
-        for items in p_log_new_entry:
-            new dict with items
-        
+    # if name in p_log:
+    #     p_log.update({
+    #         'email': email,
+    #         'symptoms': symptoms
+    #     })
+
+    # else:
+    #     p_log_new_entry = [p_id, name, email, symptoms]
+    #     for items in p_log_new_entry:
+    #         new dict with items
+
 
     CAL.events().insert(  # pylint: disable=maybe-no-member
         calendarId=CAL_ID,
