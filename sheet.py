@@ -16,7 +16,7 @@ p_log = SHEET.worksheet('patient_log')
 p_data = p_log.get_all_values()
 
 
-def get_p_data(p_data):
+def get_p_data():
     p_dict = {}
 
     for row in p_data:
@@ -24,7 +24,7 @@ def get_p_data(p_data):
             continue
         p_dict = dict(zip(p_data[0], row))
         print(
-            str(p_dict).replace("{", "").replace(
+            '\n' + str(p_dict).replace("{", "").replace(
                 "}", "").replace("'", "")
         )
 

@@ -94,7 +94,7 @@ def staff_nav():
             return False
 
         elif sche_or_log == 'l':
-            sheet.get_p_data(sheet.p_log)
+            sheet.get_p_data()
 
             e = input(
                 '\nPress e to exit or any other key for the staff menu.\n\n'
