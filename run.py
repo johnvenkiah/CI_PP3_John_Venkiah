@@ -370,7 +370,7 @@ def get_details_staff(apntmnt_to_edit, apntmnt_id):
 
     if 'description' in apntmnt_to_edit:
         print('\n' + apntmnt_to_edit['description'])
-    
+
     else:
         print(f'\nNo details for {name}')
 
@@ -392,6 +392,7 @@ def get_details_staff(apntmnt_to_edit, apntmnt_id):
 
     else:
         print('invalid entry, please try again.')
+
 
 def update_name(apntmnt_to_edit, apntmnt_id, new_name):
     apntmnt_to_edit['summary'] = new_name
@@ -542,7 +543,6 @@ def get_month(year):
 
             int_month = datetime.datetime.strptime(month, '%b')
             int_month = int(int_month.strftime('%m'))
-            # int_month = int(int_month)
 
             this_month = datetime.datetime.now().month
             int_this_month = int(this_month)
@@ -551,7 +551,7 @@ def get_month(year):
                 year = datetime.datetime.today() + timedelta(365.2425)
                 year = year.year
 
-            get_date(days_in_month, month, year)
+            get_date(days_in_month, month, year, int_month, int_this_month)
             return False
 
         elif month.isnumeric():
@@ -560,7 +560,7 @@ def get_month(year):
             print(month_incorr)
 
 
-def get_date(days_in_month, month, year):
+def get_date(days_in_month, month, year, int_month, int_this_month):
     """
     Get the date from the user, with the month and year
     passed from the above function
@@ -573,18 +573,33 @@ def get_date(days_in_month, month, year):
 
         print(f'\n{month}, {year}. Which date?\n')
         date = input('Enter two digits, ("e" to exit):\n\n')
+        date_incorrect = '\nDate incorrect, please try again'
 
-        e_to_exit(date)
+        try:
+            date_today = datetime.date.today().day
+            weekday_int = datetime.date(year, int_this_month, int(date)).weekday()
+            e_to_exit(date)
 
-        if (
-            date.isnumeric() and
-            int(date) <= int(days_in_month) and
-            int(date) > 0
-        ):
-            get_time(date, month, year)
-            return False
-        else:
-            print('\nDate incorrect, please try again')
+            if (
+                int_month == int_this_month and int(date) <= date_today
+                or weekday_int == 5 or weekday_int == 6
+            ):
+
+                print('\nBooking has to be at least one day ahead, no weekends.')
+                # print(weekday_int)
+                # print(int(date))
+                # print(date_today)
+                # print(int_month)
+                # print(int_this_month)
+            elif (
+                int(date) <= int(days_in_month) and
+                int(date) > 0
+            ):
+                get_time(date, month, year)
+                return False
+
+        except ValueError:
+            print(date_incorrect)
 
 
 def get_time(date, month, year):
@@ -643,7 +658,7 @@ def validate_name():
             return name
 
         else:
-            print("\nFirst and last name please.")
+            print("\nFirst and last name please.\n")
 
 
 def get_name(apntmnt_time, end_time):
@@ -679,28 +694,27 @@ def get_email(apntmnt_time, end_time, name):
 def get_details(apntmnt_time, end_time, name, email):
 
     while True:
+
         details = input('\nShortly describe your symptoms ("e" to exit):\n\n')
         e_to_exit(details)
 
-        start_time_pretty = convert_time.iso_to_pretty(apntmnt_time, 0)
-
-        # start_time_pretty = datetime.datetime.strptime(
-        #     apntmnt_time, '%Y-%m-%dT%H:%M:%S' + GMT_OFF
-        # )
-
-        # start_time_pretty = start_time_pretty.strftime('%H:%M, %d %b %Y')
-
-        print(f'\nConfirm appointment: {start_time_pretty}?\n')
-        confirm = input('"y" = YES, any other key = NO\n\n')
-
-        if confirm.lower() == 'y':
-            new_appointment(
-                apntmnt_time, end_time, name, email, details, start_time_pretty
-            )
-            return False
+        if len(details) < 8:
+            print('\nPlease enter at least eight characters')
 
         else:
-            print('\nAppointment Cancelled!\n')
+            start_time_pretty = convert_time.iso_to_pretty(apntmnt_time, 0)
+
+            print(f'\nConfirm appointment: {start_time_pretty}?\n')
+            confirm = input('"y" = YES, any other key = NO\n\n')
+
+            if confirm.lower() == 'y':
+                new_appointment(
+                    apntmnt_time, end_time, name, email, details, start_time_pretty
+                )
+                return False
+
+            else:
+                print('\nAppointment Cancelled!')
 
 
 def new_appointment(start, end, name, email, details, start_time_pretty):
