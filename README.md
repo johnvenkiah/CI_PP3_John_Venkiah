@@ -1,15 +1,14 @@
 # FeelGood Physio Booking System
 
-## Booking system for staff and patients
+## A Command Line interface Application
 
 ![Screenshot of Home screen](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/screenshot_home.png)
+
+**FeelGood Physio is a booking system for a fictional physiotherapy clinic, syncronized with Google Calendar and Google sheets.**
 
 [Click here](https://feelgood-physio.herokuapp.com/) to visit the deployed site.
 
 ## Contents
-
-<details>
-  <summary>Click here to view contents</summary>
 
 1. [User Experience](#user-experience)
     1. [Strategy](#strategy)
@@ -52,8 +51,6 @@
 
 7. [Credits](#credits)
 
-<details>
-
 ## User Experience
 
 ### Strategy
@@ -63,24 +60,20 @@ ___
 
 The main goals of FeelGood Physio are:
 
-- To make it easy for patients to schedule appointments.
-- Makng
-
-#### Future Goals
-
-Schools and music institutions could in the future purchase licenses for Musical minds as a web application, and its functionality could be developed even further. 
+- To build an application that serves the booking needs of both patients and staff
+- To explore the possibilities of working with API's
+- To gain knowledge of the Python programming language
 
 #### User Goals
 
-- Users who visit this site want to learn basic music theory and have fun doing it. It is as simple as that!
+Patients should find it simple to book appointments, and not be able to book a timeslot that is not available. Patients should also be made aware if their data is being logged.
 
-The user should see straight away that the content of this web application is simple; lots of space and a user-friendly but elegant design makes it attracive for both children and adults.
+Staff should find it easy to access and modify their schedule and patient data.
 
 Target Audience
 
-- Children
-- People with learning difficulties
-- Beginners or parents
+- A Physiotherapist (or their receptionist)
+- Patients
 
 ### Structure
 ___
