@@ -1,4 +1,36 @@
-from __future__ import print_function
+"""
+FEELGOOD PHYSIO, MAIN PYTHON FILE
+"""
+
+"""
+Imports for all modules for application to function fully:
+
+@datetime: For strings to be parsed as dates and time, and
+for functions to return accurate time from Google Calendar API.
+See https://docs.python.org/3/library/datetime.html for more details.
+
+@os: Imported so that password can be stored locally in workspace
+but also as config vars in Heroku. See
+https://docs.python.org/3/library/os.html?highlight=os#module-os for details.
+
+@datetime.timedelta: Used to add or subtract time from other time value.
+Imported seperately so I don't have to use datetime.timedelta each time.
+
+@build from googleapiclientdiscovery,
+@Credentials from google.oauth2.service_account:
+Needed for Google Calendar and Sheets API's to build resources
+for the application to work.
+See https://developers.google.com/calendar/api/v3/reference for details.
+
+@re: For using regular expressions to validate user input. See
+https://docs.python.org/3/library/re.html?highlight=re#module-re for details.
+
+@sheet: The file in which functions for requests to Google Sheets API occur.
+
+@password: When using from the terminal in IDE and not the deployed version,
+imports password from local file instead.
+"""
+
 import datetime
 import os
 from datetime import timedelta
@@ -6,9 +38,8 @@ from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
 import re
 import sheet
-import stdiomask
 if os.path.exists('password.py'):
-    import password  # noqa
+    import password  # noqa (To remove false error message from flake)
 
 SCOPES = 'http://www.googleapis.com/auth/calendar'
 
@@ -120,7 +151,7 @@ def staff_login():
     print(staff_greeting.upper())
 
     while True:
-        password_entered = stdiomask.getpass(
+        password_entered = input(
             'Enter your password or "e" to exit:\n\n'
         )
         e_to_exit(password_entered)
