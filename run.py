@@ -22,26 +22,33 @@ import sheet
 from time_f_converter import Time_F_Converter
 from inc_dec_week import Inc_Dec_Week
 if os.path.exists('password.py'):
-    import password  # noqa (To remove false error message from flake)
+    import password  # pylint: disable=unused-import
 
+# pylint: disable=pointless-string-statement
 """
 Imports for all modules for application to function fully:
+
 @datetime: For strings to be parsed as dates and time, and
 for functions to return accurate time from Google Calendar API.
 See https://docs.python.org/3/library/datetime.html for more details.
+
 @os: Imported so that password can be stored locally in workspace
 but also as config vars in Heroku. See
 https://docs.python.org/3/library/os.html?highlight=os#module-os for details.
+
 @datetime.timedelta: Used to add or subtract time from other time value.
 Imported seperately so I don't have to use datetime.timedelta each time.
+
 @build from googleapiclientdiscovery,
 @Credentials from google.oauth2.service_account:
 Needed for Google Calendar and Sheets API's to build resources
 for the application to work.
 See https://developers.google.com/calendar/api/v3/reference for details.
+
 @re: For using regular expressions to validate user input. See
 https://docs.python.org/3/library/re.html?highlight=re#module-re for details.
 @sheet: The file in which functions for requests to Google Sheets API occur.
+
 @password: When using from the terminal in IDE and not the deployed version,
 imports password from local file instead.
 """
@@ -142,7 +149,7 @@ def staff_nav():
             d_1 = convert_time.iso_to_pretty(now, 0)
             d_2 = convert_time.iso_to_pretty(future_date(7), 0)
             print(f'Showing appointments between {d_1} and {d_2}\n')
-            print_appointments()
+            print_appointments(now, future_date(7))
             return False
 
         if sche_or_log == 'l':
@@ -153,7 +160,7 @@ def staff_nav():
             )
 
             if e_input == 'e':
-                e_to_exit(e)
+                e_to_exit(e_input)
                 return False
 
         print('\nExiting...')
@@ -209,9 +216,8 @@ def get_appointments(earliest, latest):
         orderBy='startTime'
     ).execute()
 
-    global APPOINTMENTS
-    APPOINTMENTS = appointments_result.get('items', [])
-    return APPOINTMENTS
+    appointments = appointments_result.get('items', [])
+    return appointments
 
 
 """
@@ -220,18 +226,19 @@ An instance of the class used in nav_appntmnt function.
 week_multiplier = Inc_Dec_Week()
 
 
-def print_appointments():
+def print_appointments(earliest, latest):
     """
     Print the appointments taken through the get_appointments function.
 
     """
+    appointments = get_appointments(earliest, latest)
     app_nr = 1
     app_dict = {}
-    print(len(APPOINTMENTS))
-    if len(APPOINTMENTS) <= 3:
+
+    if len(appointments) <= 3:
         print('\nNot many appointments that week.')
 
-    for appointment in APPOINTMENTS:
+    for appointment in appointments:
 
         start = appointment['start'].get('dateTime')
         if start is None:
@@ -309,7 +316,7 @@ def nav_appntmnt(app_dict):
         )
 
         get_appointments(date_1, date_2)
-        print_appointments()
+        print_appointments(date_1, date_2)
 
     #  nav_appntmnt continues here
     if nav_or_edit == 'n':
@@ -361,7 +368,7 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
 
             print('\nAppointment deleted!')
             get_appointments(now, future_date(7))
-            print_appointments()
+            print_appointments(now, future_date(7))
         else:
             print('\nCancelled.')
             edit_appntmnt(nav_or_edit, apntmnt_id)
@@ -378,7 +385,7 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
     else:
         print('Cancelled.')
         get_appointments(now, future_date(7))
-        print_appointments()
+        print_appointments(now, future_date(7))
 
 
 def edit_appntmnt_2(apntmnt_to_edit, apntmnt_id):
@@ -407,7 +414,7 @@ def edit_appntmnt_2(apntmnt_to_edit, apntmnt_id):
 
     else:
         get_appointments(now, future_date(7))
-        print_appointments()
+        print_appointments(now, future_date(7))
         return
 
 
@@ -447,8 +454,8 @@ def get_date_staff(apntmnt_to_edit, apntmnt_id):
             add_time_staff(date_input, apntmnt_to_edit, apntmnt_id)
             return False
 
-        except ValueError as e:
-            print(f'\nInvalid date: {e}, please try again.')
+        except ValueError as error:
+            print(f'\nInvalid date: {error}, please try again.')
 
 
 def get_details_staff(apntmnt_to_edit, apntmnt_id):
@@ -481,12 +488,11 @@ def get_details_staff(apntmnt_to_edit, apntmnt_id):
         print(f'\nDetails for {name} updated.')
 
         get_appointments(now, future_date(7))
-        print_appointments()
+        print_appointments(now, future_date(7))
         return
 
-    else:
-        print('Cancelled, getting main menu...')
-        staff_nav()
+    print('Cancelled, getting main menu...')
+    staff_nav()
 
 
 def update_name(apntmnt_to_edit, apntmnt_id, new_name):
@@ -505,7 +511,7 @@ def update_name(apntmnt_to_edit, apntmnt_id, new_name):
 
     print(f'\nAppointment name updated: {new_name}')
     get_appointments(now, future_date(7))
-    print_appointments()
+    print_appointments(now, future_date(7))
 
 
 def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
@@ -529,9 +535,9 @@ def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
             apntmnt_time = convert_time_staff.pretty_to_iso(apntmnt_time, 0)
             end_time = convert_iso_iso_ms.add_hour_iso(apntmnt_time, +1)
 
-            get_appointments(apntmnt_time, end_time)
+            appointments = get_appointments(apntmnt_time, end_time)
 
-            if APPOINTMENTS:
+            if appointments:
                 print('Sorry, appointment not available. Try again.')
             else:
                 print(f'{get_hour} on {date_input} is free.\n')
@@ -553,10 +559,9 @@ def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
                     )
                     return False
 
-                else:
-                    print('\nCancelled. Getting the coming week:')
-                    get_appointments(now, future_date(7))
-                    print_appointments()
+                print('\nCancelled. Getting the coming week:')
+                get_appointments(now, future_date(7))
+                print_appointments(now, future_date(7))
         else:
             print('\nSorry, invalid entry.')
 
@@ -585,7 +590,7 @@ def update_apntmnt_time(apntmnt_time, end_time, apntmnt_to_edit, apntmnt_id):
 
     if go_back != '¶¥¿':
         get_appointments(now, future_date(7))
-        print_appointments()
+        print_appointments(now, future_date(7))
 
 
 def update_cal(apntmnt_id, apntmnt_to_edit):
@@ -621,15 +626,15 @@ def days_feb():
     year the request is made.
     """
 
-    d = 29 if year % 4 == 0 and (year % 100 == 0 or year % 400 == 0) else 28
-    return d
+    days = 29 if year % 4 == 0 and (year % 100 == 0 or year % 400 == 0) else 28
+    return days
 
 
-def get_month(year):
+def get_month(yr):  # pylint: disable=invalid-name
     """
     Initiate the booking process and gets month from user for appointment.
 
-    @param year(int): the year of the appointment.
+    @param yr(int): the year of the appointment.
     """
 
     month_dict = {
@@ -664,20 +669,23 @@ def get_month(year):
             int_this_month = int(this_month)
 
             if int_month < int_this_month:
-                year = datetime.datetime.today() + timedelta(365.2425)
-                year = year.year
+                yr = datetime.datetime.today() + timedelta(365.2425)
+                yr = yr.yr
 
-            get_date(days_in_month, month, year, int_month, int_this_month)
+            get_date(days_in_month, month, yr, int_month, int_this_month)
             return False
 
-        elif month.isnumeric():
+        if month.isnumeric():
             print(month_incorr)
 
         else:
             print(month_incorr)
 
 
-def get_date(days_in_month, month, year, int_month, int_this_month):
+def get_date(
+    days_in_month, month, yr, int_month, int_this_month
+):  # pylint: disable=invalid-name
+
     """
     Get the date from the user, with the month and year
     passed from the above function
@@ -685,13 +693,13 @@ def get_date(days_in_month, month, year, int_month, int_this_month):
     @param days_in_month(str): Number representing days in given month
         from month_dict.
     @param month(str): Month given by user
-    @param year(str): Year given by user
+    @param yr(str): Year given by user
     @param int_month(int): A number for month, eg 12 for Dec
     """
 
     while True:
 
-        print(f'\n{month}, {year}. Which date?\n')
+        print(f'\n{month}, {yr}. Which date?\n')
         date = input('Enter two digits, ("e" to exit):\n\n')
         date_incorrect = '\nDate incorrect, please try again'
         e_to_exit(date)
@@ -699,7 +707,7 @@ def get_date(days_in_month, month, year, int_month, int_this_month):
         try:
             date_today = datetime.date.today().day
             weekday_int = datetime.date(
-                year, int_this_month, int(date)
+                yr, int_this_month, int(date)
             ).weekday()
 
             if (
@@ -711,41 +719,41 @@ def get_date(days_in_month, month, year, int_month, int_this_month):
                 )
 
             elif int(date) <= int(days_in_month) and int(date) > 0:
-                get_time(date, month, year)
+                get_time(date, month, yr)
                 return False
 
         except ValueError:
             print(date_incorrect)
 
 
-def get_time(date, month, year):
+def get_time(date, month, yr):  # pylint: disable=invalid-name
     """
     Get the date from the user, with the month and year
     passed from the above function
 
     @param date(str): Date given by user
     @param month(str): Month given by user
-    @param year(str): Year given by user
+    @param yr(str): Year given by user
     """
     while True:
 
-        print(f'\n{date} {month}, {year}. What time?\n')
+        print(f'\n{date} {month}, {yr}. What time?\n')
         hour = input('Enter hour, 9 - 17 ("e" to exit):\n\n')
 
         e_to_exit(hour)
 
         if hour.isnumeric() and int(hour) >= 9 and int(hour) < 17:
-            apntmnt_time = (f'{hour}:00, {date} {month} {year}')
+            apntmnt_time = (f'{hour}:00, {date} {month} {yr}')
 
             apntmnt_time = convert_time.pretty_to_iso(apntmnt_time, 0)
             end_time = convert_time.add_hour_iso(apntmnt_time, +1)
 
-            get_appointments(apntmnt_time, end_time)
+            appointments = get_appointments(apntmnt_time, end_time)
 
-            if APPOINTMENTS:
+            if appointments:
                 print('Sorry, appointment not available. Try again.')
             else:
-                print(f'{hour}:00 on {date} {month}, {year} is free.\n')
+                print(f'{hour}:00 on {date} {month}, {yr} is free.\n')
                 get_name(apntmnt_time, end_time)
                 return False
         else:
@@ -835,11 +843,13 @@ def get_details(apntmnt_time, end_time, name, email):
                 )
                 return False
 
-            else:
-                print('\nAppointment Cancelled!')
+            print('\nAppointment Cancelled!')
 
 
-def new_appointment(start, end, name, email, details, start_time_pretty):
+def new_appointment(
+    start, end, name, email, details, start_time_pretty
+):  # pylint: disable=too-many-arguments
+
     """
     Makes an appointment entry in Google Calendar, getting data from
     the get_month function.
@@ -851,7 +861,7 @@ def new_appointment(start, end, name, email, details, start_time_pretty):
     @param details(str): Description of symptoms entered by patient
     """
     try:
-        APPOINTMENT = {
+        event = {
             'start': {
                 'dateTime': start,
                 },
@@ -864,7 +874,7 @@ def new_appointment(start, end, name, email, details, start_time_pretty):
 
         CAL.events().insert(  # pylint: disable=maybe-no-member
             calendarId=CAL_ID,
-            sendNotifications=True, body=APPOINTMENT).execute()
+            sendNotifications=True, body=event).execute()
 
         print(f'\nThanks, {name}, appointment added:\n')
         print(f'{start_time_pretty}, {email}\n')
@@ -876,8 +886,8 @@ def new_appointment(start, end, name, email, details, start_time_pretty):
         if goback != '¶':
             welcome_screen()
 
-    except Exception as e:
-        print(f'\nCould not add appointment, possible Google API Error: {e}')
+    except Exception as error:  # pylint: disable=broad-except
+        print('Could not add appointment, possible Google API Error:' + error)
         welcome_screen()
 
 
