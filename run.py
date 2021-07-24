@@ -77,6 +77,7 @@ def welcome_screen():
     """
     welcome_greeting = '\nWelcome to the Feelgood Physio booking system\n'
     print(welcome_greeting.upper())
+    print('\nMade for patients and staff at the FeelGood Physio clinic\n')
 
     while True:
         staff_or_customer = input(
@@ -144,7 +145,7 @@ def staff_nav():
             print_appointments()
             return False
 
-        elif sche_or_log == 'l':
+        if sche_or_log == 'l':
             sheet.get_p_data()
 
             e = input(
@@ -155,10 +156,9 @@ def staff_nav():
                 e_to_exit(e)
                 return False
 
-        else:
-            print('\nExiting...')
-            welcome_screen()
-            return False
+        print('\nExiting...')
+        welcome_screen()
+        return False
 
 
 def staff_login():
@@ -228,9 +228,9 @@ def print_appointments():
     """
     app_nr = 1
     app_dict = {}
-
-    if not appointments or len(appointments) <= 2:
-        print('No appointments that week.')
+    print(len(appointments))
+    if len(appointments) <= 3:
+        print('\nNot many appointments that week.')
 
     for appointment in appointments:
 
