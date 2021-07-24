@@ -19,8 +19,8 @@ from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
 
 import sheet
-from time_f_converter import Time_F_Converter
-from inc_dec_week import Inc_Dec_Week
+from time_f_converter import TimeFConverter
+from inc_dec_week import IncDecWeek
 if os.path.exists('password.py'):
     import password  # pylint: disable=unused-import
 
@@ -223,7 +223,7 @@ def get_appointments(earliest, latest):
 """
 An instance of the class used in nav_appntmnt function.
 """
-week_multiplier = Inc_Dec_Week()
+week_multiplier = IncDecWeek()
 
 
 def print_appointments(earliest, latest):
@@ -264,22 +264,22 @@ def print_appointments(earliest, latest):
 
 
 """
-Different instances of Time_F_Converter, depending on needed format to display
+Different instances of TimeFConverter, depending on needed format to display
 or function as datetime on Google Calendar
 """
-convert_time = Time_F_Converter(
+convert_time = TimeFConverter(
     '%Y-%m-%dT%H:%M:%S.%f' + GMT_OFF, '%H:%M, %d %b %Y'
 )
 
-convert_time_no_ms = Time_F_Converter(
+convert_time_no_ms = TimeFConverter(
     '%Y-%m-%dT%H:%M:%S' + GMT_OFF, '%H:%M, %d %b %Y'
 )
 
-convert_time_staff = Time_F_Converter(
+convert_time_staff = TimeFConverter(
     '%Y-%m-%dT%H:%M:%S' + GMT_OFF, '%H:%M, %d-%m-%Y'
 )
 
-convert_iso_iso_ms = Time_F_Converter(
+convert_iso_iso_ms = TimeFConverter(
     '%Y-%m-%dT%H:%M:%S' + GMT_OFF, '%Y-%m-%dT%H:%M:%S.%f' + GMT_OFF
 )
 
