@@ -1,15 +1,14 @@
 from __future__ import print_function
 import datetime
 import os
-if os.path.exists('password.py'):
-    import password
 from datetime import timedelta
 from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
 import re
 import sheet
-
-staff_password = os.environ['PASSWORD']
+import stdiomask
+if os.path.exists('password.py'):
+    import password  # noqa
 
 SCOPES = 'http://www.googleapis.com/auth/calendar'
 
@@ -37,7 +36,7 @@ def welcome_screen():
         staff_or_customer = staff_or_customer.lower()
 
         if staff_or_customer == 's':
-            staff_login(staff_password)
+            staff_login()
             return False
 
         elif staff_or_customer == 'b':
@@ -110,17 +109,18 @@ def staff_nav():
             return False
 
 
-def staff_login(password):
+def staff_login():
     """
     This is the staff area, from which staff members can access, change
     or delete patient data after successfully entering the password.
     """
+    staff_password = os.environ['PASSWORD']
     attempts = 0
     staff_greeting = '\nFeelgood Physio - Staff login area\n'
     print(staff_greeting.upper())
 
     while True:
-        password_entered = input(
+        password_entered = stdiomask.getpass(
             'Enter your password or "e" to exit:\n\n'
         )
         e_to_exit(password_entered)
@@ -608,8 +608,8 @@ def get_date(days_in_month, month, year, int_month, int_this_month):
             e_to_exit(date)
 
             if (
-                int_month == int_this_month and int(date) <= date_today
-                or weekday_int == 5 or weekday_int == 6
+                int_month == int_this_month and int(date) <= date_today or
+                weekday_int == 5 or weekday_int == 6
             ):
                 print(
                     '\nBooking has to be at least one day ahead, no weekends.'
