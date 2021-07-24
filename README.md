@@ -1,10 +1,15 @@
 # FeelGood Physio Booking System
 
-## A simple Command Line Interface Application connected to Google Calendar for staff and patients
+## Booking system for staff and patients
+
+![Screenshot of Home screen]()
 
 [Click here](https://feelgood-physio.herokuapp.com/) to visit the deployed site.
 
 ## Contents
+
+<details>
+  <summary>Click here to view contents</summary>
 
 1. [User Experience](#user-experience)
     1. [Strategy](#strategy)
@@ -34,19 +39,22 @@
     5. [Performance](#performance)
 
 4. [Testing of User Stories/Site Owner Goals](#testing-of-user-stories/site-owner-goals)
-    1. Testing of User Stories
-    2. Testing of Site Owner Goals
+    1. [Testing of User Stories](#testing-of-user-stories)
+    2. [Testing of Site Owner Goals](#testing-of-site-owner-goals)
 
 5. [Bugs](#bugs)
 
 6. [Deployment](#deployment)
     1. [GitHub Pages](#github-pages)
+    2. [Heroku](#heroku)
     2. [Forking the GitHub Repository](#forking-the-github-repository)
     3. [Making a Local Clone](#making-a-local-clone)
 
 7. [Credits](#credits)
 
-## User Experience Design
+<details>
+
+## User Experience
 
 ### Strategy
 ___
