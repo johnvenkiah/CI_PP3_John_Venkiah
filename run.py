@@ -22,7 +22,7 @@ import sheet
 from time_f_converter import TimeFConverter
 from inc_dec_week import IncDecWeek
 if os.path.exists('password.py'):
-    import password  # pylint: disable=unused-import
+    import password  # pylint: disable=unused-import  # noqa
 
 # pylint: disable=pointless-string-statement
 """
