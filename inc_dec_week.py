@@ -29,6 +29,14 @@ class IncDecWeek():
         """
         self.inc_dec_week -= 7
 
+    def initialize(self):
+        """
+        Initializes value to 0.
+        """
+
+        self.inc_dec_week = 0
+        return self.inc_dec_week
+
     def get_value(self):
         """
         Gets the value.

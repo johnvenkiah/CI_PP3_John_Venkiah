@@ -236,7 +236,7 @@ def print_appointments(earliest, latest):
     app_dict = {}
 
     if len(appointments) <= 3:
-        print('\nNot many appointments that week.')
+        print('Not many appointments that week.')
 
     for appointment in appointments:
 
@@ -329,13 +329,14 @@ def nav_appntmnt(app_dict):
     elif str(nav_or_edit) in app_dict:
         apntmnt_id = app_dict[nav_or_edit]
         edit_appntmnt(nav_or_edit, apntmnt_id)
-        return
 
     else:
         print('\nExiting..')
-        days_1 = week_multiplier.__init__()
+
+        # pylint: disable=unused-variable
+        days_1 = week_multiplier.initialize()  # noqa
+
         staff_nav()
-        return
 
 
 def edit_appntmnt(nav_or_edit, apntmnt_id):
@@ -369,7 +370,7 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
             print('\nAppointment deleted!')
             print_appointments(now, future_date(7))
         else:
-            print('\nCancelled.')
+            print('\n\nCancelled.\n')
             edit_appntmnt(nav_or_edit, apntmnt_id)
 
     elif edit_or_delete == 'e':
