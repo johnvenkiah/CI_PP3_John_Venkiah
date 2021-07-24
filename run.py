@@ -41,11 +41,24 @@ import sheet
 if os.path.exists('password.py'):
     import password  # noqa (To remove false error message from flake)
 
+"""
+SCOPES, CREDS, SCOPED_CREDS: used with Google API Client to gain access to
+and modify data on Google Calendar and Google Sheets.
+"""
+
 SCOPES = 'http://www.googleapis.com/auth/calendar'
 
+""" CREDS .json file created on Google Cloud Platform, stored as config vars
+on Heroku.
+"""
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPES)
+
+"""
+CAL: The specific calendar on Google Calendar used in this project.
+"""
 CAL = build('calendar', 'v3', credentials=CREDS)
+
 CAL_ID = 'uueq3s2tbgdl57dvmmvcp5osd8@group.calendar.google.com'
 GMT_OFF = '+01:00'
 year = datetime.date.today().year
@@ -109,6 +122,11 @@ def e_to_exit(user_input):
 
 
 def staff_nav():
+    """
+    Displays the main staff menu for staff once password is entered correctly,
+    with options to view patient log or schedule, or exit to the main screen.
+    """
+
     while True:
         print('\nWhat would you like to view?\n')
         sche_or_log = input(
@@ -195,6 +213,14 @@ def get_appointments(earliest, latest):
 
 
 class Inc_dec_week():
+"""
+Allows staff navigate between weeks in schedule, by returning
+an integer based on the function called. This way, number will retain value after each time function is run.
+Inspiration from this site:
+https://stackoverflow.com/questions/47697945/
+python-how-to-increment-number-and-store-in-variable-every-time-function-runs/
+47698278
+"""
     def __init__(self):
         self.inc_dec_week = 0
 
@@ -207,7 +233,9 @@ class Inc_dec_week():
     def get_value(self):
         return self.inc_dec_week
 
-
+"""
+The only instance of the class used in 
+"""
 week_multiplier = Inc_dec_week()
 
 
@@ -248,6 +276,13 @@ def print_appointments():
 
 
 class Time_F_Converter():
+"""
+Takes instances of time in string format, converts them to datetime,
+adds time offset if needed and returns as string in defined format.
+@param str_iso(str): Keyword for string in non-readable format
+@param str_pretty(str): Keyword for string in readable format
+@param offset(int): Integer passed for datetime to be modified of needed
+"""
 
     def __init__(self, str_iso, str_pretty):
         self.str_iso = str_iso
@@ -268,7 +303,10 @@ class Time_F_Converter():
         date = date + timedelta(hours=offset)
         return date.strftime(self.str_iso)
 
-
+"""
+Different instances of Time_F_Converter, depending on needed format to display
+or function as datetime on Google Calendar
+"""
 convert_time = Time_F_Converter(
     '%Y-%m-%dT%H:%M:%S.%f' + GMT_OFF, '%H:%M, %d %b %Y'
 )
@@ -287,12 +325,31 @@ convert_iso_iso_ms = Time_F_Converter(
 
 
 def nav_appntmnt(week_multiplier, app_dict):
+    """
+    This lets staff navigate the schedule with week intervals,
+    using week_nav_fn function to increment or decrement weeks. They can also edit
+    or delete appointments.
+
+    @param week_multiplier(int): Used in week_nav_fn.
+    @param app_dict(dict): Dict keys are integers that are displayed next to
+        each appointment for user to input, should they want to edit that
+        specific appointment, and the Google Calendar event id as values.
+    """
     print('\nTo edit an appointment, enter the appointment number.')
     print('\nTo get appointments for week after, press "n".')
     print('\nTo go back to the previous week, press "b".\n')
     nav_or_edit = input('Press any other key to get to the staff menu.\n\n')
 
     def week_nav_fn(week_multiplier):
+        """
+        This lets staff navigate the schedule with week intervals,
+        using week_nav_fn function to increment or decrement weeks.
+
+        @param week_multiplier(int): Returns an integer representing the
+            number of days from now a string should be parsed as date to
+            return schedule for desired week.
+        """
+
         days_1 = week_multiplier.get_value()
         days_2 = days_1 + 7
         date_1 = future_date(days_1)
@@ -306,6 +363,7 @@ def nav_appntmnt(week_multiplier, app_dict):
         get_appointments(date_1, date_2)
         print_appointments()
 
+    #  nav_appntmnt continues here
     if nav_or_edit == 'n':
         week_multiplier.increment()
         week_nav_fn(week_multiplier)
@@ -326,6 +384,14 @@ def nav_appntmnt(week_multiplier, app_dict):
 
 
 def edit_appntmnt(nav_or_edit, apntmnt_id):
+    """
+    This lets staff navigate the schedule with week intervals,
+    using week_nav_fn function to increment or decrement weeks.
+
+    @param nav_or_edit(str): Input from user.
+    @param apntmnt_id(int): Value stored in apntmnt_dict to pinpoint
+        specific event on Google Calendar.
+    """
     print(f'\nAppointment {nav_or_edit}:\n')
     edit_or_delete = input(
         'Press "e" to edit, "r" to remove or any other key to go back.\n\n'
@@ -369,9 +435,11 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
 
 def edit_appntmnt_2(apntmnt_to_edit, apntmnt_id):
     """
-    Edit the start and end time of the appointment.
+    Lets user choose what to edit for the chosen appointment.
 
-    @param apntmnt_to_edit (int): The specific event passed to change.
+    @param apntmnt_to_edit: The specific event to edit.
+    @param apntmnt_id(int): Value stored in apntmnt_dict to pinpoint
+        specific event on Google Calendar.
     """
 
     print('\nEdit appointment - choose what to edit:')
@@ -396,6 +464,13 @@ def edit_appntmnt_2(apntmnt_to_edit, apntmnt_id):
 
 
 def get_name_staff(apntmnt_to_edit, apntmnt_id):
+    """
+    Lets user edit patient name.
+
+    @param apntmnt_to_edit: The specific event to edit.
+    @param apntmnt_id(int): Value stored in apntmnt_dict to pinpoint
+        specific event on Google Calendar.
+    """
 
     print('\nPlease enter new name:\n')
     new_name = validate_name()
@@ -403,6 +478,13 @@ def get_name_staff(apntmnt_to_edit, apntmnt_id):
 
 
 def get_date_staff(apntmnt_to_edit, apntmnt_id):
+    """
+    Lets user enter appointment date, slightly simpler that the patient version.
+
+    @param apntmnt_to_edit: The specific event to edit.
+    @param apntmnt_id(int): Value stored in apntmnt_dict to pinpoint
+        specific event on Google Calendar.
+    """
 
     while True:
 
@@ -421,6 +503,13 @@ def get_date_staff(apntmnt_to_edit, apntmnt_id):
 
 
 def get_details_staff(apntmnt_to_edit, apntmnt_id):
+    """
+    Lets user edit email and notes for patients, showing current data first.
+
+    @param apntmnt_to_edit: The specific event to edit.
+    @param apntmnt_id(int): Value stored in apntmnt_dict to pinpoint
+        specific event on Google Calendar.
+    """
     name = apntmnt_to_edit['summary']
     print(f'\nDetails for {name}:')
 
@@ -452,6 +541,15 @@ def get_details_staff(apntmnt_to_edit, apntmnt_id):
 
 
 def update_name(apntmnt_to_edit, apntmnt_id, new_name):
+    """
+    Updates Google Calendar event ['summary'] which displays the patient name.
+
+    @param apntmnt_to_edit: The specific event to edit.
+    @param apntmnt_id(int): Value stored in apntmnt_dict to pinpoint
+        specific event on Google Calendar.
+    @param new_name(str): The name input from user to update event with.
+    """
+
     apntmnt_to_edit['summary'] = new_name
 
     update_cal(apntmnt_id, apntmnt_to_edit)
@@ -463,8 +561,7 @@ def update_name(apntmnt_to_edit, apntmnt_id, new_name):
 
 def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
     """
-    Get the date from the user, with the month and year
-    passed from the above function
+    Allows staff to enter new time for appointment.
 
     @param month(str): Month given by user
     @param year(str): Year given by user
@@ -516,6 +613,14 @@ def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
 
 
 def update_apntmnt_time(apntmnt_time, end_time, apntmnt_to_edit, apntmnt_id):
+    """
+    Passes start and end time to update_cal function to update event with.
+
+    @param apntmnt_time(str): Start time for event
+    @param end_time(str): End time for event
+    @param apntmnt_to_edit: Instance of CAL-resource updating calendar
+    @param apntmnt_id(str): Google Calendar event identifier
+    """
 
     apntmnt_to_edit['start']['dateTime'] = apntmnt_time
     apntmnt_to_edit['end']['dateTime'] = end_time
@@ -535,6 +640,13 @@ def update_apntmnt_time(apntmnt_time, end_time, apntmnt_to_edit, apntmnt_id):
 
 
 def update_cal(apntmnt_id, apntmnt_to_edit):
+    """
+    Update the Google Calendar event with the input from the previous
+    functions from user.
+
+    @param apntmnt_id(str): Google Calendar event identifier
+    @param apntmnt_to_edit: Instance of CAL-resource updating calendar
+    """
     CAL.events().update(  # pylint: disable=maybe-no-member
         calendarId=CAL_ID,
         eventId=apntmnt_id,
@@ -621,8 +733,11 @@ def get_date(days_in_month, month, year, int_month, int_this_month):
     Get the date from the user, with the month and year
     passed from the above function
 
+    @param days_in_month(str): Int representing days in given month
+        from month_dict.
     @param month(str): Month given by user
     @param year(str): Year given by user
+    @param int_month(int): A number for month, eg 12 for Dec
     """
 
     while True:
@@ -659,6 +774,7 @@ def get_time(date, month, year):
     Get the date from the user, with the month and year
     passed from the above function
 
+    @param date(str): Date given by user
     @param month(str): Month given by user
     @param year(str): Year given by user
     """
@@ -688,6 +804,9 @@ def get_time(date, month, year):
 
 
 def validate_name():
+    """
+    Simple name validation so user inputs two names and without numbers.
+    """
 
     while True:
         name = input()
@@ -707,8 +826,8 @@ def get_name(apntmnt_time, end_time):
     Get the date from the user, with the month and year
     passed from the above function
 
-    @param start(str): Start time of appointment
-    @param end(str): Start time of appointment
+    @param apntmnt_time(str): Start time of appointment
+    @param end_time(str): Start time of appointment
     """
 
     print('To continue, enter your full name ("e" to exit):\n')
@@ -719,7 +838,13 @@ def get_name(apntmnt_time, end_time):
 
 
 def get_email(apntmnt_time, end_time, name):
+    """
+    Get email from the user, and validate it with simple regular expression.
 
+    @param apntmnt_time(str): Start time of appointment
+    @param end_time(str): End time of appointment
+    @param name(str): Name to display as ['summary'] for Google event
+    """
     while True:
         email = input('Please enter your email ("e" to exit):\n\n')
         e_to_exit(email)
@@ -733,7 +858,14 @@ def get_email(apntmnt_time, end_time, name):
 
 
 def get_details(apntmnt_time, end_time, name, email):
+    """
+    Lets user describe symptoms and saves info as details
+    variable in description.
 
+    @param apntmnt_time(str): Start time of appointment
+    @param end_time(str): End time of appointment
+    @param name(str): Name to display as ['summary'] for Google event
+    """
     while True:
         details = input('\nShortly describe your symptoms ("e" to exit):\n\n')
         e_to_exit(details)
