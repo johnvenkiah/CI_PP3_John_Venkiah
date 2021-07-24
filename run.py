@@ -1,45 +1,20 @@
 """
-FEELGOOD PHYSIO, MAIN PYTHON FILE
-"""
-
-"""
-Imports for all modules for application to function fully:
-
-@datetime: For strings to be parsed as dates and time, and
-for functions to return accurate time from Google Calendar API.
-See https://docs.python.org/3/library/datetime.html for more details.
-
-@os: Imported so that password can be stored locally in workspace
-but also as config vars in Heroku. See
-https://docs.python.org/3/library/os.html?highlight=os#module-os for details.
-
-@datetime.timedelta: Used to add or subtract time from other time value.
-Imported seperately so I don't have to use datetime.timedelta each time.
-
-@build from googleapiclientdiscovery,
-@Credentials from google.oauth2.service_account:
-Needed for Google Calendar and Sheets API's to build resources
-for the application to work.
-See https://developers.google.com/calendar/api/v3/reference for details.
-
-@re: For using regular expressions to validate user input. See
-https://docs.python.org/3/library/re.html?highlight=re#module-re for details.
-
-@sheet: The file in which functions for requests to Google Sheets API occur.
-
-@password: When using from the terminal in IDE and not the deployed version,
-imports password from local file instead.
+FEELGOOD PHYSIO, MAIN PYTHON FILE - MORE INFO
 """
 
 import datetime
 import os
 from datetime import timedelta
+import re
+
 from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
-import re
-import sheet
+
 if os.path.exists('password.py'):
     import password  # noqa (To remove false error message from flake)
+import sheet
+from time_f_converter import Time_F_Converter
+from inc_dec_week import Inc_dec_week
 
 """
 SCOPES, CREDS, SCOPED_CREDS: used with Google API Client to gain access to
@@ -212,27 +187,6 @@ def get_appointments(earliest, latest):
     return appointments
 
 
-class Inc_dec_week():
-    """
-    Allows staff navigate between weeks in schedule, by returning
-    an integer based on the function called. This way, number will retain value after each time function is run.
-    Inspiration from this site:
-    https://stackoverflow.com/questions/47697945/
-    python-how-to-increment-number-and-store-in-variable-every-time-function-runs/
-    47698278
-    """
-    def __init__(self):
-        self.inc_dec_week = 0
-
-    def increment(self):
-        self.inc_dec_week += 7
-
-    def decrement(self):
-        self.inc_dec_week -= 7
-
-    def get_value(self):
-        return self.inc_dec_week
-
 """
 The only instance of the class used in 
 """
@@ -272,36 +226,8 @@ def print_appointments():
             appointment['description']
             )
         app_nr += 1
-    nav_appntmnt(week_multiplier, app_dict)
+    nav_appntmnt(app_dict)
 
-
-class Time_F_Converter():
-    """
-    Takes instances of time in string format, converts them to datetime,
-    adds time offset if needed and returns as string in defined format.
-    @param str_iso(str): Keyword for string in non-readable format
-    @param str_pretty(str): Keyword for string in readable format
-    @param offset(int): Integer passed for datetime to be modified of needed
-    """
-
-    def __init__(self, str_iso, str_pretty):
-        self.str_iso = str_iso
-        self.str_pretty = str_pretty
-
-    def iso_to_pretty(self, date, offset):
-        date = datetime.datetime.strptime(date, self.str_iso)
-        date = date + timedelta(hours=offset)
-        return date.strftime(self.str_pretty)
-
-    def pretty_to_iso(self, date, offset):
-        date = datetime.datetime.strptime(date, self.str_pretty)
-        date = date + timedelta(hours=offset)
-        return date.strftime(self.str_iso)
-
-    def add_hour_iso(self, date, offset):
-        date = datetime.datetime.strptime(date, self.str_iso)
-        date = date + timedelta(hours=offset)
-        return date.strftime(self.str_iso)
 
 """
 Different instances of Time_F_Converter, depending on needed format to display
@@ -324,13 +250,12 @@ convert_iso_iso_ms = Time_F_Converter(
 )
 
 
-def nav_appntmnt(week_multiplier, app_dict):
+def nav_appntmnt(app_dict):
     """
     This lets staff navigate the schedule with week intervals,
-    using week_nav_fn function to increment or decrement weeks. They can also edit
-    or delete appointments.
+    using week_nav_fn function to increment or decrement weeks. They can also
+    edit or delete appointments.
 
-    @param week_multiplier(int): Used in week_nav_fn.
     @param app_dict(dict): Dict keys are integers that are displayed next to
         each appointment for user to input, should they want to edit that
         specific appointment, and the Google Calendar event id as values.
@@ -340,14 +265,10 @@ def nav_appntmnt(week_multiplier, app_dict):
     print('\nTo go back to the previous week, press "b".\n')
     nav_or_edit = input('Press any other key to get to the staff menu.\n\n')
 
-    def week_nav_fn(week_multiplier):
+    def week_nav_fn():
         """
         This lets staff navigate the schedule with week intervals,
         using week_nav_fn function to increment or decrement weeks.
-
-        @param week_multiplier(int): Returns an integer representing the
-            number of days from now a string should be parsed as date to
-            return schedule for desired week.
         """
 
         days_1 = week_multiplier.get_value()
@@ -366,11 +287,11 @@ def nav_appntmnt(week_multiplier, app_dict):
     #  nav_appntmnt continues here
     if nav_or_edit == 'n':
         week_multiplier.increment()
-        week_nav_fn(week_multiplier)
+        week_nav_fn()
 
     elif nav_or_edit == 'b':
         week_multiplier.decrement()
-        week_nav_fn(week_multiplier)
+        week_nav_fn()
 
     elif str(nav_or_edit) in app_dict:
         apntmnt_id = app_dict[nav_or_edit]
@@ -479,7 +400,8 @@ def get_name_staff(apntmnt_to_edit, apntmnt_id):
 
 def get_date_staff(apntmnt_to_edit, apntmnt_id):
     """
-    Lets user enter appointment date, slightly simpler that the patient version.
+    Lets user enter appointment date, slightly simpler that the patient
+    version.
 
     @param apntmnt_to_edit: The specific event to edit.
     @param apntmnt_id(int): Value stored in apntmnt_dict to pinpoint

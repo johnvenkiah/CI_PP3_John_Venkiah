@@ -2,13 +2,6 @@
 SHEET FILE, functions to read and update Google Sheets on Google Drive
 """
 
-"""
-IMPORTS
-@gspread: So Google Sheets spreadsheet data can be sent through Google API
-
-@Credentials from google.oauth2.service_account: The credentials used with the
-Google account to access Google Drive and Sheets with the API
-"""
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -29,8 +22,8 @@ p_data = p_log.get_all_values()
 
 def get_p_data():
     """
-    Gets and shows all entries in patient log, which is a Google Sheet stored on
-    Google Drive.
+    Gets and shows all entries in patient log, which is a Google Sheet stored
+    on Google Drive.
     """
     p_dict = {}
 
@@ -57,8 +50,8 @@ def get_p_nr():
 
 def append_p_row(name, email, details):
     """
-    Adds a new patient row with details to log on Google Sheets. If patient name
-    already exists, only updates the symptoms, stored in details variable.
+    Adds a new patient row with details to log on Google Sheets. If patient
+    name already exists, only updates the symptoms, stored in details variable.
     @para, name(str): Name from user input
     @para, email(str): Email from user input
     @para, details(str): Symptoms (details var.) from user input
