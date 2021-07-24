@@ -4,7 +4,7 @@
 
 ![Screenshot of Home screen](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/screenshot_home.png)
 
-**FeelGood Physio is a booking system for a fictional physiotherapy clinic, syncronized with Google Calendar and Google sheets.**
+**FeelGood Physio is an application built for a fictional physiotherapy clinic, syncronized with Google Calendar and Google sheets.**
 
 [Click here](https://feelgood-physio.herokuapp.com/) to visit the deployed site.
 
@@ -58,7 +58,13 @@ ___
 
 #### Project Goals
 
-The main goals of FeelGood Physio are:
+Project Goals for intended use are:
+
+- Creating a system for managing bookings and patient data for both staff and patients.
+- Making this system easy and effective for all users.
+- Displaying relevant information so users can easily navigate.
+
+My personal project goals of FeelGood Physio are:
 
 - To build an application that serves the booking needs of both patients and staff
 - To explore the possibilities of working with API's
@@ -75,58 +81,60 @@ Target Audience
 - A Physiotherapist (or their receptionist)
 - Patients
 
+
 ### Structure
 ___
 
-This website has 5 pages, plus a 404 error page for when entering an invalid link. No libraries or frameworks were used. I wanted to keep the structure clear and simple. Buttons are large and a navigation bar or menu is visible at the top on all pages except the home page.
+The FeelGood Physio Booking System, or FGPBS, relies almost only on user input. There are always options displayed on the screen and users can choose what to do next.
 
-A footer is always visible with copyright info and relevant technologies depending on the page.
+When an input is entered, the application takes the user to the chosen option. All functions are chained together, each depending on the users input.
 
 #### 1. Home Screen
 
-This welcomes the user when they first enter the application, and when users exit from shere they are at. From here, there are two options:
+This welcomes the user when they first enter the application, when the task at hand is done or when users choose to exit from whereever they are in the application. From the home screen, there are two options:
 
-- Book appointment
-- Staff login
-- To play the piano and see the notes played
-
-Users can also contact the website owner at the top right of the page.
+- Book appointment - takes users to the booking process
+- Staff login - takes users to the staff area
 
 #### 2. Booking process for patient
 
-Here users can play a simple game where they are presented with notes or musical symbols and have to answer correctly to get a point. Users have to answer as many questions correctly in one minute and are then greeted with their score and a message of how the quiz went.
+This is a long chain of functions resulting in a new appointment and an update to the patient log, if completed. Users input their desired appoinment time and details, and get a confirmation message at the end.
 
 #### 3. Staff area
 
-On this page, users can view videos implemented from YouTube API. There are two sections; a main video and a videos list. Users can click on the video in the list to view it in the main frame.
+To access the staff area, users need the staff password. If entered correctly, users can either view the patient log, or access the schedule.
 
 #### 4. Staff Schedule
 
-This mainly a piano and a stave above. When the user clicks a key, they can see how the note looks on the stave and can hear it being played. Users can also play the notes with the computer keyboard.
+The schedule, which shows 1 week at a time, can be edited, which also updates the linked Google Calendar.
 
 #### 5. Patient Log
 
-On the Contact page, users can fill in a simple contact form to get in touch.
+The log, which is a Google Sheet, updates dynamically as users book appointments.
 
-#### 6. 404
-
-This page is shown when users enter an invalid link, and contains the menu and links to get home or get in touch.
 
 ### Scope
 ___
 
 #### User Stories
 
-##### As a new or existing user of this website I would like to:
+##### As a patient and user of this application:
 
-1. Easily navigate the websites pages via the menu or links provided
-2. Be presented with a well designed, user-friendly interface
-3. Experience the same quality in design, user interaction and structure on small mobile devices, tablets as on larger screens
-4. Get responses and confirmation from the website by my interactions with it
-5. Be able to play a quiz on note names, symbols and note lengths
-6. Get points if I answer a question right
-7. See a timer ticking down from one minute
-8. See an end game screen alerting me of my score and how the quiz went
+1. I would like to be able to book an appointment at a time of my choosing, should the appointement be available
+2. I would like to be alerted if my details are saved before I enter them
+3. I would like to be well informed from the application throughout the booking process
+4. I would like to be alerted if my choice is invalid anywhere in the application, and get a chance to try again
+5. I would like to only be able to book an appointment that is available
+6. I would like to be able to confirm the booking right before it is made
+7. I would like to view a confirmation of the booking when it is made
+8. At any point cancel my booking during the booking process
+
+#### Site owner goals
+
+For this application I will address staff instead of site owner, as it is made for patients and staff.
+
+##### As a staff member I would like to:
+
 9. Be able to choose to close the end game screen or play again
 10. Be able to play notes on a piano on the screen and see which tone is being played
 11. Be able to play the notes on the computer keyboard
@@ -134,11 +142,10 @@ ___
 13. Get in touch with the site owner
 14. View a 404-error page if I have entered an invalid url within the website
 
-#### Site owner goals
 
-The main goal is to create a web app that can be used for educational and amusement purposes.
 
-##### As a site owner I would like to:
+
+
 
 15. Display simple clear options on the home page
 16. Display a menu in a navigation bar or popout menu at the top of the page
