@@ -1,9 +1,8 @@
 # FeelGood Physio Booking System
 
-## A Command Line interface Application
+## A Command Line Interface Application
 
 ![Screenshot of Home screen](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/screenshot_home.png)
-
 **FeelGood Physio is an application built for a fictional physiotherapy clinic, syncronized with Google Calendar and Google sheets.**
 
 [Click here](https://feelgood-physio.herokuapp.com/) to visit the deployed site.
@@ -133,38 +132,27 @@ ___
 
 For this application I will address staff instead of site owner, as it is made for patients and staff.
 
-##### As a staff member I would like to:
+##### As a staff member and user of this application:
 
-9. Be able to choose to close the end game screen or play again
-10. Be able to play notes on a piano on the screen and see which tone is being played
-11. Be able to play the notes on the computer keyboard
-12. View videos to learn about music theory and sight reading
-13. Get in touch with the site owner
-14. View a 404-error page if I have entered an invalid url within the website
+9. I would like the appointments made by patients dynamically update my Google Calendar
+10. I would like appointments made by new users add a new row with their information to the Google Sheets patient log
+11. I would like to view my schedule for the coming week
+12. I would like to navigate between weeks in my schedule
+13. I would like to be able to update or remove any appointment viewed in my schedule
+14. I would like the changes made in the application to update the events on my Google Calendar
+15. I would like for users to only be able to book appointments on weekdays between 9 and 17, and when the schedule is free
+16. I would like to easily be able to return to the main staff area in the application
+17. I would like the staff area to be password protected
 
 
-
-
-
-
-15. Display simple clear options on the home page
-16. Display a menu in a navigation bar or popout menu at the top of the page
-17. Display a quiz for users to test their knowledge
-18. Display a learn page containing the results of a YouTube search dynamically updated, using YouTube API
-19. Display a page where users can play the piano and view the note played
-20. Be able to be contacted should the user wish to do so, through an emailing service to my private email address
-21. Have a website that contains validated HTML, CSS and JavaScript
-
-### Skeleton
+### Technology Design
 ___
 
-#### Wireframes
+#### Spreadsheet
 
-Wireframes like the one below were made for both mobile device, tablet and desktop versions of the website in the application [Balsamiq Wireframes](https://balsamiq.com/).
+Below is a flowchart describing the structure of the application, created with [Lucidchart](https://lucid.co/product/lucidchart).
 
-![Screenshot:](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/wireframes/wireframes_screenshot_home_mobile.png)
-
-[Click here](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/wireframes/all_wireframes_musical_minds.pdf) to view them.
+![Flowchart](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/flowchart.png)
 
 ### Surface
 ___
