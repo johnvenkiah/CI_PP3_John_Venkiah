@@ -2,7 +2,7 @@
 
 ## Booking system for staff and patients
 
-![Screenshot of Home screen]()
+![Screenshot of Home screen](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/screenshot_home.png)
 
 [Click here](https://feelgood-physio.herokuapp.com/) to visit the deployed site.
 
@@ -63,9 +63,8 @@ ___
 
 The main goals of FeelGood Physio are:
 
-- To make it easy for patients to schedule their appointments.
-- Making users aware of how easy it is to learn sight reading
-- Personally, for me, learning to apply JavaScript to websites
+- To make it easy for patients to schedule appointments.
+- Makng
 
 #### Future Goals
 
