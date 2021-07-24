@@ -28,10 +28,10 @@ p_data = p_log.get_all_values()
 
 
 def get_p_data():
-"""
-Gets and shows all entries in patient log, which is a Google Sheet stored on
-Google Drive.
-"""
+    """
+    Gets and shows all entries in patient log, which is a Google Sheet stored on
+    Google Drive.
+    """
     p_dict = {}
 
     for row in p_data:
@@ -45,9 +45,9 @@ Google Drive.
 
 
 def get_p_nr():
-"""
-Assigns a new patient number to patient before adding it to patient log.
-"""
+    """
+    Assigns a new patient number to patient before adding it to patient log.
+    """
     if p_data[-1][0] == 'Patient nr':
         p_nr = 1
     else:
@@ -56,14 +56,14 @@ Assigns a new patient number to patient before adding it to patient log.
 
 
 def append_p_row(name, email, details):
-"""
-Adds a new patient row with details to log on Google Sheets. If patient name
-already exists, only updates the symptoms, stored in details variable.
-@para, name(str): Name from user input
-@para, email(str): Email from user input
-@para, details(str): Symptoms (details var.) from user input
+    """
+    Adds a new patient row with details to log on Google Sheets. If patient name
+    already exists, only updates the symptoms, stored in details variable.
+    @para, name(str): Name from user input
+    @para, email(str): Email from user input
+    @para, details(str): Symptoms (details var.) from user input
 
-"""
+    """
 
     if name not in p_log.col_values(2):
         p_nr = get_p_nr()

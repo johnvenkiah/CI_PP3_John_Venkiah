@@ -213,14 +213,14 @@ def get_appointments(earliest, latest):
 
 
 class Inc_dec_week():
-"""
-Allows staff navigate between weeks in schedule, by returning
-an integer based on the function called. This way, number will retain value after each time function is run.
-Inspiration from this site:
-https://stackoverflow.com/questions/47697945/
-python-how-to-increment-number-and-store-in-variable-every-time-function-runs/
-47698278
-"""
+    """
+    Allows staff navigate between weeks in schedule, by returning
+    an integer based on the function called. This way, number will retain value after each time function is run.
+    Inspiration from this site:
+    https://stackoverflow.com/questions/47697945/
+    python-how-to-increment-number-and-store-in-variable-every-time-function-runs/
+    47698278
+    """
     def __init__(self):
         self.inc_dec_week = 0
 
@@ -276,13 +276,13 @@ def print_appointments():
 
 
 class Time_F_Converter():
-"""
-Takes instances of time in string format, converts them to datetime,
-adds time offset if needed and returns as string in defined format.
-@param str_iso(str): Keyword for string in non-readable format
-@param str_pretty(str): Keyword for string in readable format
-@param offset(int): Integer passed for datetime to be modified of needed
-"""
+    """
+    Takes instances of time in string format, converts them to datetime,
+    adds time offset if needed and returns as string in defined format.
+    @param str_iso(str): Keyword for string in non-readable format
+    @param str_pretty(str): Keyword for string in readable format
+    @param offset(int): Integer passed for datetime to be modified of needed
+    """
 
     def __init__(self, str_iso, str_pretty):
         self.str_iso = str_iso
