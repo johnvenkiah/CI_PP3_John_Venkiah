@@ -1,4 +1,4 @@
-class Inc_dec_week():
+class Inc_Dec_Week():
     """
     Allows staff navigate between weeks in schedule, by returning
     an integer based on the function called. This way, number will retain value

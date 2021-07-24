@@ -18,11 +18,33 @@ import re
 from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
 
-if os.path.exists('password.py'):
-    import password  # noqa (To remove false error message from flake)
 import sheet
 from time_f_converter import Time_F_Converter
-from inc_dec_week import Inc_dec_week
+from inc_dec_week import Inc_Dec_Week
+if os.path.exists('password.py'):
+    import password  # noqa (To remove false error message from flake)
+
+"""
+Imports for all modules for application to function fully:
+@datetime: For strings to be parsed as dates and time, and
+for functions to return accurate time from Google Calendar API.
+See https://docs.python.org/3/library/datetime.html for more details.
+@os: Imported so that password can be stored locally in workspace
+but also as config vars in Heroku. See
+https://docs.python.org/3/library/os.html?highlight=os#module-os for details.
+@datetime.timedelta: Used to add or subtract time from other time value.
+Imported seperately so I don't have to use datetime.timedelta each time.
+@build from googleapiclientdiscovery,
+@Credentials from google.oauth2.service_account:
+Needed for Google Calendar and Sheets API's to build resources
+for the application to work.
+See https://developers.google.com/calendar/api/v3/reference for details.
+@re: For using regular expressions to validate user input. See
+https://docs.python.org/3/library/re.html?highlight=re#module-re for details.
+@sheet: The file in which functions for requests to Google Sheets API occur.
+@password: When using from the terminal in IDE and not the deployed version,
+imports password from local file instead.
+"""
 
 """
 SCOPES, CREDS, SCOPED_CREDS: used with Google API Client to gain access to
@@ -66,12 +88,11 @@ def welcome_screen():
             staff_login()
             return False
 
-        elif staff_or_customer == 'b':
+        if staff_or_customer == 'b':
             suggest_appointment()
             return False
 
-        else:
-            print('\nInvalid entry, please try again\n')
+        print('\nInvalid entry, please try again\n')
 
 
 def suggest_appointment():
@@ -101,7 +122,6 @@ def e_to_exit(user_input):
 
     if user_input.lower() == 'e':
         welcome_screen()
-        return False
 
 
 def staff_nav():
@@ -196,9 +216,9 @@ def get_appointments(earliest, latest):
 
 
 """
-The only instance of the class used in 
+An instance of the class used in nav_appntmnt function.
 """
-week_multiplier = Inc_dec_week()
+week_multiplier = Inc_Dec_Week()
 
 
 def print_appointments():
@@ -663,7 +683,7 @@ def get_date(days_in_month, month, year, int_month, int_this_month):
     Get the date from the user, with the month and year
     passed from the above function
 
-    @param days_in_month(str): Int representing days in given month
+    @param days_in_month(str): Number representing days in given month
         from month_dict.
     @param month(str): Month given by user
     @param year(str): Year given by user
@@ -675,13 +695,13 @@ def get_date(days_in_month, month, year, int_month, int_this_month):
         print(f'\n{month}, {year}. Which date?\n')
         date = input('Enter two digits, ("e" to exit):\n\n')
         date_incorrect = '\nDate incorrect, please try again'
+        e_to_exit(date)
 
         try:
             date_today = datetime.date.today().day
             weekday_int = datetime.date(
                 year, int_this_month, int(date)
             ).weekday()
-            e_to_exit(date)
 
             if (
                 int_month == int_this_month and int(date) <= date_today or
