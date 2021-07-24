@@ -1,5 +1,13 @@
 """
-FEELGOOD PHYSIO, MAIN PYTHON FILE - MORE INFO
+Main file run.py, for FeelGood Physio by John Venkiah
+This is the main file for a command line interface booking system for staff and
+patients of fictive physiotherapist clinic FeelGood Physio.
+
+The main objective is for users to book appointments and staff to check their
+schedule, view and edit information.
+
+The appointments are pushed to or read from a Google Calendar, and there is a
+patient log saved as a Google sheet, stored on Google Drive.
 """
 
 import datetime
