@@ -145,9 +145,11 @@ def staff_nav():
         )
 
         if sche_or_log == 's':
-            get_appointments(now, future_date(7))
+            print('\nChecking schedule...\n')
+
             d_1 = convert_time.iso_to_pretty(now, 0)
             d_2 = convert_time.iso_to_pretty(future_date(7), 0)
+
             print(f'Showing appointments between {d_1} and {d_2}\n')
             print_appointments(now, future_date(7))
             return False
@@ -205,8 +207,6 @@ def get_appointments(earliest, latest):
     @param earliest(str): starttime for period.
     @param latest(str): endtime for period.
     """
-
-    print('\nChecking schedule...\n')
 
     appointments_result = CAL.events().list(  # pylint: disable=maybe-no-member
         calendarId=CAL_ID,
@@ -312,10 +312,9 @@ def nav_appntmnt(app_dict):
         d_pretty_1 = convert_time.iso_to_pretty(date_1, 0)
         d_pretty_2 = convert_time.iso_to_pretty(date_2, 0)
         print(
-            f'\nAppointments between {d_pretty_1} and {d_pretty_2}:'
+            f'\nAppointments between {d_pretty_1} and {d_pretty_2}:\n'
         )
 
-        get_appointments(date_1, date_2)
         print_appointments(date_1, date_2)
 
     #  nav_appntmnt continues here
@@ -334,6 +333,7 @@ def nav_appntmnt(app_dict):
 
     else:
         print('\nExiting..')
+        days_1 = week_multiplier.__init__()
         staff_nav()
         return
 
@@ -367,7 +367,6 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
             ).execute()
 
             print('\nAppointment deleted!')
-            get_appointments(now, future_date(7))
             print_appointments(now, future_date(7))
         else:
             print('\nCancelled.')
@@ -384,7 +383,6 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
 
     else:
         print('Cancelled.')
-        get_appointments(now, future_date(7))
         print_appointments(now, future_date(7))
 
 
@@ -413,7 +411,6 @@ def edit_appntmnt_2(apntmnt_to_edit, apntmnt_id):
         get_details_staff(apntmnt_to_edit, apntmnt_id)
 
     else:
-        get_appointments(now, future_date(7))
         print_appointments(now, future_date(7))
         return
 
@@ -487,7 +484,6 @@ def get_details_staff(apntmnt_to_edit, apntmnt_id):
 
         print(f'\nDetails for {name} updated.')
 
-        get_appointments(now, future_date(7))
         print_appointments(now, future_date(7))
         return
 
@@ -510,7 +506,6 @@ def update_name(apntmnt_to_edit, apntmnt_id, new_name):
     update_cal(apntmnt_id, apntmnt_to_edit)
 
     print(f'\nAppointment name updated: {new_name}')
-    get_appointments(now, future_date(7))
     print_appointments(now, future_date(7))
 
 
@@ -560,7 +555,6 @@ def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
                     return False
 
                 print('\nCancelled. Getting the coming week:')
-                get_appointments(now, future_date(7))
                 print_appointments(now, future_date(7))
         else:
             print('\nSorry, invalid entry.')
@@ -589,7 +583,6 @@ def update_apntmnt_time(apntmnt_time, end_time, apntmnt_to_edit, apntmnt_id):
     go_back = input('Press any key to see current schedule for the week.\n\n')
 
     if go_back != '¶¥¿':
-        get_appointments(now, future_date(7))
         print_appointments(now, future_date(7))
 
 

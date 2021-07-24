@@ -82,29 +82,29 @@ This website has 5 pages, plus a 404 error page for when entering an invalid lin
 
 A footer is always visible with copyright info and relevant technologies depending on the page.
 
-#### 1. Home
+#### 1. Home Screen
 
-Here, the user is given three main options:
+This welcomes the user when they first enter the application, and when users exit from shere they are at. From here, there are two options:
 
-- To play a quiz
-- To learn about music theory
+- Book appointment
+- Staff login
 - To play the piano and see the notes played
 
 Users can also contact the website owner at the top right of the page.
 
-#### 2. Quiz
+#### 2. Booking process for patient
 
 Here users can play a simple game where they are presented with notes or musical symbols and have to answer correctly to get a point. Users have to answer as many questions correctly in one minute and are then greeted with their score and a message of how the quiz went.
 
-#### 3. Learn
+#### 3. Staff area
 
 On this page, users can view videos implemented from YouTube API. There are two sections; a main video and a videos list. Users can click on the video in the list to view it in the main frame.
 
-#### 4. Play
+#### 4. Staff Schedule
 
 This mainly a piano and a stave above. When the user clicks a key, they can see how the note looks on the stave and can hear it being played. Users can also play the notes with the computer keyboard.
 
-#### 5. Contact
+#### 5. Patient Log
 
 On the Contact page, users can fill in a simple contact form to get in touch.
 
