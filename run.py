@@ -148,11 +148,11 @@ def staff_nav():
         if sche_or_log == 'l':
             sheet.get_p_data()
 
-            e = input(
+            e_input = input(
                 '\nPress e to exit or any other key for the staff menu.\n\n'
             )
 
-            if e == 'e':
+            if e_input == 'e':
                 e_to_exit(e)
                 return False
 
@@ -187,9 +187,8 @@ def staff_login():
             staff_nav()
             return False
 
-        else:
-            print('\nWrong password, please try again\n')
-            attempts += 1
+        print('\nWrong password, please try again\n')
+        attempts += 1
 
 
 def get_appointments(earliest, latest):
@@ -210,9 +209,9 @@ def get_appointments(earliest, latest):
         orderBy='startTime'
     ).execute()
 
-    global appointments
-    appointments = appointments_result.get('items', [])
-    return appointments
+    global APPOINTMENTS
+    APPOINTMENTS = appointments_result.get('items', [])
+    return APPOINTMENTS
 
 
 """
@@ -228,11 +227,11 @@ def print_appointments():
     """
     app_nr = 1
     app_dict = {}
-    print(len(appointments))
-    if len(appointments) <= 3:
+    print(len(APPOINTMENTS))
+    if len(APPOINTMENTS) <= 3:
         print('\nNot many appointments that week.')
 
-    for appointment in appointments:
+    for appointment in APPOINTMENTS:
 
         start = appointment['start'].get('dateTime')
         if start is None:
@@ -532,7 +531,7 @@ def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
 
             get_appointments(apntmnt_time, end_time)
 
-            if appointments:
+            if APPOINTMENTS:
                 print('Sorry, appointment not available. Try again.')
             else:
                 print(f'{get_hour} on {date_input} is free.\n')
@@ -743,7 +742,7 @@ def get_time(date, month, year):
 
             get_appointments(apntmnt_time, end_time)
 
-            if appointments:
+            if APPOINTMENTS:
                 print('Sorry, appointment not available. Try again.')
             else:
                 print(f'{hour}:00 on {date} {month}, {year} is free.\n')
