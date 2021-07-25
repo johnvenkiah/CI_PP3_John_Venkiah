@@ -1,7 +1,9 @@
 """
 cal_mod, Calendar operations module for Feegood Physio Application
 Contains functions to call Google API Calendar and get or recieve data to be
-passed to the functions in run.py.
+passed to the functions in run.py. The methods are mostly taken from the
+Google Calendar API Resources website:
+https://developers.google.com/calendar/api/v3/reference
 """
 
 

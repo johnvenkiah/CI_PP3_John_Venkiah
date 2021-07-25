@@ -315,7 +315,7 @@ ___
 - [Python 3](https://www.python.org/) - Was used solely to create this project.
 
 
-### Applications and Modules
+### Applications and Libraries
 
 
 #### Applications
@@ -329,6 +329,26 @@ ___
 - [Heroku](https://www.heroku.com) - Used to deploy the application.
 
 - [Lucidchart](https://lucid.co/product/lucidchart) - Lucidchart was used to create the [flowchart](#flowchart) of the project.
+
+
+#### Python Libraries
+
+I have used these third party libraries and Python libraries for this project:
+
+- datetime: As time is of essence when working with calendars, this was essential.
+
+- os: By using os I was able to both have my password in the workspace without pushing it to github, but also use it as a config var on heroku.
+
+- re: to be able to validate using regular expressions
+
+#### Third Party Libraries
+
+- googleapiclient.discovery: needed to work with the Google API
+
+- google.oauth2.service_account: So the application can access the account that the sheet and calendar are on with the credentials
+
+- gspread: so the application can read Google Spreadsheets
+
 
 
 
