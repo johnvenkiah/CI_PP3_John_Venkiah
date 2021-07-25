@@ -155,9 +155,17 @@ Below is a flowchart describing the structure of the application, created with [
 ### Technology Design
 ___
 
-#### Data model
+#### Data models
 
-My goal was to let the design appeal to all sorts of people, and create a design that was unique. At the same time i wanted to keep things simple and not use too many colors.
+I have chosen to use several data models in this project, but rely mainly on dictionaries for managing data. For variation, I have created two classes, and use lists aswell.
+
+I find that dictionaries are easy to use and access.
+
+Here are the most important ones:
+
+- The appointment list(cal_mod.apt_list) that stores dictionaries of appointments, to be read or edited and then passed through the Google API to the Calendar
+
+- The IncDecWeek class, used to increment the the number of days ahead or in the past to display the schedule from.
 
 To make the site as friendly as possible, most elements have slightly rounded edges. The environment should seem playful but not childish or silly, which I accomplished with a combination of the colors, fonts and CSS styling.
 I have tried to create a three dimentional feeling, so I spent alot of time with borders, shadows, and gradients to create this.
