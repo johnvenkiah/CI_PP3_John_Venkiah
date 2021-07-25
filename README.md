@@ -189,19 +189,17 @@ Messages to clarify what has and has not been done, and what the user's choices 
 ### Existing features
 ___
 
-#### Feature 1 The Navigation Menu
+#### Feature 1 The Patient Booking System
 
-![Navbar](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/features/feature_one_navbar_landscape.png)
+![Patient Booking System](#)
 
-This is the users way to get around the website. The navbar is part of the header, implemented by JavaScript on all pages except home, shich only consists of the buttons to navigate.
+This is the main feature of the application, getting patient information to make a booking and make a patient log entry.
 
-As some users like to have a "home" link in the navmenu, as well as being able to get "home" by clicking the page title, users can get to the home page here by doing both.
-
-The Nav element is fixed at the top of the screen and displays links to the 5 pages of the website.
-
-When on mobile, a hamburger is visible instead on the top right of the screen. Clicking it will reveal the links to the five pages.
-
-When viewing on mobile in landscape mode, the nav-menu is displayed vertically so users can still view the content. When open, the navmenu closes once a user either has tapped on a link or clicked anywhere on the screen, closing the menu.
+The patient booking system consists of several steps after the welcome screen:
+- The patient is made aware that their details are saved and have to take action to continue
+- The patient is prompted to choose month of the appointment (if the month chosen is june, and it is july at the point of booking, the application will change the year to next year)
+- The patient is informed of the month chosen and get to choose date. The date must corrrespond with the days in that month, made sure by the month_dict dictionary.
+- The patient is notified of the date chosen and can choose the time of the appointment, 9 - 17. The time must be a weekday and between 9 and 17. Here the first API request is made, if the 
 
 **User stories/site-owner goals covered:**
 
