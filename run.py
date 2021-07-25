@@ -18,8 +18,8 @@ import re
 from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
 
+import cal_mod
 import sheet
-from cal_ops import CalOps
 from time_f_converter import TimeFConverter
 from inc_dec_week import IncDecWeek
 if os.path.exists('password.py'):
@@ -209,7 +209,7 @@ def get_appointments(earliest, latest):
     @param latest(str): endtime for period.
     """
 
-    appointments_result = CalOps.apt_list(CAL, CAL_ID, earliest, latest)
+    appointments_result = cal_mod.apt_list(CAL, CAL_ID, earliest, latest)
 
     appointments = appointments_result.get('items', [])
     return appointments
@@ -357,8 +357,8 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
 
         if sure == 'y':
             # pylint: disable=maybe-no-member
-            CalOps.del_apt(CAL, CAL_ID, apntmnt_id)
-            # CAL.events().delete(  
+            cal_mod.del_apt(CAL, CAL_ID, apntmnt_id)
+            # CAL.events().delete(
             #     calendarId=CAL_ID,
             #     eventId=apntmnt_id
             # ).execute()
@@ -371,7 +371,7 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
 
     elif edit_or_delete == 'e':
         # pylint: disable=maybe-no-member
-        apntmnt_to_edit = CalOps.get_apt(CAL, CAL_ID, apntmnt_id)
+        apntmnt_to_edit = cal_mod.get_apt(CAL, CAL_ID, apntmnt_id)
         # apntmnt_to_edit = CAL.events().get(
         #     calendarId=CAL_ID,
         #     eventId=apntmnt_id
@@ -478,7 +478,8 @@ def get_details_staff(apntmnt_to_edit, apntmnt_id):
     if update_details.lower() == 'y':
 
         apntmnt_to_edit['description'] = new_details
-        update_cal(apntmnt_id, apntmnt_to_edit)
+        cal_mod.updt_apt(CAL, CAL_ID, apntmnt_id, apntmnt_to_edit)
+        # update_cal(apntmnt_id, apntmnt_to_edit)
 
         print(f'\nDetails for {name} updated.')
 
@@ -501,7 +502,8 @@ def update_name(apntmnt_to_edit, apntmnt_id, new_name):
 
     apntmnt_to_edit['summary'] = new_name
 
-    update_cal(apntmnt_id, apntmnt_to_edit)
+    cal_mod.updt_apt(CAL, CAL_ID, apntmnt_id, apntmnt_to_edit)
+    # update_cal(apntmnt_id, apntmnt_to_edit)
 
     print(f'\nAppointment name updated: {new_name}\n')
     print_appointments(now, future_date(7))
@@ -573,7 +575,8 @@ def update_apntmnt_time(apntmnt_time, end_time, apntmnt_to_edit, apntmnt_id):
     apntmnt_to_edit['start']['dateTime'] = apntmnt_time
     apntmnt_to_edit['end']['dateTime'] = end_time
 
-    update_cal(apntmnt_id, apntmnt_to_edit)
+    cal_mod.updt_apt(CAL, CAL_ID, apntmnt_id, apntmnt_to_edit)
+    # update_cal(apntmnt_id, apntmnt_to_edit)
 
     apntmnt_time = convert_time_no_ms.iso_to_pretty(apntmnt_time, 0)
 
@@ -586,16 +589,16 @@ def update_apntmnt_time(apntmnt_time, end_time, apntmnt_to_edit, apntmnt_id):
         print_appointments(now, future_date(7))
 
 
-def update_cal(apntmnt_id, apntmnt_to_edit):
-    """
-    Update the Google Calendar event with the input from the previous
-    functions from user.
+# def update_cal(apntmnt_id, apntmnt_to_edit):
+#     """
+#     Update the Google Calendar event with the input from the previous
+#     functions from user.
 
-    @param apntmnt_id(str): Google Calendar event identifier
-    @param apntmnt_to_edit: Instance of CAL-resource updating calendar
-    """
+#     @param apntmnt_id(str): Google Calendar event identifier
+#     @param apntmnt_to_edit: Instance of CAL-resource updating calendar
+#     """
     # pylint: disable=maybe-no-member
-    CalOps.updt_apt(CAL, CAL_ID, apntmnt_id, apntmnt_to_edit)
+    # cal_mod.updt_apt(CAL, CAL_ID, apntmnt_id, apntmnt_to_edit)
     # CAL.events().update(
     #     calendarId=CAL_ID,
     #     eventId=apntmnt_id,
@@ -867,9 +870,8 @@ def new_appointment(
             'description': f'{email}, {details}'
         }
 
-        CAL.events().insert(  # pylint: disable=maybe-no-member
-            calendarId=CAL_ID,
-            sendNotifications=True, body=event).execute()
+        # pylint: disable=maybe-no-member
+        cal_mod.insrt_apt(CAL, CAL_ID, event)
 
         print(f'\nThanks, {name}, appointment added:\n')
         print(f'{start_pretty}, {email}\n')
