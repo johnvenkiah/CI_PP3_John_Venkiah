@@ -3,7 +3,7 @@ inc_dec_week.py, imported in main file run.py for use in week_nav_fn.
 """
 
 
-class IncDecWeek():
+class IncDecWeek:
     """
     Allows staff to navigate between weeks in schedule, by returning
     an integer based on the function called. This way, number will retain value

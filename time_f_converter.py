@@ -7,7 +7,7 @@ import datetime
 from datetime import timedelta
 
 
-class TimeFConverter():
+class TimeFConverter:
     """
     Takes instances of time in string format, converts them to datetime,
     adds time offset if needed and returns as string in defined format.
