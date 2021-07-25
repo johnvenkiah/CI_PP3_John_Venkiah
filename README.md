@@ -182,7 +182,7 @@ I have, however, put lots of time in displaying the information to the user as c
 Some simple formatting has also been done, for example when displaying date time, the time format converter converts it into a format that is easier and more pleasing to read.
 Also, when displaying the patient log, I have removed curly braces and apostophes before the patient data is printed to the screen, only needed when managing it.
 
-Messages to clarify what has and has not been done have carefully been created to make the user experience as straightforward as possible.
+Messages to clarify what has and has not been done, and what the user's choices are have carefully been created to make the user experience as straightforward as possible.
 
 ## Features
 

@@ -157,7 +157,7 @@ def staff_nav():
             return False
 
         if sche_or_log == 'l':
-            sheet.get_p_data()
+            sheet.show_p_data()
 
             e_input = input(
                 '\nHit e to exit or any other key for the staff menu.\n\n'
@@ -842,7 +842,7 @@ def new_appointment(
         print('\nLogging your details...')
         sheet.append_p_row(name, email, details)
 
-        goback = input('\Hit any key to go back to the start screen.\n\n')
+        goback = input('\nHit any key to go back to the start screen.\n\n')
         if goback != '¶':
             welcome_screen()
 

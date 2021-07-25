@@ -16,11 +16,23 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPES_SHEETS)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('feelgood_patient_data')
 
-p_log = SHEET.worksheet('patient_log')
-p_data = p_log.get_all_values()
+
+def get_p_log():
+    try:
+        p_log = SHEET.worksheet('patient_log')
+        p_data = p_log.get_all_values()
+
+        return p_log, p_data
+
+    except Exception as error:
+        print(f'could not load Google worksheet, probable API error: {error}')
 
 
-def get_p_data():
+pat_log = get_p_log()
+p_data = pat_log[1]
+
+
+def show_p_data():
     """
     Gets and shows all entries in patient log, which is a Google Sheet stored
     on Google Drive.
@@ -57,6 +69,7 @@ def append_p_row(name, email, details):
     @para, details(str): Symptoms (details var.) from user input
 
     """
+    p_log = pat_log[0]
 
     if name not in p_log.col_values(2):
         p_nr = get_p_nr()
