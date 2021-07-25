@@ -123,10 +123,9 @@ ___
 2. I would like to be alerted if my details are saved before I enter them
 3. I would like to be well informed from the application throughout the booking process
 4. I would like to be alerted if my choice is invalid anywhere in the application, and get a chance to try again
-5. I would like to only be able to book an appointment that is available
-6. I would like to be able to confirm the booking right before it is made
-7. I would like to view a confirmation of the booking when it is made
-8. At any point cancel my booking during the booking process
+5. I would like to be able to confirm the booking right before it is made
+6. I would like to view a confirmation of the booking when it is made
+7. At any point cancel my booking during the booking process
 
 #### Site owner goals
 
@@ -134,15 +133,15 @@ For this application I will address staff instead of site owner, as it is made f
 
 ##### As a staff member and user of this application:
 
+8. I would like for users to only be able to book appointments on weekdays between 9 and 17, and when the schedule is free
 9. I would like the appointments made by patients dynamically update my Google Calendar
 10. I would like appointments made by new users add a new row with their information to the Google Sheets patient log
-11. I would like to view my schedule for the coming week
-12. I would like to navigate between weeks in my schedule
-13. I would like to be able to update or remove any appointment viewed in my schedule
-14. I would like the changes made in the application to update the events on my Google Calendar
-15. I would like for users to only be able to book appointments on weekdays between 9 and 17, and when the schedule is free
-16. I would like to easily be able to return to the main staff area in the application
-17. I would like the staff area to be password protected
+11. I would like the changes made in the application to update the events on my Google Calendar
+12. I would like to view my schedule for the coming week
+13. I would like to navigate between weeks in my schedule
+14. I would like to be able to update or remove any appointment viewed in my schedule
+15. I would like to easily be able to return to the main staff area in the application
+16. I would like the staff area to be password protected
 
 
 ### Flowchart
@@ -195,11 +194,25 @@ ___
 
 This is the main feature of the application, getting patient information to make a booking and make a patient log entry.
 
-The patient booking system consists of several steps after the welcome screen:
+The patient booking system consists of several steps after the welcome screen. The user can exit the booking process at any time.
+
 - The patient is made aware that their details are saved and have to take action to continue
+
 - The patient is prompted to choose month of the appointment (if the month chosen is june, and it is july at the point of booking, the application will change the year to next year)
+
 - The patient is informed of the month chosen and get to choose date. The date must corrrespond with the days in that month, made sure by the month_dict dictionary.
-- The patient is notified of the date chosen and can choose the time of the appointment, 9 - 17. The time must be a weekday and between 9 and 17. Here the first API request is made, if the 
+
+- The patient is notified of the date chosen and can choose the time of the appointment, 9 - 17. The time must be a weekday and between 9 and 17. After validation, the first API request is made. The application gets data through the Google API if the chosen time slot is available in the Google calendar, and, if so, notifies the user. If the slot is not available, the user has to choose another time.
+
+- If the timeslot is available, the user is prompted to enter their full name. A single name or name with digits is not accepted.
+
+- The user is, if the name is accepted, prompted to enter their email adress, which is validated with a simple regular expression.
+
+- If the email input is correct, the patient is prompted to shortly describe their symptoms. This must b at least 8 characters long, so the user cannot enter nothing or a short word.
+
+- The user is shown the appointment and must confirm the booking.
+
+- If the booking is confirmed by the user, two requests are made with the users input; one to push the information to FeelGoods Google calendar and one to make an entry in the Google sheets patient log on Google Drive, all with the help of the Google API. If the user with the same name already exists in the patient log, the patients symptoms are unpdated instead of a row being added. The patient is then notified that the booking has been made and can return to the home screen again.
 
 **User stories/site-owner goals covered:**
 

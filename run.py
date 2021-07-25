@@ -714,7 +714,7 @@ def get_time(date, month, yr):  # pylint: disable=invalid-name
             if appointments:
                 print('Sorry, appointment not available. Try again.')
             else:
-                print(f'{hour}:00 on {date} {month}, {yr} is free.\n')
+                print(f'\n{hour}:00 on {date} {month}, {yr} is free.\n')
                 get_name(apntmnt_time, end_time)
                 return False
         else:
