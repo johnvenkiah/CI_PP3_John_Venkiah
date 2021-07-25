@@ -503,7 +503,7 @@ def update_name(apntmnt_to_edit, apntmnt_id, new_name):
 
     update_cal(apntmnt_id, apntmnt_to_edit)
 
-    print(f'\nAppointment name updated: {new_name}')
+    print(f'\nAppointment name updated: {new_name}\n')
     print_appointments(now, future_date(7))
 
 
@@ -519,7 +519,9 @@ def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
         print(f'\n{date_input}. What time? Enter hour, two digits.\n')
         get_hour = input('Enter hour, 9 - 17 ("e" to exit):\n\n')
 
-        e_to_exit(get_hour)
+        if get_hour.lower() == 'e':
+            staff_nav()
+            return False
 
         if get_hour.isnumeric() and int(get_hour) >= 9 and int(get_hour) < 17:
 
@@ -592,11 +594,13 @@ def update_cal(apntmnt_id, apntmnt_to_edit):
     @param apntmnt_id(str): Google Calendar event identifier
     @param apntmnt_to_edit: Instance of CAL-resource updating calendar
     """
-    CAL.events().update(  # pylint: disable=maybe-no-member
-        calendarId=CAL_ID,
-        eventId=apntmnt_id,
-        body=apntmnt_to_edit
-    ).execute()
+    # pylint: disable=maybe-no-member
+    CalOps.updt_apt(CAL, CAL_ID, apntmnt_id, apntmnt_to_edit)
+    # CAL.events().update(
+    #     calendarId=CAL_ID,
+    #     eventId=apntmnt_id,
+    #     body=apntmnt_to_edit
+    # ).execute()
 
 
 def future_date(day):

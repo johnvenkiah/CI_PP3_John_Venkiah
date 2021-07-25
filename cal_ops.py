@@ -39,10 +39,10 @@ class CalOps:
 
     def updt_apt(cal, c_id, apt_id, apmnt):
 
-        CAL.events().update(  # pylint: disable=maybe-no-member
-            calendarId=CAL_ID,
-            eventId=apntmnt_id,
-            body=apntmnt_to_edit
+        cal.events().update(  # pylint: disable=maybe-no-member
+            calendarId=c_id,
+            eventId=apt_id,
+            body=apmnt
         ).execute()
 
     def insrt_apt(cal, c_id, evnt):
