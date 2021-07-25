@@ -86,11 +86,11 @@ def welcome_screen():
     welcome_greeting = '\nWelcome to the Feelgood Physio booking system\n'
     print(welcome_greeting.upper())
     print('\nMade for patients and staff at the FeelGood Physio clinic\n')
-    print('To use this app, enter mush be pushed after each choice.\n')
+    print('To use this app, hit enter after each choice.\n')
 
     while True:
         staff_or_customer = input(
-            'Press "b" to book an appointment or "s" for staff login:\n\n'
+            'Hit "b" to book an appointment or "s" for staff login:\n\n'
         )
         staff_or_customer = staff_or_customer.lower()
 
@@ -114,7 +114,7 @@ def suggest_appointment():
     print("\nLet's find you an appointment.\n")
     print('Your data will be saved to our database upon confirmation.\n')
     book_or_back = input(
-        'Press "1" to continue or any other key to go back.\n\n'
+        'Hit "1" to continue or any other key to go back.\n\n'
         )
 
     if book_or_back == '1':
@@ -160,7 +160,7 @@ def staff_nav():
             sheet.get_p_data()
 
             e_input = input(
-                '\nPress e to exit or any other key for the staff menu.\n\n'
+                '\nHit e to exit or any other key for the staff menu.\n\n'
             )
 
             if e_input == 'e':
@@ -278,9 +278,9 @@ def nav_appntmnt(app_dict):
         specific appointment, and the Google Calendar event id as values.
     """
     print('\nTo edit an appointment, enter the appointment number.')
-    print('\nTo get appointments for week after, press "n".')
-    print('\nTo go back to the previous week, press "b".\n')
-    nav_or_edit = input('Press any other key to get to the staff menu.\n\n')
+    print('\nTo get appointments for week after, hit "n".')
+    print('\nTo go back to the previous week, hit "b".\n')
+    nav_or_edit = input('Hit any other key to get to the staff menu.\n\n')
 
     def week_nav_fn():
         """
@@ -333,7 +333,7 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
     """
     print(f'\nAppointment {nav_or_edit}:\n')
     edit_or_delete = input(
-        'Press "e" to edit, "r" to remove or any other key to go back.\n\n'
+        'Hit "e" to edit, "r" to remove or any other key to go back.\n\n'
     )
 
     if edit_or_delete == 'r':
@@ -561,7 +561,7 @@ def update_apntmnt_time(apntmnt_time, end_time, apntmnt_to_edit, apntmnt_id):
     print('\nAppointment time updated:\n')
     print(apntmnt_time + ', ' + apntmnt_to_edit['summary'] + '\n')
 
-    go_back = input('Press any key to see current schedule for the week.\n\n')
+    go_back = input('Hit any key to see current schedule for the week.\n\n')
 
     if go_back != '¶¥¿':
         print_appointments(now, future_date(7))
@@ -842,7 +842,7 @@ def new_appointment(
         print('\nLogging your details...')
         sheet.append_p_row(name, email, details)
 
-        goback = input('\nPress any key to go back to the start screen.\n\n')
+        goback = input('\Hit any key to go back to the start screen.\n\n')
         if goback != '¶':
             welcome_screen()
 
