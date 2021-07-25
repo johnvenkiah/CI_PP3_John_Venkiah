@@ -106,6 +106,8 @@ This is a long chain of functions resulting in a new appointment and an update t
 
 To access the staff area, users need the staff password. If entered correctly, users can either view the patient log, or access the schedule.
 
+![Staff area](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/staff_area/password.png)
+
 #### 4. Staff Schedule
 
 The schedule, which shows 1 week at a time, can be edited, which also updates the linked Google Calendar.
