@@ -117,7 +117,7 @@ ___
 
 #### User Stories
 
-##### As a patient and user of this application:
+##### Patient user stories:
 
 1. I would like to be able to book an appointment at a time of my choosing, should the appointement be available
 2. I would like to be alerted if my details are saved before I enter them
@@ -125,13 +125,9 @@ ___
 4. I would like to be alerted if my choice is invalid anywhere in the application, and get a chance to try again
 5. I would like to be able to confirm the booking right before it is made
 6. I would like to view a confirmation of the booking when it is made
-7. At any point cancel my booking during the booking process
+7. I would like to at any point cancel my booking during the booking process should I wish to do so
 
-#### Site owner goals
-
-For this application I will address staff instead of site owner, as it is made for patients and staff.
-
-##### As a staff member and user of this application:
+##### Staff member user stories:
 
 8. I would like for users to only be able to book appointments on weekdays between 9 and 17, and when the schedule is free
 9. I would like appointments made by new users add a new row with their information to the Google Sheets patient log
@@ -143,6 +139,10 @@ For this application I will address staff instead of site owner, as it is made f
 15. I would like to be able to update or remove any appointment viewed in my schedule
 16. I would like to easily be able to return to the main staff area in the application
 17. I would like the staff area to be password protected
+
+#### Site owner goals
+
+18. I would like for the application to contain validated Python code without returning any errors
 
 
 ### Flowchart
@@ -161,7 +161,7 @@ I have chosen to use several data models in this project, but rely mainly on dic
 
 I like the way dictionaries behave, and in this project they are perfect; I could easily pair a patient number with an ID that Google uses for the specific event or 
 
-Here are the most important ones:
+Here are the most important objects:
 
 - The appointment list(cal_mod.apt_list) that stores dictionaries of appointments, to be read or edited and then passed through the Google API to the Calendar
 
@@ -215,7 +215,7 @@ The patient booking system consists of several steps after the welcome screen. T
 
 - If the booking is confirmed by the user, two requests are made with the users input; one to push the information to FeelGood Physio's Google calendar and one to make an entry in the Google sheets patient log on Google Drive, all with the help of the Google API. If the user with the same name already exists in the patient log, the patients symptoms are unpdated instead of a row being added. The patient is then notified that the booking has been made and can return to the home screen again.
 
-**User stories covered:**
+**Patient stories covered:**
 
 1. I would like to be able to book an appointment at a time of my choosing, should the appointement be available
 2. I would like to be alerted if my details are saved before I enter them
@@ -223,16 +223,20 @@ The patient booking system consists of several steps after the welcome screen. T
 4. I would like to be alerted if my choice is invalid anywhere in the application, and get a chance to try again
 5. I would like to be able to confirm the booking right before it is made
 6. I would like to view a confirmation of the booking when it is made
-7. At any point cancel my booking during the booking process
+7. I would like to at any point cancel my booking during the booking process should I wish to do so
 
-**Site owner goals covered**
+**Staff member goals covered**
 
 8. I would like for users to only be able to book appointments on weekdays between 9 and 17, and when the schedule is free
 9. I would like appointments made by new users add a new row with their information to the Google Sheets patient log
 10. I would like the appointments made by patients dynamically update my Google Calendar
 11. I would like the changes made in the application to update the events on my Google Calendar
 
-___
+**Site owner goals covered**
+
+18. I would like for the application to contain validated Python code without returning any errors
+
+
 #### Feature 2: The Schedule
 
 ![Schedule](#)
@@ -247,7 +251,7 @@ The user can navigate with keys "n" for next and "b" for back, which will respec
 
 Upon changing these parameters and confirming the changes, the appointments are updated in the Google Calendar. The user is notified of this and can return to the staff menu or exit.
 
-**Site owner goals covered:**
+**Staff member goals covered**
 
 11. I would like the changes made in the application edit menu to update the events on my Google Calendar
 13. I would like to view my schedule for the coming week
@@ -256,183 +260,61 @@ Upon changing these parameters and confirming the changes, the appointments are 
 16. I would like to easily be able to return to the main staff area in the application
 17. I would like the staff area to be password protected
 
+**Site owner goals covered**
+
+18. I would like for the application to contain validated Python code without returning any errors
+
 
 #### Feature 3: The Patient Log
 
 ![Patient Log](#)
 
-The quiz is a seemingly simple feature, but with a lot of functionality. The user has 60 seconds to answer the most questions correctly.
+This is where staff can access data from patients that have booked via the booking system. The system lets users know before initiating the booking that their data will be logged, and after a successful booking the datails are logged in the Google Sheet via the API as a new entry. If the user already exists, their symptoms are the only thing that will be updated.
 
-The quiz has several sub-features of its own:
+Even though the same details are kept in the Google Calendar, the patient log is a way to consolidate information if staff are looking for a specific patient.
 
-- The staffbox
+**Staff member goals covered:**
 
-![Staffbox](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/features/staffbox.png)
+9. I would like appointments made by new users add a new row with their information to the Google Sheets patient log
+12. I would like to be able to view the patient log
+16. I would like to easily be able to return to the main staff area in the application
+17. I would like the staff area to be password protected
 
-Displays an image of the note in question for the user to answer. When answered, the image is updated to display the next note in question.
+**Site owner goals covered**
 
-- The answers box
-
-
-
-On opening the page, the answers box contains one button: "Lets Play!"
-
-Clicking on this starts the quiz and displays four buttons, with three incorrect and one correct answer. The value of these buttons are updated for each question answered.
-
-If the user clicks on the incorrect answer button, the user is alerted that this was incorrect by sounds and animation, and the user is informed of the correct answer.
-
-If the user clicks on the correct answer-button, the user is greeted with a different sound and animation, and and the score above is incremented.
-
-- The Timer
-
-This keeps track of the time, once the user has clicked "Let's Play!"; the timer counts down from 60 to 0.
-
-- The Score
-
-Once a user has answered a question correctly, the score is incremented with 10 points. The score is then displayed in an end game modal.
-
-- The End Game Modal
-
-This is displayed once the 60 seconds are up, covering the screen. The user is greeted with one of five different greetings, depending on the score they have achieved.
-
-The modal window also displays two buttons with choices for the user; "Play Again" and "Close".
-
-**User stories/site-owner goals covered:**
-
-2. Be presented with a well designed, user-friendly interface
-
-3. Experience the same quality in design, user interaction and structure on small mobile devices, tablets as on larger screens
-
-4. Get responses and confirmation from the website by my interactions with it
-
-5. Be able to play a quiz on note names, symbols and note lengths
-
-6. Get points if I answer a question right
-
-7. See a timer ticking down from one minute
-
-8. See an end game screen alerting me of my score and how the quiz went
-
-9. Be able to choose to close the end game screen or play again
-
-16. Display a menu in a navigation bar or popout menu at the top of the page
-
-17. Display a quiz for users to test their knowledge
-
-21. Have a website that contains validated HTML, CSS and JavaScript
-
-
-#### Feature 4: The Piano (Play Page)
-
-![The Piano](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/features/feature_4_piano_desktop.png)
-
-The play page has two sub-features, a miniature piano and a stave showing both the bass clef and treble clef. When the user clicks a key, the relevant note displays on the stave together with the note name. The correct note is also heard when clicking it.
-
-**User stories/site-owner goals covered:**
-
-2. Be presented with a well designed, user-friendly interface
-
-3. Experience the same quality in design, user interaction and structure on small mobile devices, tablets as on larger screens
-
-4. Get responses and confirmation from the website by my interactions with it
-
-10. Be able to play notes on a piano on the screen and see which tone is being played
-
-11. Be able to play the notes on the computer keyboard
-
-19. Display a page where users can play the piano and view the note played
-
-21. Have a website that contains validated HTML, CSS and JavaScript
-
-
-#### Feature 5: The Learn Page
-
-
-
-Here, the user can navigate through a list of videos generated a search by the YouTube API, updating the list dynamically.
-In the list, title, thumbnail and decription data is displayed for each video in the list.
-
-Users can click on a video and view it in the main viewing window, located either to the left of the screen or at the top for mobile devices in portrait mode.
-
-**User stories/site-owner goals covered:**
-
-2. Be presented with a well designed, user-friendly interface
-
-3. Experience the same quality in design, user interaction and structure on small mobile devices, tablets as on larger screens
-
-4. Get responses and confirmation from the website by my interactions with it
-
-12. View videos to learn about music theory and sight reading
-
-18. Display a learn page containing the results of a YouTube search dynamically updated, using YouTube API
-
-21. Have a website that contains validated HTML, CSS and JavaScript
-
-
-#### Feature 6: The Contact Page
-
-![Contact Page](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/features/feature_6_contact_mobile.png)
-
-The "contact" page contains a simple form, where the user can fill in their name, email address and message, which they can send by clicking the submit-button.
-
-The form is validated by the contact.js JavaScript file, and sent via the Email web service [EmailJS](https://www.emailjs.com/) to my email inbox.
-
-**User stories/site-owner goals covered:**
-
-3. Experience the same quality in design, user interaction and structure on small mobile devices, tablets as on larger screens
-
-4. Get responses and confirmation from the website by my interactions with it
-
-13. Get in touch with the site owner
-
-20. Be able to be contacted should the user wish to do so, through an emailing service to my private email address
-
-21. Have a website that contains validated HTML, CSS and JavaScript
-
-
-#### Feature 7: The 404-error Page
-
-The 404-error page is displayed when a user enters an invalid link within the website. From here, users can easily navigate to the other pages of the website.
-
-**User stories/site-owner goals covered:**
-
-3. Experience the same quality in design, user interaction and structure on small mobile devices, tablets as on larger screens
-
-14. View an errors page if I have entered an invalid url within the website
-
-21. Have a website that contains validated HTML, CSS and JavaScript
-
+18. I would like for the application to contain validated Python code without returning any errors
 
 
 ### Features to be implemented
 ___
 
-This is a basic web application but could be expanded with all kinds of sections and functions. For example, there could be a play-by-ear section, where notes are played and the user has to answer which note. There could also be a chords-section, introducing chords and their uses in music. Users could create a profile, save videos they like, compete in high scores and a lot more.
+There are endless possibilities with an application like this. If the clinic were to hire more than one therapist, they could each have their own calendar and log. Patients could have the possibility to add a user account with which they log in to the system, and can reschedule or cancel their appointment. An important feature that the log now lacks is the possibility for staff to edit entries; this will be implemented at a later stage.
+
 
 ## Technologies used
 
 ### Languages
 ___
 
-- [HTML5](https://en.wikipedia.org/wiki/HTML5)
+- [Python 3](https://www.python.org/)
 
-- [CSS3](https://en.wikipedia.org/wiki/CSS)
 
-- [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
+### Applications and Modules
 
-### Applications, Libraries and Platforms
 
-No libraries or frameworks were used except for Google Fonts.
-
-- [Google Fonts](https://fonts.google.com/) - Were used for all fonts and icons in this project.
+#### Applications
 
 - [Git](https://git-scm.com/) - Version control system used to commit and push to Github via Gitpod.
 
 - [Github](https://github.com/) - The projects repository and all its branches were commited, pushed and deployed to Github.
 
-- [Gitpod](https://gitpod.com/) - All code was written and tested with the Gitpod web-based IDE.
+- [Gitpod](https://gitpod.com/) - All code was written and tested using the Gitpod web-based IDE.
 
-- [Balsamiq](https://balsamiq.com/wireframes/) - Balsamiq Wireframes was used to create wireframe images of the website which you can view [here](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/wireframes/all_wireframes_musical_minds.pdf).
+- [Heroku](https://www.heroku.com)
+
+- [Lucidchart](https://lucid.co/product/lucidchart) - Lucidchart was used to create the [flowchart](#flowchart) of the project.
+
+
 
 ## Validation
 
@@ -1068,11 +950,9 @@ Here's how to make use of EmailjS
 
 ## Credits
 
-Here are links to websites that had the answers when I didn't. I have written most of the code myself and the parts I have not written are credited below. I have adapted the code to fit my needs and tried to make it unique.
+Here are links to sites that answered a lot of my questions on coding and the Python language.
 
-All images are royalty free.
-
-Music notes and piano samples were created by me.
+This project was created from a template made by [Code Institute](https://codeinstitute.net/) to recreate the terminal in a regular web browser.
 
 Background Image from [www.123rf.com](https://www.123rf.com/photo_91583290_stock-vector-music-note-seamless-pattern-vector-illustration-hand-drawn-sketched-doodle-music-notes-symbols-.html)
 
@@ -1090,36 +970,43 @@ Tips to use collapse in markdown from [Pierre Joubert](https://gist.github.com/p
 
 ### Coding tips and tricks
 
-Disable double-tap for zoom, [Stack Overflow](https://stackoverflow.com/questions/10614481/disable-double-tap-zoom-option-in-browser-on-touch-devices)
+Overriding false errors when Flake and Pylint validate code:
+[StackOverflow, pyflakes](https://stackoverflow.com/questions/8427701/how-to-ignore-pyflakes-errors-imported-but-unused-in-the-init-py-file)
+[StackOverflow, pylint](https://stackoverflow.com/questions/26657265/hide-some-maybe-no-member-pylint-errors)
 
-Media queries in JavaScript from [w3schools](https://www.w3schools.com/howto/howto_js_media_queries.asp)
+Creating a class to increment and decrement a number free from functions: [Stack Overflow](https://stackoverflow.com/questions/47697945/python-how-to-increment-number-and-store-in-variable-every-time-function-runs/47698278)
 
-Animation tips, from [CSSWG](https://drafts.csswg.org/web-animations/#dom-animatable-animate)
+Two lists into dict:
+https://stackoverflow.com/questions/209840/how-do-i-convert-two-lists-into-a-dictionary
 
-Overflow: wrap, so text doesn't go outside its container: [CSS-Tricks](https://css-tricks.com/almanac/properties/o/overflow-wrap/)
+Creating a user login:[StackExchange](https://codereview.stackexchange.com/questions/164359/python-username-and-password-program)
 
-Click anywhere in window to remove nav-menu, [Stack Overflow](https://stackoverflow.com/questions/49158756/how-to-close-menu-when-clicking-outside-of-the-div)
+Month name from number
+https://stackoverflow.com/questions/6557553/get-month-name-from-number
 
-Using JS to detect touch device, [geeksforgeeks.com](https://www.geeksforgeeks.org/how-to-detect-touch-screen-device-using-javascript/)
+string to attribute datetime
+https://stackoverflow.com/questions/19887353/attributeerror-str-object-has-no-attribute-strftime
 
-Tips for creating hamburger menu, [dev.to](https://dev.to/devggaurav/let-s-build-a-responsive-navbar-and-hamburger-menu-using-html-css-and-javascript-4gci)
+Guides for converting datetime to string
+https://stackoverflow.com/questions/2158347/how-do-i-turn-a-python-datetime-into-a-string-with-readable-format-date
 
-The piano isn't my design i'm afraid, but I have adapted and enhanced it's functionality. I followed this guide at first and then made my own developements:[WDS on YouTube](https://youtu.be/vjco5yKZpU8)
+Timedelta to years
+https://stackoverflow.com/questions/765797/convert-timedelta-to-years
 
-Tips for randomizing buttons, [javascriptkit.com](http://www.javascriptkit.com/javatutors/randomorder.shtml)
+Leap Year:
+https://www.geeksforgeeks.org/program-check-given-year-leap-year/
 
-Insert Adjacent HTML, [Stack Overflow](https://stackoverflow.com/questions/27079598/error-failed-to-execute-appendchild-on-node-parameter-1-is-not-of-type-no)
+Strin to date:
+https://www.educative.io/edpresso/how-to-convert-a-string-to-a-date-in-python
 
-Callback, [w3Schools.com](https://www.w3schools.com/js/js_callback.asp)
+Reg ex email:
+https://stackoverflow.com/questions/8022530/how-to-check-for-valid-email-address
 
-user-select-none, [CSS-Tricks]
-(https://css-tricks.com/almanac/properties/u/user-select/)
+Isnumeric:
+https://www.delftstack.com/howto/python/user-input-int-python/
 
-Timer, [w3schools](https://www.w3schools.com/js/js_timing.asp)
+Pylint error:
 
-Event-listener for target instead of individual elements, [flaviocopes.com](https://flaviocopes.com/how-to-add-event-listener-multiple-elements-javascript/)
-
-And CI Matt Rudge’s lessons on fetch API Google API’s documentation together with [this](https://www.youtube.com/watch?v=9sWEecNUW-o&t=2241s) video helped me create the learn page
 
 The tutors at Code Institute, especially John and Sean, gave me very good advice.
 
