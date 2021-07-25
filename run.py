@@ -19,6 +19,7 @@ from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
 
 import sheet
+from cal_ops import CalOps
 from time_f_converter import TimeFConverter
 from inc_dec_week import IncDecWeek
 if os.path.exists('password.py'):
@@ -208,13 +209,7 @@ def get_appointments(earliest, latest):
     @param latest(str): endtime for period.
     """
 
-    appointments_result = CAL.events().list(  # pylint: disable=maybe-no-member
-        calendarId=CAL_ID,
-        timeMin=earliest,
-        timeMax=latest,
-        singleEvents=True,
-        orderBy='startTime'
-    ).execute()
+    appointments_result = CalOps.apt_list(CAL, CAL_ID, earliest, latest)
 
     appointments = appointments_result.get('items', [])
     return appointments
