@@ -104,23 +104,7 @@ def welcome_screen():
         print('\nInvalid entry, please try again\n')
 
 
-def suggest_appointment():
-    """
-    Function to let patient continue with booking or go back,
-    for example if a staff  member entered the wrong input.
-    """
 
-    print("\nLet's find you an appointment.\n")
-    print('Your data will be saved to our database upon confirmation.\n')
-    book_or_back = input(
-        'Press "1" to continue or any other key to go back.\n\n'
-        )
-
-    if book_or_back == '1':
-        get_month(year)
-
-    else:
-        welcome_screen()
 
 
 def e_to_exit(user_input):
@@ -205,18 +189,18 @@ def staff_login():
         attempts += 1
 
 
-def get_appointments(earliest, latest):
-    """
-    Get scheduled appointments for the given period from the Google Calendar
+# def get_appointments(earliest, latest):
+#     """
+#     Get scheduled appointments for the given period from the Google Calendar
 
-    @param earliest(str): starttime for period.
-    @param latest(str): endtime for period.
-    """
+#     @param earliest(str): starttime for period.
+#     @param latest(str): endtime for period.
+#     """
 
-    appointments_result = cal_mod.apt_list(CAL, CAL_ID, earliest, latest)
+#     appointments_result = cal_mod.apt_list(CAL, CAL_ID, earliest, latest)
 
-    appointments = appointments_result.get('items', [])
-    return appointments
+    # appointments = appointments_result.get('items', [])
+    # return appointments
 
 
 """
@@ -230,7 +214,7 @@ def print_appointments(earliest, latest):
     Print the appointments taken through the get_appointments function.
 
     """
-    appointments = get_appointments(earliest, latest)
+    appointments = cal_mod.apt_list(CAL, CAL_ID, earliest, latest)
     app_nr = 1
     app_dict = {}
 
@@ -536,7 +520,9 @@ def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
             apntmnt_time = convert_time_staff.pretty_to_iso(apntmnt_time, 0)
             end_time = convert_iso_iso_ms.add_hour_iso(apntmnt_time, +1)
 
-            appointments = get_appointments(apntmnt_time, end_time)
+            appointments = cal_mod.apt_list(
+                CAL, CAL_ID, apntmnt_time, end_time
+                )
 
             if appointments:
                 print('\nSorry, appointment not available. Try again.')
@@ -750,7 +736,9 @@ def get_time(date, month, yr):  # pylint: disable=invalid-name
             apntmnt_time = convert_time.pretty_to_iso(apntmnt_time, 0)
             end_time = convert_time.add_hour_iso(apntmnt_time, +1)
 
-            appointments = get_appointments(apntmnt_time, end_time)
+            appointments = cal_mod.apt_list(
+                CAL, CAL_ID, apntmnt_time, end_time
+            )
 
             if appointments:
                 print('Sorry, appointment not available. Try again.')

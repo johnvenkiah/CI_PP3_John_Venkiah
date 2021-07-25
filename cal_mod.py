@@ -7,7 +7,9 @@ def apt_list(cal, c_id, start, end):
         singleEvents=True,
         orderBy='startTime'
     ).execute()
-    return appointments_result
+    appointments = appointments_result.get('items', [])
+    return appointments
+    # return appointments_result
 
 
 def del_apt(cal, c_id, apt_id):
