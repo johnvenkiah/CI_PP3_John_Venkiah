@@ -34,7 +34,7 @@
     2. [Applications, Libraries and Platforms](#applications-libraries-and-platforms)
 
 4. [Validation](#validation)
-    5. [Performance](#performance)
+    1. [Performance](#performance)
 
 4. [Testing of User Stories/Site Owner Goals](#testing-of-user-stories/site-owner-goals)
     1. [Testing of User Stories](#testing-of-user-stories)
@@ -145,7 +145,7 @@ For this application I will address staff instead of site owner, as it is made f
 17. I would like the staff area to be password protected
 
 
-### Spreadsheet
+### Flowchart
 ___
 
 Below is a flowchart describing the structure of the application, created with [Lucidchart](https://lucid.co/product/lucidchart).
@@ -157,26 +157,20 @@ ___
 
 #### Data models
 
-I have chosen to use several data models in this project, but rely mainly on dictionaries for managing data. For variation, I have created two classes, and use lists aswell.
+I have chosen to use several data models in this project, but rely mainly on dictionaries for managing data. For variation, I have created two classes for this project, and use lists aswell.
 
-I find that dictionaries are easy to use and access.
+I like the way dictionaries behave, and in this project they are perfect; I could easily pair a patient number with an ID that Google uses for the specific event or 
 
 Here are the most important ones:
 
 - The appointment list(cal_mod.apt_list) that stores dictionaries of appointments, to be read or edited and then passed through the Google API to the Calendar
 
 - The IncDecWeek class, used to increment the the number of days ahead or in the past to display the schedule from.
+- The time format converter class (TimeFConverter), created in four instances for each ty p of conversion it makes.
 
-To make the site as friendly as possible, most elements have slightly rounded edges. The environment should seem playful but not childish or silly, which I accomplished with a combination of the colors, fonts and CSS styling.
-I have tried to create a three dimentional feeling, so I spent alot of time with borders, shadows, and gradients to create this.
-
-Hovering over the buttons makes them grow slightly larger, and more transparent.
-
-![Example:](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/features/zoom_in_home.png)
-
-Design freatures were also inplemented with JavaScript to confirm user interaction, for example that a wrong answer in the quiz turns the button red and the correct answer button expands.
-
-For the bakground I chose a simple music symbols collage and filled it with my chosen background color.
+- The appointment dictionary (app_dict), created in the print_appointment function to pair the Google events specific ID together with numbers, that the user can input to edit that appointment. New numbers from 1 upwards are created each time the function is called.
+- apntmnt_to_edit, a dictionary of a single event that the edit_appntmnt function gets from Google Calendar, to edit and then push bach to Google with new values.
+- The month dictionary (month_dict), used to pair the months three letter abbreviations with their corresponding number of days, accessed when getting date details from user.
 
 ##### Fonts
 
