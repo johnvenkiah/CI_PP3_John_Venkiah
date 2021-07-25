@@ -835,66 +835,34 @@ Validation results can be seen [here](https://github.com/johnvenkiah/CI_MS2_John
 <details>
   <summary>View bugs here</summary>
 
- - Bug: iPhone sometimes cuts off the beginning of the sound effects played on the quiz page, and they are sometimes not heard.
- - Fix: Tried to downsize to smaller samples. Still same problem. No fix yet.
+- Bug: Error <code: 500, APIerror> when calling the sheets API
+- Fix: create a "try", "except" to catch API errors when calling the sheets API
 
-- Bug: Contact link appears above other text on 404 page
-- Fix: Make link position relative so it is scrollable to see
+- Bug: Checking schedule displayed twice
+- Fix: Change code so things happen in correct order
 
-![Contact link bug](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/errors_bugs/contact_link_error.png)
+- Bug: Password hiding library import stdiomsk doesn't work on terminal in Heroku and produced <termios.error: 25, 'Inappropriate ioctl for device'>
+- Fix: Remove stdiomsk and let password entered be shown
 
-- Bug: Contact link appearing on top of button on home page.
-- Fix: Change dimensions of buttons and button container, home page.
+- Bug: Datetime parsing not working, returning errors
+- Fix: Create TimeFConverter class, convert formats with that
 
-- Bug: Red Shadow barely visible for wrong answer animation.
-- Fix: Change so bakcground color and font color are red instead when answer is wrong.
+- Bug: Says date incorrect although it is correct
+- Fix: Fix while loop
 
-- Bug: Videos not displaying in learn page.
-- Fix: Update API key, YouTube API
+- Bug: Sheets updating wrong cell when user exists
+- Fix code at end of sheet.py; use update_cell sheets method
 
-- Bug: Main video covering whole screen on mobile devices in landscape mode, so navigation is disabled.
-- Fix: Style video so it covers half the window in landscape mode, and the videos list in the other half.
+- Bug: Schedule displaying wrong weeks when navigating through weeks, out of schedule back in and then showing next week again
+- Fix: Add initialize method to IncDecWeek class, so when user exits, the weeks count resets
 
-- Bug: Quiz not displaying buttons
-- Fix: Error in JavaScript was fixed
-
-- Bug: controls not working on main video in learn page when viewed with DevTools on tablet view.
-- Fix. Refresh page, cross check with real tablet/mobile, bug is not there
-
-- Bug: Contact details still there after clicking "Send" on contact page
-- Fix: Fix error in JavaScript file
-
-- Bug: Video text not showing up in main video on learn page on certain devices/orientations and visible on others where it should not be
-- Fix: fix this in several media queries, so portrait doesn't display text under video but landscape does on all devices smaller than tablet
-
-- Bug: CORS error is shown when loading videos from YouTube API.
-- Fix: No fix for this; I have spent weeks trying to fix it but the best way is from the back end of which I have no experience yet. Mo, my mentor, explained that it should be ok, due to that the error has nothing to do with my code. Above all, it doesn't affect the functionality of the page.
-![CORS-error](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/errors_bugs/cors_error.png)
-
-- Bug: [Cohort warning](https://github.blog/changelog/2021-04-27-github-pages-permissions-policy-interest-cohort-header-added-to-all-pages-sites/) apparently to all GitHub Pages.
-- Fix: none.
-
-- Bug: Loading videos in iframes producing warnings about adding non-passive event listeners to scroll blocking 'touchstart' event. These listeners are in a base.js JavaScript file that is linked in the iframe, and I have not found a fix for this.
-Fix: none.
+- Bug: Some lines appearing without space below
+- Fix: Add new line to print and input strings where relevant
 
 </details>
 
 
 ## Deployment
-
-### GitHub Pages
-
-This website has been deployed using GitHub pages.
-
-To deploy a page yourself, do the following:
-
-1. Access your GitHub account and find the relevant repository.
-2. Click 'Settings' in the repository.
-3. In Settings, click 'Pages' in the left-hand menu.
-4. Click 'Source'.
-5. In the dropdown menu displaying 'None', select 'Master Branch' or 'Main'6.
-6. Allow the page some time to deploy your website.
-7. At the top of Github Pages you will see a link to your live website.
 
 ### Forking the GitHub Repository
 
@@ -915,24 +883,35 @@ To make a clone, or 'Fork' this repository, follow the steps below.
 7. Press Enter.
 8. You now have a local clone.
 
-### YouTube API
+### Heroku
+
+This application has been deployed from Github using Heroku. Here's how:
+
+1. Create an account at [heroku.com](https://.heroku.com/)
+2. Create a new app, add app name and your region
+3. Click on create app
+4. Go to "Settings"
+5. Under Config Vars, add your sensitive data (creds.json for example)
+6. For this project, I set buildpacks to <Python> and <NodeJS> in that order.
+7. Go to "Deploy" and at "Deployment method", click on "Connect to Github"
+8. Enter your repository name and click on it when it shows below
+9. Choose the branch you want to buid your app from
+10. If desired, click on "Enable Automatic Deploys", which keeps the app up to date with your Github repository
+11. All done!
+
+### Google API
 
 Here's how you can set up your own API:
 
 1. Login or create a Google account and navigate to https://console.cloud.google.com/
 2. Create a new Project by clicking on the New Project icon
-3. Add Project Name
-4. Create a credential (API-key) for the project
-5. Restrict the API to the websites that will be using them to prevent misuse
-6. Navigate to https://developers.google.com/youtube/v3
-7. Click on "Search for content" (if it is a search you want to perform")
-8. Click the relevant use case (list (by keyword) was my choice)
-9. Go to the bottom of the page and enter the search information for your needs.
-10. Click "execute" or "show code"
-11. copy the URL at the top of the page
-12. Perform a GET or Fetch request in JavaScript to the URL, and enter the API key in the space implied.
-13. Add code to use results!
-
+3. Add Project name and details
+4. Under API's and services, enable the relevant API for your project (in this case Google Drive, Sheets and Calendar)
+5. IF the API requires, create a credential (service account in this case) for your project
+6. Download the credential and upload it to your workspace a a json-file
+7. Under API's and services, enable the relevant API for your project (in this case Google Drive, Sheets and Calendar)
+8. Search for the needed tasks to be performed in the documentation for the specific API, for example here for the calendar API: [Google Calendar API Reference](https://developers.google.com/calendar/api/v3/reference?hl=en)
+9. Add them to your code.
 
 
 ### EmailJS
