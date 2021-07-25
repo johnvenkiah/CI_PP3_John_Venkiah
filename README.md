@@ -84,8 +84,7 @@ Target Audience
 ### Structure
 ___
 
-The FeelGood Physio Booking System, or FGPBS, relies almost only on user input. There are always options displayed on the screen and users can choose what to do next.
-
+The FeelGood Physio Booking System relies almost only on user input. There are always options displayed on the screen and users can choose what to do next.
 When an input is entered, the application takes the user to the chosen option. All functions are chained together, each depending on the users input.
 
 #### 1. Home Screen
@@ -159,7 +158,7 @@ ___
 
 I have chosen to use several data models in this project, but rely mainly on dictionaries for managing data. For variation, I have created two classes for this project, and use lists aswell.
 
-I like the way dictionaries behave, and in this project they are perfect; I could easily pair a patient number with an ID that Google uses for the specific event or 
+Dictionaries have attributes that fit perfectly for this project; for example, I can easily pair a patient number with an ID that Google uses for the specific event. Another example is appointment dictionary, given its values by the user and pushed to the Google Calendar.
 
 Here are the most important objects:
 
@@ -318,14 +317,9 @@ ___
 
 ## Validation
 
-All Python files passed the [PEP8](https://validator.w3.org/) and [Pylint]() tests with 0 errors.
+All Python files passed the [PEP8](http://pep8online.com/) and [Pylint](https://www.pylint.org/) tests with 0 errors.
 
-<details>
-  <summary>Click here to view them.</summary>
-
-![Validation](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/validation/validation.md)
-
-</details>
+Click ![here](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/validation/validation.md) to view them.
 
 
 ## Testing of User Stories/Site Owner Goals
