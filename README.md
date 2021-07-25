@@ -318,66 +318,14 @@ ___
 
 ## Validation
 
-### HTML Validation
+All Python files passed the [PEP8](https://validator.w3.org/) and [Pylint]() tests with 0 errors.
 
-All pages passed the [W3C HTML Validation](https://validator.w3.org/) tests with 0 errors, and can be viewed [here](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/tree/master/docs/validation/w3c/html)
+<details>
+  <summary>Click here to view them.</summary>
 
-### CSS Validation
+![Validation](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/validation/validation.md)
 
-The CSS on the website passed the [W3C CSS Jigsaw](https://jigsaw.w3.org/css-validator/) validation with 0 errors:
-
-![Results from CSS-validation](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/validation/w3c/css_jigsaw/w3c_css_jigsaw.png)
-
-Warnings were given for using prefix vendors for user-select: none to prevent selecting the piano keys when playing on play page. Removing them made user-select: none not work for me so I decided to keep them.
-
-### JavaScript Validation
-
-The JavaScript on the website was validated with [JSHint](https://jshint.com/). No errors were shown. The results can be viewed [here](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/validation/jshint.md)
-
-### Accessibility
-
-Accessibility was tested with the [WAVE Website](https://wave.webaim.org/) and passed all tests. [Here](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/tree/master/docs/validation/wave) are the results.
-
-### Performance
-
-[Google Chromes Lighthouse](https://developers.google.com/web/tools/lighthouse) was used for testing the performance of the website, which passed the tests on both desktop and mobile simulator. You can see the results [here](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/tree/master/docs/validation/lighthouse)
-
-### Devices
-
-An Apple MacBook Pro 15" was used for testing, running Chrome and Safari. Chrome's DevTools provided simulators for 12 different device sizes, aswell as testing on a custom smallest size (320px x 480px, iPhone 4 size).
-
-Below are linked screenshots of all web pages on five different sizes.
-
-- [Mobile (320 x 568)](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/screenshots_mobile.md)
-
-- [Mobile, large (411 x 823)](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/screenshots_mobile_large.md)
-
-- [Tablet (768 x 1024)](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/screenshots_tablet.md)
-
-- [Laptop (1280 x 802)](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/screenshots_laptop.md)
-
-- [Desktop (1600 x 992)](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/screenshots_desktop.md)
-
-Testing was also done on an iPhone XS and an iPad Pro 10.5"
-
-[Here](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/tree/master/docs/screenshots/screenshots_iphone) are screenshots from iPhone XS
-
-[Here](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/tree/master/docs/screenshots/screenshots_ipad) are screenshots from iPad Pro
-
-**Tests Made on Devices:**
-
-- Nav link works and is displayed as intended
-- All buttons and links on all pages work and link to the correct source
-- All sizes of elements are appropriate and no elements appear on top of each other
-- Width is set accordingly so no sideways scrolling bug is there in portrait mode
-- Animations, colors and fonts appear as they should
-- Quiz functions as intended, with sounds and functionality
-- Modal window 
-- Piano plays and displays notes with mouse, screen tap or kwyboard
-- Learn page displays videos and videos are viewable
-- 404 page
-
-Musical Minds passed all tests made on all devices, with a few minor acceptances noted in [bugs](#bugs)
+</details>
 
 
 ## Testing of User Stories/Site Owner Goals
