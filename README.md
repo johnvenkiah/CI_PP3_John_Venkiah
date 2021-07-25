@@ -98,7 +98,7 @@ This welcomes the user when they first enter the application, when the task at h
 
 #### 2. Booking process for patient
 
-![Patient booking, month](#)
+![Patient booking, month](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_booking/p_booking_month.png)
 
 This is a long chain of functions resulting in a new appointment and an update to the patient log, if completed. Users input their desired appoinment time and details, and get a confirmation message at the end.
 
