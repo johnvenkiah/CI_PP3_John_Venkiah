@@ -279,9 +279,13 @@ Upon changing these parameters and confirming the changes, the appointments are 
 
 ### Feature 3: The Patient Log
 
-![Patient Log](#)
+![Patient Log](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_log/patient_log.png)
 
 This is where staff can access data from patients that have booked via the booking system. The system lets users know before initiating the booking that their data will be logged, and after a successful booking the datails are logged in the Google Sheet via the API as a new entry. If the user already exists, their symptoms are the only thing that will be updated.
+
+![Old patient books new appointment](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_log/patient_log_old_patient.png)
+
+![The Google Sheet with the updated symptoms](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_log/sheet_update_sympt.png)
 
 Even though the same details are kept in the Google Calendar, the patient log is a way to consolidate information if staff are looking for a specific patient.
 
@@ -308,7 +312,7 @@ There are endless possibilities with an application like this. If the clinic wer
 ### Languages
 ___
 
-- [Python 3](https://www.python.org/)
+- [Python 3](https://www.python.org/) - Was used solely to create this project.
 
 
 ### Applications and Modules
