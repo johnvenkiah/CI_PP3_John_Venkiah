@@ -174,7 +174,7 @@ Here are the most important objects:
 - The time format converter class (TimeFConverter), created in four instances for each ty p of conversion it makes.
 
 - The appointment dictionary (app_dict), created in the print_appointment function to pair the Google events specific ID together with numbers, that the user can input to edit that appointment. New numbers from 1 upwards are created each time the function is called.
-- apntmnt_to_edit, a dictionary of a single event that the edit_appntmnt function gets from Google Calendar, to edit and then push bach to Google with new values.
+- apntmnt_to_edit, a dictionary of a single event that the edit_appntmnt function gets from Google Calendar, to edit and then push back to Google with new values.
 - The month dictionary (month_dict), used to pair the months three letter abbreviations with their corresponding number of days, accessed when getting date details from user.
 - The patient dictionary helps the Google Sheets patient log keep track of patients that have booked appointments, keeping their details as values and assigning (with the help of the get_p_nr function) a unique patient ID. These details can then be displayed to the staff user.
 
@@ -191,10 +191,7 @@ Messages to clarify what has and has not been done, and what the user's choices 
 
 ## Features
 
-### Existing features
-___
-
-#### Feature 1 The Patient Booking System
+### Feature 1 The Patient Booking System
 
 ![Patient Booking System](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_booking/p_booking_month.png)
 
@@ -222,11 +219,11 @@ The patient booking system consists of several steps after the welcome screen. T
 
 - If the booking is confirmed by the user, two requests are made with the users input; one to push the information to FeelGood Physio's Google calendar and one to make an entry in the Google sheets patient log on Google Drive, all with the help of the Google API.
 
-![Google calendar entry](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/google_cal_sheets/g_cal_new.png)
+![Google calendar entry](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/google_cal/g_cal_new.png)
 
 If the user with the same name already exists in the patient log, the patients symptoms are unpdated instead of a row being added. The patient is then notified that the booking has been made and can return to the home screen again.
 
-![Google sheets](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/google_cal_sheets/g_sheets_new.png)
+![Google sheets](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_log/g_sheets_new.png)
 
 **Patient stories covered:**
 
@@ -250,13 +247,11 @@ If the user with the same name already exists in the patient log, the patients s
 18. I would like for the application to contain validated Python code without returning any errors
 
 
-#### Feature 2: The Schedule
-
-![Schedule](#)
-
-The Schedule is accessed via the staff area, which only users with a password can access. Here, users are initially shown the schedule from the current time and 7 days forward. The appointments are retrieved by an API request to FeelGood Physio's Google Calender, and can be edited and removed, by user inputting number displayed within the appointment.
+### Feature 2: The Schedule
 
 ![The Schedule](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/schedule/schedule.png)
+
+The Schedule is accessed via the staff area, which only users with a password can access. Here, users are initially shown the schedule from the current time and 7 days forward. The appointments are retrieved by an API request to FeelGood Physio's Google Calender, and can be edited and removed, by user inputting number displayed within the appointment.
 
 The user can navigate with keys "n" for next and "b" for back, which will respectively retrieve the schedule for the next or previous week. New numbers are displayed for the user to modify specific appointments. If the user enters "e" for edit, the user gets several choices to edit below:
 
@@ -282,7 +277,7 @@ Upon changing these parameters and confirming the changes, the appointments are 
 18. I would like for the application to contain validated Python code without returning any errors
 
 
-#### Feature 3: The Patient Log
+### Feature 3: The Patient Log
 
 ![Patient Log](#)
 
