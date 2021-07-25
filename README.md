@@ -134,14 +134,15 @@ For this application I will address staff instead of site owner, as it is made f
 ##### As a staff member and user of this application:
 
 8. I would like for users to only be able to book appointments on weekdays between 9 and 17, and when the schedule is free
-9. I would like the appointments made by patients dynamically update my Google Calendar
-10. I would like appointments made by new users add a new row with their information to the Google Sheets patient log
-11. I would like the changes made in the application to update the events on my Google Calendar
-12. I would like to view my schedule for the coming week
-13. I would like to navigate between weeks in my schedule
-14. I would like to be able to update or remove any appointment viewed in my schedule
-15. I would like to easily be able to return to the main staff area in the application
-16. I would like the staff area to be password protected
+9. I would like appointments made by new users add a new row with their information to the Google Sheets patient log
+10. I would like the appointments made by patients dynamically update my Google Calendar
+11. I would like the changes made in the applications edit menu to update the events on my Google Calendar
+12. I would like to be able to view the patient log
+13. I would like to view my schedule for the coming week
+14. I would like to navigate between weeks in my schedule
+15. I would like to be able to update or remove any appointment viewed in my schedule
+16. I would like to easily be able to return to the main staff area in the application
+17. I would like the staff area to be password protected
 
 
 ### Flowchart
@@ -227,8 +228,8 @@ The patient booking system consists of several steps after the welcome screen. T
 **Site owner goals covered**
 
 8. I would like for users to only be able to book appointments on weekdays between 9 and 17, and when the schedule is free
-9. I would like the appointments made by patients dynamically update my Google Calendar
-10. I would like appointments made by new users add a new row with their information to the Google Sheets patient log
+9. I would like appointments made by new users add a new row with their information to the Google Sheets patient log
+10. I would like the appointments made by patients dynamically update my Google Calendar
 11. I would like the changes made in the application to update the events on my Google Calendar
 
 ___
@@ -246,18 +247,19 @@ The user can navigate with keys "n" for next and "b" for back, which will respec
 
 Upon changing these parameters and confirming the changes, the appointments are updated in the Google Calendar. The user is notified of this and can return to the staff menu or exit.
 
-**User stories/site-owner goals covered:**
+**Site owner goals covered:**
 
-1. Easily navigate the websites pages via the menu or links provided
+11. I would like the changes made in the application edit menu to update the events on my Google Calendar
+13. I would like to view my schedule for the coming week
+14. I would like to navigate between weeks in my schedule
+15. I would like to be able to update or remove any appointment viewed in my schedule
+16. I would like to easily be able to return to the main staff area in the application
+17. I would like the staff area to be password protected
 
-2. Be presented with a well designed, user-friendly interface
 
-3. Experience the same quality in design, user interaction and structure on small mobile devices, tablets as on larger screens.
+#### Feature 3: The Patient Log
 
-
-#### Feature 3: The Quiz
-
-![The Quiz](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/features/feature_3_quiz_mobile.png)
+![Patient Log](#)
 
 The quiz is a seemingly simple feature, but with a lot of functionality. The user has 60 seconds to answer the most questions correctly.
 
