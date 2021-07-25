@@ -356,7 +356,7 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
         )
 
         if sure == 'y':
-             # pylint: disable=maybe-no-member
+            # pylint: disable=maybe-no-member
             CalOps.del_apt(CAL, CAL_ID, apntmnt_id)
             # CAL.events().delete(  
             #     calendarId=CAL_ID,
@@ -370,11 +370,12 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
             edit_appntmnt(nav_or_edit, apntmnt_id)
 
     elif edit_or_delete == 'e':
-
-        apntmnt_to_edit = CAL.events().get(  # pylint: disable=maybe-no-member
-            calendarId=CAL_ID,
-            eventId=apntmnt_id
-        ).execute()
+        # pylint: disable=maybe-no-member
+        apntmnt_to_edit = CalOps.get_apt(CAL, CAL_ID, apntmnt_id)
+        # apntmnt_to_edit = CAL.events().get(
+        #     calendarId=CAL_ID,
+        #     eventId=apntmnt_id
+        # ).execute()
 
         edit_appntmnt_2(apntmnt_to_edit, apntmnt_id)
 
@@ -530,9 +531,9 @@ def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
             appointments = get_appointments(apntmnt_time, end_time)
 
             if appointments:
-                print('Sorry, appointment not available. Try again.')
+                print('\nSorry, appointment not available. Try again.')
             else:
-                print(f'{get_hour} on {date_input} is free.\n')
+                print(f'\n{get_hour} on {date_input} is free.\n')
 
                 if 'summary' not in apntmnt_to_edit:
                     apntmnt_to_edit.update({'summary': 'No info'})

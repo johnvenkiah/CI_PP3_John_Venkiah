@@ -31,9 +31,9 @@ class CalOps:
 
     def get_apt(cal, c_id, apt_id):
 
-        apntmnt_to_edit = CAL.events().get(  # pylint: disable=maybe-no-member
-            calendarId=CAL_ID,
-            eventId=apntmnt_id
+        apntmnt_to_edit = cal.events().get(  # pylint: disable=maybe-no-member
+            calendarId=c_id,
+            eventId=apt_id
         ).execute()
         return apntmnt_to_edit
 
