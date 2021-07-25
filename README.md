@@ -89,12 +89,16 @@ When an input is entered, the application takes the user to the chosen option. A
 
 #### 1. Home Screen
 
+![Screenshot of Home screen](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/screenshot_home.png)
+
 This welcomes the user when they first enter the application, when the task at hand is done or when users choose to exit from whereever they are in the application. From the home screen, there are two options:
 
 - Book appointment - takes users to the booking process
 - Staff login - takes users to the staff area
 
 #### 2. Booking process for patient
+
+![Patient booking, month](#)
 
 This is a long chain of functions resulting in a new appointment and an update to the patient log, if completed. Users input their desired appoinment time and details, and get a confirmation message at the end.
 
@@ -309,7 +313,7 @@ ___
 
 - [Gitpod](https://gitpod.com/) - All code was written and tested using the Gitpod web-based IDE.
 
-- [Heroku](https://www.heroku.com)
+- [Heroku](https://www.heroku.com) - Used to deploy the application.
 
 - [Lucidchart](https://lucid.co/product/lucidchart) - Lucidchart was used to create the [flowchart](#flowchart) of the project.
 
@@ -319,7 +323,7 @@ ___
 
 All Python files passed the [PEP8](http://pep8online.com/) and [Pylint](https://www.pylint.org/) tests with 0 errors.
 
-Click ![here](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/validation/validation.md) to view them.
+Click [here](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/validation/validation.md) to view them.
 
 
 ## Testing of User Stories/Site Owner Goals
