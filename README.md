@@ -18,7 +18,7 @@
     2. [Structure](#structure)
 
 
-    3. [Scope](#scope)
+    3. [User Stories](#User Stories)
         1. [User Stories](#user-stories)
         2. [Site Owner Goals](#site-owner-goals)
     
@@ -117,12 +117,12 @@ The schedule, which shows 1 week at a time, can be edited, which also updates th
 The log, which is a Google Sheet, updates dynamically as users book appointments.
 
 
-### Scope
+### User Stories
 ___
 
-#### User Stories
+As this application has such specific target users, I have adapted my user stories to patients and staff.
 
-##### Patient user stories:
+#### Patient user stories:
 
 1. I would like to be able to book an appointment at a time of my choosing, should the appointement be available
 2. I would like to be alerted if my details are saved before I enter them
@@ -132,7 +132,7 @@ ___
 6. I would like to view a confirmation of the booking when it is made
 7. I would like to at any point cancel my booking during the booking process should I wish to do so
 
-##### Staff member user stories:
+#### Staff member user stories:
 
 8. I would like for users to only be able to book appointments on weekdays between 9 and 17, and when the schedule is free
 9. I would like appointments made by new users add a new row with their information to the Google Sheets patient log
@@ -794,26 +794,33 @@ Validation results can be seen [here](https://github.com/johnvenkiah/CI_MS2_John
 <details>
   <summary>View bugs here</summary>
 
-- Bug: Error <code: 500, APIerror> when calling the sheets API
+- Bug: Error ``code: 500, APIerror`` when calling the sheets API
 - Fix: create a "try", "except" to catch API errors when calling the sheets API
+
 
 - Bug: Checking schedule displayed twice
 - Fix: Change code so things happen in correct order
 
-- Bug: Password hiding library import stdiomsk doesn't work on terminal in Heroku and produced <termios.error: 25, 'Inappropriate ioctl for device'>
+
+- Bug: Password hiding library import stdiomsk doesn't work on terminal in Heroku and produced ``termios.error: 25, 'Inappropriate ioctl for device'``
 - Fix: Remove stdiomsk and let password entered be shown
+
 
 - Bug: Datetime parsing not working, returning errors
 - Fix: Create TimeFConverter class, convert formats with that
 
+
 - Bug: Says date incorrect although it is correct
 - Fix: Fix while loop
+
 
 - Bug: Sheets updating wrong cell when user exists
 - Fix code at end of sheet.py; use update_cell sheets method
 
+
 - Bug: Schedule displaying wrong weeks when navigating through weeks, out of schedule back in and then showing next week again
 - Fix: Add initialize method to IncDecWeek class, so when user exits, the weeks count resets
+
 
 - Bug: Some lines appearing without space below
 - Fix: Add new line to print and input strings where relevant
@@ -871,19 +878,6 @@ Here's how you can set up your own API:
 7. Under API's and services, enable the relevant API for your project (in this case Google Drive, Sheets and Calendar)
 8. Search for the needed tasks to be performed in the documentation for the specific API, for example here for the calendar API: [Google Calendar API Reference](https://developers.google.com/calendar/api/v3/reference?hl=en)
 9. Add them to your code.
-
-
-### EmailJS
-
-Here's how to make use of EmailjS
-
-1. Create an account at https://www.emailjs.com/
-2. Click "add new service" and enter the email provider of your choice
-3. Create an email-template
-4. Use the example code given on the website or use your own in your JavaScript file
-5. Use your Servide ID in services, and template ID the template you want to use.
-6. Done!
-
 
 
 ## Credits
