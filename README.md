@@ -212,24 +212,39 @@ The patient booking system consists of several steps after the welcome screen. T
 
 - The user is shown the appointment and must confirm the booking.
 
-- If the booking is confirmed by the user, two requests are made with the users input; one to push the information to FeelGoods Google calendar and one to make an entry in the Google sheets patient log on Google Drive, all with the help of the Google API. If the user with the same name already exists in the patient log, the patients symptoms are unpdated instead of a row being added. The patient is then notified that the booking has been made and can return to the home screen again.
+- If the booking is confirmed by the user, two requests are made with the users input; one to push the information to FeelGood Physio's Google calendar and one to make an entry in the Google sheets patient log on Google Drive, all with the help of the Google API. If the user with the same name already exists in the patient log, the patients symptoms are unpdated instead of a row being added. The patient is then notified that the booking has been made and can return to the home screen again.
 
-**User stories/site-owner goals covered:**
+**User stories covered:**
 
-1. Easily navigate the websites pages via the menu or links provided
+1. I would like to be able to book an appointment at a time of my choosing, should the appointement be available
+2. I would like to be alerted if my details are saved before I enter them
+3. I would like to be well informed from the application throughout the booking process
+4. I would like to be alerted if my choice is invalid anywhere in the application, and get a chance to try again
+5. I would like to be able to confirm the booking right before it is made
+6. I would like to view a confirmation of the booking when it is made
+7. At any point cancel my booking during the booking process
 
-3. Experience the same quality in design, user interaction and structure on small mobile devices, tablets as on larger screens
+**Site owner goals covered**
 
-4. Get responses and confirmation from the website by my interactions with it
-
-15. Display a menu in a navigation bar or popout menu at the top of the page
+8. I would like for users to only be able to book appointments on weekdays between 9 and 17, and when the schedule is free
+9. I would like the appointments made by patients dynamically update my Google Calendar
+10. I would like appointments made by new users add a new row with their information to the Google Sheets patient log
+11. I would like the changes made in the application to update the events on my Google Calendar
 
 ___
-#### Feature 2: The Home Page
+#### Feature 2: The Schedule
 
-![Home Page](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/features/feature_two_desktop.png)
+![Schedule](#)
 
-The Home page has three big buttons, each containing a main feature of the site; Quiz, Learn and Play. Due to the simple nature of this site, there is little more here to distract, only the main logo, the contact link at the bottom and the footer.
+The Schedule is accessed via the staff area, which only users with a password can access. Here, users are initially shown the schedule from the current time and 7 days forward. The appointments are retrieved by an API request to FeelGood Physio's Google Calender, and can be edited and removed, by user inputting number displayed within the appointment.
+
+The user can navigate with keys "n" for next and "b" for back, which will respectively retrieve the schedule for the next or previous week. New numbers are displayed for the user to modify specific appointments. If the user enters "e" for edit, the user gets several choices to edit below:
+
+- Time: edit the date and time of the appointment
+- Name: Change the name given in the appointment
+- Details: Change the patient's email adress or symptoms description
+
+Upon changing these parameters and confirming the changes, the appointments are updated in the Google Calendar. The user is notified of this and can return to the staff menu or exit.
 
 **User stories/site-owner goals covered:**
 
