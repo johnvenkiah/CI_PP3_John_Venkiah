@@ -256,11 +256,15 @@ If the user with the same name already exists in the patient log, the patients s
 
 The Schedule is accessed via the staff area, which only users with a password can access. Here, users are initially shown the schedule from the current time and 7 days forward. The appointments are retrieved by an API request to FeelGood Physio's Google Calender, and can be edited and removed, by user inputting number displayed within the appointment.
 
+![The Schedule](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/schedule/schedule.png)
+
 The user can navigate with keys "n" for next and "b" for back, which will respectively retrieve the schedule for the next or previous week. New numbers are displayed for the user to modify specific appointments. If the user enters "e" for edit, the user gets several choices to edit below:
 
 - Time: edit the date and time of the appointment
 - Name: Change the name given in the appointment
 - Details: Change the patient's email adress or symptoms description
+
+![The edit menu](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/schedule/edit_apntmnt.png)
 
 Upon changing these parameters and confirming the changes, the appointments are updated in the Google Calendar. The user is notified of this and can return to the staff menu or exit.
 
