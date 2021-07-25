@@ -104,7 +104,23 @@ def welcome_screen():
         print('\nInvalid entry, please try again\n')
 
 
+def suggest_appointment():
+    """
+    Function to let patient continue with booking or go back,
+    for example if a staff  member entered the wrong input.
+    """
 
+    print("\nLet's find you an appointment.\n")
+    print('Your data will be saved to our database upon confirmation.\n')
+    book_or_back = input(
+        'Press "1" to continue or any other key to go back.\n\n'
+        )
+
+    if book_or_back == '1':
+        get_month(year)
+
+    else:
+        welcome_screen()
 
 
 def e_to_exit(user_input):
@@ -156,7 +172,6 @@ def staff_nav():
 
         print('\nExiting...')
         welcome_screen()
-        # return False
 
 
 def staff_login():
@@ -189,20 +204,6 @@ def staff_login():
         attempts += 1
 
 
-# def get_appointments(earliest, latest):
-#     """
-#     Get scheduled appointments for the given period from the Google Calendar
-
-#     @param earliest(str): starttime for period.
-#     @param latest(str): endtime for period.
-#     """
-
-#     appointments_result = cal_mod.apt_list(CAL, CAL_ID, earliest, latest)
-
-    # appointments = appointments_result.get('items', [])
-    # return appointments
-
-
 """
 An instance of the class used in nav_appntmnt function.
 """
@@ -228,9 +229,7 @@ def print_appointments(earliest, latest):
             continue
 
         start = convert_time_no_ms.iso_to_pretty(start, 0)
-
         event_id = appointment['id']
-
         app_dict.update({f'{app_nr}': event_id})
 
         if 'description' not in appointment:
@@ -346,10 +345,6 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
         if sure == 'y':
             # pylint: disable=maybe-no-member
             cal_mod.del_apt(CAL, CAL_ID, apntmnt_id)
-            # CAL.events().delete(
-            #     calendarId=CAL_ID,
-            #     eventId=apntmnt_id
-            # ).execute()
 
             print('\nAppointment deleted!\n')
             print_appointments(now, future_date(7))
@@ -360,11 +355,6 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
     elif edit_or_delete == 'e':
         # pylint: disable=maybe-no-member
         apntmnt_to_edit = cal_mod.get_apt(CAL, CAL_ID, apntmnt_id)
-        # apntmnt_to_edit = CAL.events().get(
-        #     calendarId=CAL_ID,
-        #     eventId=apntmnt_id
-        # ).execute()
-
         edit_appntmnt_2(apntmnt_to_edit, apntmnt_id)
 
     else:
@@ -467,7 +457,6 @@ def get_details_staff(apntmnt_to_edit, apntmnt_id):
 
         apntmnt_to_edit['description'] = new_details
         cal_mod.updt_apt(CAL, CAL_ID, apntmnt_id, apntmnt_to_edit)
-        # update_cal(apntmnt_id, apntmnt_to_edit)
 
         print(f'\nDetails for {name} updated.')
 
@@ -491,7 +480,6 @@ def update_name(apntmnt_to_edit, apntmnt_id, new_name):
     apntmnt_to_edit['summary'] = new_name
 
     cal_mod.updt_apt(CAL, CAL_ID, apntmnt_id, apntmnt_to_edit)
-    # update_cal(apntmnt_id, apntmnt_to_edit)
 
     print(f'\nAppointment name updated: {new_name}\n')
     print_appointments(now, future_date(7))
@@ -566,7 +554,6 @@ def update_apntmnt_time(apntmnt_time, end_time, apntmnt_to_edit, apntmnt_id):
     apntmnt_to_edit['end']['dateTime'] = end_time
 
     cal_mod.updt_apt(CAL, CAL_ID, apntmnt_id, apntmnt_to_edit)
-    # update_cal(apntmnt_id, apntmnt_to_edit)
 
     apntmnt_time = convert_time_no_ms.iso_to_pretty(apntmnt_time, 0)
 
@@ -577,23 +564,6 @@ def update_apntmnt_time(apntmnt_time, end_time, apntmnt_to_edit, apntmnt_id):
 
     if go_back != '¶¥¿':
         print_appointments(now, future_date(7))
-
-
-# def update_cal(apntmnt_id, apntmnt_to_edit):
-#     """
-#     Update the Google Calendar event with the input from the previous
-#     functions from user.
-
-#     @param apntmnt_id(str): Google Calendar event identifier
-#     @param apntmnt_to_edit: Instance of CAL-resource updating calendar
-#     """
-    # pylint: disable=maybe-no-member
-    # cal_mod.updt_apt(CAL, CAL_ID, apntmnt_id, apntmnt_to_edit)
-    # CAL.events().update(
-    #     calendarId=CAL_ID,
-    #     eventId=apntmnt_id,
-    #     body=apntmnt_to_edit
-    # ).execute()
 
 
 def future_date(day):
@@ -876,7 +846,7 @@ def new_appointment(
             welcome_screen()
 
     except Exception as error:  # pylint: disable=broad-except
-        print('Could not add appointment, possible Google API Error:' + error)
+        print(f'Could not add appointment, possible Google API Error:{error}')
         welcome_screen()
 
 
