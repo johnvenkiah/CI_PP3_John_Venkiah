@@ -222,7 +222,7 @@ The patient booking system consists of several steps after the welcome screen. T
 
 - If the booking is confirmed by the user, two requests are made with the users input; one to push the information to FeelGood Physio's Google calendar and one to make an entry in the Google sheets patient log on Google Drive, all with the help of the Google API.
 
-![Google calendar entry](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/google_cal/g_cal_new.png)
+![Google calendar entry](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/google_cal_sheets/g_cal_new.png)
 
 If the user with the same name already exists in the patient log, the patients symptoms are unpdated instead of a row being added. The patient is then notified that the booking has been made and can return to the home screen again.
 
