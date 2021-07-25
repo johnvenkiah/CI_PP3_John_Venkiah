@@ -194,7 +194,7 @@ ___
 
 #### Feature 1 The Patient Booking System
 
-![Patient Booking System](#)
+![Patient Booking System](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_booking/p_booking_month.png)
 
 This is the main feature of the application, getting patient information to make a booking and make a patient log entry.
 
@@ -215,6 +215,8 @@ The patient booking system consists of several steps after the welcome screen. T
 - If the email input is correct, the patient is prompted to shortly describe their symptoms. This must b at least 8 characters long, so the user cannot enter nothing or a short word.
 
 - The user is shown the appointment and must confirm the booking.
+
+![Confirm patient booking](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_booking/patient_booking_confirm.png)
 
 - If the booking is confirmed by the user, two requests are made with the users input; one to push the information to FeelGood Physio's Google calendar and one to make an entry in the Google sheets patient log on Google Drive, all with the help of the Google API. If the user with the same name already exists in the patient log, the patients symptoms are unpdated instead of a row being added. The patient is then notified that the booking has been made and can return to the home screen again.
 
