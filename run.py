@@ -166,9 +166,13 @@ def staff_nav():
                 e_to_exit(e_input)
                 return False
 
+            else:
+                staff_nav()
+                return False
+
         print('\nExiting...')
         welcome_screen()
-        return False
+        # return False
 
 
 def staff_login():
