@@ -825,15 +825,15 @@ def get_details(apntmnt_time, end_time, name, email):
             print('\nPlease enter at least eight characters')
 
         else:
-            start_time_pretty = convert_time.iso_to_pretty(apntmnt_time, 0)
+            start_pretty = convert_time.iso_to_pretty(apntmnt_time, 0)
 
-            print(f'\nConfirm appointment: {start_time_pretty}?\n')
+            print(f'\nConfirm appointment: {start_pretty}?\n')
             confirm = input('"y" = YES, any other key = NO\n\n')
 
             if confirm.lower() == 'y':
                 new_appointment(
                     apntmnt_time, end_time, name, email,
-                    details, start_time_pretty
+                    details, start_pretty
                 )
                 return False
 
@@ -841,7 +841,7 @@ def get_details(apntmnt_time, end_time, name, email):
 
 
 def new_appointment(
-    start, end, name, email, details, start_time_pretty
+    start, end, name, email, details, start_pretty
 ):  # pylint: disable=too-many-arguments
 
     """
@@ -871,7 +871,7 @@ def new_appointment(
             sendNotifications=True, body=event).execute()
 
         print(f'\nThanks, {name}, appointment added:\n')
-        print(f'{start_time_pretty}, {email}\n')
+        print(f'{start_pretty}, {email}\n')
         print(details)
         print('\nLogging your details...')
         sheet.append_p_row(name, email, details)

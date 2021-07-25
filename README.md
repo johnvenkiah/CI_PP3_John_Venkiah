@@ -145,19 +145,17 @@ For this application I will address staff instead of site owner, as it is made f
 17. I would like the staff area to be password protected
 
 
-### Technology Design
+### Spreadsheet
 ___
-
-#### Spreadsheet
 
 Below is a flowchart describing the structure of the application, created with [Lucidchart](https://lucid.co/product/lucidchart).
 
 ![Flowchart](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/flowchart.png)
 
-### Surface
+### Technology Design
 ___
 
-#### Design choices
+#### Data model
 
 My goal was to let the design appeal to all sorts of people, and create a design that was unique. At the same time i wanted to keep things simple and not use too many colors.
 
