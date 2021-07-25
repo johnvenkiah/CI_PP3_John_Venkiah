@@ -24,9 +24,9 @@ class CalOps:
 
     def del_apt(cal, c_id, apt_id):
 
-        CAL.events().delete(  # pylint: disable=maybe-no-member
-            calendarId=CAL_ID,
-            eventId=apntmnt_id
+        cal.events().delete(  # pylint: disable=maybe-no-member
+            calendarId=c_id,
+            eventId=apt_id
         ).execute()
 
     def get_apt(cal, c_id, apt_id):

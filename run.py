@@ -356,13 +356,14 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
         )
 
         if sure == 'y':
+             # pylint: disable=maybe-no-member
+            CalOps.del_apt(CAL, CAL_ID, apntmnt_id)
+            # CAL.events().delete(  
+            #     calendarId=CAL_ID,
+            #     eventId=apntmnt_id
+            # ).execute()
 
-            CAL.events().delete(  # pylint: disable=maybe-no-member
-                calendarId=CAL_ID,
-                eventId=apntmnt_id
-            ).execute()
-
-            print('\nAppointment deleted!')
+            print('\nAppointment deleted!\n')
             print_appointments(now, future_date(7))
         else:
             print('\n\nCancelled.\n')
