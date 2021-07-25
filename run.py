@@ -86,6 +86,7 @@ def welcome_screen():
     welcome_greeting = '\nWelcome to the Feelgood Physio booking system\n'
     print(welcome_greeting.upper())
     print('\nMade for patients and staff at the FeelGood Physio clinic\n')
+    print('To use this app, enter mush be pushed after each choice.\n')
 
     while True:
         staff_or_customer = input(
