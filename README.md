@@ -952,22 +952,6 @@ Here's how to make use of EmailjS
 
 Here are links to sites that answered a lot of my questions on coding and the Python language.
 
-This project was created from a template made by [Code Institute](https://codeinstitute.net/) to recreate the terminal in a regular web browser.
-
-Background Image from [www.123rf.com](https://www.123rf.com/photo_91583290_stock-vector-music-note-seamless-pattern-vector-illustration-hand-drawn-sketched-doodle-music-notes-symbols-.html)
-
-YouTube logos from YouTube, used with the guidelines of YouTube branding:
-[YouTube API–Device Partners-logo](https://www.youtube.com/about/brand-resources/#api-device-partners)
-
-[YouTube icon](https://www.youtube.com/about/brand-resources/#logos-icons-colors)
-
-Favicon from [iconsdb.com](https://www.iconsdb.com/green-icons/note-icon.html)
-
-Pdf-compress for smaller PDF-files to upload to GitHub: [smallpdf.com]
-(https://smallpdf.com/result#r=a2d783f28bb928fa77b9c573862cdbcf&t=compress)
-
-Tips to use collapse in markdown from [Pierre Joubert](https://gist.github.com/pierrejoubert73/902cc94d79424356a8d20be2b382e1ab) on Github
-
 ### Coding tips and tricks
 
 Overriding false errors when Flake and Pylint validate code:
@@ -976,38 +960,20 @@ Overriding false errors when Flake and Pylint validate code:
 
 Creating a class to increment and decrement a number free from functions: [Stack Overflow](https://stackoverflow.com/questions/47697945/python-how-to-increment-number-and-store-in-variable-every-time-function-runs/47698278)
 
-Two lists into dict:
-https://stackoverflow.com/questions/209840/how-do-i-convert-two-lists-into-a-dictionary
+Using the dictionary zip function to join two lists: [StackOverflow](https://stackoverflow.com/questions/209840/how-do-i-convert-two-lists-into-a-dictionary)
 
 Creating a user login:[StackExchange](https://codereview.stackexchange.com/questions/164359/python-username-and-password-program)
 
-Month name from number
-https://stackoverflow.com/questions/6557553/get-month-name-from-number
+Using the python datetime library: [docs.python.org](https://docs.python.org/3/library/datetime.html)
 
-string to attribute datetime
-https://stackoverflow.com/questions/19887353/attributeerror-str-object-has-no-attribute-strftime
+Calculating a leap Year with a conditional statement: [geeksforgeeks.org](https://www.geeksforgeeks.org/program-check-given-year-leap-year/)
 
-Guides for converting datetime to string
-https://stackoverflow.com/questions/2158347/how-do-i-turn-a-python-datetime-into-a-string-with-readable-format-date
+Regular expression for validating email: [Stack Overflow](https://stackoverflow.com/questions/8022530/how-to-check-for-valid-email-address)
 
-Timedelta to years
-https://stackoverflow.com/questions/765797/convert-timedelta-to-years
+Using the isnumeric function: [delftstack.com](https://www.delftstack.com/howto/python/user-input-int-python/)
 
-Leap Year:
-https://www.geeksforgeeks.org/program-check-given-year-leap-year/
+### Acknowledgments
 
-Strin to date:
-https://www.educative.io/edpresso/how-to-convert-a-string-to-a-date-in-python
+This project was created from a template made by [Code Institute](https://codeinstitute.net/) to recreate the terminal in a regular web browser.
 
-Reg ex email:
-https://stackoverflow.com/questions/8022530/how-to-check-for-valid-email-address
-
-Isnumeric:
-https://www.delftstack.com/howto/python/user-input-int-python/
-
-Pylint error:
-
-
-The tutors at Code Institute, especially John and Sean, gave me very good advice.
-
-A great big thanks to my mentor Mo Shami, who has given me so much support during my studies.
+The tutors Scott and Sean and my mentor Mo Shami at Code Institute, have helped me in times of trouble, many thanks to them.
