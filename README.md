@@ -222,8 +222,9 @@ The patient booking system consists of several steps after the welcome screen. T
 
 ![Google calendar entry](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/google_cal/g_cal_new.png)
 
-
 If the user with the same name already exists in the patient log, the patients symptoms are unpdated instead of a row being added. The patient is then notified that the booking has been made and can return to the home screen again.
+
+![Google sheets](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/google_cal_sheets/g_sheets_new.png)
 
 **Patient stories covered:**
 
