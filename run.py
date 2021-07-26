@@ -642,7 +642,7 @@ def get_month(yr):  # pylint: disable=invalid-name
             else:
                 print(month_incorr)
         except ValueError as error:
-            print(f'Time formatting error, {error}'')
+            print(f'Time formatting error: {error}')
 
 
 def get_date(
