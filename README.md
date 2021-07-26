@@ -413,7 +413,7 @@ User stories are tested with the features that cover them. All user stories pass
 
 - Actual Result: *Works as intended*
 
-![home](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/features/feature_two_desktop.png)
+![User story 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing/user_story_2.png)
 
 
 **Nav Menu Feature**
