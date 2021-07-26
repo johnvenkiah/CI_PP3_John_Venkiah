@@ -663,7 +663,7 @@ def get_date(
     while True:
 
         print(f'\n{month}, {yr}. Which date?\n')
-        date = input('Enter two digits, ("e" to exit):\n\n')
+        date = input('Enter one or two digits, ("e" to exit):\n\n')
         date_incorrect = '\nDate incorrect, please try again'
         e_to_exit(date)
 

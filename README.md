@@ -7,31 +7,25 @@
 
 [Click here](https://feelgood-physio.herokuapp.com/) to visit the deployed site.
 
-To view 
-
 [Here](https://calendar.google.com/calendar/u/0?cid=dXVlcTNzMnRiZ2RsNTdkdm1tdmNwNW9zZDhAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ) is the link to view the Google Calendar as it is updated. You will have to log in to Google and add it to your subscribed calendars, but it is just as easy to remove it again.
 
 [Here](https://docs.google.com/spreadsheets/d/1tZfgo8_TkdA9EdJyrj58YbFePcTcciv-zyC2UBqY6-g/edit?usp=sharing) is the link to the Google Spreadsheet, to see the updates made.
 
 ## Contents
 
-1. [User Experience](#user-experience)
-    1. [Strategy](#strategy)
-        1. [Project Goals](#project-goals)
-        2. [Future Goals](#future-goals)
-        3. [User Goals](#user-goals)
+1. [Strategy](#strategy)
+    1. [Project Goals](#project-goals)
+    2. [Future Goals](#future-goals)
+    3. [User Goals](#user-goals)
 
-    2. [Structure](#structure)
+2. [Structure](#structure)
 
+3. [User Stories](#user-stories)
+    1. [User Stories](#user-stories)
+    2. [Site Owner Goals](#site-owner-goals)
 
-    3. [User Stories](#User Stories)
-        1. [User Stories](#user-stories)
-        2. [Site Owner Goals](#site-owner-goals)
-    
-    4. [Skeleton](#skeleton)
-
-    5. [Surface](#surface)
-        1. [Design Choices](#design-choices)
+5. [Surface](#surface)
+    1. [Design Choices](#design-choices)
 
 2. [Features](#features)
     1. [Existing Features](#existing-features)
@@ -505,52 +499,25 @@ __
 
 [User story 3, 4](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing/user_story_3_4.png)
 
-#### User story 4:
+#### User story 4: I would like to be alerted if my choice is invalid anywhere in the application, and get a chance to try again
 
-**As a user, i would like to get responses and confirmation from the website by my interactions with it**
+- **Action**: *User enters invalid value, or date/time that is not free*
 
-**The Piano Feature**
+- **Expected Result**: *Application let user know that the entry is invalid, and the user gets to try again*
 
-- Action: *User interacts by playing keys on the piano*
+The testing of this user case is best portrayed with the images below. All areas of navigation have passed the tests.
 
-- Expected Result: *Notes are heard and seen from the website, depending on user input*
+[User story 3, 4](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing/user_story_3_4.png)
 
-- Actual Result: *Works as intended*
+[User story 3, 4](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing/user_story_3_4.png)
 
-![](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/desktop/desktop_play.png)
+[User story 3, 4](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing/user_story_3_4.png)
 
-**The Quiz Feature**
+[User story 3, 4](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing/user_story_3_4.png)
 
-- Action: 'User interacts by clicking the buttons in the quiz
-'
-- Expected Result: *Website confirms and give user feedback in the form of sounds, animations and displaying new questions. This depending on whether the user has answered the question correctly or incorrectly*
+[User story 3, 4](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing/user_story_3_4.png)
 
-- Actual Result: *Works as intended*
-
-![Quiz ipad](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/screenshots_ipad/quiz_ipad.png)
-
-![Quiz mobile](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/screenshots_iphone/quiz_iphone.png)
-
-**Learn Page Feature**
-
-- Action: *User interacts by navigating the videos section*
-
-- Expected Result: *The main window displays the video with data the user has clicked on*
-
-- Actual Result: *Works as intended*
-
-![Learn mobile](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/screenshots_iphone/learn_iphone_landscape.png)
-
-**Contact Page Feature**
-
-- Action: *User clicks on the "Send" button*
-
-- Expected Result: *The users interaction is confirmed by the website via a message below the send button, letting the user know if the message was sent or if the information in incomplete*
-
-- Actual Result: *Works as intended*
-
-![](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/mobile/mobile_contact_landscape.png)
-
+- **Actual Result**: *Works as intended*
 
 #### User story 5:
 
