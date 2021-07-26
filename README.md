@@ -7,7 +7,9 @@
 
 [Click here](https://feelgood-physio.herokuapp.com/) to visit the deployed site.
 
-[Here](https://calendar.google.com/calendar/u/0?cid=dXVlcTNzMnRiZ2RsNTdkdm1tdmNwNW9zZDhAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ) is the link to view the Google Calendar as it is updated.
+To view 
+
+[Here](https://calendar.google.com/calendar/u/0?cid=dXVlcTNzMnRiZ2RsNTdkdm1tdmNwNW9zZDhAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ) is the link to view the Google Calendar as it is updated. You will have to log in to Google and add it to your subscribed calendars, but it is just as easy to remove it again.
 
 [Here](https://docs.google.com/spreadsheets/d/1tZfgo8_TkdA9EdJyrj58YbFePcTcciv-zyC2UBqY6-g/edit?usp=sharing) is the link to the Google Spreadsheet, to see the updates made.
 
@@ -370,9 +372,9 @@ User stories are tested with the features that cover them. All user stories pass
 ### Testing of patient user stories
 
 <details>
-  <summary>View user story tests</summary>
+  <summary>View patient user story tests</summary>
 
-#### 1. I would like to be able to book an appointment at a time of my choosing, should the appointement be available
+#### Patient user story 1: I would like to be able to book an appointment at a time of my choosing, should the appointement be available
 
 
 **Covered by feature 1: The Patient Booking System**
@@ -407,125 +409,70 @@ User stories are tested with the features that cover them. All user stories pass
  - Actual result: *Works as intended*
 
 
-#### 2. I would like to be alerted if my details are saved before I enter them
+#### Patient user story 2: I would like to be alerted if my details are saved before I enter them
 
 **Covered by feature 1: The Patient Booking System**
 
-- Action: *In the welcome screen, user hits "b" to get to the booking screen*
+- **Action**: *In the welcome screen, user hits "b" to get to the booking screen*
 
-- Expected Result: *Application displays message about storing data and user needs to confirm this to carry on*
+- **Expected Result**: *Application displays message about storing data and user needs to confirm this to carry on*
 
-- Actual Result: *Works as intended*
+- **Actual Result**: *Works as intended*
 
 ![User story 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing/user_story_2.png)
 
 
-**Nav Menu Feature**
+#### Patient user story 3: I would like to be well informed from the application throughout the booking process
 
-- Action: *The clicking and navigating in the nav menu*
+This user story is tested in the steps needed to make an appointment.
 
-- Expected Result: *Animations, positioning and feel of the menu appeal to user
-*
-- Actual Results: *Works as intended*
+**Covered by feature 1: The Patient Booking System**
 
-![Nav-Desktop](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/desktop/desktop_nav.png)
+- **Action**: *User initiates a booking by pressing "b"*
 
-**The Quiz Feature**
+- **Expected Result**: *Application displays message about storing data*
 
-- Action: *Clicking "Let's Play!"*
+- **Actual Result**: *Works as intended*
 
-- Expected Result: *Experience well designed elements with sounds and animation to appeal to user*
-- Actual Result: *Works as intended*
+__
 
-![Quiz](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/mobile_large/mobile_large_quiz.png)
+- **Action**: *User hits "1" to continue*
 
-**The Piano Feature**
+- **Expected Result**: *Application asks user for the month they would like to come*
 
-- Action: *Playing keys on the piano by clicking the keys or playing on the keyboard*
+- **Actual Result**: *Works as intended*
 
-- Expected Result: *User is informed by "keys" on screen which keys on computer keyboard to press to play piano. Piano notes played are heard and seen.*
+__
 
-- Actual Result: *Works as intended*
+- **Action**: *User enters the three first letters of the month that they want to come*
 
-![Play desktop](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/laptop/laptop_play.png)
+- **Expected Result**: *Application confirms the month entered and asks for the desired appointment date*
 
-**The Learn Page Feature**
+- **Actual Result**: *Works as intended*
 
-- Action: *User navigates and clicks on videos to play them*
+__
 
-- Expected Result: *User enjoys the layout and content on the learn page*
+- **Action**: *User enters the desired appointment date*
 
-- *Works as intended* (for the people I have tested the website on too)
+- **Expected Result**: *Application lets user know if the date is unbookable, (weekends for examples) if the timeslot is taken or if it is available to book*
 
-![Learn page](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/mobile/mobile_learn_landscape.png)
+- **Actual Result**: *Works as intended*
 
+__
 
-#### User story 3:
+- **Action**: *User enters the desired appointment date*
 
-**As a user, i would like to experience the same quality in design, user interaction and structure on small mobile devices, tablets as on larger screens**
+- **Expected Result**: *Application lets user know if the date is unbookable, (weekends for example) or if it is available to book, in which case the app confirms date and asks user for time of appointment*
 
-**Nav Menu**
+- **Actual Result**: *Works as intended*
 
-- Action: *The user viewing and navigating in the nav menu on any device*
+__
 
-- Expected Result: *The menu being displayed well, and design appealing*
+- **Action**: *User enters the desired appointment date*
 
-- Actual Result: *Works as intended*
+- **Expected Result**: *Application lets user know if the date is unbookable, (weekends for examples) if the timeslot is taken or if it is available to book, in which case the app asks user for time of appointment*
 
-(The nav menu can be viewed on several devices in the images above)
-
-**Home Page Feature**
-
-- Action: *The user viewing and navigating within the home page on any device*
-
-- Expected Result: *The design of the home page looks good on all devices*
-
-- Actual Result: *Works as intended*
-
-![Home mobile](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/mobile/mobile_home.png)
-
-**The Piano Feature**
-
-- Action: *User plays the piano on any device*
-
-- Expected Result: *The design of the piano and displayed notes is well balanced on all devices*
-
-- Actual Result: *Works as intended*
-
-![Play page](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/mobile_large/mobile_large_play.png)
-
-**The Quiz Feature**
-
-- Action: *User plays the quiz on any device*
-
-- Expected Result: *The quiz elements are displayed well on all devices*
-
-- Actual Result: *Works as intended*
-
-![Quiz](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/tablet/tablet_quiz_landscape.png)
-
-**Learn Page Feature**
-
-- Action: *User navigates and watches videos on any device*
-
-- Expected Result: *The design of the video sections adapt to the screens viewing the page.*
-
-- Actual Result: *Works as intended*
-
-![Learn page](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/tablet/tablet_learn.png)
-
-![Learn page mobile](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/mobile/mobile_learn.png)
-
-**Contact Page Feature**
-
-- Action: *User fills in the form on any device*
-
-- Expected Result: *Form is displayed properly and looks good on all devices.*
-
-- Actual Result: *Works as intended*
-
-![contact](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/mobile/mobile_contact_landscape.png)
-
+- **Actual Result**: *Works as intended*
 
 #### User story 4:
 

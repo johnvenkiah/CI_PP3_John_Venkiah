@@ -606,7 +606,7 @@ def get_month(yr):  # pylint: disable=invalid-name
         'Jul': 31,
         'Aug': 31,
         'Sep': 30,
-        'Okt': 31,
+        'Oct': 31,
         'Nov': 30,
         'Dec': 31,
     }
