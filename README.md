@@ -373,7 +373,7 @@ User stories are tested with the features that cover them. All user stories pass
 
 **Covered by feature 1: The Patient Booking System**
 
-![User story 1, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing/user_story_1_1.png)
+![User story 1, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_1_1.png)
 *The initial steps of the booking*
 
 - **Actions**:
@@ -392,10 +392,10 @@ User stories are tested with the features that cover them. All user stories pass
     * User is greeted with their newly made booking
     * User can choose to go back to the beginning
 
-![User story 1, 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing/user_story1_2.png)
+![User story 1, 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story1_2.png)
 *Checks if the date is a weekend or if a booking is already made at that time*
 
-![User story 1, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing/user_story_1_3.png)
+![User story 1, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_1_3.png)
 *Lets user know that the booking is made*
 
  - Expected result: *To Make a successful booking at an available time*
@@ -413,7 +413,7 @@ User stories are tested with the features that cover them. All user stories pass
 
 - **Actual Result**: *Works as intended*
 
-![User story 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing/user_story_2.png)
+![User story 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_2.png)
 
 
 #### Patient user story 3: I would like to be well informed from the application throughout the booking process
@@ -428,7 +428,7 @@ This user story is tested in the steps needed to make an appointment.
 
 - **Actual Result**: *Works as intended*
 
-[User story 3, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing/user_story_3_1.png)
+[User story 3, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_3_1.png)
 __
 
 - **Action**: *User hits "1" to continue*
@@ -453,7 +453,7 @@ __
 
 - **Actual Result**: *Works as intended*
 
-[User story 3, 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing/user_story_3_2.png)
+[User story 3, 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_3_2.png)
 
 __
 
@@ -471,7 +471,7 @@ __
 
 - **Actual Result**: *Works as intended*
 
-[User story 3, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing/user_story_3_3.png)
+[User story 3, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_3_3.png)
 
 __
 
@@ -497,7 +497,7 @@ __
 
 - **Actual Result**: *Works as intended*
 
-[User story 3, 4](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing/user_story_3_4.png)
+[User story 3, 4](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_3_4.png)
 
 #### User story 4: I would like to be alerted if my choice is invalid anywhere in the application, and get a chance to try again
 
