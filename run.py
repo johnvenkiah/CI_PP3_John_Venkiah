@@ -221,7 +221,7 @@ def print_appointments(earliest, latest):
     app_dict = {}
 
     if len(appointments) <= 3:
-        print('Not many appointments that week.\n')
+        print('Not many appointments that week.')
 
     for appointment in appointments:
 
@@ -426,7 +426,7 @@ def get_date_staff(apntmnt_to_edit, apntmnt_id):
 
         print('\nEnter new date for appointment, in this format:\n')
         date_input = input(
-            "DD-MM-YY (don't forget the hyphens, e to exit)\n\n"
+            "DD-MM-YY (don't forget the hyphens, "e" to exit)\n\n"
         )
 
         if date_input == "e":
