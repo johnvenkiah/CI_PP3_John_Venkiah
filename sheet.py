@@ -18,14 +18,20 @@ SHEET = GSPREAD_CLIENT.open('feelgood_patient_data')
 
 
 def get_p_log():
+    """
+    Gets the patient log from Google sheets worksheet and passes it
+    to show_p_data. Get all values methods from the Google Resources
+    website: https://developers.google.com/sheets
+    """
     try:
         p_log = SHEET.worksheet('patient_log')
         p_data = p_log.get_all_values()
 
-        return p_log, p_data
+        return p_log
 
     except Exception as error:
         print(f'could not load Google worksheet, probable API error: {error}')
+        return False
 
 
 pat_log = get_p_log()
@@ -60,7 +66,7 @@ def get_p_nr():
     return str(p_nr)
 
 
-def append_p_row(name, email, details):
+def append_p_row(name, email, details, p_data):
     """
     Adds a new patient row with details to log on Google Sheets. If patient
     name already exists, only updates the symptoms, stored in details variable.
@@ -71,13 +77,16 @@ def append_p_row(name, email, details):
     """
     p_log = pat_log[0]
 
-    if name not in p_log.col_values(2):
+    if name not in str(p_log.col_values(2)):
         p_nr = get_p_nr()
 
         data = [p_nr, name, email, details]
         p_log.append_row(data)
+
     else:
         for row in p_log.col_values(2):
             if name in row:
                 row_nr = p_log.find(name).row
                 p_log.update_cell(row_nr, 4, details)
+
+    p_data = pat_log[1]  # noqa # pylint: disable=unused-variable
