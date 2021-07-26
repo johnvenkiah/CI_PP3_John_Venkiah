@@ -434,6 +434,7 @@ This user story is tested in the steps needed to make an appointment.
 
 - **Actual Result**: *Works as intended*
 
+[User story 3, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing/user_story_3_1.png)
 __
 
 - **Action**: *User hits "1" to continue*
@@ -458,6 +459,8 @@ __
 
 - **Actual Result**: *Works as intended*
 
+[User story 3, 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing/user_story_3_2.png)
+
 __
 
 - **Action**: *User enters hour of desired appointment time*
@@ -473,6 +476,8 @@ __
 - **Expected Result**: *Application Confirms the users name and asks for their email*
 
 - **Actual Result**: *Works as intended*
+
+[User story 3, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing/user_story_3_3.png)
 
 __
 
@@ -497,6 +502,8 @@ __
 - **Expected Result**: *Application displays confirmation, that patient data is logged and user can return to the main screen*
 
 - **Actual Result**: *Works as intended*
+
+[User story 3, 4](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing/user_story_3_4.png)
 
 #### User story 4:
 
