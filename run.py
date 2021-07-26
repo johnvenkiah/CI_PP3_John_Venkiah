@@ -405,7 +405,9 @@ def get_name_staff(apntmnt_to_edit, apntmnt_id):
 
     print('\nPlease enter new name or "e" to exit:\n')
 
-    new_name = validate_name()
+    new_name = input()
+    validate_name(new_name)
+
     if new_name == 'e':
         staff_nav()
 
@@ -742,13 +744,12 @@ def get_time(date, month, yr):  # pylint: disable=invalid-name
             print('\nSorry, invalid entry.')
 
 
-def validate_name():
+def validate_name(name):
     """
     Simple name validation so user inputs two names and without numbers.
     """
 
     while True:
-        name = input()
 
         if any(char.isdigit() for char in name):
             print("\nName can't contain numbers!\n")
@@ -770,8 +771,10 @@ def get_name(apntmnt_time, end_time):
     """
 
     print('To continue, enter your full name ("e" to exit):\n')
-    name = validate_name()
+    name = input()
     e_to_exit(name)
+    validate_name(name)
+
     print(f'\nThank you {name}.\n')
     get_email(apntmnt_time, end_time, name)
     return name
