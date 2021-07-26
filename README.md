@@ -373,6 +373,9 @@ User stories are tested with the features that cover them. All user stories pass
 
 **Covered by feature 1: The Patient Booking System**
 
+![User story 1, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing/user_story_1_1.png)
+*The initial steps of the booking*
+
 - **Actions**:
 
     * User hits "b" to begin
@@ -389,34 +392,24 @@ User stories are tested with the features that cover them. All user stories pass
     * User is greeted with their newly made booking
     * User can choose to go back to the beginning
 
+![User story 1, 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing/user_story1_2.png)
+*Checks if the date is a weekend or if a booking is already made at that time*
+
+![User story 1, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing/user_story_1_3.png)
+*Lets user know that the booking is made*
+
  - Expected result: *To Make a successful booking at an available time*
 
  - Actual result: *Works as intended*
 
-![Navmenu](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/screenshots_iphone/navmenu_iphone.png)
 
-![Navmenu](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/features/feature_one_navbar_landscape.png)
+#### 2. I would like to be alerted if my details are saved before I enter them
 
- **Home page Feature**
+**Covered by feature 1: The Patient Booking System**
 
-- Action: *Click on any of the buttons or the contact link below | To get to the page clicked on*
+- Action: *In the welcome screen, user hits "b" to get to the booking screen*
 
-- Expected result: *To get to the page clicked on*
-
-- Actual Result: *Works as intended*
-
-![Screenshot of home](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/mobile/mobile_home_landscape.png)
-
-
-#### User story 2:
-
-**As a user, i would like to be presented with a well designed, user-friendly interface**
-
-**Home page Feature**
-
-- Action: *General navigation, and experience of the home page*
-
-- Expected Result: *Page feels well balanced and attractive to use*
+- Expected Result: *Application displays message about storing data and user needs to confirm this to carry on*
 
 - Actual Result: *Works as intended*
 
