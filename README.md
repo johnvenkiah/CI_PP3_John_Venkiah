@@ -359,16 +359,15 @@ All Python files passed the [PEP8](http://pep8online.com/) and [Pylint](https://
 Click [here](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/validation/validation.md) to view them.
 
 
-## Testing of User Stories
+
+## Testing of patient User Stories
 
 User stories are tested with the features that cover them. All user stories passed the tests.
-
-### Testing of patient user stories
 
 <details>
   <summary>View patient user story tests</summary>
 
-#### Patient user story 1: I would like to be able to book an appointment at a time of my choosing, should the appointement be available
+### Patient user story 1. I would like to be able to book an appointment at a time of my choosing, should the appointement be available
 ___
 
 **Covered by feature 1: The Patient Booking System**
@@ -403,7 +402,7 @@ ___
  - Actual result: *Works as intended*
 
 
-#### Patient user story 2: I would like to be alerted if my details are saved before I enter them
+### Patient user story 2. I would like to be alerted if my details are saved before I enter them
 ___
 
 **Covered by feature 1: The Patient Booking System**
@@ -417,7 +416,7 @@ ___
 ![User story 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_2.png)
 
 
-#### Patient user story 3: I would like to be well informed from the application throughout the booking process
+### Patient user story 3. I would like to be well informed from the application throughout the booking process
 ___
 
 This user story is tested in the steps needed to make an appointment.
@@ -502,54 +501,71 @@ ___
 
 ![User story 3, 4](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_3_4.png)
 
-#### User story 4: I would like to be alerted if my choice is invalid anywhere in the application, and get a chance to try again
+
+
+### Patient user story 4. I would like to be alerted if my choice is invalid anywhere in the application, and get a chance to try again
 ___
 
 - **Action**: *User enters invalid value, or date/time that is not free*
 
 - **Expected Result**: *Application let user know that the entry is invalid, and the user gets to try again*
 
+- **Actual Result**: *Works as intended*
+
 The testing of this user case is best portrayed with the images below. All areas of navigation have passed the tests.
 
-*Invalid choices at the welcome screen*
+___
+
+*Invalid choices at the welcome screen:*
 ![User story 4, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_4_1.png)
 
 ___
 
-*Invalid choices when choosing month*
+*Invalid choices when choosing month:*
 ![User story 4, 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_4_2.png)
 
 ___
 
-*Invalid choices when choosing month*
+*Invalid choices when choosing date:*
 ![User story 4, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_4_3.png)
 
+___
+
+*Invalid choices when choosing weekend date:*
 ![User story 4, 4](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_4_4.png)
 
+___
+
+*Invalid choices when choosing an already booked timeslot:*
 ![User story 4, 5](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_4_5.png)
 
+___
+
+*Invalid choices when entering single word:*
 ![User story 4, 6](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_4_6.png)
 
+___
+
+*Invalid choices when entering invalid email:*
 ![User story 4, 7](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_4_7.png)
 
+___
+
+*Invalid choices when entering too short description of symptoms:*
 ![User story 4, 8](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_4_8.png)
+
+
+
+### User story 5. I would like to be able to confirm the booking right before it is made
+___
+
+- **Action**: *User completes booking and enters valid information throughout the booking process*
+
+- **Expected Result**: *User is asked to confirm the booking*
 
 - **Actual Result**: *Works as intended*
 
-#### User story 5:
-
-**As a user, i would like to be able to play a quiz on note names, symbols and note lengths**
-
-**The Quiz Feature**
-
-- Action: *User navigates to the Quiz page and clicks on the "Let's Play!" button*
-
-- Expected Result: *The quiz begins and the user answers by clicking one of four buttons*
-
-- Actual Result: *Works as intended*
-
-![Quiz mobile](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/screenshots_iphone/quiz_iphone.png)
-
+![User story 5](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_1_3.png)
 
 
 #### User story 6:
