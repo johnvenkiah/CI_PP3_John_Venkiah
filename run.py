@@ -614,7 +614,8 @@ def get_month(yr):  # pylint: disable=invalid-name
     while True:
 
         print('\nChoose the month for the appointment.\n')
-        month = input('3 letters, first capital. "e" to exit.\n\n')
+        month = input('3 letters. "e" to exit.\n\n')
+        month = month.capitalize()
         days_in_month = month_dict.get(month)
         month_incorr = '\nMonth incorrect, please try again'
 
@@ -666,12 +667,12 @@ def get_date(
         try:
             date_today = datetime.date.today().day
             weekday_int = datetime.date(
-                yr, int_this_month, int(date)
+                yr, int_month, int(date)
             ).weekday()
 
             if (
-                int_month == int_this_month and int(date) <= date_today or
-                weekday_int == 5 or weekday_int == 6
+                weekday_int == 5 or weekday_int == 6 or
+                int_month == int_this_month and int(date) <= date_today
             ):
                 print(
                     '\nBooking has to be at least one day ahead, no weekends.'
@@ -712,7 +713,7 @@ def get_time(date, month, yr):  # pylint: disable=invalid-name
             )
 
             if appointments:
-                print('Sorry, appointment not available. Try again.')
+                print('\nSorry, appointment not available. Try again.')
             else:
                 print(f'\n{hour}:00 on {date} {month}, {yr} is free.\n')
                 get_name(apntmnt_time, end_time)

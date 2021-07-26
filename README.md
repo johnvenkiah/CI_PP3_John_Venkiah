@@ -147,7 +147,7 @@ As this application has such specific target users, I have adapted my user stori
 
 #### Site owner goals
 
-18. I would like for the application to contain validated Python code without returning any errors
+18. I would like for the application to contain validated Python code without returning any errors, whatever the user does
 
 
 ### Flowchart
@@ -244,7 +244,7 @@ If the user with the same name already exists in the patient log, the patients s
 
 **Site owner goals covered**
 
-18. I would like for the application to contain validated Python code without returning any errors
+18. I would like for the application to contain validated Python code without returning any errors, whatever the user does
 
 
 ### Feature 2: The Schedule
@@ -274,7 +274,7 @@ Upon changing these parameters and confirming the changes, the appointments are 
 
 **Site owner goals covered**
 
-18. I would like for the application to contain validated Python code without returning any errors
+18. I would like for the application to contain validated Python code without returning any errors, whatever the user does
 
 
 ### Feature 3: The Patient Log
@@ -298,7 +298,7 @@ Even though the same details are kept in the Google Calendar, the patient log is
 
 **Site owner goals covered**
 
-18. I would like for the application to contain validated Python code without returning any errors
+18. I would like for the application to contain validated Python code without returning any errors, whatever the user does
 
 
 ### Features to be implemented
@@ -359,22 +359,28 @@ All Python files passed the [PEP8](http://pep8online.com/) and [Pylint](https://
 Click [here](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/validation/validation.md) to view them.
 
 
-## Testing of User Stories/Site Owner Goals
+## Testing of User Stories
 
 User stories are tested with the features that cover them. All user stories passed the tests.
 
-### Testing of user stories
+### Testing of patient user stories
 
 <details>
   <summary>View user story tests</summary>
 
-#### User story 1:
+#### 1. I would like to be able to book an appointment at a time of my choosing, should the appointement be available
 
-**As a user, i would like to easily navigate the websites pages via the menu or links provided**
 
-**Navmenu Feature**
+**Covered by feature 1: The Patient Booking System**
 
- - Action: *Click on the links at the top of all pages other than Home on large screens, on mobile, click on the hamburger button*
+- **Actions**:
+
+    * User hits "b" to begin
+    * User enters "1" to agree on the application logging the patient data
+    * User enters desired month of the appointment (Three letters)
+    * User enters desired date (one or two figure numbers both work)
+    * User enters desired hour of the appointment
+    * User is notified if the timeslot is free or not, and 
 
  - Expected result: *To get to the page clicked on by user*
 
@@ -814,36 +820,29 @@ Validation results can be seen [here](https://github.com/johnvenkiah/CI_MS2_John
 <details>
   <summary>View bugs here</summary>
 
-- Bug: Error ``code: 500, APIerror`` when calling the sheets API
-- Fix: create a "try", "except" to catch API errors when calling the sheets API
+Bug: Error ``code: 500, APIerror`` when calling the sheets API
+Fix: create a "try", "except" to catch API errors when calling the sheets API
 
+Bug: Checking schedule displayed twice
+Fix: Change code so things happen in correct order
 
-- Bug: Checking schedule displayed twice
-- Fix: Change code so things happen in correct order
+Bug: Password hiding library import stdiomsk doesn't work on terminal in Heroku and produced ``termios.error: 25, 'Inappropriate ioctl for device'``
+Fix: Remove stdiomsk and let password entered be shown
 
+Bug: Datetime parsing not working, returning errors
+Fix: Create TimeFConverter class, convert formats with that
 
-- Bug: Password hiding library import stdiomsk doesn't work on terminal in Heroku and produced ``termios.error: 25, 'Inappropriate ioctl for device'``
-- Fix: Remove stdiomsk and let password entered be shown
+Bug: Says date incorrect although it is correct
+Fix: Fix while loop
 
+Bug: Sheets updating wrong cell when user exists
+Fix code at end of sheet.py; use update_cell sheets method
 
-- Bug: Datetime parsing not working, returning errors
-- Fix: Create TimeFConverter class, convert formats with that
+Bug: Schedule displaying wrong weeks when navigating through weeks, out of schedule back in and then showing next week again
+Fix: Add initialize method to IncDecWeek class, so when user exits, the weeks count resets
 
-
-- Bug: Says date incorrect although it is correct
-- Fix: Fix while loop
-
-
-- Bug: Sheets updating wrong cell when user exists
-- Fix code at end of sheet.py; use update_cell sheets method
-
-
-- Bug: Schedule displaying wrong weeks when navigating through weeks, out of schedule back in and then showing next week again
-- Fix: Add initialize method to IncDecWeek class, so when user exits, the weeks count resets
-
-
-- Bug: Some lines appearing without space below
-- Fix: Add new line to print and input strings where relevant
+Bug: Some lines appearing without space below
+Fix: Add new line to print and input strings where relevant
 
 </details>
 
