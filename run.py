@@ -406,7 +406,7 @@ def get_name_staff(apntmnt_to_edit, apntmnt_id):
     print('\nPlease enter new name or "e" to exit:\n')
 
     new_name = validate_name()
-    if new_name == "e":
+    if new_name == 'e':
         staff_nav()
 
     update_name(apntmnt_to_edit, apntmnt_id, new_name)
@@ -426,10 +426,10 @@ def get_date_staff(apntmnt_to_edit, apntmnt_id):
 
         print('\nEnter new date for appointment, in this format:\n')
         date_input = input(
-            "DD-MM-YY (don't forget the hyphens, "e" to exit)\n\n"
+            "DD-MM-YY (don't forget the hyphens, 'e' to exit)\n\n"
         )
 
-        if date_input == "e":
+        if date_input == 'e':
             print_appointments(now, future_date(7))
             return False
 
