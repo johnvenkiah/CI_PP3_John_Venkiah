@@ -796,8 +796,25 @@ ___
 
 ![user story 11, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_11_3.png)
 
-</details>
 
+### User story 12.
+
+*"I would like to be able to view the patient log"*
+
+**Covered by feature 3: The Patient Log**
+
+- Action: *User hits "l" in the staff area*
+
+- Expected Result: *The patient log is displayed*
+
+- Actual Result: *Works as intended*
+
+</details>
+    <summary>View image of initial steps of the booking</summary>
+
+![User story 12](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_log/patient_log.png)
+
+</details>
 
 ## Bugs
 
