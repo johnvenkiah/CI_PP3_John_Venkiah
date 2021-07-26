@@ -821,7 +821,7 @@ ___
 
 *"I would like to view my schedule for the coming week"*
 
-**Covered by feature 3: The Schedule**
+**Covered by feature 2: The Schedule**
 
 - Action: *User hits "s" in the staff area*
 
@@ -840,7 +840,7 @@ ___
 
 *"I would like to navigate between weeks in my schedule"*
 
-**Covered by feature 3: The Schedule**
+**Covered by feature 2: The Schedule**
 
 - Action: *User hits "n" or "b" when viewing the schedule*
 
@@ -859,7 +859,7 @@ ___
 
 *"I would like to be able to update or remove any appointment viewed in my schedule"*
 
-**Covered by feature 3: The Schedule**
+**Covered by feature 2: The Schedule**
 
 #### Edit appointment
 
@@ -914,6 +914,34 @@ ___
 
 *The Google event is now nowhere to be seen*
 ![User story 15, 6](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_15_6.png)
+
+</details>
+
+### Testing of user story 16
+
+*"I would like to easily be able to return to the main staff area in the application"*
+
+**Covered by feature 2: The Schedule, and feature 3, The Patient Log**
+
+#### Edit appointment
+
+- **Actions**:
+
+* *User enters number of appoinment when viewing the schedule*
+* *User chooses what to edit; time, name or details*
+* *User enters new time, name or details for appointment*
+* *User confirms changes*
+
+
+- Expected Result: *The event is updated on Google Calendar*
+
+- Actual Result: *Works as intended*
+
+</details>
+    <summary>View images of editing appointments</summary>
+
+*The edit menu*
+![User story 15, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_15_1.png)
 
 </details>
 

@@ -403,7 +403,8 @@ def get_name_staff(apntmnt_to_edit, apntmnt_id):
         specific event on Google Calendar.
     """
 
-    print('\nPlease enter new name:\n')
+    print('\nPlease enter new name or "e" to exit:\n')
+
     new_name = validate_name()
     update_name(apntmnt_to_edit, apntmnt_id, new_name)
 
