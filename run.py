@@ -621,25 +621,28 @@ def get_month(yr):  # pylint: disable=invalid-name
 
         e_to_exit(month)
 
-        if month in month_dict.keys():
-            int_month = datetime.datetime.strptime(month, '%b')
-            int_month = int(int_month.strftime('%m'))
+        try:
+            if month in month_dict.keys():
+                int_month = datetime.datetime.strptime(month, '%b')
+                int_month = int(int_month.strftime('%m'))
 
-            this_month = datetime.datetime.now().month
-            int_this_month = int(this_month)
+                this_month = datetime.datetime.now().month
+                int_this_month = int(this_month)
 
-            if int_month < int_this_month:
-                yr = datetime.datetime.today() + timedelta(365.2425)
-                yr = yr.yr
+                if int_month < int_this_month:
+                    yr = datetime.datetime.today() + timedelta(365.2425)
+                    yr = yr.yr
 
-            get_date(days_in_month, month, yr, int_month, int_this_month)
-            return False
+                get_date(days_in_month, month, yr, int_month, int_this_month)
+                return False
 
-        if month.isnumeric():
-            print(month_incorr)
+            if month.isnumeric():
+                print(month_incorr)
 
-        else:
-            print(month_incorr)
+            else:
+                print(month_incorr)
+        except ValueError as error:
+            print(f'Time formatting error, {error}'')
 
 
 def get_date(

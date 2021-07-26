@@ -771,8 +771,10 @@ Validation results can be seen [here](https://github.com/johnvenkiah/CI_MS2_John
 <details>
   <summary>View bugs here</summary>
 
+Bug: Error when entering month "oct" in patient booking system
+
 Bug: Error ``code: 500, APIerror`` when calling the sheets API
-Fix: create a "try", "except" to catch API errors when calling the sheets API
+Fix: Only happened once, difficult to recreate. Created a "try", "except" to catch API errors when calling the sheets API.
 
 Bug: Checking schedule displayed twice
 Fix: Change code so things happen in correct order
