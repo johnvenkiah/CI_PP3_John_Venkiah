@@ -454,23 +454,47 @@ __
 
 - **Action**: *User enters the desired appointment date*
 
-- **Expected Result**: *Application lets user know if the date is unbookable, (weekends for examples) if the timeslot is taken or if it is available to book*
-
-- **Actual Result**: *Works as intended*
-
-__
-
-- **Action**: *User enters the desired appointment date*
-
 - **Expected Result**: *Application lets user know if the date is unbookable, (weekends for example) or if it is available to book, in which case the app confirms date and asks user for time of appointment*
 
 - **Actual Result**: *Works as intended*
 
 __
 
-- **Action**: *User enters the desired appointment date*
+- **Action**: *User enters hour of desired appointment time*
 
-- **Expected Result**: *Application lets user know if the date is unbookable, (weekends for examples) if the timeslot is taken or if it is available to book, in which case the app asks user for time of appointment*
+- **Expected Result**: *Application confirms the time and asks user for name if the desired appoinment time is free and bookable, otherwise lets the user know and user has to choose new time*
+
+- **Actual Result**: *Works as intended*
+
+__
+
+- **Action**: *User enters their name*
+
+- **Expected Result**: *Application Confirms the users name and asks for their email*
+
+- **Actual Result**: *Works as intended*
+
+__
+
+- **Action**: *User enters their email*
+
+- **Expected Result**: *Application Confirms the users email address and asks user to enter their symptoms*
+
+- **Actual Result**: *Works as intended*
+
+__
+
+- **Action**: *User enters their symptoms*
+
+- **Expected Result**: *Application displays all the patient data retrieved and asks user to confirm appointment*
+
+- **Actual Result**: *Works as intended*
+
+__
+
+- **Action**: *User confirms appointment*
+
+- **Expected Result**: *Application displays confirmation, that patient data is logged and user can return to the main screen*
 
 - **Actual Result**: *Works as intended*
 
@@ -772,9 +796,10 @@ Validation results can be seen [here](https://github.com/johnvenkiah/CI_MS2_John
   <summary>View bugs here</summary>
 
 Bug: Error when entering month "oct" in patient booking system
+Fix: Correct typo "Okt" in month dictionary, create try and except to catch time format value errors
 
 Bug: Error ``code: 500, APIerror`` when calling the sheets API
-Fix: Only happened once, difficult to recreate. Created a "try", "except" to catch API errors when calling the sheets API.
+Fix: Only happened once, difficult to recreate. Created a "try", "except" to catch API errors when calling the sheets API
 
 Bug: Checking schedule displayed twice
 Fix: Change code so things happen in correct order
@@ -786,7 +811,7 @@ Bug: Datetime parsing not working, returning errors
 Fix: Create TimeFConverter class, convert formats with that
 
 Bug: Says date incorrect although it is correct
-Fix: Fix while loop
+Fix: Fix while loop and indentation in get date function
 
 Bug: Sheets updating wrong cell when user exists
 Fix code at end of sheet.py; use update_cell sheets method

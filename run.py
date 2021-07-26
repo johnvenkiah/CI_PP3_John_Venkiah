@@ -789,8 +789,9 @@ def get_details(apntmnt_time, end_time, name, email):
     @param name(str): Name to display as ['summary'] for Google event
     """
     while True:
-        details = input('\nShortly describe your symptoms ("e" to exit):\n\n')
-        e_to_exit(details)
+        det_in = input('\nShortly describe your symptoms ("e" to exit):\n\n')
+        e_to_exit(det_in)
+        details = det_in.replace('[C ', '').replace('[C', '')
 
         if len(details) < 8:
             print('\nPlease enter at least eight characters')
@@ -798,7 +799,7 @@ def get_details(apntmnt_time, end_time, name, email):
         else:
             start_pretty = convert_time.iso_to_pretty(apntmnt_time, 0)
 
-            print(f'\nConfirm appointment: {start_pretty}?\n')
+            print(f'\nConfirm appointment: {start_pretty}, {details}?\n')
             confirm = input('"y" = YES, any other key = NO\n\n')
 
             if confirm.lower() == 'y':

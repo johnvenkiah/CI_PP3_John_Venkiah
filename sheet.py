@@ -44,8 +44,8 @@ def show_p_data():
             continue
         p_dict = dict(zip(p_data[0], row))
         print(
-            '\n' + str(p_dict).replace("{", "").replace(
-                "}", "").replace("'", "")
+            '\n' + str(p_dict).replace('{', '').replace(
+                '}', '').replace("'", '')
         )
 
 
