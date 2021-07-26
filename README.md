@@ -7,6 +7,10 @@
 
 [Click here](https://feelgood-physio.herokuapp.com/) to visit the deployed site.
 
+[Here](https://calendar.google.com/calendar/u/0?cid=dXVlcTNzMnRiZ2RsNTdkdm1tdmNwNW9zZDhAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ) is the link to view the Google Calendar as it is updated.
+
+[Here](https://docs.google.com/spreadsheets/d/1tZfgo8_TkdA9EdJyrj58YbFePcTcciv-zyC2UBqY6-g/edit?usp=sharing) is the link to the Google Spreadsheet, to see the updates made.
+
 ## Contents
 
 1. [User Experience](#user-experience)
