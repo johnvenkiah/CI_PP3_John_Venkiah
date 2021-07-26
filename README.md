@@ -137,7 +137,7 @@ As this application has such specific target users, I have adapted my user stori
 8. I would like for users to only be able to book appointments on weekdays between 9 and 17, and when the schedule is free
 9. I would like appointments made by new users add a new row with their information to the Google Sheets patient log
 10. I would like the appointments made by patients dynamically update my Google Calendar
-11. I would like the changes made in the applications edit menu to update the events on my Google Calendar
+11. I would like the changes made in the schedules edit menu to update the events on my Google Calendar
 12. I would like to be able to view the patient log
 13. I would like to view my schedule for the coming week
 14. I would like to navigate between weeks in my schedule
@@ -191,7 +191,7 @@ Messages to clarify what has and has not been done, and what the user's choices 
 
 ## Features
 
-### Feature 1 The Patient Booking System
+### Feature 1: The Patient Booking System
 
 ![Patient Booking System](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_booking/p_booking_month.png)
 
@@ -675,17 +675,20 @@ ___
 ![User story 9, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/google_cal/g_cal_new.png)
 
 
-#### User story 18:
+### User story 11:
 
-**As a site owner, i would like to display a learn page containing the results of a YouTube search dynamically updated, using YouTube API**
+**"I would like the changes made in the schedules edit menu to update the events on my Google Calendar"**
+___
 
-**Learn Page Feature**
+**Covered by feature 2: The Schedule**
 
-- Action: *User navigates to the learn page*
+- Action: *User edits an appointment from the schedule*
 
-- Expected Result: *The Videos list is dynamically updated with YouTube API and loaded into the videos section*
+- Expected Result: *The appointment is updated on Google Calendar with new data from user*
 
 - Actual Result: *Works as intended*
+
+
 
 The learn page can be viewed above. It is highly responsive, and works even on the smallest devices.
 

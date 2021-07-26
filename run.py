@@ -221,7 +221,7 @@ def print_appointments(earliest, latest):
     app_dict = {}
 
     if len(appointments) <= 3:
-        print('Not many appointments that week.')
+        print('Not many appointments that week.\n')
 
     for appointment in appointments:
 
