@@ -406,6 +406,9 @@ def get_name_staff(apntmnt_to_edit, apntmnt_id):
     print('\nPlease enter new name or "e" to exit:\n')
 
     new_name = validate_name()
+    if new_name == "e":
+        staff_nav()
+
     update_name(apntmnt_to_edit, apntmnt_id, new_name)
 
 
@@ -458,7 +461,11 @@ def get_details_staff(apntmnt_to_edit, apntmnt_id):
     else:
         print(f'\nNo details for {name}')
 
-    new_details = input('\nEnter new patient details here:\n\n')
+    new_details = input('\nEnter new patient details  ("e" to exit):\n\n')
+
+    if new_details == 'e':
+        staff_nav()
+        return
 
     print(f'\nAccept update "{new_details}" for {name}?\n')
     update_details = input('("y" for YES, any other key for NO)\n\n')
@@ -742,7 +749,7 @@ def validate_name():
 
     while True:
         name = input()
-        e_to_exit(name)
+
         if any(char.isdigit() for char in name):
             print("\nName can't contain numbers!\n")
 
@@ -764,6 +771,7 @@ def get_name(apntmnt_time, end_time):
 
     print('To continue, enter your full name ("e" to exit):\n')
     name = validate_name()
+    e_to_exit(name)
     print(f'\nThank you {name}.\n')
     get_email(apntmnt_time, end_time, name)
     return name
