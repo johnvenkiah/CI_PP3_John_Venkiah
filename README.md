@@ -245,7 +245,7 @@ If the user with the same name already exists in the patient log, the patients s
 
 </details>
 
-**Patient stories covered:**
+**Patient user stories covered:**
 
 1. I would like to be able to book an appointment at a time of my choosing, should the appointement be available
 2. I would like to be alerted if my details are saved before I enter them
@@ -255,7 +255,7 @@ If the user with the same name already exists in the patient log, the patients s
 6. I would like to view a confirmation of the booking when it is made
 7. I would like to at any point cancel my booking during the booking process should I wish to do so
 
-**Staff member goals covered**
+**Staff member user stories covered**
 
 8. I would like for users to only be able to book appointments on weekdays between 9 and 17, and when the schedule is free
 9. I would like appointments made by new users add a new row with their information to the Google Sheets patient log
@@ -269,13 +269,6 @@ If the user with the same name already exists in the patient log, the patients s
 
 ### Feature 2: The Schedule
 
-<details>
-    <summary>Click to view image of schedule</summary>
-
-![The Schedule](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/schedule/schedule.png)
-
-</details>
-
 The Schedule is accessed via the staff area, which only users with a password can access. Here, users are initially shown the schedule from the current time and 7 days forward. The appointments are retrieved by an API request to FeelGood Physio's Google Calender, and can be edited and removed, by user inputting number displayed within the appointment.
 
 The user can navigate with keys "n" for next and "b" for back, which will respectively retrieve the schedule for the next or previous week. New numbers are displayed for the user to modify specific appointments. If the user enters "e" for edit, the user gets several choices to edit below:
@@ -284,14 +277,19 @@ The user can navigate with keys "n" for next and "b" for back, which will respec
 - Name: Change the name given in the appointment
 - Details: Change the patient's email adress or symptoms description
 
-<details>
-    <summary>Click to view image of edit menu</summary>
+Upon changing these parameters and confirming the changes, the appointments are updated in the Google Calendar. The user is notified of this and can return to the staff menu or exit.
 
+
+<details>
+    <summary>Click to view images of feature 2</summary>
+
+*The schedule*
+![The Schedule](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/schedule/schedule.png)
+
+*The edit menu*
 ![The edit menu](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/schedule/edit_apntmnt.png)
 
 </details>
-
-Upon changing these parameters and confirming the changes, the appointments are updated in the Google Calendar. The user is notified of this and can return to the staff menu or exit.
 
 **Staff member goals covered**
 
@@ -309,30 +307,23 @@ Upon changing these parameters and confirming the changes, the appointments are 
 
 ### Feature 3: The Patient Log
 
-<details>
-    <summary>Click to view image of the patient log</summary>
-
-![Patient Log](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_log/patient_log.png)
-
-</details>
-
 This is where staff can access data from patients that have booked via the booking system. The system lets users know before initiating the booking that their data will be logged, and after a successful booking the datails are logged in the Google Sheet via the API as a new entry. If the user already exists, their symptoms are the only thing that will be updated.
 
-<details>
-    <summary>Click to view image of edit menu</summary>
+Even though the same details are kept in the Google Calendar, the patient log is a way to consolidate information if staff are looking for a specific patient.
 
+<details>
+    <summary>Click to view images of feature 3</summary>
+
+*The patient log*
+![Patient Log](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_log/patient_log.png)
+
+*The patient log with an existing patient*
 ![Old patient books new appointment](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_log/patient_log_old_patient.png)
 
-</details>
-
-<details>
-    <summary>Click to view image of the updated details</summary>
-
+*The updated details*
 ![The Google Sheet with the updated details](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_log/sheet_update_sympt.png)
 
 </details>
-
-Even though the same details are kept in the Google Calendar, the patient log is a way to consolidate information if staff are looking for a specific patient.
 
 **Staff member goals covered:**
 
@@ -348,7 +339,9 @@ Even though the same details are kept in the Google Calendar, the patient log is
 
 ### Features to be implemented
 
-There are endless possibilities with an application like this. If the clinic were to hire more than one therapist, they could each have their own calendar and log. Patients could have the possibility to add a user account with which they log in to the system, and can reschedule or cancel their appointment. An important feature that the log now lacks is the possibility for staff to edit entries; this will be implemented at a later stage.
+There are endless possibilities with an application like this. If the clinic were to hire more than one therapist, they could each have their own calendar and log. Patients could have the possibility to add a user account with which they log in to the system, and can reschedule or cancel their appointment.
+
+An important feature that the log now lacks is the possibility for staff to edit entries; this will be implemented at a later stage.
 
 
 ## Technologies used
