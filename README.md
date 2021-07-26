@@ -50,12 +50,10 @@
 
 7. [Credits](#credits)
 
-## User Experience
 
-### Strategy
 ___
 
-#### Project Goals
+## Project Goals
 
 Project Goals for intended use are:
 
@@ -69,7 +67,7 @@ My personal project goals of FeelGood Physio are:
 - To explore the possibilities of working with API's
 - To gain knowledge of the Python programming language
 
-#### User Goals
+## User Goals
 
 Patients should find it simple to book appointments, and not be able to book a timeslot that is not available. Patients should also be made aware if their data is being logged.
 
@@ -81,13 +79,13 @@ Target Audience
 - Patients
 
 
-### Structure
+## Structure
 ___
 
 The FeelGood Physio Booking System relies almost only on user input. There are always options displayed on the screen and users can choose what to do next.
 When an input is entered, the application takes the user to the chosen option. All functions are chained together, each depending on the users input.
 
-#### 1. Home Screen
+### 1. Home Screen
 
 ![Screenshot of Home screen](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/screenshot_home.png)
 
@@ -96,13 +94,13 @@ This welcomes the user when they first enter the application, when the task at h
 - Book appointment - takes users to the booking process
 - Staff login - takes users to the staff area
 
-#### 2. Booking process for patient
+### 2. Booking process for patient
 
 ![Patient booking, month](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_booking/p_booking_month.png)
 
 This is a long chain of functions resulting in a new appointment and an update to the patient log, if completed. Users input their desired appoinment time and details, and get a confirmation message at the end.
 
-#### 3. Staff area
+### 3. Staff area
 
 To access the staff area, users need the staff password. If entered correctly, users can either view the patient log, or access the schedule.
 
@@ -149,18 +147,22 @@ As this application has such specific target users, I have adapted my user stori
 
 18. I would like for the application to contain validated Python code without returning any errors, whatever the user does
 
+## Technical Design
+___
 
 ### Flowchart
 ___
 
 Below is a flowchart describing the structure of the application, created with [Lucidchart](https://lucid.co/product/lucidchart).
 
+<details>
+    <summary>View flowchart here</summary>
+
 ![Flowchart](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/flowchart.png)
 
-### Technology Design
-___
+</details>
 
-#### Data models
+### Data models
 
 I have chosen to use several data models in this project, but rely mainly on dictionaries for managing data. For variation, I have created two classes for this project, and use lists aswell.
 
@@ -744,26 +746,40 @@ Validation results can be seen [here](https://github.com/johnvenkiah/CI_MS2_John
 <details>
   <summary>View bugs here</summary>
 
-Bug: Error when entering month "oct" in patient booking system
-Fix: Correct typo "Okt" in month dictionary, create try and except to catch time format value errors
+**Bug**: Error when entering month "oct" in patient booking system
 
-Bug: Error ``code: 500, APIerror`` when calling the sheets API
-Fix: Only happened once, difficult to recreate. Created a "try", "except" to catch API errors when calling the sheets API
+**Fix**: Correct typo "Okt" in month dictionary, create try and except to catch time format value errors
+
+
+**Bug**: Error ``code: 500, APIerror`` when calling the sheets API
+
+**Fix**: Only happened once, difficult to recreate. Created a "try", "except" to catch API errors when calling the sheets API
+
 
 Bug: Checking schedule displayed twice
+
 Fix: Change code so things happen in correct order
 
+
 Bug: Password hiding library import stdiomsk doesn't work on terminal in Heroku and produced ``termios.error: 25, 'Inappropriate ioctl for device'``
+
 Fix: Remove stdiomsk and let password entered be shown
 
+
 Bug: Datetime parsing not working, returning errors
+
 Fix: Create TimeFConverter class, convert formats with that
 
+
 Bug: Says date incorrect although it is correct
+
 Fix: Fix while loop and indentation in get date function
 
+
 Bug: Sheets updating wrong cell when user exists
+
 Fix code at end of sheet.py; use update_cell sheets method
+
 
 Bug: Schedule displaying wrong weeks when navigating through weeks, out of schedule back in and then showing next week again
 Fix: Add initialize method to IncDecWeek class, so when user exits, the weeks count resets

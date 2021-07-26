@@ -27,7 +27,7 @@ def get_p_log():
         p_log = SHEET.worksheet('patient_log')
         p_data = p_log.get_all_values()
 
-        return p_log
+        return p_log, p_data
 
     except Exception as error:
         print(f'could not load Google worksheet, probable API error: {error}')
