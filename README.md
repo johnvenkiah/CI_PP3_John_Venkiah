@@ -688,9 +688,12 @@ ___
 
 - Actual Result: *Works as intended*
 
+![user story 11, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_11_1.png)
 
+![user story 11, 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_11_2.png)
 
-The learn page can be viewed above. It is highly responsive, and works even on the smallest devices.
+![user story 11, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_11_3.png)
+
 
 #### User story 19:
 
