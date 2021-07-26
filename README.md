@@ -585,12 +585,9 @@ ___
 **Actual Result** - *Works as intended*
 
 ![User story 6](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_6.png)
-___
-
-**Covered by feature 1: The Patient Booking System**
 
 
-#### User story 7. I would like to at any point cancel my booking during the booking process should I wish to do so
+### User story 7. I would like to at any point cancel my booking during the booking process should I wish to do so
 ___
 
 **Covered by feature 1: The Patient Booking System**
@@ -601,125 +598,30 @@ ___
 
 **Actual Result** - *Works as intended*
 
-![User story 6](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_6.png)
-___
+![User story 7](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_7_1.png)
 
-![timer](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/features/timer.png)
+![User story 7, 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_7_2.png)
 
-#### User story 8
-
-**As a user, i would like to see an end game screen alerting me of my score and how the quiz went**
-
-**The Quiz Feature**
-
-- Action: *User play quiz, which then ends*
-
-- Expected Result: *A modal covers the screen ending the game*
-
-- Actual Result: *Works as intended*
-
-#### User story 9:
-
-**As a user, i would like to be able to choose to close the end game screen or play again**
-
-- Action: *User play quiz, which then ends*
-
-- Expected Result: *The modal window contains two buttons, one to close and one to play again.*
-
-- Actual Result: *Works as intended*
-
-![modal](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/tablet/tablet_quiz_modal.png)
-
-#### User story 10:
-
-**As a user, i would like to be able to play notes on a piano on the screen and see which tone is being played**
-
-**The Piano Feature**
-
-- Action: *User opens the play page, and plays on the piano keys*
-
-- Expected Result: *The note played is both heard and seen on the screen*
-
-- Actual Result: *Works as intended*
-
-(The piano can be viewed in the images above)
-
-#### User story 11:
-
-**As a user, i would like to be able to play the notes on the computer keyboard**
-
-**The Piano Feature**
-
-- Action: *User opens the play page, and triggers the piano keys with the keyboard*
-
-- Expected Result: *The note played is both heard and seen on the screen*
-
-- Actual Result: *Works as intended*
-
-(The piano can be viewed in the images above)
-
-#### User story 12:
-
-**As a user, i would like to be able to view videos to learn about music theory and sight reading**
-
-**Learn Page Feature**
-
-- Action: *User opens the learn page, and clicks on a video to view it*
-
-- Expected Result: *The video that the user clicks on is viewed in the main window*
-
-- Actual Result: *Works as intended*
-
-![learn](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/laptop/laptop_learn.png)
-
-#### User story 13:
-
-**As a user, i would like to be able to get in touch with the site owner**
-
-**Contact Page Feature**
-
-- Action: *User opens the learn page, and clicks on a video to view it*
-
-- Expected Result: *The video that the user clicks on is viewed in the main window*
-
-- Actual Result: *Works as intended*
-
-![Contact tablet](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/tablet/tablet_contact_landscape.png)
-
-#### User story 14:
-
-**As a user, i would like to view an 404-error page if I have entered an invalid url within the website**
-
-**404 Page Feature**
-
-- Action: User enters an invalid URL within the website
-
-- Expected Result: *The user is taken to the 404-error page, where user can navigate home or elsewhere on the website
-*
-- Actual Result: *Works as intended*
-
-![404](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/screenshots_iphone/404_iphone.png)
 
 </details>
 
-### Testing of site owner goals
+### Testing of staff user stories
 
 <details>
-  <summary>View siteowner goal tests</summary>
+  <summary>Click here to view staff user stories</summary>
 
-#### User story 15:
+### User story 8. I would like for users to only be able to book appointments on weekdays between 9 and 17, and when the schedule is free
+___
 
-**As a site owner, i would like to display simple clear options on the home page**
+**Covered by feature 1: The Patient Booking System**
 
-**Home Page Feature**
+**Action** - *User tries to make a booking on a weekend, outside the schedule or when a booking is already scheduled*
 
-- Action: *User visits the home page*
+**Expected Result** - *Patient is alerted that the time is invalid or unavailable*
 
-- Expected Result: *The options to navigate all the pages of the site are there and clear*
+**Actual Result** - *Works as intended*
 
-- Actual Result: *Works as intended*
-
-![home iphone](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/screenshots_iphone/home_iphon.png)
+![User story 8](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_1_2.png)
 
 #### User story 16:
 
