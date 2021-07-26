@@ -367,7 +367,9 @@ User stories are tested with the features that cover them. All user stories pass
 <details>
   <summary>View patient user story tests</summary>
 
-### Patient user story 1. I would like to be able to book an appointment at a time of my choosing, should the appointement be available
+### User story 1.
+
+**"I would like to be able to book an appointment at a time of my choosing, should the appointement be available"**
 ___
 
 **Covered by feature 1: The Patient Booking System**
@@ -402,7 +404,9 @@ ___
  - Actual result: *Works as intended*
 
 
-### Patient user story 2. I would like to be alerted if my details are saved before I enter them
+### User story 2.
+
+**"I would like to be alerted if my details are saved before I enter them"**
 ___
 
 **Covered by feature 1: The Patient Booking System**
@@ -416,7 +420,9 @@ ___
 ![User story 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_2.png)
 
 
-### Patient user story 3. I would like to be well informed from the application throughout the booking process
+### User story 3.
+
+**"I would like to be well informed from the application throughout the booking process"**
 ___
 
 This user story is tested in the steps needed to make an appointment.
@@ -503,7 +509,9 @@ ___
 
 
 
-### Patient user story 4. I would like to be alerted if my choice is invalid anywhere in the application, and get a chance to try again
+### User story 4.
+
+**"I would like to be alerted if my choice is invalid anywhere in the application, and get a chance to try again"**
 ___
 
 **Covered by feature 1: The Patient Booking System**
@@ -559,7 +567,9 @@ ___
 
 
 
-### User story 5. I would like to be able to confirm the booking right before it is made
+### User story 5.
+
+**"I would like to be able to confirm the booking right before it is made"**
 ___
 
 **Covered by feature 1: The Patient Booking System**
@@ -573,7 +583,9 @@ ___
 ![User story 5](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_1_3.png)
 
 
-### User story 6. I would like to view a confirmation of the booking when it is made
+### User story 6.
+
+**"I would like to view a confirmation of the booking when it is made"**
 ___
 
 **Covered by feature 1: The Patient Booking System**
@@ -587,7 +599,9 @@ ___
 ![User story 6](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_6.png)
 
 
-### User story 7. I would like to at any point cancel my booking during the booking process should I wish to do so
+### User story 7.
+
+**"I would like to at any point cancel my booking during the booking process should I wish to do so"**
 ___
 
 **Covered by feature 1: The Patient Booking System**
@@ -610,7 +624,9 @@ ___
 <details>
   <summary>Click here to view staff user stories</summary>
 
-### User story 8. I would like for users to only be able to book appointments on weekdays between 9 and 17, and when the schedule is free
+### User story 8.
+
+**"I would like for users to only be able to book appointments on weekdays between 9 and 17, and when the schedule is free"**
 ___
 
 **Covered by feature 1: The Patient Booking System**
@@ -623,19 +639,24 @@ ___
 
 ![User story 8](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_1_2.png)
 
-#### User story 16:
+### User story 9.
 
-**As a site owner, i would like to display a menu in a navigation bar or popout menu at the top of the page**
+**"I would like appointments made by new users add a new row with their information to the Google Sheets patient log"**
+___
 
-**Nav Menu Feature**
+**Covered by feature 1: The Patient Booking System and feature 3, the Patient Log**
 
-- Action: *User views a page or clicks on the hamburger button*
+**Action** - *User successfully books an appointment*
 
-- Expected Result: *The nav menu appears (if it isn't already visible as on larger screens)*
+**Expected Result** - *Patients information is added on a new row in the patient log on the Google spreadsheet*
 
-- Actual Result: *Works as intended*
+**Actual Result** - *Works as intended*
 
-![nav menu](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/screenshots_iphone/navmenu_iphone.png)
+![User story 9, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_booking/p_booking_done.png)
+
+![User story 9, 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_log/patient_log.png)
+
+![User story 9, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_log/g_sheets_new.png)
 
 #### User story 17:
 
