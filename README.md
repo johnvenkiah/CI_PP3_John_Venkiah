@@ -648,7 +648,7 @@ ___
 
 **Action** - *User successfully books an appointment*
 
-**Expected Result** - *Patients information is added on a new row in the patient log on the Google spreadsheet*
+**Expected Result** - *Patients information is added on a new row in the patient log on the Google spreadsheet, which is viewable in the application*
 
 **Actual Result** - *Works as intended*
 
@@ -658,19 +658,22 @@ ___
 
 ![User story 9, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_log/g_sheets_new.png)
 
-#### User story 17:
 
-**As a site owner, i would like to display a quiz for users to test their knowledge**
+### User story 10.
 
-**The Quiz Feature**
+**"I would like the appointments made by patients dynamically update my Google Calendar"**
+___
 
-- Action: *User navigates to the Quiz page and clicks "Let's Play!"*
+**Covered by feature 1: The Patient Booking System**
 
-- Expected Result: *The user is able to play the quiz*
+**Action** - *User successfully books an appointment*
 
-- Actual Result: *Works as intended*
+**Expected Result** - *Event on Google Calendar is created from input by user during booking*
 
-(Quiz images are visible above)
+**Actual Result** - *Works as intended*
+
+![User story 9, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/google_cal/g_cal_new.png)
+
 
 #### User story 18:
 
