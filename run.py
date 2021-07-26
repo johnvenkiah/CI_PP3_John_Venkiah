@@ -360,7 +360,7 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
         edit_appntmnt_2(apntmnt_to_edit, apntmnt_id)
 
     else:
-        print('Cancelled.')
+        print('Cancelled.\n')
         print_appointments(now, future_date(7))
 
 

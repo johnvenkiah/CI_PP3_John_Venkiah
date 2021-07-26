@@ -34,10 +34,6 @@ def get_p_log():
         return False
 
 
-# pat_log = get_p_log()
-# p_data = get_p_log()
-
-
 def show_p_data():
     """
     Gets and shows all entries in patient log, which is a Google Sheet stored
@@ -76,9 +72,7 @@ def append_p_row(name, email, details):
     @para, name(str): Name from user input
     @para, email(str): Email from user input
     @para, details(str): Symptoms (details var.) from user input
-
     """
-    # p_log = pat_log[0]
 
     if name not in str(pat_log.col_values(2)):
         p_nr = get_p_nr()
@@ -93,8 +87,3 @@ def append_p_row(name, email, details):
             if name in row:
                 row_nr = pat_log.find(name).row
                 pat_log.update_cell(row_nr, 4, details)
-
-   # p_data = pat_log[1]  # noqa # pylint: disable=unused-variable
-
-
-# print(get_p_log())
