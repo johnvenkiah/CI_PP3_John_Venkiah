@@ -369,7 +369,7 @@ User stories are tested with the features that cover them. All user stories pass
   <summary>View patient user story tests</summary>
 
 #### Patient user story 1: I would like to be able to book an appointment at a time of my choosing, should the appointement be available
-
+___
 
 **Covered by feature 1: The Patient Booking System**
 
@@ -404,6 +404,7 @@ User stories are tested with the features that cover them. All user stories pass
 
 
 #### Patient user story 2: I would like to be alerted if my details are saved before I enter them
+___
 
 **Covered by feature 1: The Patient Booking System**
 
@@ -417,6 +418,7 @@ User stories are tested with the features that cover them. All user stories pass
 
 
 #### Patient user story 3: I would like to be well informed from the application throughout the booking process
+___
 
 This user story is tested in the steps needed to make an appointment.
 
@@ -430,7 +432,7 @@ This user story is tested in the steps needed to make an appointment.
 
 ![User story 1, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_3_1.png)
 
-__
+___
 
 - **Action**: *User hits "1" to continue*
 
@@ -438,7 +440,7 @@ __
 
 - **Actual Result**: *Works as intended*
 
-__
+___
 
 - **Action**: *User enters the three first letters of the month that they want to come*
 
@@ -446,7 +448,7 @@ __
 
 - **Actual Result**: *Works as intended*
 
-__
+___
 
 - **Action**: *User enters the desired appointment date*
 
@@ -456,7 +458,7 @@ __
 
 ![User story 3, 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_3_2.png)
 
-__
+___
 
 - **Action**: *User enters hour of desired appointment time*
 
@@ -464,7 +466,7 @@ __
 
 - **Actual Result**: *Works as intended*
 
-__
+___
 
 - **Action**: *User enters their name*
 
@@ -474,7 +476,7 @@ __
 
 ![User story 3, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_3_3.png)
 
-__
+___
 
 - **Action**: *User enters their email*
 
@@ -482,7 +484,7 @@ __
 
 - **Actual Result**: *Works as intended*
 
-__
+___
 
 - **Action**: *User enters their symptoms*
 
@@ -490,7 +492,7 @@ __
 
 - **Actual Result**: *Works as intended*
 
-__
+___
 
 - **Action**: *User confirms appointment*
 
@@ -501,6 +503,7 @@ __
 ![User story 3, 4](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_3_4.png)
 
 #### User story 4: I would like to be alerted if my choice is invalid anywhere in the application, and get a chance to try again
+___
 
 - **Action**: *User enters invalid value, or date/time that is not free*
 
@@ -508,10 +511,17 @@ __
 
 The testing of this user case is best portrayed with the images below. All areas of navigation have passed the tests.
 
+*Invalid choices at the welcome screen*
 ![User story 4, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_4_1.png)
 
+___
+
+*Invalid choices when choosing month*
 ![User story 4, 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_4_2.png)
 
+___
+
+*Invalid choices when choosing month*
 ![User story 4, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_4_3.png)
 
 ![User story 4, 4](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_4_4.png)
