@@ -495,7 +495,7 @@ def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
     """
     while True:
 
-        print(f'\n{date_input}. What time? Enter hour, two digits.\n')
+        print(f'\n{date_input}. What time?\n')
         get_hour = input('Enter hour, 9 - 17 ("e" to exit):\n\n')
 
         if get_hour.lower() == 'e':

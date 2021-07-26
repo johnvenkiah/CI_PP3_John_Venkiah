@@ -379,10 +379,17 @@ User stories are tested with the features that cover them. All user stories pass
     * User enters "1" to agree on the application logging the patient data
     * User enters desired month of the appointment (Three letters)
     * User enters desired date (one or two figure numbers both work)
+    * User is notified if the date is bookable
     * User enters desired hour of the appointment
-    * User is notified if the timeslot is free or not, and 
+    * User is notified if the timeslot is free or not
+    * User enters their name
+    * User enters their email
+    * User enters their symptoms
+    * User confirms by hitting "y"
+    * User is greeted with their newly made booking
+    * User can choose to go back to the beginning
 
- - Expected result: *To get to the page clicked on by user*
+ - Expected result: *To Make a successful booking at an available time*
 
  - Actual result: *Works as intended*
 
