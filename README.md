@@ -407,11 +407,11 @@ ___
 
 **Covered by feature 1: The Patient Booking System**
 
-- **Action**: *In the welcome screen, user hits "b" to get to the booking screen*
+**Action** - *In the welcome screen, user hits "b" to get to the booking screen*
 
-- **Expected Result**: *Application displays message about storing data and user needs to confirm this to carry on*
+**Expected Result** - *Application displays message about storing data and user needs to confirm this to carry on*
 
-- **Actual Result**: *Works as intended*
+**Actual Result** - *Works as intended*
 
 ![User story 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_2.png)
 
@@ -433,71 +433,71 @@ This user story is tested in the steps needed to make an appointment.
 
 ___
 
-- **Action**: *User hits "1" to continue*
+**Action** - *User hits "1" to continue*
 
-- **Expected Result**: *Application asks user for the month they would like to come*
+**Expected Result** - *Application asks user for the month they would like to come*
 
-- **Actual Result**: *Works as intended*
-
-___
-
-- **Action**: *User enters the three first letters of the month that they want to come*
-
-- **Expected Result**: *Application confirms the month entered and asks for the desired appointment date*
-
-- **Actual Result**: *Works as intended*
+**Actual Result** - *Works as intended*
 
 ___
 
-- **Action**: *User enters the desired appointment date*
+**Action** - *User enters the three first letters of the month that they want to come*
 
-- **Expected Result**: *Application lets user know if the date is unbookable, (weekends for example) or if it is available to book, in which case the app confirms date and asks user for time of appointment*
+**Expected Result** - *Application confirms the month entered and asks for the desired appointment date*
 
-- **Actual Result**: *Works as intended*
+**Actual Result** - *Works as intended*
+
+___
+
+**Action** - *User enters the desired appointment date*
+
+**Expected Result** - *Application lets user know if the date is unbookable, (weekends for example) or if it is available to book, in which case the app confirms date and asks user for time of appointment*
+
+**Actual Result** - *Works as intended*
 
 ![User story 3, 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_3_2.png)
 
 ___
 
-- **Action**: *User enters hour of desired appointment time*
+**Action** - *User enters hour of desired appointment time*
 
-- **Expected Result**: *Application confirms the time and asks user for name if the desired appoinment time is free and bookable, otherwise lets the user know and user has to choose new time*
+**Expected Result** - *Application confirms the time and asks user for name if the desired appoinment time is free and bookable, otherwise lets the user know and user has to choose new time*
 
-- **Actual Result**: *Works as intended*
+**Actual Result** - *Works as intended*
 
 ___
 
-- **Action**: *User enters their name*
+**Action** - *User enters their name*
 
-- **Expected Result**: *Application Confirms the users name and asks for their email*
+**Expected Result** - *Application Confirms the users name and asks for their email*
 
-- **Actual Result**: *Works as intended*
+**Actual Result** - *Works as intended*
 
 ![User story 3, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_3_3.png)
 
 ___
 
-- **Action**: *User enters their email*
+**Action** - *User enters their email*
 
-- **Expected Result**: *Application Confirms the users email address and asks user to enter their symptoms*
+**Expected Result** - *Application Confirms the users email address and asks user to enter their symptoms*
 
-- **Actual Result**: *Works as intended*
-
-___
-
-- **Action**: *User enters their symptoms*
-
-- **Expected Result**: *Application displays all the patient data retrieved and asks user to confirm appointment*
-
-- **Actual Result**: *Works as intended*
+**Actual Result** - *Works as intended*
 
 ___
 
-- **Action**: *User confirms appointment*
+**Action** - *User enters their symptoms*
 
-- **Expected Result**: *Application displays confirmation, that patient data is logged and user can return to the main screen*
+**Expected Result** - *Application displays all the patient data retrieved and asks user to confirm appointment*
 
-- **Actual Result**: *Works as intended*
+**Actual Result** - *Works as intended*
+
+___
+
+**Action** - *User confirms appointment*
+
+**Expected Result** - *Application displays confirmation, that patient data is logged and user can return to the main screen*
+
+**Actual Result** - *Works as intended*
 
 ![User story 3, 4](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_3_4.png)
 
@@ -506,11 +506,14 @@ ___
 ### Patient user story 4. I would like to be alerted if my choice is invalid anywhere in the application, and get a chance to try again
 ___
 
-- **Action**: *User enters invalid value, or date/time that is not free*
+**Covered by feature 1: The Patient Booking System**
 
-- **Expected Result**: *Application let user know that the entry is invalid, and the user gets to try again*
 
-- **Actual Result**: *Works as intended*
+**Action** - *User enters invalid value, or date/time that is not free*
+
+**Expected Result** - *Application let user know that the entry is invalid, and the user gets to try again*
+
+**Actual Result** - *Works as intended*
 
 The testing of this user case is best portrayed with the images below. All areas of navigation have passed the tests.
 
@@ -559,28 +562,30 @@ ___
 ### User story 5. I would like to be able to confirm the booking right before it is made
 ___
 
-- **Action**: *User completes booking and enters valid information throughout the booking process*
+**Covered by feature 1: The Patient Booking System**
 
-- **Expected Result**: *User is asked to confirm the booking*
+**Action** - *User completes booking and enters valid information throughout the booking process*
 
-- **Actual Result**: *Works as intended*
+**Expected Result** - *User is asked to confirm the booking*
+
+**Actual Result** - *Works as intended*
 
 ![User story 5](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_1_3.png)
 
 
-#### User story 6:
+### User story 6. I would like to view a confirmation of the booking when it is made
+___
 
-**As a user, i would like to get points if I answer a question right**
+**Covered by feature 1: The Patient Booking System**
 
-**The Quiz Feature**
+**Action** - *User confirms the booking made*
 
-- Action: *User answers a question correctly*
+**Expected Result** - *Application displays the details of the booking*
 
-- Expected Result: *The score on the quiz page is incremented along with an animation the emphasizes this*
+**Actual Result** - *Works as intended*
 
-- Actual Result: *Works as intended*
+![User story 5](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_1_3.png)
 
-![score](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/features/score.png)
 
 #### User story 7:
 
