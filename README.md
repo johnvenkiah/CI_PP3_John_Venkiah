@@ -99,7 +99,7 @@ This welcomes the user when they first enter the application, when the task at h
 ### 2. Booking process for patient
 
 <details>
-    <summary>Click here to view an image</summary>
+    <summary>Click to view image</summary>
 
 ![Patient booking, month](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_booking/p_booking_month.png)
 
@@ -112,26 +112,26 @@ This is a long chain of functions resulting in a new appointment and an update t
 To access the staff area, users need the staff password. If entered correctly, users can either view the patient log, or access the schedule.
 
 <details>
-    <summary>Click here to view an image</summary>
+    <summary>Click to view image</summary>
 
 ![Staff area](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/staff_area/password.png)
 
 </details>
 
-#### 4. Staff Schedule
+### 4. Staff Schedule
 
 The schedule, which shows 1 week at a time, can be edited, which also updates the linked Google Calendar.
 
-#### 5. Patient Log
+### 5. Patient Log
 
 The log, which is a Google Sheet, updates dynamically as users book appointments.
 
 
-### User Stories
+## User Stories
 
 As this application has such specific target users, I have adapted my user stories to patients and staff.
 
-#### Patient user stories:
+### Patient user stories:
 
 1. I would like to be able to book an appointment at a time of my choosing, should the appointement be available
 2. I would like to be alerted if my details are saved before I enter them
@@ -141,7 +141,7 @@ As this application has such specific target users, I have adapted my user stori
 6. I would like to view a confirmation of the booking when it is made
 7. I would like to at any point cancel my booking during the booking process should I wish to do so
 
-#### Staff member user stories:
+### Staff member user stories:
 
 8. I would like for users to only be able to book appointments on weekdays between 9 and 17, and when the schedule is free
 9. I would like appointments made by new users add a new row with their information to the Google Sheets patient log
@@ -154,7 +154,7 @@ As this application has such specific target users, I have adapted my user stori
 16. I would like to easily be able to return to the main staff area in the application
 17. I would like the staff area to be password protected
 
-#### Site owner goals
+### Site owner goals
 
 18. I would like for the application to contain validated Python code without returning any errors, whatever the user does
 
@@ -204,54 +204,43 @@ Messages to clarify what has and has not been done, and what the user's choices 
 
 ### Feature 1: The Patient Booking System
 
-<details>
-    <summary>View bugs here</summary>
-
-![Patient Booking System](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_booking/p_booking_month.png)
-
-</details>
-
 This is the main feature of the application, getting patient information to make a booking and make a patient log entry.
 
 The patient booking system consists of several steps after the welcome screen. The user can exit the booking process at any time.
 
-- The patient is made aware that their details are saved and have to take action to continue
+1. The patient is made aware that their details are saved and have to take action to continue
 
-- The patient is prompted to choose month of the appointment (if the month chosen is june, and it is july at the point of booking, the application will change the year to next year)
+2. The patient is prompted to choose month of the appointment (if the month chosen is june, and it is july at the point of booking, the application will change the year to next year)
 
-- The patient is informed of the month chosen and get to choose date. The date must corrrespond with the days in that month, made sure by the month_dict dictionary.
+3. The patient is informed of the month chosen and get to choose date. The date must corrrespond with the days in that month, made sure by the month_dict dictionary.
 
-- The patient is notified of the date chosen and can choose the time of the appointment, 9 - 17. The time must be a weekday and between 9 and 17. After validation, the first API request is made. The application gets data through the Google API if the chosen time slot is available in the Google calendar, and, if so, notifies the user. If the slot is not available, the user has to choose another time.
+4. The patient is notified of the date chosen and can choose the time of the appointment, 9 - 17. The time must be a weekday and between 9 and 17. After validation, the first API request is made. The application gets data through the Google API if the chosen time slot is available in the Google calendar, and, if so, notifies the user. If the slot is not available, the user has to choose another time.
 
-- If the timeslot is available, the user is prompted to enter their full name. A single name or name with digits is not accepted.
+5. If the timeslot is available, the user is prompted to enter their full name. A single name or name with digits is not accepted.
 
-- The user is, if the name is accepted, prompted to enter their email adress, which is validated with a simple regular expression.
+6. The user is, if the name is accepted, prompted to enter their email adress, which is validated with a simple regular expression.
 
-- If the email input is correct, the patient is prompted to shortly describe their symptoms. This must b at least 8 characters long, so the user cannot enter nothing or a short word.
+7. If the email input is correct, the patient is prompted to shortly describe their symptoms. This must b at least 8 characters long, so the user cannot enter nothing or a short word.
 
-- The user is shown the appointment and must confirm the booking.
+8. The user is shown the appointment and must confirm the booking.
 
-<details>
-  <summary>Click to view image</summary>
-
-![Confirm patient booking](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_booking/p_booking_done.png)
-
-</details>
-
-- If the booking is confirmed by the user, two requests are made with the users input; one to push the information to FeelGood Physio's Google calendar and one to make an entry in the Google sheets patient log on Google Drive, all with the help of the Google API.
-
-<details>
-  <summary>Click to view image</summary>
-
-![Google calendar entry](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/google_cal/g_cal_new.png)
-
-</details>
+9. If the booking is confirmed by the user, two requests are made with the users input; one to push the information to FeelGood Physio's Google calendar and one to make an entry in the Google sheets patient log on Google Drive, all with the help of the Google API.
 
 If the user with the same name already exists in the patient log, the patients symptoms are unpdated instead of a row being added. The patient is then notified that the booking has been made and can return to the home screen again.
 
 <details>
-  <summary>Click to view image</summary>
+  <summary>Click to view images of feature 1</summary>
 
+*Entering month*
+![Patient Booking System](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_booking/p_booking_month.png)
+
+*Booking confirmation*
+![Confirm patient booking](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_booking/p_booking_done.png)
+
+*Google Calendar entry*
+![Google calendar entry](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/google_cal/g_cal_new.png)
+
+*Entry in Google Sheets*
 ![Google sheets](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_log/g_sheets_new.png)
 
 </details>
