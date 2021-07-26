@@ -584,20 +584,25 @@ ___
 
 **Actual Result** - *Works as intended*
 
-![User story 5](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_1_3.png)
+![User story 6](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_6.png)
+___
+
+**Covered by feature 1: The Patient Booking System**
 
 
-#### User story 7:
+#### User story 7. I would like to at any point cancel my booking during the booking process should I wish to do so
+___
 
-**As a user, i would like to see a timer ticking down from one minute**
+**Covered by feature 1: The Patient Booking System**
 
-**The Quiz Feature**
+**Action** - *User follows instructions to exit on screen*
 
-- Action: *User play quiz*
+**Expected Result** - *Booking returns to the home screen or the previous stage*
 
-- Expected Result: *The clock starts ticking down from 60 to 0*
+**Actual Result** - *Works as intended*
 
-- Actual Result: *Works as intended*
+![User story 6](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_6.png)
+___
 
 ![timer](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/features/timer.png)
 
