@@ -401,7 +401,7 @@ Click [here](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/v
 User stories are tested with the features that cover them. All user stories passed the tests.
 
 
-### User story 1.
+### Testing of user story 1
 
 **"I would like to be able to book an appointment at a time of my choosing, should the appointement be available"**
 
@@ -450,7 +450,7 @@ User stories are tested with the features that cover them. All user stories pass
  - Actual result: *Works as intended*
 
 
-### User story 2.
+### Testing of user story 2
 
 **"I would like to be alerted if my details are saved before I enter them"**
 
@@ -470,7 +470,7 @@ User stories are tested with the features that cover them. All user stories pass
 
 </details>
 
-### User story 3.
+### Testing of user story 3
 
 **"I would like to be well informed from the application throughout the booking process"**
 
@@ -578,7 +578,7 @@ ___
 
 </details>
 
-### User story 4.
+### Testing of user story 4
 
 **"I would like to be alerted if my choice is invalid anywhere in the application, and get a chance to try again"**
 
@@ -642,7 +642,7 @@ ___
 
 </details>
 
-### User story 5.
+### Testing of user story 5
 
 **"I would like to be able to confirm the booking right before it is made"**
 
@@ -662,7 +662,7 @@ ___
 
 </details>
 
-### User story 6.
+### Testing of user story 6
 
 **"I would like to view a confirmation of the booking when it is made"**
 
@@ -683,7 +683,7 @@ ___
 </details>
 
 
-### User story 7.
+### Testing of user story 7
 
 **"I would like to at any point cancel my booking during the booking process should I wish to do so"**
 
@@ -707,8 +707,9 @@ ___
 </details>
 
 ### Testing of staff user stories
+___
 
-### User story 8.
+### Testing of user story 8
 
 **"I would like for users to only be able to book appointments on weekdays between 9 and 17, and when the schedule is free"**
 
@@ -728,7 +729,7 @@ ___
 
 </details>
 
-### User story 9.
+### Testing of user story 9
 
 **"I would like appointments made by new users add a new row with their information to the Google Sheets patient log"**
 
@@ -753,7 +754,7 @@ ___
 </details>
 
 
-### User story 10.
+### Testing of user story 10
 
 **"I would like the appointments made by patients dynamically update my Google Calendar"**
 
@@ -774,7 +775,7 @@ ___
 </details>
 
 
-### User story 11:
+### Testing of user story 11
 
 **"I would like the changes made in the schedules edit menu to update the events on my Google Calendar"**
 
@@ -797,7 +798,7 @@ ___
 ![user story 11, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_11_3.png)
 
 
-### User story 12.
+### Testing of user story 12
 
 *"I would like to be able to view the patient log"*
 
@@ -810,11 +811,51 @@ ___
 - Actual Result: *Works as intended*
 
 </details>
-    <summary>View image of initial steps of the booking</summary>
+    <summary>View image of the result</summary>
 
 ![User story 12](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_log/patient_log.png)
 
 </details>
+
+### Testing of user story 13
+
+*"I would like to view my schedule for the coming week"*
+
+**Covered by feature 3: The Schedule**
+
+- Action: *User hits "s" in the staff area*
+
+- Expected Result: *The schedule is displayed*
+
+- Actual Result: *Works as intended*
+
+</details>
+    <summary>View image of the result</summary>
+
+![User story 13](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/schedule/schedule.png)
+
+</details>
+
+### Testing of user story 14
+
+*"I would like to navigate between weeks in my schedule"*
+
+**Covered by feature 3: The Schedule**
+
+- Action: *User hits "n" or "b" when viewing the schedule*
+
+- Expected Result: *The next week is displayed*
+
+- Actual Result: *Works as intended*
+
+</details>
+    <summary>View image of the result</summary>
+
+![User story 14](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_14.png)
+
+</details>
+
+
 
 ## Bugs
 
