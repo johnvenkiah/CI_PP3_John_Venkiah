@@ -863,7 +863,7 @@ def new_appointment(
         print(f'{start_pretty}, {email}\n')
         print(details)
         print('\nLogging your details...')
-        sheet.append_p_row(name, email, details, sheet.p_data)
+        sheet.append_p_row(name, email, details)
 
         goback = input('\nHit any key to go back to the start screen.\n\n')
         if goback != '¶':
