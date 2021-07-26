@@ -51,8 +51,6 @@
 7. [Credits](#credits)
 
 
-___
-
 ## Project Goals
 
 Project Goals for intended use are:
@@ -80,14 +78,18 @@ Target Audience
 
 
 ## Structure
-___
 
 The FeelGood Physio Booking System relies almost only on user input. There are always options displayed on the screen and users can choose what to do next.
 When an input is entered, the application takes the user to the chosen option. All functions are chained together, each depending on the users input.
 
 ### 1. Home Screen
 
+<details>
+    <summary>Click here to view the home screen</summary>
+
 ![Screenshot of Home screen](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/screenshot_home.png)
+
+</details>
 
 This welcomes the user when they first enter the application, when the task at hand is done or when users choose to exit from whereever they are in the application. From the home screen, there are two options:
 
@@ -96,7 +98,12 @@ This welcomes the user when they first enter the application, when the task at h
 
 ### 2. Booking process for patient
 
+<details>
+    <summary>Click here to view an image</summary>
+
 ![Patient booking, month](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_booking/p_booking_month.png)
+
+</details>
 
 This is a long chain of functions resulting in a new appointment and an update to the patient log, if completed. Users input their desired appoinment time and details, and get a confirmation message at the end.
 
@@ -104,7 +111,12 @@ This is a long chain of functions resulting in a new appointment and an update t
 
 To access the staff area, users need the staff password. If entered correctly, users can either view the patient log, or access the schedule.
 
+<details>
+    <summary>Click here to view an image</summary>
+
 ![Staff area](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/staff_area/password.png)
+
+</details>
 
 #### 4. Staff Schedule
 
@@ -116,7 +128,6 @@ The log, which is a Google Sheet, updates dynamically as users book appointments
 
 
 ### User Stories
-___
 
 As this application has such specific target users, I have adapted my user stories to patients and staff.
 
@@ -148,10 +159,8 @@ As this application has such specific target users, I have adapted my user stori
 18. I would like for the application to contain validated Python code without returning any errors, whatever the user does
 
 ## Technical Design
-___
 
 ### Flowchart
-___
 
 Below is a flowchart describing the structure of the application, created with [Lucidchart](https://lucid.co/product/lucidchart).
 
@@ -180,7 +189,7 @@ Here are the most important objects:
 - The month dictionary (month_dict), used to pair the months three letter abbreviations with their corresponding number of days, accessed when getting date details from user.
 - The patient dictionary helps the Google Sheets patient log keep track of patients that have booked appointments, keeping their details as values and assigning (with the help of the get_p_nr function) a unique patient ID. These details can then be displayed to the staff user.
 
-#### User interface
+### User interface
 
 I find it important to be clear to the user on displaying information, especially on an interface where styling is limited. As this project focuses solely on the Python language, I decided not to try to implement graphics and focus on funcionality, even though it was tempting.
 
@@ -195,7 +204,12 @@ Messages to clarify what has and has not been done, and what the user's choices 
 
 ### Feature 1: The Patient Booking System
 
+<details>
+    <summary>View bugs here</summary>
+
 ![Patient Booking System](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_booking/p_booking_month.png)
+
+</details>
 
 This is the main feature of the application, getting patient information to make a booking and make a patient log entry.
 
@@ -217,15 +231,30 @@ The patient booking system consists of several steps after the welcome screen. T
 
 - The user is shown the appointment and must confirm the booking.
 
+<details>
+  <summary>Click to view image</summary>
+
 ![Confirm patient booking](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_booking/p_booking_done.png)
+
+</details>
 
 - If the booking is confirmed by the user, two requests are made with the users input; one to push the information to FeelGood Physio's Google calendar and one to make an entry in the Google sheets patient log on Google Drive, all with the help of the Google API.
 
+<details>
+  <summary>Click to view image</summary>
+
 ![Google calendar entry](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/google_cal/g_cal_new.png)
+
+</details>
 
 If the user with the same name already exists in the patient log, the patients symptoms are unpdated instead of a row being added. The patient is then notified that the booking has been made and can return to the home screen again.
 
+<details>
+  <summary>Click to view image</summary>
+
 ![Google sheets](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_log/g_sheets_new.png)
+
+</details>
 
 **Patient stories covered:**
 
@@ -251,7 +280,12 @@ If the user with the same name already exists in the patient log, the patients s
 
 ### Feature 2: The Schedule
 
+<details>
+    <summary>Click to view image of schedule</summary>
+
 ![The Schedule](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/schedule/schedule.png)
+
+</details>
 
 The Schedule is accessed via the staff area, which only users with a password can access. Here, users are initially shown the schedule from the current time and 7 days forward. The appointments are retrieved by an API request to FeelGood Physio's Google Calender, and can be edited and removed, by user inputting number displayed within the appointment.
 
@@ -261,7 +295,12 @@ The user can navigate with keys "n" for next and "b" for back, which will respec
 - Name: Change the name given in the appointment
 - Details: Change the patient's email adress or symptoms description
 
+<details>
+    <summary>Click to view image of edit menu</summary>
+
 ![The edit menu](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/schedule/edit_apntmnt.png)
+
+</details>
 
 Upon changing these parameters and confirming the changes, the appointments are updated in the Google Calendar. The user is notified of this and can return to the staff menu or exit.
 
@@ -281,13 +320,28 @@ Upon changing these parameters and confirming the changes, the appointments are 
 
 ### Feature 3: The Patient Log
 
+<details>
+    <summary>Click to view image of the patient log</summary>
+
 ![Patient Log](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_log/patient_log.png)
+
+</details>
 
 This is where staff can access data from patients that have booked via the booking system. The system lets users know before initiating the booking that their data will be logged, and after a successful booking the datails are logged in the Google Sheet via the API as a new entry. If the user already exists, their symptoms are the only thing that will be updated.
 
+<details>
+    <summary>Click to view image of edit menu</summary>
+
 ![Old patient books new appointment](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_log/patient_log_old_patient.png)
 
-![The Google Sheet with the updated symptoms](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_log/sheet_update_sympt.png)
+</details>
+
+<details>
+    <summary>Click to view image of the updated details</summary>
+
+![The Google Sheet with the updated details](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_log/sheet_update_sympt.png)
+
+</details>
 
 Even though the same details are kept in the Google Calendar, the patient log is a way to consolidate information if staff are looking for a specific patient.
 
@@ -304,7 +358,6 @@ Even though the same details are kept in the Google Calendar, the patient log is
 
 
 ### Features to be implemented
-___
 
 There are endless possibilities with an application like this. If the clinic were to hire more than one therapist, they could each have their own calendar and log. Patients could have the possibility to add a user account with which they log in to the system, and can reschedule or cancel their appointment. An important feature that the log now lacks is the possibility for staff to edit entries; this will be implemented at a later stage.
 
@@ -312,7 +365,6 @@ There are endless possibilities with an application like this. If the clinic wer
 ## Technologies used
 
 ### Languages
-___
 
 - [Python 3](https://www.python.org/) - Was used solely to create this project.
 
@@ -366,18 +418,20 @@ Click [here](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/v
 
 User stories are tested with the features that cover them. All user stories passed the tests.
 
-<details>
-  <summary>View patient user story tests</summary>
 
 ### User story 1.
 
 **"I would like to be able to book an appointment at a time of my choosing, should the appointement be available"**
-___
+
 
 **Covered by feature 1: The Patient Booking System**
 
+<details>
+    <summary>View image of initial steps of the booking</summary>
+
 ![User story 1, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_1_1.png)
-*The initial steps of the booking*
+
+</details>
 
 - **Actions**:
 
@@ -395,11 +449,19 @@ ___
     * User is greeted with their newly made booking
     * User can choose to go back to the beginning
 
+<details>
+    <summary>View image of date validation here</summary>
+
 ![User story 1, 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_1_2.png)
-*Checks if the date is a weekend or if a booking is already made at that time*
+
+</details>
+
+<details>
+    <summary>View image of booking confirmation here</summary>
 
 ![User story 1, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_1_3.png)
-*Lets user know that the booking is made*
+
+</details>
 
  - Expected result: *To Make a successful booking at an available time*
 
@@ -409,7 +471,7 @@ ___
 ### User story 2.
 
 **"I would like to be alerted if my details are saved before I enter them"**
-___
+
 
 **Covered by feature 1: The Patient Booking System**
 
@@ -419,13 +481,17 @@ ___
 
 **Actual Result** - *Works as intended*
 
+<details>
+    <summary>View image here</summary>
+
 ![User story 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_2.png)
 
+</details>
 
 ### User story 3.
 
 **"I would like to be well informed from the application throughout the booking process"**
-___
+
 
 This user story is tested in the steps needed to make an appointment.
 
@@ -437,7 +503,12 @@ This user story is tested in the steps needed to make an appointment.
 
 - **Actual Result**: *Works as intended*
 
+<details>
+    <summary>View image here</summary>
+
 ![User story 1, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_3_1.png)
+
+</details>
 
 ___
 
@@ -463,7 +534,13 @@ ___
 
 **Actual Result** - *Works as intended*
 
+<details>
+    <summary>View image here</summary>
+
+
 ![User story 3, 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_3_2.png)
+
+</details>
 
 ___
 
@@ -481,7 +558,12 @@ ___
 
 **Actual Result** - *Works as intended*
 
+<details>
+    <summary>View image here</summary>
+
 ![User story 3, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_3_3.png)
+
+</details>
 
 ___
 
@@ -507,14 +589,17 @@ ___
 
 **Actual Result** - *Works as intended*
 
+<details>
+    <summary>View image here</summary>
+
 ![User story 3, 4](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_3_4.png)
 
-
+</details>
 
 ### User story 4.
 
 **"I would like to be alerted if my choice is invalid anywhere in the application, and get a chance to try again"**
-___
+
 
 **Covered by feature 1: The Patient Booking System**
 
@@ -527,29 +612,35 @@ ___
 
 The testing of this user case is best portrayed with the images below. All areas of navigation have passed the tests.
 
-___
+<details>
+    <summary>View images of user 4 testing results</summary>
 
-*Invalid choices at the welcome screen:*
+*Invalid choices at home screen:*
+
 ![User story 4, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_4_1.png)
 
 ___
 
 *Invalid choices when choosing month:*
+
 ![User story 4, 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_4_2.png)
 
 ___
 
 *Invalid choices when choosing date:*
+
 ![User story 4, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_4_3.png)
 
 ___
 
 *Invalid choices when choosing weekend date:*
+
 ![User story 4, 4](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_4_4.png)
 
 ___
 
 *Invalid choices when choosing an already booked timeslot:*
+
 ![User story 4, 5](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_4_5.png)
 
 ___
@@ -567,12 +658,12 @@ ___
 *Invalid choices when entering too short description of symptoms:*
 ![User story 4, 8](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_4_8.png)
 
-
+</details>
 
 ### User story 5.
 
 **"I would like to be able to confirm the booking right before it is made"**
-___
+
 
 **Covered by feature 1: The Patient Booking System**
 
@@ -582,13 +673,17 @@ ___
 
 **Actual Result** - *Works as intended*
 
+<details>
+    <summary>View image here</summary>
+
 ![User story 5](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_1_3.png)
 
+</details>
 
 ### User story 6.
 
 **"I would like to view a confirmation of the booking when it is made"**
-___
+
 
 **Covered by feature 1: The Patient Booking System**
 
@@ -598,13 +693,18 @@ ___
 
 **Actual Result** - *Works as intended*
 
+<details>
+    <summary>View image here</summary>
+
 ![User story 6](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_6.png)
+
+</details>
 
 
 ### User story 7.
 
 **"I would like to at any point cancel my booking during the booking process should I wish to do so"**
-___
+
 
 **Covered by feature 1: The Patient Booking System**
 
@@ -614,22 +714,22 @@ ___
 
 **Actual Result** - *Works as intended*
 
+<details>
+    <summary>View images here</summary>
+
+
 ![User story 7](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_7_1.png)
 
 ![User story 7, 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_7_2.png)
-
 
 </details>
 
 ### Testing of staff user stories
 
-<details>
-  <summary>Click here to view staff user stories</summary>
-
 ### User story 8.
 
 **"I would like for users to only be able to book appointments on weekdays between 9 and 17, and when the schedule is free"**
-___
+
 
 **Covered by feature 1: The Patient Booking System**
 
@@ -639,12 +739,17 @@ ___
 
 **Actual Result** - *Works as intended*
 
+<details>
+    <summary>View image here</summary>
+
 ![User story 8](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_1_2.png)
+
+</details>
 
 ### User story 9.
 
 **"I would like appointments made by new users add a new row with their information to the Google Sheets patient log"**
-___
+
 
 **Covered by feature 1: The Patient Booking System and feature 3, the Patient Log**
 
@@ -654,17 +759,22 @@ ___
 
 **Actual Result** - *Works as intended*
 
+<details>
+    <summary>View images here</summary>
+
 ![User story 9, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_booking/p_booking_done.png)
 
 ![User story 9, 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_log/patient_log.png)
 
 ![User story 9, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_log/g_sheets_new.png)
 
+</details>
+
 
 ### User story 10.
 
 **"I would like the appointments made by patients dynamically update my Google Calendar"**
-___
+
 
 **Covered by feature 1: The Patient Booking System**
 
@@ -674,13 +784,18 @@ ___
 
 **Actual Result** - *Works as intended*
 
+<details>
+    <summary>View image of date validation here</summary>
+
 ![User story 9, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/google_cal/g_cal_new.png)
+
+</details>
 
 
 ### User story 11:
 
 **"I would like the changes made in the schedules edit menu to update the events on my Google Calendar"**
-___
+
 
 **Covered by feature 2: The Schedule**
 
@@ -690,61 +805,22 @@ ___
 
 - Actual Result: *Works as intended*
 
+<details>
+    <summary>View image of initial steps of the booking</summary>
+
 ![user story 11, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_11_1.png)
 
 ![user story 11, 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_11_2.png)
 
 ![user story 11, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_11_3.png)
 
-
-#### User story 19:
-
-**As a site owner, i would like to display a page where users can play the piano and view the note played**
-
-**The Piano Feature**
-
-- Action: *User navigates to the learn page*
-
-- Expected Result: *The Videos list is dynamically updated with YouTube API and loaded into the videos section*
-
-- Actual Result: *Works as intended*
-
-(Images from play page are visible above)
-
-#### User story 20:
-
-**As a site owner, i would like to be able to be contacted should the user wish to do so, through an emailing service to my private email address**
-
-**Contact Page Feature**
-
-- Action: *User fills in the form on Contact page and clicks send*
-
-- Expected Result: *The form data is sent to the site owner via EmailJS*
-
-- Actual Result: *Works as intended*
-
-![Mail from emailJS](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/blob/master/docs/screenshots/features/emailjs.jpeg)
-
-#### User story 21:
-
-**As a site owner, i would like to have a website that contains validated HTML, CSS and JavaScript**
-
-**ALL PAGES**
-
-- Action: *Have users who care about well written code, validation, etc visiting the site*
-
-- Expected Result: *The website passes all valdation tests*
-
-- Actual Result: *All tests passed without errors*
-
-Validation results can be seen [here](https://github.com/johnvenkiah/CI_MS2_John_Venkiah/tree/master/docs/validation)
-
 </details>
+
 
 ## Bugs
 
 <details>
-  <summary>View bugs here</summary>
+    <summary>View bugs here</summary>
 
 **Bug**: Error when entering month "oct" in patient booking system
 
