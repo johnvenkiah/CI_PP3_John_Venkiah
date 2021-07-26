@@ -417,19 +417,19 @@ User stories are tested with the features that cover them. All user stories pass
 
 - **Actions**:
 
-    * User hits "b" to begin
-    * User enters "1" to agree on the application logging the patient data
-    * User enters desired month of the appointment (Three letters)
-    * User enters desired date (one or two figure numbers both work)
-    * User is notified if the date is bookable
-    * User enters desired hour of the appointment
-    * User is notified if the timeslot is free or not
-    * User enters their name
-    * User enters their email
-    * User enters their symptoms
-    * User confirms by hitting "y"
-    * User is greeted with their newly made booking
-    * User can choose to go back to the beginning
+    * *User hits "b" to begin*
+    * *User enters "1" to agree on the application logging the patient data*
+    * *User enters desired month of the appointment (Three letters)*
+    * *User enters desired date (one or two figure numbers both work)*
+    * *User is notified if the date is bookable*
+    * *User enters desired hour of the appointment*
+    * *User is notified if the timeslot is free or not*
+    * *User enters their name*
+    * *User enters their email*
+    * *User enters their symptoms*
+    * *User confirms by hitting "y"*
+    * *User is greeted with their newly made booking*
+    * *User can choose to go back to the beginning*
 
 <details>
     <summary>View image of date validation here</summary>
@@ -855,7 +855,67 @@ ___
 
 </details>
 
+### Testing of user story 15
 
+*"I would like to be able to update or remove any appointment viewed in my schedule"*
+
+**Covered by feature 3: The Schedule**
+
+#### Edit appointment
+
+- **Actions**:
+
+* *User enters number of appoinment when viewing the schedule*
+* *User chooses what to edit; time, name or details*
+* *User enters new time, name or details for appointment*
+* *User confirms changes*
+
+
+- Expected Result: *The event is updated on Google Calendar*
+
+- Actual Result: *Works as intended*
+
+</details>
+    <summary>View images of editing appointments</summary>
+
+*The edit menu*
+![User story 15, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_15_1.png)
+
+*Editing the date and time*
+![User story 15, 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_15_2.png)
+
+*Changes are confirmed*
+![User story 15, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_15_3.png)
+
+*The Google event now has the new time*
+![User story 15, 4](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_15_4.png)
+
+</details>
+
+#### Remove appointment
+
+- **Actions**:
+
+* *User enters number of appoinment when viewing the schedule*
+* *User chooses what to edit; time, name or details*
+* *User enters new time, name or details for appointment*
+* *User confirms changes*
+
+
+- Expected Result: *The event is removed from Google Calendar*
+
+- Actual Result: *Works as intended*
+
+</details>
+    <summary>View images of removing appointment</summary>
+
+*Choice to remove and confirmation once removed*
+![User story 15, 5](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_15_5.png)
+
+*The Google event is now nowhere to be seen*
+![User story 15, 6](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_15_6.png)
+
+</details>
 
 ## Bugs
 

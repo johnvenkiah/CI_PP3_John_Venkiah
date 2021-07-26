@@ -348,6 +348,7 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
             cal_mod.del_apt(CAL, CAL_ID, apntmnt_id)
 
             print('\nAppointment deleted!\n')
+            print('\nGetting Schedule...\n')
             print_appointments(now, future_date(7))
         else:
             print('\n\nCancelled.\n')
@@ -388,6 +389,7 @@ def edit_appntmnt_2(apntmnt_to_edit, apntmnt_id):
         get_details_staff(apntmnt_to_edit, apntmnt_id)
 
     else:
+        print('\nGetting Schedule...\n')
         print_appointments(now, future_date(7))
         return
 
@@ -419,7 +421,13 @@ def get_date_staff(apntmnt_to_edit, apntmnt_id):
     while True:
 
         print('\nEnter new date for appointment, in this format:\n')
-        date_input = input("DD-MM-YY (don't forget the hyphens)\n\n")
+        date_input = input(
+            "DD-MM-YY (don't forget the hyphens, e to exit)\n\n"
+        )
+
+        if date_input == "e":
+            print_appointments(now, future_date(7))
+            return False
 
         try:
             date_input = datetime.datetime.strptime(date_input, '%d-%m-%y')
@@ -564,6 +572,7 @@ def update_apntmnt_time(apntmnt_time, end_time, apntmnt_to_edit, apntmnt_id):
     go_back = input('Hit any key to see current schedule for the week.\n\n')
 
     if go_back != '¶¥¿':
+        print('\nGetting Schedule...\n')
         print_appointments(now, future_date(7))
 
 
