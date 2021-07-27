@@ -33,30 +33,28 @@
 6. [Features](#features)
     1. [Feature 1: The Patient Booking System](#feature-1:-the-patient-booking-system)
     2. [Feature 2: The Schedule](#feature-2:-the-schedule)
-    3. [Feature 3: The Patient Log](#feature-3:-the-patient-log)
+    3. [Feature 3: The Patient Log](#feature-3-the-patient-log)
     4. [Features to be implemented](#features-to-be-implemented)
 7. [Technologies Used](#technologies-used)
     1. [Languages](#languages)
-    2. [Applications and Libraries](#applications-and-libraries)
-        
+    2. [Applications, Platforms and Libraries](#applications-platforms-and-libraries)
+        1. [Applications and Platforms](#applications-and-platforms)
+        2. [Python Libraries](#python-libraries)
+        3. [Third Party Libraries](#third-party-libraries)
+8. [Validation](#validation)
+9. [Testing of Patient User Stories](#testing-of-patient-user-stories)
+10. [Testing of Staff Member User Stories](#testing-of-staff-member-user-stories)
+11. [Testing of Site Owner Goals](#testing-of-site-owner-goals)
+12. [Bugs](#bugs)
 
-4. [Validation](#validation)
-    1. [Performance](#performance)
-
-4. [Testing of User Stories/Site Owner Goals](#testing-of-user-stories/site-owner-goals)
-    1. [Testing of User Stories](#testing-of-user-stories)
-    2. [Testing of Site Owner Goals](#testing-of-site-owner-goals)
-
-5. [Bugs](#bugs)
-
-6. [Deployment](#deployment)
-    1. [GitHub Pages](#github-pages)
-    2. [Heroku](#heroku)
-    2. [Forking the GitHub Repository](#forking-the-github-repository)
-    3. [Making a Local Clone](#making-a-local-clone)
-
-7. [Credits](#credits)
-
+13. [Deployment](#deployment)
+    1. [Forking the GitHub Repository](#forking-the-github-repository)
+    2. [Making a Local Clone](#making-a-local-clone)
+    3. [Heroku](#heroku)
+    4. [Google API](#google-api)
+14. [Credits](#credits)
+15. [Coding tips and tricks](#coding-tips-and-tricks)
+16. [Acknowledgments](#acknowledgments)
 
 ## Project Goals
 
@@ -358,10 +356,10 @@ An important feature that the log now lacks is the possibility for staff to edit
 - [Python 3](https://www.python.org/) - Was used solely to create this project.
 
 
-### Applications and Libraries
+### Applications, Platforms and Libraries
 
 
-#### Applications
+#### Applications and Platforms
 
 - [Git](https://git-scm.com/) - Version control system used to commit and push to Github via Gitpod.
 
@@ -372,6 +370,12 @@ An important feature that the log now lacks is the possibility for staff to edit
 - [Heroku](https://www.heroku.com) - Used to deploy the application.
 
 - [Lucidchart](https://lucid.co/product/lucidchart) - Lucidchart was used to create the [flowchart](#flowchart) of the project.
+
+- [Google Calendar](https://calendar.google.com/) - The users input data creates and edits events on Google Calendar
+
+- [Google Sheets](https://calendar.google.com/) - - The users input data creates and edits content on Google Sheets
+
+- [Google Cloud Platform](https://console.cloud.google.com/) - All data send and received with the help of the Google API, through the Google Cloud Platform
 
 
 #### Python Libraries
@@ -403,7 +407,7 @@ Click [here](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/v
 
 
 
-## Testing of patient User Stories
+## Testing of Patient User Stories
 
 User stories are tested with the features that cover them. All user stories passed the tests.
 
@@ -713,8 +717,8 @@ ___
 
 </details>
 
-### Testing of staff user stories
-___
+## Testing of Staff Member User Stories
+
 
 ### Testing of user story 8
 
@@ -985,6 +989,8 @@ ___
 
 </details>
 
+## Testing of Site Owner Goals
+
 ### Testing of user story 18
 
 *"I would like for the application to contain validated Python code without returning any errors, whatever the user does"*
@@ -1159,4 +1165,4 @@ Using the isnumeric function: [delftstack.com](https://www.delftstack.com/howto/
 
 This project was created from a template made by [Code Institute](https://codeinstitute.net/) to recreate the terminal in a regular web browser.
 
-The tutors Scott and Sean and my mentor Mo Shami at Code Institute, have helped me in times of trouble. Many thanks to them.
+The tutors Scott and Sean and my mentor Mo Shami at Code Institute, have helped me in times of trouble. Many thanks to them, and of course to the comprehensive course material from Code Institute.
