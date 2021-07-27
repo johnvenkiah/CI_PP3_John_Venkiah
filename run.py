@@ -124,15 +124,14 @@ def suggest_appointment():
         welcome_screen()
 
 
-def e_to_exit(user_input, func):
+def e_to_exit(user_input):
     """
     Gets user back to welcome screen if they input "e".
     @paran user_input(str): input from user.
     """
 
     if user_input.lower() == 'e':
-        print(user_input.lower())
-        func
+        welcome_screen
 
 
 def staff_nav():
@@ -190,7 +189,7 @@ def staff_login():
         password_entered = input(
             'Enter your password or "e" to exit:\n\n'
         )
-        e_to_exit(password_entered, welcome_screen)
+        e_to_exit(password_entered)
 
         if attempts == 4:
             print('\nToo many incorrect attempts, exiting...\n')
@@ -405,12 +404,13 @@ def get_name_staff(apntmnt_to_edit, apntmnt_id):
 
     print('\nPlease enter new name or "e" to exit:\n')
 
-    new_name = validate_name(staff_nav)
+    new_name = validate_name()
 
     if new_name:
         update_name(apntmnt_to_edit, apntmnt_id, new_name)
 
-    staff_nav()
+    else:
+        staff_nav()
 
 
 def get_date_staff(apntmnt_to_edit, apntmnt_id):
@@ -637,7 +637,7 @@ def get_month(yr):  # pylint: disable=invalid-name
         days_in_month = month_dict.get(month)
         month_incorr = '\nMonth incorrect, please try again'
 
-        e_to_exit(month, welcome_screen)
+        e_to_exit(month)
 
         try:
             if month in month_dict.keys():
@@ -683,7 +683,7 @@ def get_date(
         print(f'\n{month}, {yr}. Which date?\n')
         date = input('Enter one or two digits, ("e" to exit):\n\n')
         date_incorrect = '\nDate incorrect, please try again'
-        e_to_exit(date, welcome_screen)
+        e_to_exit(date)
 
         try:
             date_today = datetime.date.today().day
@@ -721,7 +721,7 @@ def get_time(date, month, yr):  # pylint: disable=invalid-name
         print(f'\n{date} {month}, {yr}. What time?\n')
         hour = input('Enter hour, 9 - 17 ("e" to exit):\n\n')
 
-        e_to_exit(hour, welcome_screen)
+        e_to_exit(hour)
 
         if hour.isnumeric() and int(hour) >= 9 and int(hour) < 17:
             apntmnt_time = (f'{hour}:00, {date} {month} {yr}')
@@ -743,7 +743,7 @@ def get_time(date, month, yr):  # pylint: disable=invalid-name
             print('\nSorry, invalid entry.')
 
 
-def validate_name(func):
+def validate_name():
     """
     Simple name validation so user inputs two names and without numbers.
     """
@@ -752,7 +752,6 @@ def validate_name(func):
         name = input()
 
         if name == 'e':
-            func
             return False
 
         if any(char.isdigit() for char in name):
@@ -776,15 +775,17 @@ def get_name(apntmnt_time, end_time):
 
     print('To continue, enter your full name ("e" to exit):\n')
 
-    name = validate_name(welcome_screen)
+    name = validate_name()
 
     # if name == 'e':
     #     welcome_screen()
-    #     return
+    if name:
+        print(f'\nThank you {name}.\n')
+        get_email(apntmnt_time, end_time, name)
+        return name
 
-    print(f'\nThank you {name}.\n')
-    get_email(apntmnt_time, end_time, name)
-    return name
+    else:
+        welcome_screen()
 
 
 def get_email(apntmnt_time, end_time, name):
@@ -797,7 +798,7 @@ def get_email(apntmnt_time, end_time, name):
     """
     while True:
         email = input('Please enter your email ("e" to exit):\n\n')
-        e_to_exit(email, welcome_screen)
+        e_to_exit(email)
 
         if not re.match(r'[^@]+@[^@]+\.[^@]+', email):
             print('\nInvalid email, try again\n')
@@ -820,7 +821,8 @@ def get_details(apntmnt_time, end_time, name, email):
         detls_inp = input(
             '\nShortly describe your symptoms ("e" to exit):\n\n'
         )
-        e_to_exit(detls_inp, welcome_screen)
+        if e_to_exit(detls_inp):
+            break
 
         #  fix some formatting issues in the Heroku terminal if deleting text
         details = detls_inp.replace('[C ', '').replace('[C', '')
