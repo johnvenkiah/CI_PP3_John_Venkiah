@@ -29,7 +29,7 @@ def get_p_log():
 
         return p_data
 
-    except Exception as error:
+    except Exception as error:  # pylint: disable=broad-except
         print(f'could not load Google worksheet, probable API error: {error}')
         return False
 

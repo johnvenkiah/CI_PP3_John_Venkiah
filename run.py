@@ -167,9 +167,8 @@ def staff_nav():
                 welcome_screen()
                 return False
 
-            else:
-                staff_nav()
-                return False
+            staff_nav()
+            return False
 
         print('\nExiting...')
         welcome_screen()
@@ -784,8 +783,8 @@ def get_name(apntmnt_time, end_time):
         get_email(apntmnt_time, end_time, name)
         return name
 
-    else:
-        welcome_screen()
+    welcome_screen()
+    return False
 
 
 def get_email(apntmnt_time, end_time, name):
