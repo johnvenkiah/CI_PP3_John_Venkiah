@@ -34,9 +34,11 @@
     1. [Feature 1: The Patient Booking System](#feature-1:-the-patient-booking-system)
     2. [Feature 2: The Schedule](#feature-2:-the-schedule)
     3. [Feature 3: The Patient Log](#feature-3:-the-patient-log)
+    4. [Features to be implemented](#features-to-be-implemented)
 7. [Technologies Used](#technologies-used)
     1. [Languages](#languages)
-    2. [Applications, Libraries and Platforms](#applications-libraries-and-platforms)
+    2. [Applications and Libraries](#applications-and-libraries)
+        
 
 4. [Validation](#validation)
     1. [Performance](#performance)
