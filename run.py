@@ -14,6 +14,7 @@ import datetime
 import os
 from datetime import timedelta
 import re
+import readline
 
 from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
@@ -245,7 +246,7 @@ def print_appointments(earliest, latest):
             appointment['description']
             )
         app_nr += 1
-    # nav_appntmnt(app_dict)
+    nav_appntmnt(app_dict)
 
 
 """
@@ -282,7 +283,7 @@ def nav_appntmnt(app_dict):
     print('\nTo edit an appointment, enter the appointment number.\n')
     print('To get appointments for week after, hit "n".\n')
     print('To go back to the previous week, hit "b".\n')
-    nav_or_edit = input('Hit any other key to get to the staff menu.\n')
+    nav_or_edit = input('Hit any other key to get to the staff menu.\n\n')
 
     def week_nav_fn():
         """
@@ -340,7 +341,7 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
     if edit_or_delete == 'r':
 
         sure = input(
-            '\nDelete appointment ' + nav_or_edit +
+            '\nRemove appointment ' + nav_or_edit +
             ' ("y": YES, any other key: NO)?\n\n'
         )
 
