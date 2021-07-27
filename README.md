@@ -1018,43 +1018,56 @@ This was tested by trying all possible entries in all menus in the application. 
 **Bug**: Error when entering month "oct" in patient booking system
 
 **Fix**: Correct typo "Okt" in month dictionary, create try and except to catch time format value errors
-
+___
 
 **Bug**: Error ``code: 500, APIerror`` when calling the sheets API
 
 **Fix**: Only happened once, difficult to recreate. Created a "try", "except" to catch API errors when calling the sheets API
+___
 
+**Bug**: Checking schedule displayed twice
 
-Bug: Checking schedule displayed twice
+**Fix**: Change code so things happen in correct order
+___
 
-Fix: Change code so things happen in correct order
+**Bug**: Password hiding library import stdiomsk doesn't work on terminal in Heroku and produced ``termios.error: 25, 'Inappropriate ioctl for device'``
 
+**Fix**: Remove stdiomsk and let password entered be shown
+___
 
-Bug: Password hiding library import stdiomsk doesn't work on terminal in Heroku and produced ``termios.error: 25, 'Inappropriate ioctl for device'``
+**Bug**: Datetime parsing not working, returning errors
 
-Fix: Remove stdiomsk and let password entered be shown
+**Fix**: Create TimeFConverter class, convert formats with that
+___
 
+**Bug**: Says date incorrect although it is correct
 
-Bug: Datetime parsing not working, returning errors
+**Fix**: Fix while loop and indentation in get date function
+___
 
-Fix: Create TimeFConverter class, convert formats with that
+**Bug**: Sheets updating wrong cell when user exists
 
+**Fix** code at end of sheet.py; use update_cell sheets method
+___
 
-Bug: Says date incorrect although it is correct
+**Bug**: Schedule displaying wrong weeks when navigating through weeks, out of schedule back in and then showing next week again
 
-Fix: Fix while loop and indentation in get date function
+**Fix**: Add initialize method to IncDecWeek class, so when user exits, the weeks count resets
+___
 
+**Bug**: Some lines appearing without space below
 
-Bug: Sheets updating wrong cell when user exists
+**Fix**: Add new line to print and input strings where relevant
+___
 
-Fix code at end of sheet.py; use update_cell sheets method
+**Bug**: "e" didn't let user exit
 
+**Fix**: Add paretheses to e_to_edit function
+___
 
-Bug: Schedule displaying wrong weeks when navigating through weeks, out of schedule back in and then showing next week again
-Fix: Add initialize method to IncDecWeek class, so when user exits, the weeks count resets
+**Bug**: Error when selecting date in month that has passed
 
-Bug: Some lines appearing without space below
-Fix: Add new line to print and input strings where relevant
+**Fix**: Changed datetime method to year that was wrongly named as variable "yr"
 
 </details>
 
