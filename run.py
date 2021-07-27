@@ -131,7 +131,7 @@ def e_to_exit(user_input):
     """
 
     if user_input.lower() == 'e':
-        welcome_screen
+        welcome_screen()
 
 
 def staff_nav():
@@ -649,7 +649,7 @@ def get_month(yr):  # pylint: disable=invalid-name
 
                 if int_month < int_this_month:
                     yr = datetime.datetime.today() + timedelta(365.2425)
-                    yr = yr.yr
+                    yr = yr.year
 
                 get_date(days_in_month, month, yr, int_month, int_this_month)
                 return False
@@ -833,7 +833,7 @@ def get_details(apntmnt_time, end_time, name, email):
         else:
             start_pretty = convert_time.iso_to_pretty(apntmnt_time, 0)
 
-            print(f'\nConfirm appointment: {start_pretty}, {details}?\n')
+            print(f'\nConfirm appointment: {start_pretty} for {name}?\n')
             confirm = input('"y" = YES, any other key = NO\n\n')
 
             if confirm.lower() == 'y':
