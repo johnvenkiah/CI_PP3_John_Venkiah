@@ -87,6 +87,9 @@ def welcome_screen():
     print(welcome_greeting.upper())
     print('\nMade for patients and staff at the FeelGood Physio clinic\n')
     print('To use this app, hit enter after each choice.\n')
+    print(
+        '(Using the alt-delete function may cause the app to malfunction)\n'
+    )
 
     while True:
         staff_or_customer = input(
@@ -242,7 +245,7 @@ def print_appointments(earliest, latest):
             appointment['description']
             )
         app_nr += 1
-    nav_appntmnt(app_dict)
+    # nav_appntmnt(app_dict)
 
 
 """
@@ -276,10 +279,10 @@ def nav_appntmnt(app_dict):
         each appointment for user to input, should they want to edit that
         specific appointment, and the Google Calendar event id as values.
     """
-    print('\nTo edit an appointment, enter the appointment number.')
-    print('\nTo get appointments for week after, hit "n".')
-    print('\nTo go back to the previous week, hit "b".\n')
-    nav_or_edit = input('Hit any other key to get to the staff menu.\n\n')
+    print('\nTo edit an appointment, enter the appointment number.\n')
+    print('To get appointments for week after, hit "n".\n')
+    print('To go back to the previous week, hit "b".\n')
+    nav_or_edit = input('Hit any other key to get to the staff menu.\n')
 
     def week_nav_fn():
         """
@@ -349,7 +352,7 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
             print('\nGetting Schedule...\n')
             print_appointments(now, future_date(7))
         else:
-            print('\n\nCancelled.\n')
+            print('\nCancelled.\n')
             edit_appntmnt(nav_or_edit, apntmnt_id)
 
     elif edit_or_delete == 'e':
@@ -358,7 +361,7 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
         edit_appntmnt_2(apntmnt_to_edit, apntmnt_id)
 
     else:
-        print('Cancelled.\n')
+        print('\nCancelled.\n')
         print_appointments(now, future_date(7))
 
 

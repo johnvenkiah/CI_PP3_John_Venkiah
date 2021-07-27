@@ -78,8 +78,6 @@ def append_p_row(name, email, details):
         p_nr = get_p_nr()
 
         data = [p_nr, name, email, details]
-        print(data)
-        print(p_nr)
         pat_log.append_row(data)
 
     else:
