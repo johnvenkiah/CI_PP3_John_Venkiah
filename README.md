@@ -13,23 +13,28 @@
 
 ## Contents
 
-1. [Strategy](#strategy)
-    1. [Project Goals](#project-goals)
-    2. [Future Goals](#future-goals)
-    3. [User Goals](#user-goals)
 
-2. [Structure](#structure)
-
-3. [User Stories](#user-stories)
-    1. [User Stories](#user-stories)
-    2. [Site Owner Goals](#site-owner-goals)
-
-5. [Surface](#surface)
-    1. [Design Choices](#design-choices)
-
-2. [Features](#features)
-    1. [Existing Features](#existing-features)
-3. [Technologies Used](#technologies-used)
+1. [Project Goals](#project-goals)
+2. [User Goals](#user-goals)
+3. [Structure](#structure)
+    1. [Home Screen](home-screen)
+    2. [Booking Process for Patient](#booking-process-for-patient)
+    3. [Staff area](#staff-area)
+    4. [Staff Schedule](#staff-schedule)
+    5. [Patient Log](#patient-log)
+4. [User Stories](#user-stories)
+    1. [Patient User Stories](#patient-user-stories)
+    2. [Staff Member User Stories](#staff-member-user-stories)
+    3. [Site Owner Goals](#site-owner-goals)
+5. [Technical Design](#technical-design)
+    1. [Flow Chart](#flow-chart)
+    2. [Data Models](#data-models)
+    3. [User Interface](#user-interface)
+6. [Features](#features)
+    1. [Feature 1: The Patient Booking System](#feature-1:-the-patient-booking-system)
+    2. [Feature 2: The Schedule](#feature-2:-the-schedule)
+    3. [Feature 3: The Patient Log](#feature-3:-the-patient-log)
+7. [Technologies Used](#technologies-used)
     1. [Languages](#languages)
     2. [Applications, Libraries and Platforms](#applications-libraries-and-platforms)
 
@@ -96,7 +101,7 @@ This welcomes the user when they first enter the application, when the task at h
 - Book appointment - takes users to the booking process
 - Staff login - takes users to the staff area
 
-### 2. Booking process for patient
+### 2. Booking Process for Patient
 
 <details>
     <summary>Click to view image</summary>
@@ -131,7 +136,7 @@ The log, which is a Google Sheet, updates dynamically as users book appointments
 
 As this application has such specific target users, I have adapted my user stories to patients and staff.
 
-### Patient user stories:
+### Patient User Stories:
 
 1. I would like to be able to book an appointment at a time of my choosing, should the appointement be available
 2. I would like to be alerted if my details are saved before I enter them
@@ -141,7 +146,7 @@ As this application has such specific target users, I have adapted my user stori
 6. I would like to view a confirmation of the booking when it is made
 7. I would like to at any point cancel my booking during the booking process should I wish to do so
 
-### Staff member user stories:
+### Staff Member User stories:
 
 8. I would like for users to only be able to book appointments on weekdays between 9 and 17, and when the schedule is free
 9. I would like appointments made by new users add a new row with their information to the Google Sheets patient log
@@ -154,7 +159,7 @@ As this application has such specific target users, I have adapted my user stori
 16. I would like to easily be able to return to the main staff area in the application
 17. I would like the staff area to be password protected
 
-### Site owner goals
+### Site Owner Goals
 
 18. I would like for the application to contain validated Python code without returning any errors, whatever the user does
 
@@ -1152,4 +1157,4 @@ Using the isnumeric function: [delftstack.com](https://www.delftstack.com/howto/
 
 This project was created from a template made by [Code Institute](https://codeinstitute.net/) to recreate the terminal in a regular web browser.
 
-The tutors Scott and Sean and my mentor Mo Shami at Code Institute, have helped me in times of trouble, many thanks to them.
+The tutors Scott and Sean and my mentor Mo Shami at Code Institute, have helped me in times of trouble. Many thanks to them.
