@@ -457,11 +457,11 @@ User stories are tested with the features that cover them. All user stories pass
 
 **Covered by feature 1: The Patient Booking System**
 
-**Action** - *In the welcome screen, user hits "b" to get to the booking screen*
+- **Action** - *In the welcome screen, user hits "b" to get to the booking screen*
 
-**Expected Result** - *Application displays message about storing data and user needs to confirm this to carry on*
+- **Expected Result** - *Application displays message about storing data and user needs to confirm this to carry on*
 
-**Actual Result** - *Works as intended*
+- **Actual Result** - *Works as intended*
 
 <details>
     <summary>View image here</summary>
@@ -494,27 +494,27 @@ This user story is tested in the steps needed to make an appointment.
 
 ___
 
-**Action** - *User hits "1" to continue*
+- **Action** - *User hits "1" to continue*
 
-**Expected Result** - *Application asks user for the month they would like to come*
+- **Expected Result** - *Application asks user for the month they would like to come*
 
-**Actual Result** - *Works as intended*
-
-___
-
-**Action** - *User enters the three first letters of the month that they want to come*
-
-**Expected Result** - *Application confirms the month entered and asks for the desired appointment date*
-
-**Actual Result** - *Works as intended*
+- **Actual Result** - *Works as intended*
 
 ___
 
-**Action** - *User enters the desired appointment date*
+- **Action** - *User enters the three first letters of the month that they want to come*
 
-**Expected Result** - *Application lets user know if the date is unbookable, (weekends for example) or if it is available to book, in which case the app confirms date and asks user for time of appointment*
+- **Expected Result** - *Application confirms the month entered and asks for the desired appointment date*
 
-**Actual Result** - *Works as intended*
+- **Actual Result** - *Works as intended*
+
+___
+
+- **Action** - *User enters the desired appointment date*
+
+- **Expected Result** - *Application lets user know if the date is unbookable, (weekends for example) or if it is available to book, in which case the app confirms date and asks user for time of appointment*
+
+- **Actual Result** - *Works as intended*
 
 <details>
     <summary>View image here</summary>
@@ -526,19 +526,19 @@ ___
 
 ___
 
-**Action** - *User enters hour of desired appointment time*
+- **Action** - *User enters hour of desired appointment time*
 
-**Expected Result** - *Application confirms the time and asks user for name if the desired appoinment time is free and bookable, otherwise lets the user know and user has to choose new time*
+- **Expected Result** - *Application confirms the time and asks user for name if the desired appoinment time is free and bookable, otherwise lets the user know and user has to choose new time*
 
-**Actual Result** - *Works as intended*
+- **Actual Result** - *Works as intended*
 
 ___
 
-**Action** - *User enters their name*
+- **Action** - *User enters their name*
 
-**Expected Result** - *Application Confirms the users name and asks for their email*
+- **Expected Result** - *Application Confirms the users name and asks for their email*
 
-**Actual Result** - *Works as intended*
+- **Actual Result** - *Works as intended*
 
 <details>
     <summary>View image here</summary>
@@ -549,27 +549,27 @@ ___
 
 ___
 
-**Action** - *User enters their email*
+- **Action** - *User enters their email*
 
-**Expected Result** - *Application Confirms the users email address and asks user to enter their symptoms*
+- **Expected Result** - *Application Confirms the users email address and asks user to enter their symptoms*
 
-**Actual Result** - *Works as intended*
-
-___
-
-**Action** - *User enters their symptoms*
-
-**Expected Result** - *Application displays all the patient data retrieved and asks user to confirm appointment*
-
-**Actual Result** - *Works as intended*
+- **Actual Result** - *Works as intended*
 
 ___
 
-**Action** - *User confirms appointment*
+- **Action** - *User enters their symptoms*
 
-**Expected Result** - *Application displays confirmation, that patient data is logged and user can return to the main screen*
+- **Expected Result** - *Application displays all the patient data retrieved and asks user to confirm appointment*
 
-**Actual Result** - *Works as intended*
+- **Actual Result** - *Works as intended*
+
+___
+
+- **Action** - *User confirms appointment*
+
+- **Expected Result** - *Application displays confirmation, that patient data is logged and user can return to the main screen*
+
+- **Actual Result** - *Works as intended*
 
 <details>
     <summary>View image here</summary>
@@ -586,11 +586,11 @@ ___
 **Covered by feature 1: The Patient Booking System**
 
 
-**Action** - *User enters invalid value, or date/time that is not free*
+- **Action** - *User enters invalid value, or date/time that is not free*
 
-**Expected Result** - *Application let user know that the entry is invalid, and the user gets to try again*
+- **Expected Result** - *Application let user know that the entry is invalid, and the user gets to try again*
 
-**Actual Result** - *Works as intended*
+- **Actual Result** - *Works as intended*
 
 The testing of this user case is best portrayed with the images below. All areas of navigation have passed the tests.
 
@@ -669,11 +669,11 @@ ___
 
 **Covered by feature 1: The Patient Booking System**
 
-**Action** - *User confirms the booking made*
+- **Action** - *User confirms the booking made*
 
-**Expected Result** - *Application displays the details of the booking*
+- **Expected Result** - *Application displays the details of the booking*
 
-**Actual Result** - *Works as intended*
+- **Actual Result** - *Works as intended*
 
 <details>
     <summary>View image here</summary>
@@ -690,11 +690,11 @@ ___
 
 **Covered by feature 1: The Patient Booking System**
 
-**Action** - *User follows instructions to exit on screen*
+- **Action** - *User follows instructions to exit on screen*
 
-**Expected Result** - *Booking returns to the home screen or the previous stage*
+- **Expected Result** - *Booking returns to the home screen or the previous stage*
 
-**Actual Result** - *Works as intended*
+- **Actual Result** - *Works as intended*
 
 <details>
     <summary>View images here</summary>
@@ -716,11 +716,11 @@ ___
 
 **Covered by feature 1: The Patient Booking System**
 
-**Action** - *User tries to make a booking on a weekend, outside the schedule or when a booking is already scheduled*
+- **Action** - *User tries to make a booking on a weekend, outside the schedule or when a booking is already scheduled*
 
-**Expected Result** - *Patient is alerted that the time is invalid or unavailable*
+- **Expected Result** - *Patient is alerted that the time is invalid or unavailable*
 
-**Actual Result** - *Works as intended*
+- **Actual Result** - *Works as intended*
 
 <details>
     <summary>View image here</summary>
@@ -736,19 +736,24 @@ ___
 
 **Covered by feature 1: The Patient Booking System and feature 3, the Patient Log**
 
-**Action** - *User successfully books an appointment*
+- **Action** - *User successfully books an appointment*
 
-**Expected Result** - *Patients information is added on a new row in the patient log on the Google spreadsheet, which is viewable in the application*
+- **Expected Result** - *Patients information is added on a new row in the patient log on the Google spreadsheet, which is viewable in the application*
 
-**Actual Result** - *Works as intended*
+- **Actual Result** - *Works as intended*
 
 <details>
     <summary>View images here</summary>
 
+*A completed patient booking*
+
 ![User story 9, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_booking/p_booking_done.png)
+
+*The patient log after booking*
 
 ![User story 9, 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_log/patient_log.png)
 
+*The Google Sheet after booking is made*
 ![User story 9, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_log/g_sheets_new.png)
 
 </details>
@@ -761,11 +766,11 @@ ___
 
 **Covered by feature 1: The Patient Booking System**
 
-**Action** - *User successfully books an appointment*
+- **Action** - *User successfully books an appointment*
 
-**Expected Result** - *Event on Google Calendar is created from input by user during booking*
+- **Expected Result** - *Event on Google Calendar is created from input by user during booking*
 
-**Actual Result** - *Works as intended*
+- **Actual Result** - *Works as intended*
 
 <details>
     <summary>View image of date validation here</summary>
@@ -782,11 +787,11 @@ ___
 
 **Covered by feature 2: The Schedule**
 
-- Action: *User edits an appointment from the schedule*
+- **Action**: *User edits an appointment from the schedule*
 
-- Expected Result: *The appointment is updated on Google Calendar with new data from user*
+- **Expected Result**: *The appointment is updated on Google Calendar with new data from user*
 
-- Actual Result: *Works as intended*
+- **Actual Result**: *Works as intended*
 
 <details>
     <summary>View image of initial steps of the booking</summary>
@@ -797,6 +802,8 @@ ___
 
 ![user story 11, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_11_3.png)
 
+</details>
+
 
 ### Testing of user story 12
 
@@ -804,11 +811,11 @@ ___
 
 **Covered by feature 3: The Patient Log**
 
-- Action: *User hits "l" in the staff area*
+- **Action**: *User hits "l" in the staff area*
 
-- Expected Result: *The patient log is displayed*
+- **Expected Result**: *The patient log is displayed*
 
-- Actual Result: *Works as intended*
+- **Actual Result**: *Works as intended*
 
 </details>
     <summary>View image of the result</summary>
@@ -823,11 +830,11 @@ ___
 
 **Covered by feature 2: The Schedule**
 
-- Action: *User hits "s" in the staff area*
+- **Action**: *User hits "s" in the staff area*
 
-- Expected Result: *The schedule is displayed*
+- **Expected Result**: *The schedule is displayed*
 
-- Actual Result: *Works as intended*
+- **Actual Result**: *Works as intended*
 
 </details>
     <summary>View image of the result</summary>
@@ -842,11 +849,11 @@ ___
 
 **Covered by feature 2: The Schedule**
 
-- Action: *User hits "n" or "b" when viewing the schedule*
+- **Action**: *User hits "n" or "b" when viewing the schedule*
 
-- Expected Result: *The next week is displayed*
+- **Expected Result**: *The next week is displayed*
 
-- Actual Result: *Works as intended*
+- **Actual Result**: *Works as intended*
 
 </details>
     <summary>View image of the result</summary>
@@ -871,23 +878,27 @@ ___
 * *User confirms changes*
 
 
-- Expected Result: *The event is updated on Google Calendar*
+- **Expected Result**: *The event is updated on Google Calendar*
 
-- Actual Result: *Works as intended*
+- **Actual Result**: *Works as intended*
 
 </details>
     <summary>View images of editing appointments</summary>
 
 *The edit menu*
+
 ![User story 15, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_15_1.png)
 
 *Editing the date and time*
+
 ![User story 15, 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_15_2.png)
 
 *Changes are confirmed*
+
 ![User story 15, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_15_3.png)
 
 *The Google event now has the new time*
+
 ![User story 15, 4](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_15_4.png)
 
 </details>
@@ -902,17 +913,19 @@ ___
 * *User confirms changes*
 
 
-- Expected Result: *The event is removed from Google Calendar*
+- **Expected Result**: *The event is removed from Google Calendar*
 
-- Actual Result: *Works as intended*
+- **Actual Result**: *Works as intended*
 
 </details>
     <summary>View images of removing appointment</summary>
 
 *Choice to remove and confirmation once removed*
+
 ![User story 15, 5](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_15_5.png)
 
 *The Google event is now nowhere to be seen*
+
 ![User story 15, 6](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_15_6.png)
 
 </details>
@@ -921,27 +934,79 @@ ___
 
 *"I would like to easily be able to return to the main staff area in the application"*
 
-**Covered by feature 2: The Schedule, and feature 3, The Patient Log**
-
-#### Edit appointment
-
-- **Actions**:
-
-* *User enters number of appoinment when viewing the schedule*
-* *User chooses what to edit; time, name or details*
-* *User enters new time, name or details for appointment*
-* *User confirms changes*
+**Covered by feature 2: The Schedule, and feature 3: The Patient Log**
 
 
-- Expected Result: *The event is updated on Google Calendar*
+- **Action**: *User follows the instructions to get to the staff menu*
 
-- Actual Result: *Works as intended*
+- **Expected Result**: *Staff main menu is displayed*
+
+- **Actual Result**: *Works as intended*
 
 </details>
-    <summary>View images of editing appointments</summary>
+    <summary>Click to view images</summary>
 
-*The edit menu*
-![User story 15, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_15_1.png)
+*Returning from patient log to staff menu*
+
+![User story 16, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_16_1.png)
+
+*Returning from schedule to staff menu*
+
+![User story 16, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_16_2.png)
+
+</details>
+
+### Testing of user story 17
+
+*"I would like the staff area to be password protected"*
+
+**Covered by all features**
+
+
+- **Action**: *User enters "s" to view staff area*
+
+- **Expected Result**: *User must enter password to continue*
+
+- **Actual Result**: *Works as intended*
+
+</details>
+    <summary>Click to view image</summary>
+
+*The password being displayed*
+
+![User story 17](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_16_1.png)
+
+</details>
+
+### Testing of user story 18
+
+*"I would like for the application to contain validated Python code without returning any errors, whatever the user does"*
+
+**Covered by all features**
+
+
+- **Action**: *User enters invalid information*
+
+- **Expected Result**: *Application lets user know and user can enter info again*
+
+- **Actual Result**: *Works as intended*
+
+This was tested by trying all possible entries in all menus in the application. The application passed all validation tests which can be viewed [here](#validation), and user will be displayed with information in all menus if user input is incorrect.
+
+</details>
+    <summary>Click to view images</summary>
+
+*Incorrect date entered, staff area*
+
+![User story 18, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_18_1.png)
+
+*Incorrect month entered, patient booking area*
+
+![User story 18, 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_18_2.png)
+
+*Incorrect name entered, patient booking area*
+
+![User story 18, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_18_3.png)
 
 </details>
 
