@@ -131,6 +131,7 @@ def e_to_exit(user_input, func):
     """
 
     if user_input.lower() == 'e':
+        print(user_input.lower())
         func
 
 
@@ -164,7 +165,7 @@ def staff_nav():
             )
 
             if e_input == 'e':
-                e_to_exit(e_input, welcome_screen)
+                welcome_screen()
                 return False
 
             else:
@@ -404,9 +405,12 @@ def get_name_staff(apntmnt_to_edit, apntmnt_id):
 
     print('\nPlease enter new name or "e" to exit:\n')
 
-    new_name = validate_name()
-    e_to_exit(new_name, staff_nav)
-    update_name(apntmnt_to_edit, apntmnt_id, new_name)
+    new_name = validate_name(staff_nav)
+
+    if new_name:
+        update_name(apntmnt_to_edit, apntmnt_id, new_name)
+
+    staff_nav()
 
 
 def get_date_staff(apntmnt_to_edit, apntmnt_id):
@@ -661,7 +665,7 @@ def get_month(yr):  # pylint: disable=invalid-name
 
 def get_date(
     days_in_month, month, yr, int_month, int_this_month
-    ):  # pylint: disable=invalid-name
+):  # pylint: disable=invalid-name
 
     """
     Get the date from the user, with the month and year
@@ -739,13 +743,18 @@ def get_time(date, month, yr):  # pylint: disable=invalid-name
             print('\nSorry, invalid entry.')
 
 
-def validate_name():
+def validate_name(func):
     """
     Simple name validation so user inputs two names and without numbers.
     """
 
     while True:
         name = input()
+
+        if name == 'e':
+            func
+            return False
+
         if any(char.isdigit() for char in name):
             print("\nName can't contain numbers!\n")
 
@@ -767,8 +776,11 @@ def get_name(apntmnt_time, end_time):
 
     print('To continue, enter your full name ("e" to exit):\n')
 
-    name = validate_name()
-    e_to_exit(name, welcome_screen)
+    name = validate_name(welcome_screen)
+
+    # if name == 'e':
+    #     welcome_screen()
+    #     return
 
     print(f'\nThank you {name}.\n')
     get_email(apntmnt_time, end_time, name)
@@ -805,7 +817,9 @@ def get_details(apntmnt_time, end_time, name, email):
     @param name(str): Name to display as ['summary'] for Google event
     """
     while True:
-        detls_inp = input('\nShortly describe your symptoms ("e" to exit):\n\n')
+        detls_inp = input(
+            '\nShortly describe your symptoms ("e" to exit):\n\n'
+        )
         e_to_exit(detls_inp, welcome_screen)
 
         #  fix some formatting issues in the Heroku terminal if deleting text
