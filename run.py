@@ -14,7 +14,6 @@ import datetime
 import os
 from datetime import timedelta
 import re
-import readline
 
 from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
@@ -396,6 +395,16 @@ def edit_appntmnt_2(apntmnt_to_edit, apntmnt_id):
         return
 
 
+def remove_esc_char(word):
+    """
+    Function to remove escape characters created by pressing option-delete in
+    the Heroku terminal, which create errors when viewing them.
+    @param word(str): the word to be checked
+    """
+    word = word.replace('[C', '')
+    return word
+
+
 def get_name_staff(apntmnt_to_edit, apntmnt_id):
     """
     Lets user edit patient name.
@@ -410,6 +419,7 @@ def get_name_staff(apntmnt_to_edit, apntmnt_id):
     new_name = validate_name()
 
     if new_name:
+        remove_esc_char(new_name)
         update_name(apntmnt_to_edit, apntmnt_id, new_name)
 
     else:
