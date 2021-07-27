@@ -124,14 +124,14 @@ def suggest_appointment():
         welcome_screen()
 
 
-def e_to_exit(user_input):
+def e_to_exit(user_input, func):
     """
     Gets user back to welcome screen if they input "e".
     @paran user_input(str): input from user.
     """
 
     if user_input.lower() == 'e':
-        welcome_screen()
+        func
 
 
 def staff_nav():
@@ -164,7 +164,7 @@ def staff_nav():
             )
 
             if e_input == 'e':
-                e_to_exit(e_input)
+                e_to_exit(e_input, welcome_screen)
                 return False
 
             else:
@@ -189,7 +189,7 @@ def staff_login():
         password_entered = input(
             'Enter your password or "e" to exit:\n\n'
         )
-        e_to_exit(password_entered)
+        e_to_exit(password_entered, welcome_screen)
 
         if attempts == 4:
             print('\nToo many incorrect attempts, exiting...\n')
@@ -318,7 +318,6 @@ def nav_appntmnt(app_dict):
 
         # pylint: disable=unused-variable
         days_1 = week_multiplier.initialize()  # noqa
-
         staff_nav()
 
 
@@ -405,12 +404,8 @@ def get_name_staff(apntmnt_to_edit, apntmnt_id):
 
     print('\nPlease enter new name or "e" to exit:\n')
 
-    new_name = input()
-    validate_name(new_name)
-
-    if new_name == 'e':
-        staff_nav()
-
+    new_name = validate_name()
+    e_to_exit(new_name, staff_nav)
     update_name(apntmnt_to_edit, apntmnt_id, new_name)
 
 
@@ -638,7 +633,7 @@ def get_month(yr):  # pylint: disable=invalid-name
         days_in_month = month_dict.get(month)
         month_incorr = '\nMonth incorrect, please try again'
 
-        e_to_exit(month)
+        e_to_exit(month, welcome_screen)
 
         try:
             if month in month_dict.keys():
@@ -666,7 +661,7 @@ def get_month(yr):  # pylint: disable=invalid-name
 
 def get_date(
     days_in_month, month, yr, int_month, int_this_month
-):  # pylint: disable=invalid-name
+    ):  # pylint: disable=invalid-name
 
     """
     Get the date from the user, with the month and year
@@ -684,7 +679,7 @@ def get_date(
         print(f'\n{month}, {yr}. Which date?\n')
         date = input('Enter one or two digits, ("e" to exit):\n\n')
         date_incorrect = '\nDate incorrect, please try again'
-        e_to_exit(date)
+        e_to_exit(date, welcome_screen)
 
         try:
             date_today = datetime.date.today().day
@@ -722,7 +717,7 @@ def get_time(date, month, yr):  # pylint: disable=invalid-name
         print(f'\n{date} {month}, {yr}. What time?\n')
         hour = input('Enter hour, 9 - 17 ("e" to exit):\n\n')
 
-        e_to_exit(hour)
+        e_to_exit(hour, welcome_screen)
 
         if hour.isnumeric() and int(hour) >= 9 and int(hour) < 17:
             apntmnt_time = (f'{hour}:00, {date} {month} {yr}')
@@ -744,13 +739,13 @@ def get_time(date, month, yr):  # pylint: disable=invalid-name
             print('\nSorry, invalid entry.')
 
 
-def validate_name(name):
+def validate_name():
     """
     Simple name validation so user inputs two names and without numbers.
     """
 
     while True:
-
+        name = input()
         if any(char.isdigit() for char in name):
             print("\nName can't contain numbers!\n")
 
@@ -771,9 +766,9 @@ def get_name(apntmnt_time, end_time):
     """
 
     print('To continue, enter your full name ("e" to exit):\n')
-    name = input()
-    e_to_exit(name)
-    validate_name(name)
+
+    name = validate_name()
+    e_to_exit(name, welcome_screen)
 
     print(f'\nThank you {name}.\n')
     get_email(apntmnt_time, end_time, name)
@@ -790,7 +785,7 @@ def get_email(apntmnt_time, end_time, name):
     """
     while True:
         email = input('Please enter your email ("e" to exit):\n\n')
-        e_to_exit(email)
+        e_to_exit(email, welcome_screen)
 
         if not re.match(r'[^@]+@[^@]+\.[^@]+', email):
             print('\nInvalid email, try again\n')
@@ -810,9 +805,11 @@ def get_details(apntmnt_time, end_time, name, email):
     @param name(str): Name to display as ['summary'] for Google event
     """
     while True:
-        det_in = input('\nShortly describe your symptoms ("e" to exit):\n\n')
-        e_to_exit(det_in)
-        details = det_in.replace('[C ', '').replace('[C', '')
+        detls_inp = input('\nShortly describe your symptoms ("e" to exit):\n\n')
+        e_to_exit(detls_inp, welcome_screen)
+
+        #  fix some formatting issues in the Heroku terminal if deleting text
+        details = detls_inp.replace('[C ', '').replace('[C', '')
 
         if len(details) < 8:
             print('\nPlease enter at least eight characters')
