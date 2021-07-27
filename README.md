@@ -31,8 +31,8 @@
     2. [Data Models](#data-models)
     3. [User Interface](#user-interface)
 6. [Features](#features)
-    1. [Feature 1: The Patient Booking System](#feature-1:-the-patient-booking-system)
-    2. [Feature 2: The Schedule](#feature-2:-the-schedule)
+    1. [Feature 1: The Patient Booking System](#feature-1-the-patient-booking-system)
+    2. [Feature 2: The Schedule](#feature-2-the-schedule)
     3. [Feature 3: The Patient Log](#feature-3-the-patient-log)
     4. [Features to be implemented](#features-to-be-implemented)
 7. [Technologies Used](#technologies-used)
@@ -828,7 +828,7 @@ ___
 
 - **Actual Result**: *Works as intended*
 
-</details>
+<details>
     <summary>View image of the result</summary>
 
 ![User story 12](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/patient_log/patient_log.png)
@@ -847,7 +847,7 @@ ___
 
 - **Actual Result**: *Works as intended*
 
-</details>
+<details>
     <summary>View image of the result</summary>
 
 ![User story 13](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/schedule/schedule.png)
@@ -866,7 +866,7 @@ ___
 
 - **Actual Result**: *Works as intended*
 
-</details>
+<details>
     <summary>View image of the result</summary>
 
 ![User story 14](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_14.png)
@@ -893,7 +893,7 @@ ___
 
 - **Actual Result**: *Works as intended*
 
-</details>
+<details>
     <summary>View images of editing appointments</summary>
 
 *The edit menu*
@@ -928,7 +928,7 @@ ___
 
 - **Actual Result**: *Works as intended*
 
-</details>
+<details>
     <summary>View images of removing appointment</summary>
 
 *Choice to remove and confirmation once removed*
@@ -954,7 +954,7 @@ ___
 
 - **Actual Result**: *Works as intended*
 
-</details>
+<details>
     <summary>Click to view images</summary>
 
 *Returning from patient log to staff menu*
@@ -980,7 +980,7 @@ ___
 
 - **Actual Result**: *Works as intended*
 
-</details>
+<details>
     <summary>Click to view image</summary>
 
 *The password being displayed*
@@ -1006,7 +1006,7 @@ ___
 
 This was tested by trying all possible entries in all menus in the application. The application passed all validation tests which can be viewed [here](#validation), and user will be displayed with information in all menus if user input is incorrect.
 
-</details>
+<details>
     <summary>Click to view images</summary>
 
 *Incorrect date entered, staff area*
