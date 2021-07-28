@@ -87,7 +87,7 @@ def welcome_screen():
     print(welcome_greeting.upper())
     print('\nMade for patients and staff at the FeelGood Physio clinic\n')
     print('To use this app, hit enter after each choice.\n')
-    print('Attention: using the alt-delete and the arrows when entering text')    
+    print('Attention: using the alt-delete and the arrows when entering text')
     print('in this application causes the app to malfunction. We are aware of')
     print('this and are working on it. Thank you for your patience.\n')
 
