@@ -257,8 +257,9 @@ def print_appointments(earliest, latest):
 
         if 'summary' not in appointment:
             appointment.update({'summary': 'No name'})
-        print(
+
         #  Print the event data to user
+        print(
             f'{app_nr}: ', start, appointment['summary'],
             appointment['description']
             )
@@ -563,6 +564,7 @@ def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
             staff_nav()
             return False
 
+        #  Validate time so it is within office hours and a number
         if get_hour.isnumeric() and int(get_hour) >= 9 and int(get_hour) < 17:
 
             get_hour = get_hour + ':00'
@@ -570,6 +572,7 @@ def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
             apntmnt_time = convert_time_staff.pretty_to_iso(apntmnt_time, 0)
             end_time = convert_iso_iso_ms.add_hour_iso(apntmnt_time, +1)
 
+            #  get the appointments list
             appointments = cal_mod.apt_list(
                 CAL, CAL_ID, apntmnt_time, end_time
                 )
@@ -579,6 +582,7 @@ def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
             else:
                 print(f'\n{get_hour} on {date_input} is free.\n')
 
+                #  Add the 'no info' string in no info exists
                 if 'summary' not in apntmnt_to_edit:
                     apntmnt_to_edit.update({'summary': 'No info'})
                     print(
@@ -591,6 +595,8 @@ def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
                 )
 
                 if conf_new_time == 'y':
+                    
+                    #  Update event with the input data
                     update_apntmnt_time(
                         apntmnt_time, end_time, apntmnt_to_edit, apntmnt_id
                     )
@@ -612,13 +618,15 @@ def update_apntmnt_time(apntmnt_time, end_time, apntmnt_to_edit, apntmnt_id):
     @param apntmnt_id(str): Google Calendar event identifier
     """
 
+    #  Get the start and endtime of the apntmnt_to_edit dictionary
     apntmnt_to_edit['start']['dateTime'] = apntmnt_time
     apntmnt_to_edit['end']['dateTime'] = end_time
 
+    #  Update the appointment with the dicionary's data
     cal_mod.updt_apt(CAL, CAL_ID, apntmnt_id, apntmnt_to_edit)
 
+    #  Convert the start time to readable string and display it to user
     apntmnt_time = convert_time_no_ms.iso_to_pretty(apntmnt_time, 0)
-
     print('\nAppointment time updated:\n')
     print(apntmnt_time + ', ' + apntmnt_to_edit['summary'] + '\n')
 
@@ -658,6 +666,7 @@ def get_month(yr):  # pylint: disable=invalid-name
     @param yr(int): the year of the appointment.
     """
 
+    #  Dictionary to validate correct month data
     month_dict = {
         'Jan': 31,
         'Feb': days_feb(),
@@ -675,9 +684,12 @@ def get_month(yr):  # pylint: disable=invalid-name
 
     while True:
 
+        #  Get month from user
         print('\nChoose the month for the appointment.\n')
         month = input('3 letters. "e" to exit.\n\n')
         month = month.capitalize()
+
+        #  Check number of days in month
         days_in_month = month_dict.get(month)
         month_incorr = '\nMonth incorrect, please try again'
 
