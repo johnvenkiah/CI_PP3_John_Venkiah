@@ -537,8 +537,8 @@ def update_name(apntmnt_to_edit, apntmnt_id, new_name):
     @param new_name(str): The name input from user to update event with.
     """
 
+    #  Get name from apntmnt_to_edit object and update the G. Cal with it
     apntmnt_to_edit['summary'] = new_name
-
     cal_mod.updt_apt(CAL, CAL_ID, apntmnt_id, apntmnt_to_edit)
 
     print(f'\nAppointment name updated: {new_name}\n')
