@@ -1,5 +1,6 @@
 """
 Main file run.py, for FeelGood Physio by John Venkiah
+
 This is the main file for a command line interface booking system for staff and
 patients of fictive physiotherapist clinic FeelGood Physio.
 
@@ -23,10 +24,9 @@ import sheet
 from time_f_converter import TimeFConverter
 from inc_dec_week import IncDecWeek
 if os.path.exists('password.py'):
-    import password  # pylint: disable=unused-import  # noqa
+    import password  # pylint: disable=unused-import  # noqa #  This is used!
 
 # Pylint thinks the string below is pointless so have bypassed the message.
-
 # pylint: disable=pointless-string-statement
 """
 Imports for all modules for application to function fully:
@@ -114,7 +114,8 @@ def welcome_screen():
 def suggest_appointment():
     """
     Function to let patient continue with booking or go back,
-    for example if a staff  member entered the wrong input.
+    for example if a staff member entered the wrong input or the user doesn't
+    consent with the saving of data.
     """
 
     print("\nLet's find you an appointment.\n")
@@ -124,6 +125,8 @@ def suggest_appointment():
         )
 
     if book_or_back == '1':
+
+        #  Initiate the booking process if user chooses to continue
         get_month(year)
 
     else:
@@ -218,17 +221,18 @@ def staff_login():
         attempts += 1
 
 
-"""
-An instance of the class used in nav_appntmnt function.
-"""
+
+#  An instance of the class used in nav_appntmnt function.
 week_multiplier = IncDecWeek()
 
 
 def print_appointments(earliest, latest):
     """
     Print the appointments taken through the get_appointments function.
-
+    @param earliest(str): The start time of the event
+    @param latest(str): The end time of the event
     """
+
     #  Get a list of dictionaries containing the appointment data
     appointments = cal_mod.apt_list(CAL, CAL_ID, earliest, latest)
     app_nr = 1
@@ -267,10 +271,9 @@ def print_appointments(earliest, latest):
     nav_appntmnt(app_dict)
 
 
-"""
-Different instances of TimeFConverter, depending on needed format to display
-or function as datetime on Google Calendar
-"""
+
+#  Different instances of TimeFConverter, depending on needed format to display
+#  or function with Google Calendar
 convert_time = TimeFConverter(
     '%Y-%m-%dT%H:%M:%S.%f' + GMT_OFF, '%H:%M, %d %b %Y'
 )
@@ -291,13 +294,14 @@ convert_iso_iso_ms = TimeFConverter(
 def nav_appntmnt(app_dict):
     """
     This lets staff navigate the schedule with week intervals,
-    using week_nav_fn function to increment or decrement weeks. They can also
-    edit or delete appointments.
+    using week_nav_fn function within to increment or decrement weeks.
+    They can also edit or delete appointments.
 
     @param app_dict(dict): Dict keys are integers that are displayed next to
         each appointment for user to input, should they want to edit that
         specific appointment, and the Google Calendar event id as values.
     """
+
     print('\nTo edit an appointment, enter the appointment number.\n')
     print('To get appointments for week after, hit "n".\n')
     print('To go back to the previous week, hit "b".\n')
@@ -305,31 +309,40 @@ def nav_appntmnt(app_dict):
 
     def week_nav_fn():
         """
-        This lets staff navigate the schedule with week intervals,
-        using week_nav_fn function to increment or decrement weeks.
+        Used to increment or decrement week of the appointments displayed.
         """
 
+        #  Get value of week_multiplier so that nav_appntmnt knows which
+        #  week to display
         days_1 = week_multiplier.get_value()
         days_2 = days_1 + 7
+
+        #  Insert the values to future_date so we get a datetime value
         date_1 = future_date(days_1)
         date_2 = future_date(days_2)
+
+        #  Convert them to readable strings    
         d_pretty_1 = convert_time.iso_to_pretty(date_1, 0)
         d_pretty_2 = convert_time.iso_to_pretty(date_2, 0)
         print(
             f'\nAppointments between {d_pretty_1} and {d_pretty_2}:\n'
         )
 
+        #  Print appointments between the two dates
         print_appointments(date_1, date_2)
 
-    #  nav_appntmnt continues here
+    #  Get the next week's schedule
     if nav_or_edit == 'n':
         week_multiplier.increment()
         week_nav_fn()
 
+    # Get the previous week's schedule
     elif nav_or_edit == 'b':
         week_multiplier.decrement()
         week_nav_fn()
 
+    #  If user enters key (apntmnt_id, nr) of appointment value (apntmnt_id) in
+    #  app_dict, user can edit that appointment
     elif str(nav_or_edit) in app_dict:
         apntmnt_id = app_dict[nav_or_edit]
         edit_appntmnt(nav_or_edit, apntmnt_id)
@@ -347,8 +360,7 @@ def nav_appntmnt(app_dict):
 
 def edit_appntmnt(nav_or_edit, apntmnt_id):
     """
-    This lets staff navigate the schedule with week intervals,
-    using week_nav_fn function to increment or decrement weeks.
+    Gives options for staff to edit or delete appointments.
 
     @param nav_or_edit(str): Input from user.
     @param apntmnt_id(int): Value stored in apntmnt_dict to pinpoint
@@ -399,7 +411,7 @@ def edit_appntmnt_2(apntmnt_to_edit, apntmnt_id):
     """
 
     print('\nEdit appointment - choose what to edit:')
-    print('\nTime: "t"                | Name: "n"\n')
+    print('\nTime: "t"              | Name: "n"\n')
     change_choice = input(
         'Details / Email: "d"   | Exit: any other\n\n'
     )
@@ -830,7 +842,7 @@ def validate_name():
         #  Only accept if name contains a space
         elif name.__contains__(' '):
 
-        #  Try to remove erroneous characters
+            #  Remove erroneous characters
             remove_esc_char(name)
             return name
 
@@ -872,10 +884,14 @@ def get_email(apntmnt_time, end_time, name):
         email = input('Please enter your email ("e" to exit):\n\n')
         e_to_exit(email)
 
+        #  A simple regex I found at Stack Overflow here:
+        # https://stackoverflow.com/questions/8022530/
+        # how-to-check-for-valid-email-address
         if not re.match(r'[^@]+@[^@]+\.[^@]+', email):
             print('\nInvalid email, try again\n')
 
         else:
+            #  Remove unwanted characters if present
             remove_esc_char(email)
             get_details(apntmnt_time, end_time, name, email)
             return False
@@ -897,18 +913,23 @@ def get_details(apntmnt_time, end_time, name, email):
         if e_to_exit(details):
             break
 
+        #  Remove unwanted characters if present
         remove_esc_char(details)
 
+        #  To make sure the user can't enter nothing
         if len(details) < 8:
             print('\nPlease enter at least eight characters')
 
         else:
+            #  Convert time to readable string
             start_pretty = convert_time.iso_to_pretty(apntmnt_time, 0)
 
             print(f'\nConfirm appointment: {start_pretty} for {name}?\n')
             confirm = input('"y" = YES, any other key = NO\n\n')
 
             if confirm.lower() == 'y':
+
+                #  Create appointment with the user data
                 new_appointment(
                     apntmnt_time, end_time, name, email,
                     details, start_pretty
@@ -933,6 +954,9 @@ def new_appointment(
     @param details(str): Description of symptoms entered by patient
     """
     try:
+        #  An event dictionary that Google Calendar can read
+        #  Found possibility to do this on Google API resources:
+        #  https://developers.google.com/calendar/api/v3/reference
         event = {
             'start': {
                 'dateTime': start,
@@ -951,6 +975,8 @@ def new_appointment(
         print(f'{start_pretty}, {email}\n')
         print(details)
         print('\nLogging your details...')
+
+        #  Create an entry in Google Sheet patient log
         sheet.append_p_row(name, email, details)
 
         goback = input('\nHit any key to go back to the start screen.\n\n')

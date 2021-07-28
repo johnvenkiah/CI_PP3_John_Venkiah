@@ -1155,7 +1155,9 @@ Here are links to sites that answered a lot of my questions on coding and the Py
 ### Coding tips and tricks
 
 Overriding false errors when Flake and Pylint validate code:
+
 [StackOverflow, pyflakes](https://stackoverflow.com/questions/8427701/how-to-ignore-pyflakes-errors-imported-but-unused-in-the-init-py-file)
+
 [StackOverflow, pylint](https://stackoverflow.com/questions/26657265/hide-some-maybe-no-member-pylint-errors)
 
 Creating a class to increment and decrement a number free from functions: [Stack Overflow](https://stackoverflow.com/questions/47697945/python-how-to-increment-number-and-store-in-variable-every-time-function-runs/47698278)
