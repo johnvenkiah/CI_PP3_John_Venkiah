@@ -401,7 +401,7 @@ def remove_esc_char(word):
     the Heroku terminal, which create errors when viewing them.
     @param word(str): the word to be checked
     """
-    word = word.replace('[C', '')
+    word = word.replace('[C', '').replace(';', '')
     return word
 
 
@@ -419,7 +419,6 @@ def get_name_staff(apntmnt_to_edit, apntmnt_id):
     new_name = validate_name()
 
     if new_name:
-        remove_esc_char(new_name)
         update_name(apntmnt_to_edit, apntmnt_id, new_name)
 
     else:
@@ -476,6 +475,7 @@ def get_details_staff(apntmnt_to_edit, apntmnt_id):
         print(f'\nNo details for {name}')
 
     new_details = input('\nEnter new patient details  ("e" to exit):\n\n')
+    remove_esc_char(new_details)
 
     if new_details == 'e':
         staff_nav()
@@ -771,6 +771,7 @@ def validate_name():
             print("\nName can't contain numbers!\n")
 
         elif name.__contains__(' '):
+            remove_esc_char(name)
             return name
 
         else:
@@ -790,8 +791,6 @@ def get_name(apntmnt_time, end_time):
 
     name = validate_name()
 
-    # if name == 'e':
-    #     welcome_screen()
     if name:
         print(f'\nThank you {name}.\n')
         get_email(apntmnt_time, end_time, name)
@@ -817,6 +816,7 @@ def get_email(apntmnt_time, end_time, name):
             print('\nInvalid email, try again\n')
 
         else:
+            remove_esc_char(email)
             get_details(apntmnt_time, end_time, name, email)
             return False
 
@@ -831,14 +831,13 @@ def get_details(apntmnt_time, end_time, name, email):
     @param name(str): Name to display as ['summary'] for Google event
     """
     while True:
-        detls_inp = input(
+        details = input(
             '\nShortly describe your symptoms ("e" to exit):\n\n'
         )
-        if e_to_exit(detls_inp):
+        if e_to_exit(details):
             break
 
-        #  fix some formatting issues in the Heroku terminal if deleting text
-        details = detls_inp.replace('[C ', '').replace('[C', '')
+        remove_esc_char(details)
 
         if len(details) < 8:
             print('\nPlease enter at least eight characters')
