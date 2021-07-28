@@ -489,12 +489,12 @@ def get_details_staff(apntmnt_to_edit, apntmnt_id):
         apntmnt_to_edit['description'] = new_details
         cal_mod.updt_apt(CAL, CAL_ID, apntmnt_id, apntmnt_to_edit)
 
-        print(f'\nDetails for {name} updated.')
-
+        print(f'\nDetails for {name} updated: {new_details}.\n')
+        print('Getting schedule for the week...\n')
         print_appointments(now, future_date(7))
         return
 
-    print('Cancelled, getting main menu...')
+    print('Cancelled, getting main menu...\n')
     staff_nav()
 
 
