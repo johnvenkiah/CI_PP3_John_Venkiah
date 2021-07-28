@@ -595,7 +595,7 @@ def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
                 )
 
                 if conf_new_time == 'y':
-                    
+
                     #  Update event with the input data
                     update_apntmnt_time(
                         apntmnt_time, end_time, apntmnt_to_edit, apntmnt_id
