@@ -550,8 +550,9 @@ def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
     """
     Allows staff to enter new time for appointment.
 
-    @param month(str): Month given by user
-    @param year(str): Year given by user
+    @param date_input(str): Date given by user
+    @param apntmnt_to_edit(dict): The appointment object to edit
+    @param apntmnt_id(str): The appointment id
     """
     while True:
 
