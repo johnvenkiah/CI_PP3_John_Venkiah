@@ -1028,6 +1028,17 @@ This was tested by trying all possible entries in all menus in the application. 
 <details>
     <summary>View bugs here</summary>
 
+**Bug**: When user tries to delete whole words with option delete on mac, nothing happens, then deleting the input has no effect on the string. Probable error with terminal and not in Python code.
+
+**Fix**: Print message to users not to use this function in the application. No fix for the bug as of yet.
+___
+
+**Bug**: User can navigate with arrows anywhere in the terminal window, entering input here renders the printed text in a false manner.
+
+**Fix**: Print message to users not to use this function in the application. No fix for the bug as of yet.
+___
+
+
 **Bug**: Error when entering month "oct" in patient booking system
 
 **Fix**: Correct typo "Okt" in month dictionary, create try and except to catch time format value errors

@@ -513,6 +513,7 @@ def update_name(apntmnt_to_edit, apntmnt_id, new_name):
     cal_mod.updt_apt(CAL, CAL_ID, apntmnt_id, apntmnt_to_edit)
 
     print(f'\nAppointment name updated: {new_name}\n')
+    print('Getting Schedule for the week...\n')
     print_appointments(now, future_date(7))
 
 
