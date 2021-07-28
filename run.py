@@ -25,6 +25,8 @@ from inc_dec_week import IncDecWeek
 if os.path.exists('password.py'):
     import password  # pylint: disable=unused-import  # noqa
 
+# Pylint thinks the string below is pointless so have bypassed the message.
+
 # pylint: disable=pointless-string-statement
 """
 Imports for all modules for application to function fully:
@@ -61,19 +63,20 @@ and modify data on Google Calendar and Google Sheets.
 
 SCOPES = 'http://www.googleapis.com/auth/calendar'
 
-""" CREDS .json file created on Google Cloud Platform, stored as config vars
-on Heroku.
-"""
+#  CREDS .json file created on Google Cloud Platform, stored as config vars
+#  on Heroku.
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPES)
 
-"""
-CAL: The specific calendar on Google Calendar used in this project.
-"""
+
+#  CAL: Resource construct for interacting with the Google Calendar API
 CAL = build('calendar', 'v3', credentials=CREDS)
 
+#  CAL_ID: The ID of the specific calendar on Google Calendar
 CAL_ID = 'uueq3s2tbgdl57dvmmvcp5osd8@group.calendar.google.com'
 GMT_OFF = '+01:00'
+
+#  Get the current year and time
 year = datetime.date.today().year
 now = datetime.datetime.utcnow().isoformat() + GMT_OFF
 
@@ -152,14 +155,19 @@ def staff_nav():
         if sche_or_log == 's':
             print('\nChecking schedule...\n')
 
+            #  Convert time string to more readble format
             d_1 = convert_time.iso_to_pretty(now, 0)
             d_2 = convert_time.iso_to_pretty(future_date(7), 0)
 
             print(f'Showing appointments between {d_1} and {d_2}\n')
+
+            #  Print the appointments between now and a week from now
             print_appointments(now, future_date(7))
             return False
 
         if sche_or_log == 'l':
+
+            #  Shows the patient log
             sheet.show_p_data()
 
             e_input = input(
@@ -188,6 +196,9 @@ def staff_login():
     print(staff_greeting.upper())
 
     while True:
+
+        #  Tried using getpass here to hide password when entering but didn't
+        #  work in Heroku terminal, so password entered remains visible.
         password_entered = input(
             'Enter your password or "e" to exit:\n\n'
         )
@@ -218,29 +229,36 @@ def print_appointments(earliest, latest):
     Print the appointments taken through the get_appointments function.
 
     """
+    #  Get a list of dictionaries containing the appointment data
     appointments = cal_mod.apt_list(CAL, CAL_ID, earliest, latest)
     app_nr = 1
     app_dict = {}
 
+    #  Displays if appointments are 1 or none
     if len(appointments) <= 3:
         print('Not many appointments that week.')
 
     for appointment in appointments:
 
+        #  Get start time of appointment
         start = appointment['start'].get('dateTime')
         if start is None:
             continue
 
+        #  Convert start time to readable format and update the app_dict with a
+        #  number for each appointment and its event id
         start = convert_time_no_ms.iso_to_pretty(start, 0)
         event_id = appointment['id']
         app_dict.update({f'{app_nr}': event_id})
 
+        #  If no description or summary add 'no info/name' to the event
         if 'description' not in appointment:
             appointment.update({'description': 'No info'})
 
         if 'summary' not in appointment:
             appointment.update({'summary': 'No name'})
         print(
+        #  Print the event data to user
             f'{app_nr}: ', start, appointment['summary'],
             appointment['description']
             )
@@ -318,6 +336,9 @@ def nav_appntmnt(app_dict):
     else:
         print('\nExiting..')
 
+        #  Initialize the week multiplier so weeks are correct when reenterring
+        #  schedule and navigating
+
         # pylint: disable=unused-variable
         days_1 = week_multiplier.initialize()  # noqa
         staff_nav()
@@ -345,6 +366,8 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
         )
 
         if sure == 'y':
+
+            #  Delete the appointment chosen
             # pylint: disable=maybe-no-member
             cal_mod.del_apt(CAL, CAL_ID, apntmnt_id)
 
@@ -447,6 +470,7 @@ def get_date_staff(apntmnt_to_edit, apntmnt_id):
             return False
 
         try:
+            #  Reformat time so full year is displayed to user
             date_input = datetime.datetime.strptime(date_input, '%d-%m-%y')
             date_input = date_input.date()
             date_input = date_input.strftime('%d-%m-%Y')
@@ -468,13 +492,17 @@ def get_details_staff(apntmnt_to_edit, apntmnt_id):
     name = apntmnt_to_edit['summary']
     print(f'\nDetails for {name}:')
 
+    #  Print details if there are any
     if 'description' in apntmnt_to_edit:
         print('\n' + apntmnt_to_edit['description'])
 
     else:
-        print(f'\nNo details for {name}')
+        print(f'\nNo details for {name}\n')
 
-    new_details = input('\nEnter new patient details  ("e" to exit):\n\n')
+    print('Details should contain email, comma and symtoms.\n')
+    new_details = input('Enter new patient details ("e" to exit):\n\n')
+
+    #  Try and remove erroneous escape characters
     remove_esc_char(new_details)
 
     if new_details == 'e':
@@ -486,6 +514,7 @@ def get_details_staff(apntmnt_to_edit, apntmnt_id):
 
     if update_details.lower() == 'y':
 
+        #  Pass the new details to the evennt and update it on Google Calendar
         apntmnt_to_edit['description'] = new_details
         cal_mod.updt_apt(CAL, CAL_ID, apntmnt_id, apntmnt_to_edit)
 
