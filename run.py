@@ -88,7 +88,9 @@ def welcome_screen():
     print('\nMade for patients and staff at the FeelGood Physio clinic\n')
     print('To use this app, hit enter after each choice.\n')
     print(
-        '(Using the alt-delete function may cause the app to malfunction)\n'
+        '''Attention: using the alt-delete and the arrows when entering text
+        in this application causes the app to malfunction. We are aware of this
+        and are working on it. Thank you for your patience.\n'''
     )
 
     while True:
