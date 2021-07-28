@@ -582,7 +582,7 @@ def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
             else:
                 print(f'\n{get_hour} on {date_input} is free.\n')
 
-                #  Add the 'no info' string in no info exists
+                #  Add the 'no info' string to dict if no info exists
                 if 'summary' not in apntmnt_to_edit:
                     apntmnt_to_edit.update({'summary': 'No info'})
                     print(
@@ -632,6 +632,7 @@ def update_apntmnt_time(apntmnt_time, end_time, apntmnt_to_edit, apntmnt_id):
 
     go_back = input('Hit any key to see current schedule for the week.\n\n')
 
+    #  Unlikely string so appointments show if user presses any key
     if go_back != '¶¥¿':
         print('\nGetting Schedule...\n')
         print_appointments(now, future_date(7))
@@ -659,7 +660,7 @@ def days_feb():
     return days
 
 
-def get_month(yr):  # pylint: disable=invalid-name
+def get_month(yr):  # pylint: disable=invalid-name  #  yr not valid for pylint
     """
     Initiate the booking process and gets month from user for appointment.
 
@@ -695,21 +696,27 @@ def get_month(yr):  # pylint: disable=invalid-name
 
         e_to_exit(month)
 
+        #  If month is is a key in month dict, parse to datetime and format
         try:
             if month in month_dict.keys():
                 int_month = datetime.datetime.strptime(month, '%b')
                 int_month = int(int_month.strftime('%m'))
 
+                #  Get the current month
                 this_month = datetime.datetime.now().month
                 int_this_month = int(this_month)
 
+                #  If month before this, change to next year
                 if int_month < int_this_month:
+
+                    #  Get the date one year from now
                     yr = datetime.datetime.today() + timedelta(365.2425)
                     yr = yr.year
 
                 get_date(days_in_month, month, yr, int_month, int_this_month)
                 return False
 
+            #  Don't accept numbers
             if month.isnumeric():
                 print(month_incorr)
 
@@ -721,7 +728,7 @@ def get_month(yr):  # pylint: disable=invalid-name
 
 def get_date(
     days_in_month, month, yr, int_month, int_this_month
-):  # pylint: disable=invalid-name
+):  # pylint: disable=invalid-name  #  Due to yr not valid for pylint
 
     """
     Get the date from the user, with the month and year
@@ -741,6 +748,7 @@ def get_date(
         date_incorrect = '\nDate incorrect, please try again'
         e_to_exit(date)
 
+        #  If weekday is sat or sun, don't accept
         try:
             date_today = datetime.date.today().day
             weekday_int = datetime.date(
@@ -755,6 +763,7 @@ def get_date(
                     '\nBooking has to be at least one day ahead, no weekends.'
                 )
 
+            #  To get date after today and not a minus value
             elif int(date) <= int(days_in_month) and int(date) > 0:
                 get_time(date, month, yr)
                 return False
@@ -779,16 +788,19 @@ def get_time(date, month, yr):  # pylint: disable=invalid-name
 
         e_to_exit(hour)
 
+        #  Only allow time between 9 17, only numbers
         if hour.isnumeric() and int(hour) >= 9 and int(hour) < 17:
             apntmnt_time = (f'{hour}:00, {date} {month} {yr}')
 
             apntmnt_time = convert_time.pretty_to_iso(apntmnt_time, 0)
             end_time = convert_time.add_hour_iso(apntmnt_time, +1)
 
+            #  Get appointments list between the given time
             appointments = cal_mod.apt_list(
                 CAL, CAL_ID, apntmnt_time, end_time
             )
 
+            #  If appointments the time is not free, don't allow booking
             if appointments:
                 print('\nSorry, appointment not available. Try again.')
             else:
@@ -807,13 +819,18 @@ def validate_name():
     while True:
         name = input()
 
+        #  Exit if user presses "e"
         if name == 'e':
             return False
 
+        #  Don't accept numbers in name
         if any(char.isdigit() for char in name):
             print("\nName can't contain numbers!\n")
 
+        #  Only accept if name contains a space
         elif name.__contains__(' '):
+
+        #  Try to remove erroneous characters
             remove_esc_char(name)
             return name
 
