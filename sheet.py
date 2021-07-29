@@ -15,8 +15,8 @@ Account accessing the data.
 """
 
 """
-SCOPED_SHEETS, CREDS, SCOPED_CREDS: used with Google API Client to gain access to
-and modify data on and Google Sheets. Some help here from the walkthrough
+SCOPED_SHEETS, CREDS, SCOPED_CREDS: used with Google API Client to gain access
+to and modify data on and Google Sheets. Some help here from the walkthrough
 project Love Sandwiches.
 """
 SCOPES_SHEETS = [
@@ -67,7 +67,7 @@ def show_p_data():
         #  how-do-i-convert-two-lists-into-a-dictionary
         p_dict = dict(zip(p_data[0], row))
 
-        #  Replace characters so string is displayed more readable 
+        #  Replace characters so string is displayed more readable
         print(
             '\n' + str(p_dict).replace('{', '').replace(
                 '}', '').replace("'", '')
@@ -87,7 +87,7 @@ def get_p_nr():
         p_nr = 1
     else:
 
-    #  Get the last patent nr cell and give it the number next in line
+        #  Get the last patent nr cell and give it the number next in line
         p_nr = int(p_data[-1][0]) + 1
     return str(p_nr)
 
