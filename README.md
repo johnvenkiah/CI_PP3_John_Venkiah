@@ -784,7 +784,7 @@ ___
 - **Actual Result** - *Works as intended*
 
 <details>
-    <summary>View image of date validation here</summary>
+    <summary>View image of updated calendar here</summary>
 
 ![User story 9, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/images/google_cal/g_cal_new.png)
 
@@ -805,7 +805,7 @@ ___
 - **Actual Result**: *Works as intended*
 
 <details>
-    <summary>View image of initial steps of the booking</summary>
+    <summary>View images here</summary>
 
 ![user story 11, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_11_1.png)
 
@@ -897,19 +897,15 @@ ___
     <summary>View images of editing appointments</summary>
 
 *The edit menu*
-
 ![User story 15, 1](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_15_1.png)
 
 *Editing the date and time*
-
 ![User story 15, 2](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_15_2.png)
 
 *Changes are confirmed*
-
 ![User story 15, 3](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_15_3.png)
 
 *The Google event now has the new time*
-
 ![User story 15, 4](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_15_4.png)
 
 </details>
@@ -985,7 +981,7 @@ ___
 
 *The password being displayed*
 
-![User story 17](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_16_1.png)
+![User story 17](https://github.com/johnvenkiah/CI_PP3_John_Venkiah/blob/main/docs/testing_user_stories/user_story_17.png)
 
 </details>
 
@@ -1027,6 +1023,7 @@ This was tested by trying all possible entries in all menus in the application. 
 
 <details>
     <summary>View bugs here</summary>
+___
 
 **Bug**: When user tries to delete whole words with option delete on mac, nothing happens, then deleting the input has no effect on the string. Probable error with terminal and not in Python code.
 
