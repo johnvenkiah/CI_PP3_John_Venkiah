@@ -221,7 +221,6 @@ def staff_login():
         attempts += 1
 
 
-
 #  An instance of the class used in nav_appntmnt function.
 week_multiplier = IncDecWeek()
 
@@ -269,7 +268,6 @@ def print_appointments(earliest, latest):
             )
         app_nr += 1
     nav_appntmnt(app_dict)
-
 
 
 #  Different instances of TimeFConverter, depending on needed format to display
@@ -321,7 +319,7 @@ def nav_appntmnt(app_dict):
         date_1 = future_date(days_1)
         date_2 = future_date(days_2)
 
-        #  Convert them to readable strings    
+        #  Convert them to readable strings
         d_pretty_1 = convert_time.iso_to_pretty(date_1, 0)
         d_pretty_2 = convert_time.iso_to_pretty(date_2, 0)
         print(
@@ -366,6 +364,7 @@ def edit_appntmnt(nav_or_edit, apntmnt_id):
     @param apntmnt_id(int): Value stored in apntmnt_dict to pinpoint
         specific event on Google Calendar.
     """
+
     print(f'\nAppointment {nav_or_edit}:\n')
     edit_or_delete = input(
         'Hit "e" to edit, "r" to remove or any other key to go back.\n\n'
@@ -544,7 +543,7 @@ def update_name(apntmnt_to_edit, apntmnt_id, new_name):
     """
     Updates Google Calendar event ['summary'] which displays the patient name.
 
-    @param apntmnt_to_edit: The specific event to edit.
+    @param apntmnt_to_edit(dict): The appointment object to edit
     @param apntmnt_id(int): Value stored in apntmnt_dict to pinpoint
         specific event on Google Calendar.
     @param new_name(str): The name input from user to update event with.
@@ -579,6 +578,7 @@ def add_time_staff(date_input, apntmnt_to_edit, apntmnt_id):
         #  Validate time so it is within office hours and a number
         if get_hour.isnumeric() and int(get_hour) >= 9 and int(get_hour) < 17:
 
+            #  Get the hour and format it to G. Calendar-readable string
             get_hour = get_hour + ':00'
             apntmnt_time = (f'{get_hour}, {date_input}')
             apntmnt_time = convert_time_staff.pretty_to_iso(apntmnt_time, 0)
@@ -654,7 +654,7 @@ def future_date(day):
     """
     Gives a day in the future in datetime format depending on day parameter.
 
-    @param day (int): Amount of days from now into the future to return.
+    @param day (int): Amount of days from now to return.
     """
 
     date = datetime.datetime.now() + timedelta(day)
@@ -665,7 +665,8 @@ def future_date(day):
 def days_feb():
     """
     Simple function to calculate amount of days in Feb on the
-    year the request is made.
+    year the request is made. Found a version of this here:
+    https://www.geeksforgeeks.org/program-check-given-year-leap-year/
     """
 
     days = 29 if year % 4 == 0 and (year % 100 == 0 or year % 400 == 0) else 28
@@ -750,7 +751,7 @@ def get_date(
         from month_dict.
     @param month(str): Month given by user
     @param yr(str): Year given by user
-    @param int_month(int): A number for month, eg 12 for Dec
+    @param int_this_month(int): A number for month, eg 12 for Dec
     """
 
     while True:
@@ -760,13 +761,13 @@ def get_date(
         date_incorrect = '\nDate incorrect, please try again'
         e_to_exit(date)
 
-        #  If weekday is sat or sun, don't accept
         try:
             date_today = datetime.date.today().day
             weekday_int = datetime.date(
                 yr, int_month, int(date)
             ).weekday()
 
+            #  If weekday is sat or sun, don't accept
             if (
                 weekday_int == 5 or weekday_int == 6 or
                 int_month == int_this_month and int(date) <= date_today
@@ -905,7 +906,9 @@ def get_details(apntmnt_time, end_time, name, email):
     @param apntmnt_time(str): Start time of appointment
     @param end_time(str): End time of appointment
     @param name(str): Name to display as ['summary'] for Google event
+    @param email(str): The email input from user
     """
+
     while True:
         details = input(
             '\nShortly describe your symptoms ("e" to exit):\n\n'
@@ -941,7 +944,7 @@ def get_details(apntmnt_time, end_time, name, email):
 
 def new_appointment(
     start, end, name, email, details, start_pretty
-):  # pylint: disable=too-many-arguments
+):  # pylint: disable=too-many-arguments #
 
     """
     Makes an appointment entry in Google Calendar, getting data from
@@ -954,7 +957,7 @@ def new_appointment(
     @param details(str): Description of symptoms entered by patient
     """
     try:
-        #  An event dictionary that Google Calendar can read
+        #  An event dictionary that Google Calendar can read.
         #  Found possibility to do this on Google API resources:
         #  https://developers.google.com/calendar/api/v3/reference
         event = {
