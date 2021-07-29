@@ -21,6 +21,9 @@ class TimeFConverter:
     """
 
     def __init__(self, str_iso, str_pretty):
+        """
+        Set initial values.
+        """
         self.str_iso = str_iso
         self.str_pretty = str_pretty
 

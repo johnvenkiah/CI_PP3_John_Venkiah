@@ -15,6 +15,9 @@ class IncDecWeek:
     47698278
     """
     def __init__(self):
+        """
+        Initial value
+        """
         self.inc_dec_week = 0
 
     def increment(self):

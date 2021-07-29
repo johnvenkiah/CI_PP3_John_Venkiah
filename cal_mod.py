@@ -17,6 +17,7 @@ def apt_list(cal, c_id, start, end):
     @param end(str): The end time of the period or events
     """
 
+    #  Get the appointments returning it as list of dictionaries
     appointments_result = cal.events().list(
         calendarId=c_id,
         timeMin=start,
@@ -26,7 +27,6 @@ def apt_list(cal, c_id, start, end):
     ).execute()
     appointments = appointments_result.get('items', [])
     return appointments
-    # return appointments_result
 
 
 def del_apt(cal, c_id, apt_id):
@@ -66,9 +66,12 @@ def updt_apt(cal, c_id, apt_id, apmnt):
     Update the Google Calendar event with the input from the previous
     functions from user.
 
+    @param cal(Resource): The Google Calendar object to update
+    @param c_id(str): The Google Calendar id
     @param apt_id(str): Google Calendar event identifier
     @param apmnt(dict): The appointment passed to the calendar
     """
+
     cal.events().update(  # pylint: disable=maybe-no-member
         calendarId=c_id,
         eventId=apt_id,
@@ -84,6 +87,7 @@ def insrt_apt(cal, c_id, evnt):
     @param c_id(str): Google Calendar ID
     @param evnt(dict): Event inserted into calendar
     """
+
     cal.events().insert(  # pylint: disable=maybe-no-member
         calendarId=c_id,
         sendNotifications=True, body=evnt
