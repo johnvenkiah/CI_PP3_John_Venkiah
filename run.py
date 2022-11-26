@@ -74,7 +74,7 @@ CAL = build('calendar', 'v3', credentials=CREDS)
 
 #  CAL_ID: The ID of the specific calendar on Google Calendar
 CAL_ID = 'uueq3s2tbgdl57dvmmvcp5osd8@group.calendar.google.com'
-GMT_OFF = '+01:00'
+GMT_OFF = 'Z'
 
 #  Get the current year and time
 year = datetime.date.today().year
